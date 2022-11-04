@@ -1,0 +1,17 @@
+node_modules
+*/node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+*.d.ts
+*.d.ts.map
+*.js
+*.js.map
+
+
+style
+dist
+lib
+component
+*/coverage

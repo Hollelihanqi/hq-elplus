@@ -1,0 +1,11 @@
+{
+  "name": "yto-engine",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "build": "npm run build:lib && npx tsc"
+  },
+  "devDependencies": {
+    "typescript": "^4.4.4"
+  }
+}
