@@ -1,8 +1,36 @@
-# vue3 业务组件开发
-## Vue3 + TypeScript + Vite4 + element-plus + Sass + EsLint + lint-staged + Prettier + Husky + Commitzen + vitepress + unocss
+# 技术平台部业务组件库
+## Install
 
-## 子系统
-docs
-play
-utils
-yto-custom
+```shell
+pnpm install
+```
+
+## Build
+
+```shell
+pnpm build
+```
+
+### YtoCustom
+
+`Build`
+```shell
+pnpm build
+```
+### Docs
+
+`Dev`
+```shell
+pnpm docs:dev
+```
+
+`Build`
+```shell
+pnpm docs:build
+```
+### YtoUtils
+
+`Build`
+```shell
+pnpm docs:build
+```
