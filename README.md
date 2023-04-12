@@ -1,8 +1,8 @@
+# vue3 业务组件开发
+## Vue3 + TypeScript + Vite4 + element-plus + Sass + EsLint + lint-staged + Prettier + Husky + Commitzen + vitepress + unocss
 
-# gold-core Exports
-
-gold-core / [Exports](/docs/modules.md)
-
-# gold-layout Exports
-
-gold-layout / [Exports](/docs-layout/modules.md)
+## 子系统
+docs
+play
+utils
+yto-custom

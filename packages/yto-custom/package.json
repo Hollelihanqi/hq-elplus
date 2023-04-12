@@ -1,0 +1,16 @@
+{
+  "name": "@yto/custom",
+  "version": "0.0.2",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "vue-tsc && vite build"
+  },
+  "devDependencies": {
+    "vite-plugin-vue-setup-extend": "^0.4.0"
+  },
+  "dependencies": {
+    "echarts": "^5.4.2",
+    "immutable": "^4.3.0"
+  }
+}
