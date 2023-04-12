@@ -1,0 +1,35 @@
+{
+  "hash": "3d969050",
+  "browserHash": "7c45c1e9",
+  "optimized": {
+    "vue": {
+      "src": "../../../../node_modules/.pnpm/vue@3.2.45/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "efae64f2",
+      "needsInterop": false
+    },
+    "vue-router": {
+      "src": "../../../../node_modules/.pnpm/vue-router@4.1.6_vue@3.2.45/node_modules/vue-router/dist/vue-router.mjs",
+      "file": "vue-router.js",
+      "fileHash": "0baf27f3",
+      "needsInterop": false
+    },
+    "@ruabick/vitepress-demo-block": {
+      "src": "../../../../node_modules/.pnpm/@ruabick+vitepress-demo-block@0.3.1/node_modules/@ruabick/vitepress-demo-block/dist/vitepress-demo-block.js",
+      "file": "@ruabick_vitepress-demo-block.js",
+      "fileHash": "acc2dd04",
+      "needsInterop": false
+    },
+    "element-plus": {
+      "src": "../../../../node_modules/.pnpm/element-plus@2.2.18_vue@3.2.45/node_modules/element-plus/es/index.mjs",
+      "file": "element-plus.js",
+      "fileHash": "8dba7af9",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-A7ICIGYR": {
+      "file": "chunk-A7ICIGYR.js"
+    }
+  }
+}
