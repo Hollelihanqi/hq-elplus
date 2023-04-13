@@ -1,35 +1,29 @@
 {
-  "hash": "ca8ba51f",
-  "browserHash": "1cb2706f",
+  "hash": "15b6c5a3",
+  "browserHash": "d5debbb5",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/.pnpm/vue@3.2.45/node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "d23d59f3",
+      "fileHash": "7ccb15f8",
       "needsInterop": false
     },
     "@ruabick/vitepress-demo-block": {
       "src": "../../../../node_modules/.pnpm/@ruabick+vitepress-demo-block@0.3.1/node_modules/@ruabick/vitepress-demo-block/dist/vitepress-demo-block.js",
       "file": "@ruabick_vitepress-demo-block.js",
-      "fileHash": "9cbb3c0b",
+      "fileHash": "63cda59f",
       "needsInterop": false
     },
     "element-plus": {
       "src": "../../../../node_modules/.pnpm/element-plus@2.2.18_vue@3.2.45/node_modules/element-plus/es/index.mjs",
       "file": "element-plus.js",
-      "fileHash": "31f75364",
-      "needsInterop": false
-    },
-    "vue-router": {
-      "src": "../../../../node_modules/.pnpm/vue-router@4.1.6_vue@3.2.45/node_modules/vue-router/dist/vue-router.mjs",
-      "file": "vue-router.js",
-      "fileHash": "b2886f55",
+      "fileHash": "cf6c2b4d",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-3JIOR4RU": {
-      "file": "chunk-3JIOR4RU.js"
+    "chunk-A7ICIGYR": {
+      "file": "chunk-A7ICIGYR.js"
     }
   }
 }
