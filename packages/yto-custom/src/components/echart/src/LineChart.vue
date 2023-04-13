@@ -7,7 +7,7 @@ import {computed} from 'vue'
 import BaseEchart from "./index.vue";
 import { Map } from "immutable";
 import { getLineChartConfig, getOptiops } from "./chartConfig";
-import { isEmpty } from "lodash-es";
+import { isEmpty, isArray } from "lodash-es";
 
 interface Props {
   options?: any;
@@ -30,7 +30,7 @@ const chartOptions = computed(() => {
  * @return {*}
  */
 const dealNodata = (options: any) => {
-  if (isEmpty(options.series) || isEmpty(options.series[0].data)) {
+  if (isEmpty(options.series) || (isArray(options.series) && options.series.every((item:any) => isEmpty(item.data))) ){
     options.title.show = true;
     options.yAxis.show = false;
     options.xAxis.show = false;
