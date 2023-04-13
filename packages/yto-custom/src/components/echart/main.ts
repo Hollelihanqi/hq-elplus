@@ -1,8 +1,12 @@
 import YtoEchart from './src/index.vue'
+import YtoLineEchart  from './src/LineChart.vue'
+import YtoBarEchart from './src/BarChart.vue'
 
-export { YtoEchart }
+export { YtoEchart, YtoBarEchart, YtoLineEchart }
 export default {
     install: (App:any) => {
-        App.component("yto-echart", YtoEchart) //注意避坑 -> 组件内部一定要写name属性
+        App.component("yto-chart", YtoEchart) 
+        App.component("yto-bar-chart", YtoBarEchart)
+        App.component("yto-line-chart", YtoLineEchart)
     }
 }

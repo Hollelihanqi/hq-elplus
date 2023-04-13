@@ -7,10 +7,12 @@
     "build": "vue-tsc && vite build"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.7",
     "vite-plugin-vue-setup-extend": "^0.4.0"
   },
   "dependencies": {
     "echarts": "^5.4.2",
-    "immutable": "^4.3.0"
+    "immutable": "^4.3.0",
+    "lodash-es": "^4.17.21"
   }
 }
