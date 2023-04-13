@@ -5,7 +5,6 @@ import directives from './directives'
 export {
   directives
 }
-
 export default {
   install(App: any) {
       const components = import.meta.glob('./components/*/src/index.vue', { eager: true });
