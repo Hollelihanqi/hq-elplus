@@ -9,8 +9,6 @@ dist-ssr
 *.js
 *.js.map
 
-
-style
 dist
 lib
 component

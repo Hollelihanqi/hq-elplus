@@ -312,6 +312,7 @@ defineExpose({
   tableData,
   searchParam,
   pageable,
+  reset,
   getTableList,
   clearSelection,
 });

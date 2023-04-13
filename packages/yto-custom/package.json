@@ -1,12 +1,17 @@
 {
   "name": "@yto/custom",
   "version": "0.0.2",
-  "main": "dist/index.js",
   "type": "module",
+  "main": "dist/es/index.js",
+  "module": "dist/es/index.js",
+  "types": "dist/es/index.d.ts",
   "scripts": {
-    "build": "vue-tsc && vite build"
+    "clean": "rimraf dist",
+    "build": "pnpm clean && vue-tsc && vite build"
   },
   "devDependencies": {
+    "rollup-plugin-visualizer": "^5.9.0",
+    "vite-plugin-dts": "^2.2.0",
     "vite-plugin-vue-setup-extend": "^0.4.0"
   },
   "dependencies": {
