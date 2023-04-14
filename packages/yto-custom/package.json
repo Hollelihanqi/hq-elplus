@@ -1,9 +1,12 @@
 {
   "name": "@yto/custom",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "main": "dist/es/index.js",
   "module": "dist/es/index.js",
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "clean": "rimraf dist",
     "build": "pnpm clean && vue-tsc && vite build"

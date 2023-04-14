@@ -1,107 +1,109 @@
 <template>
-  <!-- 查询表单 card -->
-  <SearchForm
-    v-show="isShowSearch"
-    :search="search"
-    :reset="reset"
-    :search-param="searchParam"
-    :columns="searchColumns"
-    :col-config="searchCol"
-  />
-
-  <!-- 表格内容 card -->
-  <div class="card table">
-    <!-- 表格头部 操作按钮 -->
-    <div class="table-header">
-      <div class="header-button-lf">
-        <slot
-          name="tableHeader"
-          :selected-list-ids="selectedListIds"
-          :select-list="selectedList"
-          :is-selected="isSelected"
-        ></slot>
-      </div>
-      <div v-if="toolButton" class="header-button-ri">
-        <el-button :icon="Refresh" circle @click="getTableList"> </el-button>
-        <el-button
-          v-if="columns.length"
-          :icon="Printer"
-          circle
-          @click="handlePrint"
-        >
-        </el-button>
-        <el-button
-          v-if="columns.length"
-          :icon="Operation"
-          circle
-          @click="openColSetting"
-        >
-        </el-button>
-        <el-button
-          v-if="searchColumns.length"
-          :icon="Search"
-          circle
-          @click="isShowSearch = !isShowSearch"
-        >
-        </el-button>
-      </div>
-    </div>
-    <!-- 表格主体 -->
-    <el-table
-      ref="tableRef"
-      v-bind="$attrs"
-      :data="tableData"
-      :border="border"
-      :row-key="getRowKeys"
-      @selection-change="selectionChange"
-    >
-      <!-- 默认插槽 -->
-      <slot></slot>
-      <template v-for="item in tableColumns" :key="item">
-        <!-- selection || index -->
-        <el-table-column
-          v-if="item.type == 'selection' || item.type == 'index'"
-          v-bind="item"
-          :align="item.align ?? 'center'"
-          :reserve-selection="item.type == 'selection'"
-        >
-        </el-table-column>
-        <!-- expand 支持 tsx 语法 && 作用域插槽 (tsx > slot) -->
-        <el-table-column
-          v-else-if="item.type == 'expand'"
-          v-slot="scope"
-          v-bind="item"
-          :align="item.align ?? 'center'"
-        >
-          <component :is="item.render" v-if="item.render" :row="scope.row">
-          </component>
-          <slot v-else :name="item.type" :row="scope.row"></slot>
-        </el-table-column>
-        <!-- other 循环递归 -->
-        <TableColumn v-else :column="item">
-          <template v-for="slot in Object.keys($slots)" #[slot]="scope">
-            <slot :name="slot" :row="scope.row"></slot>
-          </template>
-        </TableColumn>
-      </template>
-      <!-- 无数据 -->
-      <template #empty>
-        <div class="table-empty">
-          <!-- <img src="@/assets/images/notData.png" alt="notData" /> -->
-          <div>暂无数据</div>
-        </div>
-      </template>
-    </el-table>
-    <!-- 分页组件 -->
-    <Pagination
-      v-if="pagination"
-      :pageable="pageable"
-      :handle-size-change="handleSizeChange"
-      :handle-current-change="handleCurrentChange"
+  <ElConfigProvider :locale="locale">
+    <!-- 查询表单 card -->
+    <SearchForm
+      v-show="isShowSearch"
+      :search="search"
+      :reset="reset"
+      :search-param="searchParam"
+      :columns="searchColumns"
+      :col-config="searchCol"
     />
-  </div>
-  <!-- 列设置 -->
-  <!-- <ColSetting v-if="toolButton" ref="colRef" v-model:colSetting="colSetting" /> -->
+
+    <!-- 表格内容 card -->
+    <div class="card table" style="display: flex">
+      <!-- 表格头部 操作按钮 -->
+      <div class="table-header">
+        <div class="header-button-lf">
+          <slot
+            name="tableHeader"
+            :selected-list-ids="selectedListIds"
+            :select-list="selectedList"
+            :is-selected="isSelected"
+          ></slot>
+        </div>
+        <div v-if="toolButton" class="header-button-ri">
+          <el-button :icon="Refresh" circle @click="getTableList"> </el-button>
+          <el-button
+            v-if="columns.length"
+            :icon="Printer"
+            circle
+            @click="handlePrint"
+          >
+          </el-button>
+          <el-button
+            v-if="columns.length"
+            :icon="Operation"
+            circle
+            @click="openColSetting"
+          >
+          </el-button>
+          <el-button
+            v-if="searchColumns.length"
+            :icon="Search"
+            circle
+            @click="isShowSearch = !isShowSearch"
+          >
+          </el-button>
+        </div>
+      </div>
+      <!-- 表格主体 -->
+      <el-table
+        ref="tableRef"
+        v-bind="$attrs"
+        :data="tableData"
+        :border="border"
+        :row-key="getRowKeys"
+        @selection-change="selectionChange"
+      >
+        <!-- 默认插槽 -->
+        <slot></slot>
+        <template v-for="item in tableColumns" :key="item">
+          <!-- selection || index -->
+          <el-table-column
+            v-if="item.type == 'selection' || item.type == 'index'"
+            v-bind="item"
+            :align="item.align ?? 'center'"
+            :reserve-selection="item.type == 'selection'"
+          >
+          </el-table-column>
+          <!-- expand 支持 tsx 语法 && 作用域插槽 (tsx > slot) -->
+          <el-table-column
+            v-else-if="item.type == 'expand'"
+            v-slot="scope"
+            v-bind="item"
+            :align="item.align ?? 'center'"
+          >
+            <component :is="item.render" v-if="item.render" :row="scope.row">
+            </component>
+            <slot v-else :name="item.type" :row="scope.row"></slot>
+          </el-table-column>
+          <!-- other 循环递归 -->
+          <TableColumn v-else :column="item">
+            <template v-for="slot in Object.keys($slots)" #[slot]="scope">
+              <slot :name="slot" :row="scope.row"></slot>
+            </template>
+          </TableColumn>
+        </template>
+        <!-- 无数据 -->
+        <template #empty>
+          <div class="table-empty">
+            <!-- <img src="@/assets/images/notData.png" alt="notData" /> -->
+            <div>暂无数据</div>
+          </div>
+        </template>
+      </el-table>
+      <!-- 分页组件 -->
+      <Pagination
+        v-if="pagination"
+        :pageable="pageable"
+        :handle-size-change="handleSizeChange"
+        :handle-current-change="handleCurrentChange"
+      />
+    </div>
+    <!-- 列设置 -->
+    <!-- <ColSetting v-if="toolButton" ref="colRef" v-model:colSetting="colSetting" /> -->
+  </ElConfigProvider>
 </template>
 
 <script setup lang="ts" name="ProTable">
@@ -118,6 +120,9 @@ import Pagination from "./components/Pagination.vue";
 import ColSetting from "./components/ColSetting.vue";
 import TableColumn from "./components/TableColumn.vue";
 import printJS from "print-js";
+import { ElConfigProvider } from "element-plus";
+// @ts-ignore
+import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 
 // 表格 DOM 元素
 const tableRef = ref<InstanceType<typeof ElTable>>();
@@ -315,6 +320,7 @@ defineExpose({
   reset,
   getTableList,
   clearSelection,
+  locale: zhCn,
 });
 </script>
 <style lang="scss">

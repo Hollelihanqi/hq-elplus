@@ -1,29 +1,29 @@
 {
-  "hash": "15b6c5a3",
-  "browserHash": "d5debbb5",
+  "hash": "d099134f",
+  "browserHash": "668742c9",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/.pnpm/vue@3.2.45/node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "7ccb15f8",
+      "fileHash": "acb139b9",
       "needsInterop": false
     },
     "@ruabick/vitepress-demo-block": {
       "src": "../../../../node_modules/.pnpm/@ruabick+vitepress-demo-block@0.3.1/node_modules/@ruabick/vitepress-demo-block/dist/vitepress-demo-block.js",
       "file": "@ruabick_vitepress-demo-block.js",
-      "fileHash": "63cda59f",
+      "fileHash": "d773c39b",
       "needsInterop": false
     },
     "element-plus": {
       "src": "../../../../node_modules/.pnpm/element-plus@2.2.18_vue@3.2.45/node_modules/element-plus/es/index.mjs",
       "file": "element-plus.js",
-      "fileHash": "cf6c2b4d",
+      "fileHash": "481c9a00",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-A7ICIGYR": {
-      "file": "chunk-A7ICIGYR.js"
+    "chunk-3JIOR4RU": {
+      "file": "chunk-3JIOR4RU.js"
     }
   }
 }
