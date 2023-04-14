@@ -1,10 +1,10 @@
 <template>
-  <BaseEchart :options="chartOptions"></BaseEchart>
+  <BaseEchart :options="chartOptions" v-bind="$attrs"></BaseEchart>
 </template>
 
 <script lang="ts" setup>
 import {computed} from 'vue'
-import BaseEchart from "./index.vue";
+import BaseEchart from "./BaseChart.vue";
 import { Map } from "immutable";
 import { getLineChartConfig, getOptiops } from "./chartConfig";
 import { isEmpty, isArray } from "lodash-es";
@@ -21,7 +21,6 @@ const chartOptions = computed(() => {
   const options = getOptiops(
     Map(getLineChartConfig()).mergeDeep(props.options)
   );
-  console.log("LineChartOptions-computed", options);
   return dealNodata(options);
 });
 /**
@@ -39,6 +38,10 @@ const dealNodata = (options: any) => {
   }
   return options;
 };
+onMounted(()=>{
+  console.log('linechart-onMounted');
+  
+})
 </script>
 <style lang="scss" scoped>
 .wrapper {

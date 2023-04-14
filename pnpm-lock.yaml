@@ -33,7 +33,7 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0(vite@4.0.4)(vue@3.2.45)
       '@yto/custom':
-        specifier: workspace:^0.0.2
+        specifier: workspace:^
         version: link:packages/yto-custom
       '@yto/utils':
         specifier: workspace:^1.0.0
@@ -74,6 +74,9 @@ importers:
       '@vitejs/plugin-vue-jsx':
         specifier: ^3.0.1
         version: 3.0.1(vite@4.2.1)(vue@3.2.47)
+      '@yto/custom':
+        specifier: workspace:^
+        version: link:../packages/yto-custom
       markdown-it:
         specifier: ^13.0.1
         version: 13.0.1
@@ -116,6 +119,8 @@ importers:
         specifier: ^0.4.0
         version: 0.4.0(vite@4.2.1)
 
+  packages/yto-custom/dist: {}
+
   packages/yto-custom/src/components/menu:
     dependencies:
       vue:
@@ -143,6 +148,9 @@ importers:
 
   play:
     dependencies:
+      '@yto/custom':
+        specifier: workspace:^
+        version: link:../packages/yto-custom
       '@yto/utils':
         specifier: workspace:^1.0.0
         version: link:../packages/yto-utils

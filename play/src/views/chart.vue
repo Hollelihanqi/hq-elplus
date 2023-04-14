@@ -1,18 +1,16 @@
 <template>
   <div class="wrapper">
     <p class="p-[10px] text-[#5B8FF9]">线图测试</p>
-      <yto-line-echart :options="lineChartOptions"></yto-line-echart>
+      <yto-echart type="line" :options="lineChartOptions"></yto-echart>
       <p class="p-[10px] text-[#5B8FF9]">柱状图测试</p>
-      <yto-bar-echart :options="barChartOptions"></yto-bar-echart>
+      <yto-echart type="bar" :options="barChartOptions"></yto-echart>
       <p class="p-[10px] text-[#5B8FF9]">饼图测试</p>
-      <yto-echart :options="pieChartOptions"></yto-echart>
+      <yto-echart :options="pieChartOptions" ></yto-echart>
   </div>
 </template>
 
 <script lang="ts" setup>
-import {reactive} from 'vue'
-import {  YtoBarEchart,  YtoLineEchart} from '@yto/custom/src/components/echart/main'
-
+import { reactive } from 'vue'
 const lineChartOptions = reactive({
   color: ["#5B8FF9"],
   legend: {
@@ -46,8 +44,7 @@ const barChartOptions = reactive({
     },
   ],
 });
-const pieChartOptions = reactive(
-  {
+const pieChartOptions = {
   title: {
     text: 'Referer of a Website',
     subtext: 'Fake Data',
@@ -82,7 +79,6 @@ const pieChartOptions = reactive(
     }
   ]
 }
-)
 </script>
 <style lang="scss" scoped>
 .wrapper{}

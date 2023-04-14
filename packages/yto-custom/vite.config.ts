@@ -8,8 +8,10 @@ import ElementPlus from 'unplugin-element-plus/vite'
 import path, { resolve } from "path";
 import dts from 'vite-plugin-dts'
 import { copyFileSync } from 'fs'
-import { name, version } from './package.json'
 import { visualizer } from 'rollup-plugin-visualizer'
+//@ts-ignore
+import { name, version } from './package.json'
+//@ts-ignore
 import MoveFile from './vite-plugin-move'
 
 
