@@ -59,7 +59,7 @@ export default defineConfig({
       name: "YtoCustom",
     },
     rollupOptions: {
-      external: ["vue","vue-router","echarts"],
+      external: ["vue", "vue-router", "echarts", "axios", "lodash-es"],
       output: [
         {
           name: "YtoCustom",
