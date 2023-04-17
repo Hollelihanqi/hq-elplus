@@ -11,7 +11,6 @@ import { copyFileSync } from 'fs'
 import { name, version } from './package.json'
 // import { visualizer } from 'rollup-plugin-visualizer'
 import MoveFile from './vite-plugin-move'
-import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 
 export default defineConfig({
   plugins: [
@@ -29,13 +28,13 @@ export default defineConfig({
     }),
     ElementPlus(),
     dts({
+      entryRoot: "./src/components",
       skipDiagnostics: true /** 是否跳过类型诊断 */,
       staticImport: true /** 是否将动态引入转换为静态 */,
       outputDir: ['./dist/es'] /** 可以指定一个数组来输出到多个目录中 */,
       insertTypesEntry: true /** 是否生成类型声明入口 */,
       cleanVueFileName: true /** 是否将 '.vue.d.ts' 文件名转换为 '.d.ts' */,
-      copyDtsFiles: true /** 是否将源码里的 .d.ts 文件复制到 outputDir */,
-      include: ['./*'] /** 手动设置包含路径的 glob */,
+      copyDtsFiles: true /** 是否将源码里的 .d.ts 文件复制到 outputDir */
       // /** 构建后回调钩子 */
       // afterBuild: (): void => {
       //   move()
@@ -59,14 +58,15 @@ export default defineConfig({
       name: "YtoCustom",
     },
     rollupOptions: {
-      external: ["vue", "vue-router", "echarts", "lodash-es","axios"],
+      external: ["vue", "vue-router", "echarts", "lodash-es"],
       output: [
         {
           name: "YtoCustom",
           format: "es",
           dir: "dist/es",
           // 输出后的文件名
-          entryFileNames: 'index.js'
+          entryFileNames: 'index.js',
+          exports: "named"
         }
       ],
     }

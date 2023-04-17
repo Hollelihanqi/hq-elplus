@@ -10,7 +10,6 @@ import { getLineChartConfig } from "./common/chartConfig";
 import { getOptiops } from './common/util';
 import echartsComposable from './common/echartsComposable'
 import { isEmpty, isArray } from "lodash-es";
-import console from 'console';
 
 interface Props {
   options?: any;
