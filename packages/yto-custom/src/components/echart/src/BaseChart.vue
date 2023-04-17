@@ -59,9 +59,7 @@ export default defineComponent({
     };
 
     const resizeHandler = debounce(() => {
-      nextTick(()=> {
-        chart && chart.resize();
-      })
+      chart && chart.resize();
     }, 200);
 
     const disposeChart = () => {
