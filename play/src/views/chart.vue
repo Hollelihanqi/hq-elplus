@@ -1,16 +1,17 @@
 <template>
   <div class="wrapper">
     <p class="p-[10px] text-[#5B8FF9]">线图测试</p>
-      <yto-echart type="line" :options="lineChartOptions"></yto-echart>
+      <yto-echart ref="lineChartRef" type="line" :options="lineChartOptions"></yto-echart>
       <p class="p-[10px] text-[#5B8FF9]">柱状图测试</p>
       <yto-echart type="bar" :options="barChartOptions"></yto-echart>
       <p class="p-[10px] text-[#5B8FF9]">饼图测试</p>
-      <yto-echart :options="pieChartOptions" ></yto-echart>
+      <yto-echart type="pie" :options="pieChartOptions" ></yto-echart>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
+const lineChartRef = ref()
 const lineChartOptions = reactive({
   color: ["#5B8FF9"],
   legend: {
@@ -47,15 +48,6 @@ const barChartOptions = reactive({
 const pieChartOptions = {
   title: {
     text: 'Referer of a Website',
-    subtext: 'Fake Data',
-    left: 'center'
-  },
-  tooltip: {
-    trigger: 'item'
-  },
-  legend: {
-    orient: 'vertical',
-    left: 'left'
   },
   series: [
     {
@@ -79,6 +71,10 @@ const pieChartOptions = {
     }
   ]
 }
+onMounted(()=>{
+  console.log('chart-onMounted',lineChartRef.value.echartsComposable);
+  
+})
 </script>
 <style lang="scss" scoped>
 .wrapper{}
