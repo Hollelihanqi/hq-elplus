@@ -11,7 +11,7 @@ import { copyFileSync } from 'fs'
 import { name, version } from './package.json'
 // import { visualizer } from 'rollup-plugin-visualizer'
 import MoveFile from './vite-plugin-move'
-
+import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 
 export default defineConfig({
   plugins: [
@@ -59,17 +59,14 @@ export default defineConfig({
       name: "YtoCustom",
     },
     rollupOptions: {
-      external: ["vue"],
+      external: ["vue","vue-router","echarts"],
       output: [
         {
           name: "YtoCustom",
           format: "es",
-          // exports: 'named',
           dir: "dist/es",
-          entryFileNames: 'index.js',
-          // chunkFileNames: '[name].js',
-          // assetFileNames: '[name].[ext]',
-          inlineDynamicImports: false,
+          // 输出后的文件名
+          entryFileNames: 'index.js'
         }
       ],
     }

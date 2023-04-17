@@ -18,7 +18,6 @@
   },
   "dependencies": {
     "@vitejs/plugin-vue-jsx": "^3.0.1",
-    "@yto/custom": "workspace:^",
     "markdown-it": "^13.0.1",
     "markdown-it-container": "^3.0.0"
   }

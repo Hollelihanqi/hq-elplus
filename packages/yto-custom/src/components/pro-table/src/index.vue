@@ -1,6 +1,6 @@
 <template>
+  <!-- 查询表单 card -->
   <ElConfigProvider :locale="locale">
-    <!-- 查询表单 card -->
     <SearchForm
       v-show="isShowSearch"
       :search="search"
@@ -101,9 +101,9 @@
         :handle-current-change="handleCurrentChange"
       />
     </div>
-    <!-- 列设置 -->
-    <!-- <ColSetting v-if="toolButton" ref="colRef" v-model:colSetting="colSetting" /> -->
   </ElConfigProvider>
+  <!-- 列设置 -->
+  <!-- <ColSetting v-if="toolButton" ref="colRef" v-model:colSetting="colSetting" /> -->
 </template>
 
 <script setup lang="ts" name="ProTable">
@@ -113,17 +113,17 @@ import { useTable } from "./hooks/useTable";
 import { useSelection } from "./hooks/useSelection";
 import { BreakPoint } from "./components/Grid/interface";
 import { ColumnProps } from "./interface";
-import { ElTable, TableProps } from "element-plus";
+import { ElTable, TableProps, ElConfigProvider } from "element-plus";
 import { Refresh, Printer, Operation, Search } from "@element-plus/icons-vue";
 import SearchForm from "./components/SearchForm/index.vue";
 import Pagination from "./components/Pagination.vue";
 import ColSetting from "./components/ColSetting.vue";
 import TableColumn from "./components/TableColumn.vue";
 import printJS from "print-js";
-import { ElConfigProvider } from "element-plus";
 // @ts-ignore
 import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 
+const locale = zhCn;
 // 表格 DOM 元素
 const tableRef = ref<InstanceType<typeof ElTable>>();
 
@@ -320,7 +320,6 @@ defineExpose({
   reset,
   getTableList,
   clearSelection,
-  locale: zhCn,
 });
 </script>
 <style lang="scss">
