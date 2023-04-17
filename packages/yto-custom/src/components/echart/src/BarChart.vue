@@ -1,12 +1,14 @@
 <template>
-  <BaseEchart :options="chartOptions" v-bind="$attrs"></BaseEchart>
+  <BaseEchart ref="chartRef" :options="chartOptions" v-bind="$attrs"></BaseEchart>
 </template>
 
 <script lang="ts" setup>
 import {computed} from 'vue'
 import BaseEchart from "./BaseChart.vue";
 import { Map } from "immutable";
-import { getBarChartBaseOptions, getOptiops } from "./chartConfig";
+import { getBarChartBaseOptions } from "./common/chartConfig";
+import { getOptiops } from './common/util';
+import echartsComposable from './common/echartsComposable'
 import { isEmpty,isArray } from "lodash-es";
 
 interface Props {
@@ -17,6 +19,7 @@ const props = withDefaults(defineProps<Props>(), {
     return {};
   },
 });
+const chartRef = ref()
 const chartOptions = computed(() => {
   const options = getOptiops(
     Map(getBarChartBaseOptions()).mergeDeep(props.options)
@@ -37,6 +40,8 @@ const dealNodata = (options: any) => {
   }
   return options;
 };
+
+// echartsComposable(chartRef)
 </script>
 <style lang="scss" scoped>
 .wrapper {

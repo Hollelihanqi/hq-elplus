@@ -28,13 +28,13 @@ export default defineComponent({
   directives: {
     "resize-element": directivesList.resizeElement,
   },
-  setup(props) {
-    let chart: any | null;
+  setup(props, {expose}) {
+    let myChart: any | null;
 
     const container = `baseChart_${guid()}`;
     const showLoading = () => {
-      chart &&
-        chart.showLoading({
+      myChart &&
+        myChart.showLoading({
           text: "正在加载...",
           color: "#2c3cd8",
           textColor: "#2c3cd8",
@@ -43,7 +43,7 @@ export default defineComponent({
     };
 
     const initChart = () => {
-      chart = echarts.init(
+      myChart = echarts.init(
         document.querySelector(`#${container}`) as HTMLElement
       );
       showLoading();
@@ -54,20 +54,19 @@ export default defineComponent({
     const setChartOption = async (options?: any) => {
       await nextTick();
       console.log('setChartOption', options || props.options);
-      chart && chart.setOption(options || props.options);
-      chart && chart.hideLoading();
+      myChart && myChart.setOption(options || props.options);
+      myChart && myChart.hideLoading();
     };
 
     const resizeHandler = debounce(() => {
-      nextTick(()=> {
-        chart && chart.resize();
-      })
+      myChart && myChart.resize();
     }, 200);
 
     const disposeChart = () => {
-      chart && chart.dispose();
-      chart = null;
+      myChart && myChart.dispose();
+      myChart = null;
     };
+    const getEchartInstance = () => myChart
 
     watch(
       () => props.options,
@@ -84,10 +83,14 @@ export default defineComponent({
     onMounted(initChart);
     onUnmounted(disposeChart);
 
+    expose({
+      getEchartInstance
+    })
+
     return {
       resizeHandler,
       container,
     };
-  },
+  }
 });
 </script>

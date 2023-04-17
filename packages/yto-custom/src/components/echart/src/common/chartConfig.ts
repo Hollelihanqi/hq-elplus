@@ -1,10 +1,9 @@
-import { isFunction } from "lodash-es";
 
 /***************线图的基础配置----start*****************/
-export  const getLineChartConfig = () => {
+export const getLineChartConfig = () => {
   return {
-    title:{
-      show:false,
+    title: {
+      show: false,
       text: "暂无数据",
       x: "center",
       y: "center",
@@ -16,7 +15,7 @@ export  const getLineChartConfig = () => {
     },
     color: [],
     tooltip: {
-      show:true,
+      show: true,
       trigger: "axis",
       backgroundColor: "rgba(0, 0, 0, 0.75)",
       textStyle: {
@@ -26,7 +25,7 @@ export  const getLineChartConfig = () => {
       axisPointer: {
         type: "line",
         lineStyle: {
-          show:true,
+          show: true,
           type: "solid",
         },
       },
@@ -42,7 +41,7 @@ export  const getLineChartConfig = () => {
       bottom: 50,
     },
     xAxis: {
-      show:true,
+      show: true,
       type: "category",
       axisTick: {
         show: false,
@@ -55,7 +54,7 @@ export  const getLineChartConfig = () => {
       data: [],
     },
     yAxis: {
-      show:true,
+      show: true,
       type: "value",
       splitLine: {
         lineStyle: {
@@ -70,12 +69,12 @@ export  const getLineChartConfig = () => {
 
 
 /***************柱状图基础配置----start*****************/
-export const getBarChartBaseOptions = () =>{
+export const getBarChartBaseOptions = () => {
   return {
     backgroundColor: "#fff",
     animation: true,
-    title:{
-      show:false,
+    title: {
+      show: false,
       text: "暂无数据",
       x: "center",
       y: "center",
@@ -110,7 +109,7 @@ export const getBarChartBaseOptions = () =>{
           color: "#D9D9D9",
         },
       },
-      data:[]
+      data: []
     },
     yAxis: {
       show: true,
@@ -129,7 +128,7 @@ export const getBarChartBaseOptions = () =>{
       axisTick: {
         show: false,
       },
-      
+
       data: [],
     },
     series: [],
@@ -138,12 +137,25 @@ export const getBarChartBaseOptions = () =>{
 
 /***************柱状图基础配置----end*****************/
 
+/***************饼图图基础配置----start*****************/
+export const getPieChartBaseOptions = () => {
+  return {
+    title: {
+      text: '',
+      left: 'center',
+      top: 10,
+    },
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      top: "5%",
+      orient: 'vertical',
+      left: 'left'
+    },
+    series: []
+  }
+}
 
-/**
- * @description: 将MapOptions转换为options
- * @param {any} options
- * @return {*}
- */
-export const getOptiops = (options: any) => {
-  return isFunction(options.toObject) ? options.toObject() : options;
-};
+/***************饼图基础配置----end*****************/
+
