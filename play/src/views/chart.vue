@@ -2,6 +2,7 @@
   <div class="wrapper">
     <p class="p-[10px] text-[#5B8FF9]">线图测试</p>
     <yto-echart
+      echartId="lineChart"
       ref="lineChartRef"
       type="line"
       :options="lineChartOptions"

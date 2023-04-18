@@ -1,7 +1,7 @@
 <template>
   <div class="echart-container" :style="{ height, width }">
     <div
-      :id="container"
+      :id="containerId"
       :style="{ height, width }"
       v-resize-element="resizeHandler"
     ></div>
@@ -15,6 +15,10 @@ import { guid, debounce } from "@yto/utils";
 import resizeElement from "./common/resizeElement";
 export default defineComponent({
   props: {
+    echartId:{
+      type: String,
+      default:''
+    },
     options: {
       type: Object,
       default: () => {},
@@ -35,7 +39,9 @@ export default defineComponent({
   setup(props, { expose }) {
     let myChart: any | null;
 
-    const container = `baseChart_${guid()}`;
+    const containerId = computed(()=>{
+      return props.echartId || `baseChart_${guid()}`
+    })
     const showLoading = () => {
       myChart &&
         myChart.showLoading({
@@ -48,7 +54,7 @@ export default defineComponent({
 
     const initChart = () => {
       myChart = echarts.init(
-        document.querySelector(`#${container}`) as HTMLElement
+        document.querySelector(`#${containerId.value}`) as HTMLElement
       );
       showLoading();
       setChartOption();
@@ -93,7 +99,7 @@ export default defineComponent({
 
     return {
       resizeHandler,
-      container,
+      containerId,
     };
   },
 });
