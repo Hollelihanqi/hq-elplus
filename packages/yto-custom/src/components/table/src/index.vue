@@ -63,6 +63,7 @@ export interface ColumnsItemProps {
 }
 
 export default defineComponent({
+  name:"Table",
   components: {
     ElConfigProvider,
   },

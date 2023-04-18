@@ -14,6 +14,7 @@ interface AnyProps {
   [propsName: string]: any;
 }
 export default defineComponent({
+  name:"Menu",
   props: {
     menus: {
       type: Array as PropType<MenuProps[]>,
