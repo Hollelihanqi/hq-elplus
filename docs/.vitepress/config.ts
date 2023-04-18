@@ -42,18 +42,18 @@ export default defineConfig({
             }
           ],
           collapsible: true,
-          collapsed: false,
+          collapsed: false
         },
-        {
-          text: "指令",
-          link: "/.vitepress/examples/directives/index.md",
-          items: [
-            {
-              text: "拖拽指令",
-              link: "/.vitepress/examples/directives/drag/index.md",
-            },
-          ],
-        },
+        // {
+        //   text: "指令",
+        //   link: "/.vitepress/examples/directives/index.md",
+        //   items: [
+        //     {
+        //       text: "拖拽指令",
+        //       link: "/.vitepress/examples/directives/drag/index.md",
+        //     },
+        //   ],
+        // },
       ],
     },
     docFooter: {

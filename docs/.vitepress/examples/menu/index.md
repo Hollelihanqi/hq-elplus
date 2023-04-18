@@ -12,7 +12,7 @@
 
 ## Attributes
 
-[完整配置请参考-element-plus]('https://element-plus.org/zh-CN/component/menu.html')
+[完整配置请参考-element-plus](https://element-plus.org/zh-CN/component/menu.html)
 
 ### 自定义 Menu 属性
 

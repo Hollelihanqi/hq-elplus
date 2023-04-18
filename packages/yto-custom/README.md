@@ -16,7 +16,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 
 import YtoCustom from "@yto/custom";
-import "@yto/custom/dist/style.css";
+import "@yto/custom/dist/es/style.css";
 
 createApp(App).use(YtoCustom).mount("#app");
 ```
