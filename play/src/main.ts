@@ -12,5 +12,11 @@ import YtoCustom from '@yto/custom'
 import '@yto/custom/dist/es/style.css'
 
 const app = createApp(App)
-app.use(YtoCustom)
+app.use(YtoCustom, {
+  table: {
+
+  }, form: {
+    lableWidth: 100
+  }
+})
 app.mount('#app')

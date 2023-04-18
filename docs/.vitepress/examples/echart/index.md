@@ -7,7 +7,7 @@
 - 折线图:内置默认 options
 - 柱状图:内置默认 options
 - 饼图:内置默认 options
-- 其他图形:需要提供完整options
+- 其他图形:需要提供完整 options
 
 ## 基本使用
 
@@ -29,7 +29,7 @@
 
 ## Attributes
 
-[options完整配置请参考-echarts文档]('https://echarts.apache.org/zh/option.html#title')
+[options 完整配置请参考-echarts 文档]('https://echarts.apache.org/zh/option.html#title')
 
 ### Echart 属性
 
@@ -39,3 +39,9 @@
 | `options` | 配置项   | object | —            | {}     | —                                      |
 | `width`   | 图形宽度 | string | —            | 100%   | —                                      |
 | `height`  | 图形高度 | string | —            | 400px  | —                                      |
+
+### Echart 方法
+
+| 方法名              | 说明             | 类型         |
+| ------------------- | ---------------- | ------------ |
+| `getEchartInstance` | 获取 echart 实例 | `() => Echart` |

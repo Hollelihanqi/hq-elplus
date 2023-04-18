@@ -1,5 +1,5 @@
 <template>
-  <component :is="getRenderChart()" :options="optins" :width="width" :height="height"></component>
+  <component ref="chartRef" :is="getRenderChart()" :options="optins" :width="width" :height="height"></component>
 </template>
 
 <script lang="ts" setup>
@@ -7,6 +7,7 @@ import LineChart from './LineChart.vue'
 import BarChart from './BarChart.vue'
 import BaseChart from './BaseChart.vue'
 import PieChart from './PieChart.vue'
+import echartsComposable from './common/echartsComposable'
 
 interface Props {
   type?: 'line'|'bar'|'pie';//目前支持3种预定义图形
@@ -22,7 +23,7 @@ const props = withDefaults(defineProps<Props>(), {
     return {}
   }
 })
-
+const chartRef = ref()
 const chartMap = new Map<String,any>
 chartMap.set('line', LineChart)
 chartMap.set('bar', BarChart)
@@ -32,5 +33,10 @@ const getRenderChart = () => {
   console.log('getRenderChart', props.type);
   return  props.type && chartMap.has(props.type) ? chartMap.get(props.type) : BaseChart
 };
+const {getEchartInstance} = echartsComposable(chartRef)
+
+defineExpose({
+  getEchartInstance
+})
 
 </script>
