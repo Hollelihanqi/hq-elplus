@@ -30,7 +30,6 @@ chartMap.set('bar', BarChart)
 chartMap.set('pie', PieChart)
 
 const getRenderChart = () => {
-  console.log('getRenderChart', props.type);
   return  props.type && chartMap.has(props.type) ? chartMap.get(props.type) : BaseChart
 };
 const {getEchartInstance} = echartsComposable(chartRef)

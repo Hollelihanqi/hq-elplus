@@ -11,7 +11,8 @@
 <script lang="ts">
 import * as echarts from "echarts";
 import { guid, debounce } from "@yto/utils";
-import { directivesList } from "@/directives/index";
+// import { directivesList } from "@/directives/index";
+import resizeElement from "./common/resizeElement";
 export default defineComponent({
   props: {
     options: {
@@ -29,7 +30,7 @@ export default defineComponent({
     },
   },
   directives: {
-    "resize-element": directivesList.resizeElement,
+    "resize-element": resizeElement,
   },
   setup(props, { expose }) {
     let myChart: any | null;
