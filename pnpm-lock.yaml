@@ -37,7 +37,7 @@ importers:
       '@types/node': 18.15.11
       '@vitejs/plugin-vue-jsx': 3.0.1_vite@4.2.1+vue@3.2.45
       '@vue/runtime-core': 3.2.47
-      '@yto/custom': link:packages/yto-custom
+      '@yto/custom': link:packages/yto-custom/dist
       fs-extra: 11.1.1
       immutable: 4.3.0
       moment: 2.29.4
