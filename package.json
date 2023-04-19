@@ -32,6 +32,7 @@
     "@types/node": "^18.15.11",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "@vue/runtime-core": "^3.2.47",
+    "@yto/custom": "workspace:^0.0.3",
     "fs-extra": "^11.1.1",
     "immutable": "^4.3.0",
     "moment": "^2.29.4",
