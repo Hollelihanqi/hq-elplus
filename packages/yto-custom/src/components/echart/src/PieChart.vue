@@ -8,8 +8,8 @@ import BaseEchart from "./BaseChart.vue";
 import { Map } from "immutable";
 import { getPieChartBaseOptions } from "./common/chartConfig";
 import { getOptiops } from './common/util';
-import echartsComposable from './common/echartsComposable'
-import { isEmpty, isArray } from "lodash-es";
+import echartsComposable from './common/echartsComposable';
+import { isEmpty } from "@yto/utils";
 
 interface Props {
   options?: any;
@@ -35,7 +35,7 @@ const chartOptions = computed(() => {
 const dealNodata = (options: any) => {
   if (
     isEmpty(options.series) ||
-    (isArray(options.series) &&
+    (Array.isArray(options.series) &&
       options.series.every((item: any) => isEmpty(item.data)))
   ) {
     options.title.text = "暂无数据";
@@ -49,7 +49,11 @@ const dealNodata = (options: any) => {
   return options;
 };
 
-// echartsComposable(chartRef)
+const {getEchartInstance} = echartsComposable(chartRef)
+
+defineExpose({
+  getEchartInstance
+})
 </script>
 <style lang="scss" scoped>
 .wrapper {
