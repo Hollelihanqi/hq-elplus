@@ -3,7 +3,7 @@
     <div class="table-w">
       <el-table
         ref="tableRef"
-        :data="tableData"
+        :data="!requestApi ? tableData : list"
         style="width: 100%"
         class="my-table"
         header-cell-class-name="my-header-cell"
@@ -42,10 +42,10 @@
         v-if="!paginationHide"
         class="my-pagination"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
+        :total="!requestApi ? total : listTotal"
         :page-sizes="pageSizes"
-        :page-size="pageSize"
-        :current-page="currentPage"
+        :page-size="!requestApi ? pageSize : paginationParams.pageSize"
+        :current-page="!requestApi ? currentPage : paginationParams.currentPage"
         @size-change="handleSizeChange"
         @current-change="handleTableChange"
       ></el-pagination>
@@ -63,23 +63,9 @@ export interface ColumnsItemProps {
 }
 
 export default defineComponent({
-  name:"Table",
+  name: "Table",
   components: {
     ElConfigProvider,
-  },
-  directives: {
-    loading: {
-      // 指令的定义
-      mounted(el: HTMLElement) {
-        console.log(el.querySelector(".el-table__empty-text"));
-      },
-    },
-    hoverTip: {
-      // 指令的定义
-      mounted(el: HTMLElement) {
-        console.log(el);
-      },
-    },
   },
   props: {
     tableData: {
@@ -113,33 +99,108 @@ export default defineComponent({
       type: Number,
       default: 1,
     },
+    currentPageField: {
+      type: String,
+      default: "page",
+    },
+    pageSizeField: {
+      type: String,
+      default: "size",
+    },
     handleChange: {
       type: Function,
       default: null,
     },
+    requestApi: {
+      type: Function,
+      default: null,
+    },
+    requestAuto: {
+      type: Boolean,
+      default: true,
+    },
+    dataCallback: {
+      type: Function,
+      default: null,
+    },
+    otherParams: {
+      type: Object,
+      default: () => ({}),
+    },
   },
-
   setup(props) {
     const tableRef = ref();
-    const load = () => {};
+    const list = ref([]);
+    const listTotal = ref(0);
+    const paginationParams = ref({
+      currentPage: 1,
+      pageSize: 10,
+    });
+    const getTableData = async () => {
+      let result = await props.requestApi({
+        ...props.otherParams,
+        [props.currentPageField]: paginationParams.value.currentPage,
+        [props.pageSizeField]: paginationParams.value.pageSize,
+      });
+      if (props.dataCallback && typeof props.dataCallback === "function") {
+        result = props.dataCallback(result);
+      }
+      list.value = result.items;
+      listTotal.value = result.total;
+    };
     const handleTableChange = (num: number) => {
-      if (props.handleChange && typeof props.handleChange === "function") {
+      if (
+        !props.requestApi &&
+        props.handleChange &&
+        typeof props.handleChange === "function"
+      ) {
         props.handleChange("page", num);
+      } else {
+        paginationParams.value.currentPage = num;
+        getTableData();
       }
     };
     const handleSizeChange = (val: number): void => {
-      if (props.handleChange && typeof props.handleChange === "function") {
+      if (
+        !props.requestApi &&
+        props.handleChange &&
+        typeof props.handleChange === "function"
+      ) {
         props.handleChange("size", val);
+      } else {
+        paginationParams.value.pageSize = val;
+        getTableData();
       }
     };
     const tableClearSelection = () => {
       tableRef.value.clearSelection();
     };
+    const updateTableData = () => {
+      getTableData();
+    };
+    const resetTableData = () => {
+      paginationParams.value.currentPage = 1;
+      paginationParams.value.pageSize = 10;
+      getTableData();
+    };
+    onMounted(() => {
+      if (
+        props.requestApi &&
+        props.requestAuto &&
+        typeof props.requestApi === "function"
+      ) {
+        getTableData();
+      }
+    });
     return {
+      list,
+      listTotal,
+      paginationParams,
       handleTableChange,
       handleSizeChange,
-      load,
       tableClearSelection,
+      updateTableData,
+      resetTableData,
       tableRef,
       locale: zhCn,
     };

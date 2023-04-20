@@ -30,6 +30,7 @@ const handleTableChange = async (type: string, num: number) => {
   }
 };
 
+// 列配置
 const columns = [
   {
     label: "调用方编码",
