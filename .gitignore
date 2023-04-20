@@ -4,7 +4,6 @@ node_modules
 dist
 dist-ssr
 *.local
-*.d.ts
 *.d.ts.map
 *.js
 *.js.map

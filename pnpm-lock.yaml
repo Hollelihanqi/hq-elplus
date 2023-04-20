@@ -94,7 +94,7 @@ importers:
         version: 3.0.1(vite@4.2.1)(vue@3.2.47)
       '@yto/custom':
         specifier: workspace:^0.0.3
-        version: link:../packages/yto-custom
+        version: link:../packages/yto-custom/dist
       markdown-it:
         specifier: ^13.0.1
         version: 13.0.1
@@ -104,13 +104,13 @@ importers:
     devDependencies:
       '@ruabick/md-demo-plugins':
         specifier: ^0.3.1
-        version: 0.3.1(@algolia/client-search@4.16.0)(@types/node@18.15.11)(sass@1.56.1)
+        version: 0.3.1(@algolia/client-search@4.16.0)
       '@ruabick/vitepress-demo-block':
         specifier: ^0.3.1
         version: 0.3.1
       vitepress:
         specifier: 1.0.0-alpha.61
-        version: 1.0.0-alpha.61(@algolia/client-search@4.16.0)(@types/node@18.15.11)(sass@1.56.1)
+        version: 1.0.0-alpha.61(@algolia/client-search@4.16.0)
 
   packages/yto-custom:
     dependencies:
@@ -118,7 +118,11 @@ importers:
         specifier: ^5.4.2
         version: 5.4.2
 
-  packages/yto-custom/dist: {}
+  packages/yto-custom/dist:
+    dependencies:
+      echarts:
+        specifier: ^5.4.2
+        version: 5.4.2
 
   packages/yto-utils:
     dependencies:
@@ -130,7 +134,7 @@ importers:
     dependencies:
       '@yto/custom':
         specifier: workspace:^
-        version: link:../packages/yto-custom
+        version: link:../packages/yto-custom/dist
       '@yto/utils':
         specifier: workspace:^1.0.0
         version: link:../packages/yto-utils
@@ -1139,13 +1143,13 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /@ruabick/md-demo-plugins@0.3.1(@algolia/client-search@4.16.0)(@types/node@18.15.11)(sass@1.56.1):
+  /@ruabick/md-demo-plugins@0.3.1(@algolia/client-search@4.16.0):
     resolution: {integrity: sha512-vhUmYDqCL81H+ErDzuoANK4pw7Z7ePaDid70IvcfYlTGRSfVHP63Te3wZ+QrYoF3PJFy0cXDw9b76WUov+3PAg==}
     dependencies:
-      '@ruabick/utils': 0.3.1(@algolia/client-search@4.16.0)(@types/node@18.15.11)(sass@1.56.1)
+      '@ruabick/utils': 0.3.1(@algolia/client-search@4.16.0)
       fs-extra: 10.1.0
       markdown-it: 13.0.1
-      vitepress: 1.0.0-alpha.29(@algolia/client-search@4.16.0)(@types/node@18.15.11)(sass@1.56.1)
+      vitepress: 1.0.0-alpha.29(@algolia/client-search@4.16.0)
     transitivePeerDependencies:
       - '@algolia/client-search'
       - '@types/node'
@@ -1160,11 +1164,11 @@ packages:
       - terser
     dev: true
 
-  /@ruabick/utils@0.3.1(@algolia/client-search@4.16.0)(@types/node@18.15.11)(sass@1.56.1):
+  /@ruabick/utils@0.3.1(@algolia/client-search@4.16.0):
     resolution: {integrity: sha512-q0bvv53pxoOuP00rOWvY3OA6sBney4xXc4Xk9fNX7We3g1HtOCRZTyNiEWx4dKENF7QxJVZX15r33aLetYmhTA==}
     dependencies:
       '@vue/compiler-core': 3.2.47
-      vitepress: 1.0.0-alpha.29(@algolia/client-search@4.16.0)(@types/node@18.15.11)(sass@1.56.1)
+      vitepress: 1.0.0-alpha.29(@algolia/client-search@4.16.0)
     transitivePeerDependencies:
       - '@algolia/client-search'
       - '@types/node'
@@ -1281,7 +1285,7 @@ packages:
       '@babel/core': 7.21.4
       '@babel/plugin-transform-typescript': 7.21.3(@babel/core@7.21.4)
       '@vue/babel-plugin-jsx': 1.1.1(@babel/core@7.21.4)
-      vite: 4.2.1(@types/node@18.15.11)(sass@1.56.1)
+      vite: 4.2.1
       vue: 3.2.47
     transitivePeerDependencies:
       - supports-color
@@ -1294,7 +1298,7 @@ packages:
       vite: ^3.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 3.2.5(@types/node@18.15.11)(sass@1.56.1)
+      vite: 3.2.5
       vue: 3.2.47
     dev: true
 
@@ -1327,7 +1331,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.2.1(@types/node@18.15.11)(sass@1.56.1)
+      vite: 4.2.1
       vue: 3.2.47
     dev: true
 
@@ -3026,7 +3030,7 @@ packages:
       - supports-color
     dev: true
 
-  /vite@3.2.5(@types/node@18.15.11)(sass@1.56.1):
+  /vite@3.2.5:
     resolution: {integrity: sha512-4mVEpXpSOgrssFZAOmGIr85wPHKvaDAcXqxVxVRZhljkJOMZi1ibLibzjLHzJvcok8BMguLc7g1W6W/GqZbLdQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -3051,12 +3055,10 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 18.15.11
       esbuild: 0.15.18
       postcss: 8.4.21
       resolve: 1.22.1
       rollup: 2.79.1
-      sass: 1.56.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -3096,6 +3098,38 @@ packages:
       fsevents: 2.3.2
     dev: true
 
+  /vite@4.2.1:
+    resolution: {integrity: sha512-7MKhqdy0ISo4wnvwtqZkjke6XN4taqQ2TBaTccLIpOKv7Vp2h4Y+NpmWCnGDeSvvn45KxvWgGyb0MkHvY1vgbg==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': '>= 14'
+      less: '*'
+      sass: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.4.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      less:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+    dependencies:
+      esbuild: 0.17.16
+      postcss: 8.4.21
+      resolve: 1.22.2
+      rollup: 3.20.2
+    optionalDependencies:
+      fsevents: 2.3.2
+
   /vite@4.2.1(@types/node@18.15.11)(sass@1.56.1):
     resolution: {integrity: sha512-7MKhqdy0ISo4wnvwtqZkjke6XN4taqQ2TBaTccLIpOKv7Vp2h4Y+NpmWCnGDeSvvn45KxvWgGyb0MkHvY1vgbg==}
     engines: {node: ^14.18.0 || >=16.0.0}
@@ -3130,7 +3164,7 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
 
-  /vitepress@1.0.0-alpha.29(@algolia/client-search@4.16.0)(@types/node@18.15.11)(sass@1.56.1):
+  /vitepress@1.0.0-alpha.29(@algolia/client-search@4.16.0):
     resolution: {integrity: sha512-oaRaeMLcN9M3Bxz97fFVF6Gzm3Aqtb0CijTt5TOW0XPzNPuKA0YpFnsmS97gdKmA+VztM6itRJ8K7JJuU0VS3g==}
     hasBin: true
     dependencies:
@@ -3141,7 +3175,7 @@ packages:
       '@vueuse/core': 9.13.0(vue@3.2.47)
       body-scroll-lock: 4.0.0-beta.0
       shiki: 0.11.1
-      vite: 3.2.5(@types/node@18.15.11)(sass@1.56.1)
+      vite: 3.2.5
       vue: 3.2.47
     transitivePeerDependencies:
       - '@algolia/client-search'
@@ -3157,7 +3191,7 @@ packages:
       - terser
     dev: true
 
-  /vitepress@1.0.0-alpha.61(@algolia/client-search@4.16.0)(@types/node@18.15.11)(sass@1.56.1):
+  /vitepress@1.0.0-alpha.61(@algolia/client-search@4.16.0):
     resolution: {integrity: sha512-NvzERVS3/TU9YkYcaiK7yNSe0zY9UcSV58tx3mxbvVLCuwRykzO4OWbl6vQT6Ut6YGuZU1y3Z5WcSS+fHfaxJA==}
     hasBin: true
     dependencies:
@@ -3168,7 +3202,7 @@ packages:
       '@vueuse/core': 9.13.0(vue@3.2.47)
       body-scroll-lock: 4.0.0-beta.0
       shiki: 0.14.1
-      vite: 4.2.1(@types/node@18.15.11)(sass@1.56.1)
+      vite: 4.2.1
       vue: 3.2.47
     transitivePeerDependencies:
       - '@algolia/client-search'

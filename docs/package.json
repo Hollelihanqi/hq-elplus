@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "docs:dev": "vitepress dev --port 1167",
-    "docs:build": "vitepress build",
-    "docs:server": "vitepress serve"
+    "docs:build": "vitepress build docs",
+    "docs:server": "vitepress serve",
+    "docs:preview": "vitepress preview docs --port 8963"
   },
   "keywords": [],
   "author": "",
