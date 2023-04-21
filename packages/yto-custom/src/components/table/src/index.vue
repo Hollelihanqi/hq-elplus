@@ -70,8 +70,7 @@ export default defineComponent({
   props: {
     tableData: {
       type: Array,
-      default: () => [],
-      required: true,
+      default: () => []
     },
     columns: {
       type: Array as PropType<ColumnsItemProps[]>,
@@ -134,7 +133,7 @@ export default defineComponent({
     const listTotal = ref(0);
     const paginationParams = ref({
       currentPage: 1,
-      pageSize: 10,
+      pageSize: props.pageSize,
     });
     const getTableData = async () => {
       let result = await props.requestApi({
@@ -180,7 +179,7 @@ export default defineComponent({
     };
     const resetTableData = () => {
       paginationParams.value.currentPage = 1;
-      paginationParams.value.pageSize = 10;
+      paginationParams.value.pageSize = props.pageSize;
       getTableData();
     };
     onMounted(() => {
