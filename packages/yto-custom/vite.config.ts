@@ -47,7 +47,7 @@ export default defineConfig({
       //   move()
       // }
     }),
-    MoveFile(() => { move() }),
+    // MoveFile(() => { move() }),
     // visualizer()
   ],
   resolve: {
@@ -65,7 +65,7 @@ export default defineConfig({
       name: "YtoCustom",
     },
     rollupOptions: {
-      external: ["vue", "vue-router", "echarts","@vue/runtime-core"],
+      external: ["vue", "vue-router", "echarts", "@vue/runtime-core"],
       output: [
         {
           name: "YtoCustom",
