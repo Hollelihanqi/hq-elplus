@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import CustomTable from './views/index.vue'
-import Menu from './components/Menu.vue'
+import Menu from './views/Menu.vue'
 import Chart from './views/chart.vue'
 </script>
 
 <template>
     <div class="app">
       <!-- <CustomTable />
-      <Menu/> -->
-      <Chart></Chart>
+      <Chart></Chart> -->
+      <Menu/>
     </div>
 </template>
 

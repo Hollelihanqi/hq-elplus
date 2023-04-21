@@ -2,20 +2,13 @@
  * @Description: 模块名称
  * @Author: ym
  * @Date: 2023-04-21 15:45:49
- * @LastEditTime: 2023-04-21 17:11:07
+ * @LastEditTime: 2023-04-21 17:13:51
 -->
 <template>
-  <yto-menu :menuData="menuData"></yto-menu>
+  <yto-menu :menuData="menuData" @select="onSelect" @open="open" @close="close" @menuItemClick="menuItemClick"></yto-menu>
 </template>
 <script lang="ts" setup name="Menu">
-interface IMenuData {
-  name: string
-  path?: string
-  icon?: String
-  type?: 'group'
-  children?: IMenuData[]
-}
-const menuData: IMenuData[] = [
+const menuData = [
   {
     name: "Navigator Three",
     path: "/navigatorThree",
@@ -70,4 +63,21 @@ const menuData: IMenuData[] = [
     ],
   },
 ]
+const onSelect = () => {
+  console.log('****se');
+  
+}
+const open = () => {
+  console.log('****open');
+  
+}
+const close = () => {
+  console.log('****close');
+  
+}
+const menuItemClick = () => {
+  console.log('****menuItemClick');
+  
+}
+
 </script>
