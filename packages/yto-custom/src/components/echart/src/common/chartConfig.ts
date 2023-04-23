@@ -20,7 +20,7 @@ export const getLineChartConfig = () => {
       backgroundColor: "rgba(0, 0, 0, 0.75)",
       textStyle: {
         fontSize: 14,
-        color: "#999",
+        color: "#fff",  
       },
       axisPointer: {
         type: "line",
