@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     ColSetting: typeof import('./src/components/pro-table/src/components/ColSetting.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
+    ElDialog: typeof import('element-plus/es')['ElDialog']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElIcon: typeof import('element-plus/es')['ElIcon']
@@ -29,7 +30,7 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     SearchForm: typeof import('./src/components/pro-table/src/components/SearchForm/index.vue')['default']
     SearchFormItem: typeof import('./src/components/pro-table/src/components/SearchForm/components/SearchFormItem.vue')['default']
-    Src: typeof import('./src/components/echart/src/index.vue')['default']
+    Src: typeof import('./src/components/dialog/src/index.vue')['default']
     TableColumn: typeof import('./src/components/pro-table/src/components/TableColumn.vue')['default']
   }
 }

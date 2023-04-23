@@ -1,4 +1,4 @@
-<script lang="ts" setup name="CustomDialog">
+<script lang="ts" setup name="Cdialog">
 	import type { ButtonProps, DialogProps } from "element-plus";
 	import { ZoomIn, ZoomOut } from "@element-plus/icons-vue";
 	import type { Component } from "vue";

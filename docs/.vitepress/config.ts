@@ -39,6 +39,10 @@ export default defineConfig({
             {
               text: "Echart",
               link: "/.vitepress/examples/echart/index.md",
+            },
+            {
+              text: "Dialog",
+              link: "/.vitepress/examples/dialog/index.md",
             }
           ],
           collapsible: true,
