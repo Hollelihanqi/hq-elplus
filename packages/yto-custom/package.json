@@ -9,8 +9,7 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "build": "pnpm clean && vite build",
-    "build2": "pnpm clean && vue-tsc && vite build"
+    "build": "pnpm clean && vue-tsc && vite build"
   },
   "dependencies": {
     "echarts": "^5.4.2"

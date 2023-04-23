@@ -21,7 +21,7 @@
             show-overflow-tooltip
             v-bind="item"
           >
-            <template #default="scope: any">
+            <template #default="scope">
               <slot
                 v-if="item.slot"
                 :name="item.slot"
