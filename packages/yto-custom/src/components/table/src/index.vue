@@ -55,6 +55,7 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from "vue";
 import { ElConfigProvider } from "element-plus";
+
 // @ts-ignore
 import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 
@@ -70,7 +71,7 @@ export default defineComponent({
   props: {
     tableData: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     columns: {
       type: Array as PropType<ColumnsItemProps[]>,

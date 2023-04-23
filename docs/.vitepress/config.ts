@@ -41,7 +41,6 @@ export default defineConfig({
               link: "/.vitepress/examples/echart/index.md",
             }
           ],
-          collapsible: true,
           collapsed: false
         },
         // {
@@ -60,7 +59,6 @@ export default defineConfig({
       prev: "上一篇",
       next: "下一篇",
     },
-    lastUpdated: true,
   },
   /**
    * 自定义 markdown 解析器
