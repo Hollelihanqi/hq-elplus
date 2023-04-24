@@ -1,7 +1,22 @@
 <script lang="ts" setup name="Cdialog">
-	import type { ButtonProps, DialogProps } from "element-plus";
+	import { ButtonProps } from "element-plus";
 	import { ZoomIn, ZoomOut } from "@element-plus/icons-vue";
 	import type { Component } from "vue";
+
+	// type MyButtonProps = Writeable<ButtonProps> & {
+	// 	// 在这里添加自己的属性
+	// 	txt: string;
+	// };
+
+	type MyParital<T> = {
+		[P in keyof T]?: T[P];
+	};
+	type Writeable<T> = { -readonly [P in keyof T]: T[P] };
+
+	type MyButtonProps = MyParital<ButtonProps> & {
+		// 在这里添加自己的属性
+		txt?: string;
+	};
 
 	interface IProps {
 		visible: boolean;
@@ -12,8 +27,8 @@
 		mimIcon?: Component; //最小化最大化按钮
 		maxmin?: boolean; // 最小化最大化按钮显示隐藏
 
-		confirmOption?: Object | string | undefined;
-		cancelOption?: Object | string | undefined;
+		confirmOption?: MyButtonProps | undefined;
+		cancelOption?: MyButtonProps | undefined;
 	}
 	const props = withDefaults(defineProps<IProps>(), {
 		visible: false,
@@ -54,8 +69,9 @@
 	const _showCancel = computed(() => {
 		return Reflect.has(props, "cancelOption") && props.cancelOption != undefined;
 	});
+
 	const _confirmOption = computed(() => {
-		let option = {
+		let option: MyButtonProps = {
 			type: "primary",
 			size: "default",
 			txt: "确认",
@@ -64,7 +80,7 @@
 		return reactive(option);
 	});
 	const _cancelOption = computed(() => {
-		let option = {
+		let option: MyButtonProps = {
 			type: "default",
 			size: "default",
 			txt: "取消",
