@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <yto-echart type="line" :options="lineChartOptions"></yto-echart>
+    <yto-c-echart type="line" :options="lineChartOptions"></yto-c-echart>
   </div>
 </template>
 
