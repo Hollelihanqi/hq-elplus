@@ -1,5 +1,5 @@
 <template>
-  <yto-menu :menus="testMenus" />
+  <YtoCMenu :menus="testMenus" />
 </template>
 <script lang="ts" setup>
 const testMenus = [

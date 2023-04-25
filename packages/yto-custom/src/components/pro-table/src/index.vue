@@ -106,7 +106,7 @@
   <!-- <ColSetting v-if="toolButton" ref="colRef" v-model:colSetting="colSetting" /> -->
 </template>
 
-<script setup lang="ts" name="ProTable">
+<script setup lang="ts" name="CProTable">
 import { ref, watch, computed, provide } from "vue";
 import { filterEnum } from "./utils";
 import { useTable } from "./hooks/useTable";

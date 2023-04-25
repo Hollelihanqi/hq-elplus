@@ -1,5 +1,5 @@
 <template>
-  <yto-table
+  <yto-c-table
     :columns="columns"
     :tableData="tableData"
     :total="total"
@@ -10,7 +10,7 @@
     <template #callStatus="scope">
       <span>{{ scope.row.status }}</span>
     </template>
-  </yto-table>
+  </yto-c-table>
 </template>
 <script lang="ts" setup>
 import { ref } from "vue";

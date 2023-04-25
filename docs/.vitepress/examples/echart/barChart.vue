@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <yto-echart type="bar" :options="barChartOptions"></yto-echart>
+    <yto-c-echart type="bar" :options="barChartOptions"></yto-c-echart>
   </div>
 </template>
 

@@ -53,7 +53,7 @@
   </ElConfigProvider>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, ref } from "vue";
+import { defineComponent, PropType, ref, ExtractPropTypes } from "vue";
 import { ElConfigProvider } from "element-plus";
 
 // @ts-ignore
@@ -63,72 +63,75 @@ export interface ColumnsItemProps {
   [propsName: string]: any;
 }
 
+const props = {
+  tableData: {
+    type: Array,
+    default: () => [],
+  },
+  columns: {
+    type: Array as PropType<ColumnsItemProps[]>,
+    default: () => [],
+    required: true,
+  },
+  paginationHide: {
+    // 是否隐藏分页组件
+    type: Boolean,
+    default: false,
+  },
+  total: {
+    type: Number,
+    default: 0,
+  },
+  pageSizes: {
+    type: Array as PropType<number[]>,
+    default: () => [10, 30, 50, 100],
+  },
+  pageSize: {
+    type: Number,
+    default: 10,
+  },
+  currentPage: {
+    type: Number,
+    default: 1,
+  },
+  currentPageField: {
+    type: String,
+    default: "page",
+  },
+  pageSizeField: {
+    type: String,
+    default: "size",
+  },
+  handleChange: {
+    type: Function,
+    default: null,
+  },
+  requestApi: {
+    type: Function,
+    default: null,
+  },
+  requestAuto: {
+    type: Boolean,
+    default: true,
+  },
+  dataCallback: {
+    type: Function,
+    default: null,
+  },
+  otherParams: {
+    type: Object,
+    default: () => ({}),
+  },
+};
+type Props = ExtractPropTypes<typeof props>;
+
 export default defineComponent({
-  name: "Table",
+  name: "CTable",
   components: {
     ElConfigProvider,
   },
-  props: {
-    tableData: {
-      type: Array,
-      default: () => [],
-    },
-    columns: {
-      type: Array as PropType<ColumnsItemProps[]>,
-      default: () => [],
-      required: true,
-    },
-    paginationHide: {
-      // 是否隐藏分页组件
-      type: Boolean,
-      default: false,
-    },
-    total: {
-      type: Number,
-      default: 0,
-    },
-    pageSizes: {
-      type: Array as PropType<number[]>,
-      default: () => [10, 30, 50, 100],
-    },
-    pageSize: {
-      type: Number,
-      default: 10,
-    },
-    currentPage: {
-      type: Number,
-      default: 1,
-    },
-    currentPageField: {
-      type: String,
-      default: "page",
-    },
-    pageSizeField: {
-      type: String,
-      default: "size",
-    },
-    handleChange: {
-      type: Function,
-      default: null,
-    },
-    requestApi: {
-      type: Function,
-      default: null,
-    },
-    requestAuto: {
-      type: Boolean,
-      default: true,
-    },
-    dataCallback: {
-      type: Function,
-      default: null,
-    },
-    otherParams: {
-      type: Object,
-      default: () => ({}),
-    },
-  },
-  setup(props) {
+  props,
+  setup(props: Props) {
     const tableRef = ref();
     const list = ref([]);
     const listTotal = ref(0);
@@ -237,6 +240,9 @@ export default defineComponent({
 .my-pagination :deep(.el-pagination__jump) {
   margin-left: 16px;
 }
+.my-pagination :deep(.el-pagination__sizes) {
+  margin-right: 16px;
+}
 
 :deep(.el-input__inner) {
   height: 32px !important;
@@ -301,5 +307,8 @@ export default defineComponent({
   line-height: 36px;
   vertical-align: top;
   box-sizing: border-box;
+}
+:deep(.el-pagination span:not([class*="suffix"])) {
+  align-items: center;
 }
 </style>

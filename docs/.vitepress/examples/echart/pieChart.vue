@@ -1,5 +1,5 @@
 <template>
-  <yto-echart type="pie" :options="pieChartOptions"></yto-echart>
+  <yto-c-echart type="pie" :options="pieChartOptions"></yto-c-echart>
 </template>
 
 <script lang="ts" setup>
