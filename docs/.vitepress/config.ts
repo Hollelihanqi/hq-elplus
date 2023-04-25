@@ -39,6 +39,10 @@ export default defineConfig({
             {
               text: "Echart",
               link: "/.vitepress/examples/echart/index.md",
+            },
+            {
+              text: "fromItem",
+              link: "/.vitepress/examples/echart/index.md",
             }
           ],
           collapsed: false

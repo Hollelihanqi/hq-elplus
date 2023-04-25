@@ -1,11 +1,10 @@
 <template>
-  <el-row class="dis-flex pad-tb-5" :gutter="20">
-    <el-col class="pad-tb-5"  v-for="(item, index) in formConfig" :span="item.span || colNum"   :key="index">
+  <el-row class="dis-flex pad-tb-5" >
+    <el-col class="pad-tb-5"  v-for="(item, index) in formConfig" :span="item.span || colNum" style="padding: 0 10px"   :key="index">
     <el-form-item
         :label="item?.label"
         :prop="item?.prop"
         :label-width="item.labelWidth"
-        style="margin: 0"
     >
       <component
           v-bind="item"
@@ -26,7 +25,7 @@
       <slot  v-if="item?.slot" :name="item?.prop"/>
     </el-form-item>
     </el-col>
-    <div v-if="$slots.default" class="flex-1 dis-flex flex-align-item-center flex-justify-end">
+    <div v-if="$slots.default" class="flex-1 dis-flex flex-align-item-center flex-justify-end " style="padding-right: 20px">
       <slot />
     </div>
   </el-row>

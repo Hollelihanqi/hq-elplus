@@ -2,13 +2,15 @@
 import CustomTable from './views/index.vue'
 import Menu from './components/Menu.vue'
 import Chart from './views/chart.vue'
+import FromItem from "./views/formItem/index.vue"
 </script>
 
 <template>
     <div class="app">
       <!-- <CustomTable />
       <Menu/> -->
-      <Chart></Chart>
+<!--      <Chart></Chart>-->
+      <FromItem></FromItem>
     </div>
 </template>
 
