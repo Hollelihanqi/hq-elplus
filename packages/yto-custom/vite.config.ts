@@ -12,7 +12,8 @@ import { copyFileSync } from 'fs'
 import { readFile } from 'fs/promises'
 //@ts-ignore
 import { outputFile } from 'fs-extra/esm'
-// import { visualizer } from 'rollup-plugin-visualizer'
+//@ts-ignore
+import { visualizer } from 'rollup-plugin-visualizer'
 //@ts-ignore
 import MoveFile from './vite-plugin-move'
 
@@ -48,7 +49,7 @@ export default defineConfig({
     //   // }
     // }),
     MoveFile(() => { move() }),
-    // visualizer()
+    visualizer()
   ],
   resolve: {
     alias: {
@@ -65,7 +66,7 @@ export default defineConfig({
       name: "YtoCustom",
     },
     rollupOptions: {
-      external: ["vue", "vue-router", "echarts"],
+      external: ["vue", "vue-router", "echarts", "axios"],
       output: [
         {
           name: "YtoCustom",
