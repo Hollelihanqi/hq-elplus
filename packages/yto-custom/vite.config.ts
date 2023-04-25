@@ -12,7 +12,8 @@ import { copyFileSync } from 'fs'
 import { readFile } from 'fs/promises'
 //@ts-ignore
 import { outputFile } from 'fs-extra/esm'
-// import { visualizer } from 'rollup-plugin-visualizer'
+//@ts-ignore
+import { visualizer } from 'rollup-plugin-visualizer'
 //@ts-ignore
 import MoveFile from './vite-plugin-move'
 
@@ -33,22 +34,22 @@ export default defineConfig({
     }),
     ElementPlus(),
     vueSetupExtend(),
-    dts({
-      skipDiagnostics: true /** 是否跳过类型诊断 */,
-      staticImport: true /** 是否将动态引入转换为静态 */,
-      outputDir: ['./dist/es']/** 可以指定一个数组来输出到多个目录中 */,
-      insertTypesEntry: true /** 是否生成类型声明入口 */,
-      cleanVueFileName: true /** 是否将 '.vue.d.ts' 文件名转换为 '.d.ts' */,
-      copyDtsFiles: true /** 是否将源码里的 .d.ts 文件复制到 outputDir */,
-      include: ['./packages/yto-custom'] /** 手动设置包含路径的 glob */,
-      // exclude:['./src/directives'],
-      // /** 构建后回调钩子 */
-      // afterBuild: (): void => {
-      //   move()
-      // }
-    }),
-    // MoveFile(() => { move() }),
-    // visualizer()
+    // dts({
+    //   skipDiagnostics: true /** 是否跳过类型诊断 */,
+    //   staticImport: true /** 是否将动态引入转换为静态 */,
+    //   outputDir: ['./dist/es']/** 可以指定一个数组来输出到多个目录中 */,
+    //   insertTypesEntry: true /** 是否生成类型声明入口 */,
+    //   cleanVueFileName: true /** 是否将 '.vue.d.ts' 文件名转换为 '.d.ts' */,
+    //   copyDtsFiles: true /** 是否将源码里的 .d.ts 文件复制到 outputDir */,
+    //   include: ['./packages/yto-custom'] /** 手动设置包含路径的 glob */,
+    //   // exclude:['./src/directives'],
+    //   // /** 构建后回调钩子 */
+    //   // afterBuild: (): void => {
+    //   //   move()
+    //   // }
+    // }),
+    MoveFile(() => { move() }),
+    visualizer()
   ],
   resolve: {
     alias: {
@@ -65,7 +66,7 @@ export default defineConfig({
       name: "YtoCustom",
     },
     rollupOptions: {
-      external: ["vue", "vue-router", "echarts", "@vue/runtime-core"],
+      external: ["vue", "vue-router", "echarts", "axios"],
       output: [
         {
           name: "YtoCustom",
@@ -86,7 +87,7 @@ const move = (): void => {
     const json = JSON.parse(data)
     json.main = "es/index.js"
     json.module = "es/index.js"
-    json.types = "es/index.d.ts"
+    // json.types = "es/index.d.ts"
     json.files = ["es/"]
     delete json.scripts
     outputFile(

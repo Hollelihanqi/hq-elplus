@@ -106,7 +106,7 @@
   <!-- <ColSetting v-if="toolButton" ref="colRef" v-model:colSetting="colSetting" /> -->
 </template>
 
-<script setup lang="ts" name="ProTable">
+<script setup lang="ts" name="CProTable">
 import { ref, watch, computed, provide } from "vue";
 import { filterEnum } from "./utils";
 import { useTable } from "./hooks/useTable";
@@ -119,7 +119,7 @@ import SearchForm from "./components/SearchForm/index.vue";
 import Pagination from "./components/Pagination.vue";
 import ColSetting from "./components/ColSetting.vue";
 import TableColumn from "./components/TableColumn.vue";
-import printJS from "print-js";
+// import printJS from "print-js";
 // @ts-ignore
 import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 
@@ -283,32 +283,32 @@ const printData = computed(() => {
 
 // 打印表格数据（💥 多级表头数据打印时，只能扁平化成一维数组，printJs 不支持多级表头打印）
 const handlePrint = () => {
-  printJS({
-    printable: printData.value,
-    header:
-      props.title &&
-      `<div style="display: flex;flex-direction: column;text-align: center"><h2>${props.title}</h2></div>`,
-    properties: flatColumns
-      .value!.filter(
-        (item) =>
-          item.isShow &&
-          item.type !== "selection" &&
-          item.type !== "index" &&
-          item.type !== "expand" &&
-          item.prop !== "operation"
-      )
-      .map((item: ColumnProps) => {
-        return {
-          field: item.prop,
-          displayName: item.label,
-        };
-      }),
-    type: "json",
-    gridHeaderStyle:
-      "border: 1px solid #ebeef5;height: 45px;font-size: 14px;color: #232425;text-align: center;background-color: #fafafa;",
-    gridStyle:
-      "border: 1px solid #ebeef5;height: 40px;font-size: 14px;color: #494b4e;text-align: center",
-  });
+  // printJS({
+  //   printable: printData.value,
+  //   header:
+  //     props.title &&
+  //     `<div style="display: flex;flex-direction: column;text-align: center"><h2>${props.title}</h2></div>`,
+  //   properties: flatColumns
+  //     .value!.filter(
+  //       (item) =>
+  //         item.isShow &&
+  //         item.type !== "selection" &&
+  //         item.type !== "index" &&
+  //         item.type !== "expand" &&
+  //         item.prop !== "operation"
+  //     )
+  //     .map((item: ColumnProps) => {
+  //       return {
+  //         field: item.prop,
+  //         displayName: item.label,
+  //       };
+  //     }),
+  //   type: "json",
+  //   gridHeaderStyle:
+  //     "border: 1px solid #ebeef5;height: 45px;font-size: 14px;color: #232425;text-align: center;background-color: #fafafa;",
+  //   gridStyle:
+  //     "border: 1px solid #ebeef5;height: 40px;font-size: 14px;color: #494b4e;text-align: center",
+  // });
 };
 
 // 暴露给父组件的参数和方法(外部需要什么，都可以从这里暴露出去)

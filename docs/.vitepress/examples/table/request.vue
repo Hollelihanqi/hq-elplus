@@ -1,5 +1,5 @@
 <template>
-  <yto-table
+  <yto-c-table
     :columns="columns"
     :requestApi="getList"
     :dataCallback="dataCallback"
@@ -7,7 +7,7 @@
     <template #callStatus="scope">
       <span>{{ scope.row.status }}</span>
     </template>
-  </yto-table>
+  </yto-c-table>
 </template>
 <script lang="ts" setup>
 const tableData = [
