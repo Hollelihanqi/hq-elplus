@@ -12,10 +12,10 @@
 ## hello: world
 
 <script setup>
-import { ref } from 'vue'
-import {useData} from 'vitepress'
-const {page} = useData()
-const count = ref(0)
+import { ref } from 'vue';
+import {useData} from 'vitepress';
+const {page} = useData();
+const count = ref(0);
 
 const columns = [
   {

@@ -11,8 +11,8 @@ import { defineConfig, ConfigEnv, UserConfig, loadEnv } from "vite";
 import AutoImport from 'unplugin-auto-import/vite'
 // import vue from "@vitejs/plugin-vue";
 // import vueJsx from "@vitejs/plugin-vue-jsx";
-import dns from 'dns'
-dns.setDefaultResultOrder('verbatim')
+// import dns from 'dns'
+// dns.setDefaultResultOrder('verbatim')
 // // https://vitejs.dev/config/
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
   const env = loadEnv(mode, process.cwd(), "VITE_");
