@@ -28,7 +28,6 @@ const chartMap = new Map<String,any>
 chartMap.set('line', LineChart)
 chartMap.set('bar', BarChart)
 chartMap.set('pie', PieChart)
-
 const getRenderChart = () => {
   return  props.type && chartMap.has(props.type) ? chartMap.get(props.type) : BaseChart
 };
