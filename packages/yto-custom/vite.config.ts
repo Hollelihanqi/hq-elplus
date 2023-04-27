@@ -98,7 +98,10 @@ const move = (): void => {
     json.files = ["es/"];
     delete json.scripts;
     outputFile(path.resolve("./dist", `package.json`), JSON.stringify(json), "utf-8");
-    const files = [{ input: "./README.md", outDir: "dist/README.md" }] as const;
+    const files = [
+      { input: "./README.md", outDir: "dist/README.md" },
+      { input: "./LICENSE", outDir: "dist/LICENSE" },
+    ] as const;
 
     files.forEach((item): void => {
       copyFileSync(item.input, item.outDir);
