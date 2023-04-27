@@ -28,15 +28,14 @@
         "*",
         "src/*"
       ]
-    },
+    }
   },
   "include": [
+    "*.d.ts",
     "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "auto-imports.d.ts"
+    "types/auto-imports.d.ts"
   ],
   "exclude": [
     "node_modules",

@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import {reactive} from 'vue'
+import { reactive } from "vue";
 
 const lineChartOptions = reactive({
   color: ["#5B8FF9"],
@@ -29,5 +29,6 @@ const lineChartOptions = reactive({
 });
 </script>
 <style lang="scss" scoped>
-.wrapper{}
+.wrapper {
+}
 </style>

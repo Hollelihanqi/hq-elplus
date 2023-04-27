@@ -7,8 +7,8 @@ import { computed } from "vue";
 import BaseEchart from "./BaseChart.vue";
 import { Map } from "immutable";
 import { getPieChartBaseOptions } from "./common/chartConfig";
-import { getOptiops } from './common/util';
-import echartsComposable from './common/echartsComposable';
+import { getOptiops } from "./common/util";
+import echartsComposable from "./common/echartsComposable";
 import { isEmpty } from "@yto/utils";
 
 interface Props {
@@ -19,11 +19,9 @@ const props = withDefaults(defineProps<Props>(), {
     return {};
   },
 });
-const chartRef = ref()
+const chartRef = ref();
 const chartOptions = computed(() => {
-  const options = getOptiops(
-    Map(getPieChartBaseOptions()).mergeDeep(props.options)
-  );
+  const options = getOptiops(Map(getPieChartBaseOptions()).mergeDeep(props.options));
   return dealNodata(options);
 });
 
@@ -35,8 +33,7 @@ const chartOptions = computed(() => {
 const dealNodata = (options: any) => {
   if (
     isEmpty(options.series) ||
-    (Array.isArray(options.series) &&
-      options.series.every((item: any) => isEmpty(item.data)))
+    (Array.isArray(options.series) && options.series.every((item: any) => isEmpty(item.data)))
   ) {
     options.title.text = "暂无数据";
     !options.title.textStyle &&
@@ -49,11 +46,11 @@ const dealNodata = (options: any) => {
   return options;
 };
 
-const {getEchartInstance} = echartsComposable(chartRef)
+const { getEchartInstance } = echartsComposable(chartRef);
 
 defineExpose({
-  getEchartInstance
-})
+  getEchartInstance,
+});
 </script>
 <style lang="scss" scoped>
 .wrapper {

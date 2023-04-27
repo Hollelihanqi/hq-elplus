@@ -32,11 +32,11 @@ const pieChartOptions = reactive({
         [12.0, 6.26],
         [12.0, 8.84],
         [7.08, 5.82],
-        [5.02, 5.68]
+        [5.02, 5.68],
       ],
-      type: 'scatter'
-    }
-  ]
+      type: "scatter",
+    },
+  ],
 });
 </script>
 <style lang="scss" scoped>

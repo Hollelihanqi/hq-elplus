@@ -1,3 +1,3 @@
-import type ProTable from './index.vue'
+import type ProTable from "./index.vue";
 
-export type  ProTableInstance = InstanceType<typeof ProTable>
+export type ProTableInstance = InstanceType<typeof ProTable>;

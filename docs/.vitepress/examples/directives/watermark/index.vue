@@ -5,8 +5,7 @@
       text: 'Watermark Direct',
       textColor: 'rgba(180, 180, 180, 0.6)',
     }"
-  >
-  </div>
+  ></div>
 </template>
 
 <script setup lang="ts" name="watermarkDirect"></script>

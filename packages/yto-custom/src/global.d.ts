@@ -1,4 +1,4 @@
-import type * as components from './components'
+import type * as components from "./components";
 
 /**
  * Volar 插件实现代码提示
@@ -6,21 +6,17 @@ import type * as components from './components'
  * https://github.com/johnsoncodehk/volar/blob/master/extensions/vscode-vue-language-features/README.md
  */
 
-declare module '@vue/runtime-core' {
+declare module "@vue/runtime-core" {
   export interface GlobalComponents {
-    YtoProTable: typeof components.YtoProTable
-    YtoTable: typeof components.YtoTable
-    YtoMenu: typeof components.YtoMenu
-    YtoEchart: typeof components.YtoEchart
-  }
-
-  interface ComponentCustomProperties {
-
+    YtoProTable: typeof components.YtoProTable;
+    YtoTable: typeof components.YtoTable;
+    YtoMenu: typeof components.YtoMenu;
+    YtoEchart: typeof components.YtoEchart;
   }
 }
 
 declare global {
-  const __DEV__: boolean
+  const __DEV__: boolean;
 }
 
-export { }
+export {};

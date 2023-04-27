@@ -8,7 +8,6 @@
 
 <demo src="./longpress/index.vue"></demo>
 
-
 ## 水印指令
 
 <demo src="./watermark/index.vue"></demo>

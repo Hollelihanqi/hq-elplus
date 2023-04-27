@@ -3,13 +3,13 @@ export const isEmpty = (value: any): boolean => {
     // undefined 或 null
     return true;
   }
-  if (typeof value === 'string' || Array.isArray(value)) {
+  if (typeof value === "string" || Array.isArray(value)) {
     // 字符串或数组
     return value.length === 0;
   }
-  if (typeof value === 'object') {
+  if (typeof value === "object") {
     // 对象
-    for (let key in value) {
+    for (const key in value) {
       if (Object.prototype.hasOwnProperty.call(value, key)) {
         return false;
       }
@@ -17,11 +17,11 @@ export const isEmpty = (value: any): boolean => {
     return true;
   }
   return false;
-}
+};
 
 export const isFunction = (value: any): boolean => {
-  return typeof value === 'function';
-}
+  return typeof value === "function";
+};
 
 export function debounce<F extends (...args: any[]) => any>(
   func: F,

@@ -7,12 +7,11 @@
  */
 const echartsComposable = (chartRef: any) => {
   const getEchartInstance = () => {
-    return chartRef ? unref(chartRef).getEchartInstance() : null
-  }
+    return chartRef ? unref(chartRef).getEchartInstance() : null;
+  };
   return {
-    getEchartInstance
-  }
-}
+    getEchartInstance,
+  };
+};
 
-export default echartsComposable
-
+export default echartsComposable;

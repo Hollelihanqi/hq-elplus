@@ -1,1 +1,1 @@
-declare module '@yto/custom';
+declare module "@yto/custom";

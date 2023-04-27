@@ -7,6 +7,7 @@
 ```shell
 pnpm add --save-dev @yto/custom
 ```
+
 ## 完整引入
 
 在 `main.ts` 中引入下面内容

@@ -1,3 +1,3 @@
-import type Menu from './index.vue'
+import type Menu from "./index.vue";
 
-export type  MenuInstance = InstanceType<typeof Menu>
+export type MenuInstance = InstanceType<typeof Menu>;

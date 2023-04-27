@@ -24,26 +24,9 @@
         </div>
         <div v-if="toolButton" class="header-button-ri">
           <el-button :icon="Refresh" circle @click="getTableList"> </el-button>
-          <el-button
-            v-if="columns.length"
-            :icon="Printer"
-            circle
-            @click="handlePrint"
-          >
-          </el-button>
-          <el-button
-            v-if="columns.length"
-            :icon="Operation"
-            circle
-            @click="openColSetting"
-          >
-          </el-button>
-          <el-button
-            v-if="searchColumns.length"
-            :icon="Search"
-            circle
-            @click="isShowSearch = !isShowSearch"
-          >
+          <el-button v-if="columns.length" :icon="Printer" circle @click="handlePrint"> </el-button>
+          <el-button v-if="columns.length" :icon="Operation" circle @click="openColSetting"> </el-button>
+          <el-button v-if="searchColumns.length" :icon="Search" circle @click="isShowSearch = !isShowSearch">
           </el-button>
         </div>
       </div>
@@ -74,8 +57,7 @@
             v-bind="item"
             :align="item.align ?? 'center'"
           >
-            <component :is="item.render" v-if="item.render" :row="scope.row">
-            </component>
+            <component :is="item.render" v-if="item.render" :row="scope.row"> </component>
             <slot v-else :name="item.type" :row="scope.row"></slot>
           </el-table-column>
           <!-- other 循环递归 -->
@@ -120,7 +102,6 @@ import Pagination from "./components/Pagination.vue";
 import ColSetting from "./components/ColSetting.vue";
 import TableColumn from "./components/TableColumn.vue";
 // import printJS from "print-js";
-// @ts-ignore
 import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 
 const locale = zhCn;
@@ -130,7 +111,10 @@ const tableRef = ref<InstanceType<typeof ElTable>>();
 // 是否显示搜索模块
 const isShowSearch = ref<boolean>(true);
 
-interface ProTableProps extends Partial<Omit<TableProps<any>, "data">> {
+interface AnyObj {
+  [propsName: string]: any;
+}
+interface ProTableProps extends TableProps<AnyObj> {
   columns: ColumnProps[]; // 列配置项
   requestApi: (params: any) => Promise<any>; // 请求表格数据的api ==> 必传
   dataCallback?: (data: any) => any; // 返回数据的回调函数，可以对数据进行处理 ==> 非必传
@@ -151,17 +135,13 @@ const props = withDefaults(defineProps<ProTableProps>(), {
   border: false,
   toolButton: false,
   selectId: "id",
+  title: "",
+  dataCallback: undefined,
   searchCol: () => ({ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }),
 });
 
 // 表格多选 Hooks
-const {
-  selectionChange,
-  getRowKeys,
-  selectedList,
-  selectedListIds,
-  isSelected,
-} = useSelection(props.selectId);
+const { selectionChange, getRowKeys, selectedList, selectedListIds, isSelected } = useSelection(props.selectId);
 
 // 表格操作 Hooks
 const {
@@ -174,12 +154,7 @@ const {
   reset,
   handleSizeChange,
   handleCurrentChange,
-} = useTable(
-  props.requestApi,
-  props.initParam,
-  props.pagination,
-  props.dataCallback
-);
+} = useTable(props.requestApi, props.initParam, props.pagination, props.dataCallback);
 
 // 清空选中数据列表
 const clearSelection = () => tableRef.value!.clearSelection();
@@ -201,10 +176,7 @@ const enumMap = ref(new Map<string, { [key: string]: any }[]>());
 provide("enumMap", enumMap);
 
 // 扁平化 columns && 处理 tableColumns 数据
-const flatColumnsFunc: any = (
-  columns: ColumnProps[],
-  flatArr: ColumnProps[] = []
-) => {
+const flatColumnsFunc: any = (columns: ColumnProps[], flatArr: ColumnProps[] = []) => {
   columns.forEach(async (col) => {
     if (col._children?.length) flatArr.push(...flatColumnsFunc(col._children));
     flatArr.push(col);
@@ -215,8 +187,7 @@ const flatColumnsFunc: any = (
 
     if (!col.enum) return;
     // 如果当前 enum 为后台数据需要请求数据，则调用该请求接口，并存储到 enumMap
-    if (typeof col.enum !== "function")
-      return enumMap.value.set(col.prop!, col.enum);
+    if (typeof col.enum !== "function") return enumMap.value.set(col.prop!, col.enum);
     const { data } = await col.enum();
     enumMap.value.set(col.prop!, data);
   });
@@ -234,12 +205,8 @@ const searchColumns = flatColumns.value
 
 // 设置搜索表单的默认值
 searchColumns.forEach((column) => {
-  if (
-    column.search?.defaultValue !== undefined &&
-    column.search?.defaultValue !== null
-  ) {
-    searchInitParam.value[column.search.key ?? column.prop!] =
-      column.search?.defaultValue;
+  if (column.search?.defaultValue !== undefined && column.search?.defaultValue !== null) {
+    searchInitParam.value[column.search.key ?? column.prop!] = column.search?.defaultValue;
   }
 });
 
@@ -263,11 +230,7 @@ const openColSetting = () => {
 
 // 处理打印数据（把后台返回的值根据 enum 做转换）
 const printData = computed(() => {
-  let printDataList = JSON.parse(
-    JSON.stringify(
-      selectedList.value.length ? selectedList.value : tableData.value
-    )
-  );
+  let printDataList = JSON.parse(JSON.stringify(selectedList.value.length ? selectedList.value : tableData.value));
   let colEnumList = flatColumns.value!.filter((item) => item.enum);
   colEnumList.forEach((colItem) => {
     printDataList.forEach((tableItem: any) => {

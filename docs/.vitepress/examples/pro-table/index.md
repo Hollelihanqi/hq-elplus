@@ -41,8 +41,8 @@
 | `title`        | 表格标题，目前只在打印的时候用到 | String   | {}                                      |
 
 ## Column 属性（ColumnProps）
-> 使用 `v-bind="column"` 通过属性透传将每一项 **column** 属性全部透传到 **el-table-column** 上，支持 **el-table-column** 的所有 **Props** 属性。在此基础上，扩展了以下 **Props：**
 
+> 使用 `v-bind="column"` 通过属性透传将每一项 **column** 属性全部透传到 **el-table-column** 上，支持 **el-table-column** 的所有 **Props** 属性。在此基础上，扩展了以下 **Props：**
 
 | 属性名         | 说明                                                 | 类型               | 默认值 |
 | -------------- | ---------------------------------------------------- | ------------------ | ------ |
@@ -55,7 +55,6 @@
 ## 搜索项 配置（SearchProps）
 
 > 使用 `v-bind="column.search.props“` 通过属性透传将 **search.props** 属性全部透传到每一项搜索组件上，支持 **input、select、tree-select、date-packer、time-picker、time-select、switch** 大部分属性，扩展了以下 **Props：**
-
 
 | 属性名         | 说明                                                                                                                                           | 类型   | 默认值 |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ------ |
@@ -72,8 +71,8 @@
 >
 > [el-table 事件文档链接](https://element-plus.org/zh-CN/component/table.html#table-%E4%BA%8B%E4%BB%B6)
 
-
 ## Table 方法
+
 > **Table** 组件暴露了 **el-table** 实例和一些组件内部的参数和方法：
 >
 > [el-table 方法文档链接](https://element-plus.org/zh-CN/component/table.html#table-%E6%96%B9%E6%B3%95)

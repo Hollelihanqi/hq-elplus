@@ -8,17 +8,17 @@
  */
 
 import { defineConfig, ConfigEnv, UserConfig, loadEnv } from "vite";
-import AutoImport from 'unplugin-auto-import/vite'
+import AutoImport from "unplugin-auto-import/vite";
 // import vue from "@vitejs/plugin-vue";
 // import vueJsx from "@vitejs/plugin-vue-jsx";
-import dns from 'dns'
-dns.setDefaultResultOrder('verbatim')
+import dns from "dns";
+dns.setDefaultResultOrder("verbatim");
 // // https://vitejs.dev/config/
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
   const env = loadEnv(mode, process.cwd(), "VITE_");
   return {
     ssr: {
-      noExternal: ['vue'] // 告诉 Vite 不要将 Vue 打包成外部模块，否则会出现 window is not defined 的错误
+      noExternal: ["vue"], // 告诉 Vite 不要将 Vue 打包成外部模块，否则会出现 window is not defined 的错误
     },
     plugins: [
       AutoImport({
@@ -29,6 +29,6 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       //   transformOn: true,
       //   mergeProps: true,
       // })
-    ]
+    ],
   };
 });

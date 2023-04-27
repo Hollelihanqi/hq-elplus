@@ -1,9 +1,9 @@
-import ProTable from './src/index.vue'
+import ProTable from "./src/index.vue";
 
-import { install } from '../../_utils'
+import { install } from "../../_utils";
 
-export const YtoProTable = install(ProTable)
+export const YtoProTable = install(ProTable);
 
-export type { ProTableInstance } from './src/instance'
+export type { ProTableInstance } from "./src/instance";
 
-export default YtoProTable
+export default YtoProTable;

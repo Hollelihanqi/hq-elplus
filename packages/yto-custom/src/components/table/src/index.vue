@@ -10,30 +10,13 @@
         v-bind="$attrs"
       >
         <template v-for="(item, index) in columns" :key="index">
-          <el-table-column
-            v-if="item.hideCell"
-            show-overflow-tooltip
-            v-bind="item"
-          />
+          <el-table-column v-if="item.hideCell" show-overflow-tooltip v-bind="item" />
           <el-table-column v-if="item.type" v-bind="item" />
-          <el-table-column
-            v-if="!item.hideCell && !item.type"
-            show-overflow-tooltip
-            v-bind="item"
-          >
+          <el-table-column v-if="!item.hideCell && !item.type" show-overflow-tooltip v-bind="item">
             <template #default="scope">
-              <slot
-                v-if="item.slot"
-                :name="item.slot"
-                :index="scope.$index"
-                :row="scope.row"
-              ></slot>
-              <template v-else-if="item.formatText">{{
-                item.formatText(scope.row)
-              }}</template>
-              <template v-else>{{
-                item.prop && scope.row[item.prop]
-              }}</template>
+              <slot v-if="item.slot" :name="item.slot" :index="scope.$index" :row="scope.row" v-bind="scope"></slot>
+              <template v-else-if="item.formatText">{{ item.formatText(scope.row) }}</template>
+              <template v-else>{{ item.prop && scope.row[item.prop] }}</template>
             </template>
           </el-table-column>
         </template>
@@ -53,10 +36,8 @@
   </ElConfigProvider>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, ref, ExtractPropTypes } from "vue";
+import { defineComponent, PropType, ExtractPropTypes } from "vue";
 import { ElConfigProvider } from "element-plus";
-
-// @ts-ignore
 import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 
 export interface ColumnsItemProps {
@@ -152,11 +133,7 @@ export default defineComponent({
       listTotal.value = result.total;
     };
     const handleTableChange = (num: number) => {
-      if (
-        !props.requestApi &&
-        props.handleChange &&
-        typeof props.handleChange === "function"
-      ) {
+      if (!props.requestApi && props.handleChange && typeof props.handleChange === "function") {
         props.handleChange("page", num);
       } else {
         paginationParams.value.currentPage = num;
@@ -164,11 +141,7 @@ export default defineComponent({
       }
     };
     const handleSizeChange = (val: number): void => {
-      if (
-        !props.requestApi &&
-        props.handleChange &&
-        typeof props.handleChange === "function"
-      ) {
+      if (!props.requestApi && props.handleChange && typeof props.handleChange === "function") {
         props.handleChange("size", val);
       } else {
         paginationParams.value.pageSize = val;
@@ -187,11 +160,7 @@ export default defineComponent({
       getTableData();
     };
     onMounted(() => {
-      if (
-        props.requestApi &&
-        props.requestAuto &&
-        typeof props.requestApi === "function"
-      ) {
+      if (props.requestApi && props.requestAuto && typeof props.requestApi === "function") {
         getTableData();
       }
     });

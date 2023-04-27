@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import {reactive} from 'vue'
+import { reactive } from "vue";
 
 const barChartOptions = reactive({
   xAxis: {
@@ -21,5 +21,6 @@ const barChartOptions = reactive({
 });
 </script>
 <style lang="scss" scoped>
-.wrapper{}
+.wrapper {
+}
 </style>

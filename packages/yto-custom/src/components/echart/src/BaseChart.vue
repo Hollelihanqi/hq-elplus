@@ -1,10 +1,6 @@
 <template>
   <div class="echart-container" :style="{ height, width }">
-    <div
-      :id="containerId"
-      :style="{ height, width }"
-      v-resize-element="resizeHandler"
-    ></div>
+    <div :id="containerId" v-resize-element="resizeHandler" :style="{ height, width }"></div>
   </div>
 </template>
 
@@ -13,15 +9,19 @@ import * as echarts from "echarts";
 import { guid, debounce } from "@yto/utils";
 // import { directivesList } from "@/directives/index";
 import resizeElement from "./common/resizeElement";
+
 export default defineComponent({
+  directives: {
+    "resize-element": resizeElement,
+  },
   props: {
-    echartId:{
+    echartId: {
       type: String,
-      default:''
+      default: "",
     },
     options: {
       type: Object,
-      default: () => {},
+      default: () => ({}),
       required: true,
     },
     height: {
@@ -33,15 +33,12 @@ export default defineComponent({
       default: "100%",
     },
   },
-  directives: {
-    "resize-element": resizeElement,
-  },
   setup(props, { expose }) {
     let myChart: any | null;
 
-    const containerId = computed(()=>{
-      return props.echartId || `baseChart_${guid()}`
-    })
+    const containerId = computed(() => {
+      return props.echartId || `baseChart_${guid()}`;
+    });
     const showLoading = () => {
       myChart &&
         myChart.showLoading({
@@ -53,9 +50,7 @@ export default defineComponent({
     };
 
     const initChart = () => {
-      myChart = echarts.init(
-        document.querySelector(`#${containerId.value}`) as HTMLElement
-      );
+      myChart = echarts.init(document.querySelector(`#${containerId.value}`) as HTMLElement);
       showLoading();
       setChartOption();
       //窗口大小改变，重新绘图

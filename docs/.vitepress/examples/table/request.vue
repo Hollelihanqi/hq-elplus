@@ -1,9 +1,5 @@
 <template>
-  <yto-c-table
-    :columns="columns"
-    :requestApi="getList"
-    :dataCallback="dataCallback"
-  >
+  <yto-c-table :columns="columns" :requestApi="getList" :dataCallback="dataCallback">
     <template #callStatus="scope">
       <span>{{ scope.row.status }}</span>
     </template>

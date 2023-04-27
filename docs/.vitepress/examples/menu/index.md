@@ -21,12 +21,13 @@
 | `menus` | 菜单数组 | array | —      | []     | 子节点 children |
 
 ### Interface
-``` ts
+
+```ts
 interface MenuProps {
   name: string;
   path?: string;
   icon?: string | undefined;
   children?: [];
-  [propName:string]:any;
+  [propName: string]: any;
 }
 ```

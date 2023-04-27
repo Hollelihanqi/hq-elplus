@@ -1,12 +1,7 @@
 <template>
   <div class="wrapper">
     <p class="p-[10px] text-[#5B8FF9]">线图测试</p>
-    <yto-echart
-      echartId="lineChart"
-      ref="lineChartRef"
-      type="line"
-      :options="lineChartOptions"
-    ></yto-echart>
+    <yto-echart ref="lineChartRef" echart-id="lineChart" type="line" :options="lineChartOptions"></yto-echart>
     <p class="p-[10px] text-[#5B8FF9]">柱状图测试</p>
     <yto-echart type="bar" :options="barChartOptions"></yto-echart>
     <p class="p-[10px] text-[#5B8FF9]">饼图测试</p>
@@ -81,11 +76,11 @@ onMounted(() => {
   console.log("chart-onMounted", unref(pieChartRef).getEchartInstance());
   const lineChart = unref(lineChartRef).getEchartInstance();
   lineChart.on("click", function (params: any) {
-    console.log('lineChart',params);
+    console.log("lineChart", params);
   });
   const pieChart = unref(pieChartRef).getEchartInstance();
   pieChart.on("click", function (params: any) {
-    console.log('pieChart', params);
+    console.log("pieChart", params);
   });
 });
 </script>
