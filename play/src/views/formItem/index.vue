@@ -4,7 +4,7 @@
           <yto-form-item
               :form="form"
               :formConfig="formConfig"
-              :colNum="4"
+              :span="12"
               clearable
           >
             <template #cascader="scope">
@@ -13,9 +13,7 @@
             <div >
               <el-button type="primary">测试</el-button>
             </div>
-
           </yto-form-item>
-
       </el-form>
   </div>
 </template>
@@ -294,7 +292,7 @@ const options = [
 ];
 const form = reactive({});
 const formConfig = [
-  { itemType: "input", prop: "name", label: "文本框",span:12 },
+  { itemType: "input", prop: "name", label: "文本框",contentWidth:"test" },
   {
     itemType: "cascader",
     slot:true,
@@ -330,4 +328,9 @@ const formConfig = [
 ];
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+:deep(.test){
+  width: 100%;
+  background: red;
+}
+</style>

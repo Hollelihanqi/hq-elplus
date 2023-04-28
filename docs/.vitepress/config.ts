@@ -42,7 +42,7 @@ export default defineConfig({
             },
             {
               text: "fromItem",
-              link: "/.vitepress/examples/echart/index.md",
+              link: "/.vitepress/examples/fromItem/index.md",
             }
           ],
           collapsed: false

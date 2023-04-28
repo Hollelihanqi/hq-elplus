@@ -1,29 +1,30 @@
 <template>
   <el-row class="dis-flex pad-tb-5" >
-    <el-col class="pad-tb-5"  v-for="(item, index) in formConfig" :span="item.span || colNum" style="padding: 0 10px"   :key="index">
-    <el-form-item
-        :label="item?.label"
-        :prop="item?.prop"
-        :label-width="item.labelWidth"
-    >
-      <component
-          v-bind="item"
-          :style="compontWidth(item.inputWidth)"
+    <el-col class="pad-tb-5"  v-for="(item, index) in formConfig" :span="item.span || span" style="padding: 0 10px"   :key="index">
+      <el-form-item
+          :label="item?.label"
           :prop="item?.prop"
-          v-if="!item?.slot"
-          :form="form"
-          :options="item?.options || options"
-          :multiple="item?.multiple || false"
-          :activeColor="item?.activeColor || activeColor"
-          :inactiveColor="item?.inactiveColor || inactiveColor"
-          :activeValue="item?.activeValue || activeValue"
-          :inactiveValue="item?.inactiveValue || inactiveValue"
-          :disabled="item?.disabled || disabled"
-          :clearable="item?.clearable || clearable"
-          :is="getComponent(item.itemType)"
-      />
-      <slot  v-if="item?.slot" :name="item?.prop"/>
-    </el-form-item>
+          :label-width="item.labelWidth"
+      >
+        <div :class="item.contentWidth || contentWidth ">
+          <component
+              v-bind="item"
+              :prop="item?.prop"
+              v-if="!item?.slot"
+              :form="form"
+              :options="item?.options || options"
+              :multiple="item?.multiple || false"
+              :activeColor="item?.activeColor || activeColor"
+              :inactiveColor="item?.inactiveColor || inactiveColor"
+              :activeValue="item?.activeValue || activeValue"
+              :inactiveValue="item?.inactiveValue || inactiveValue"
+              :disabled="item?.disabled || disabled"
+              :clearable="item?.clearable || clearable"
+              :is="getComponent(item.itemType)"
+          />
+          <slot  v-if="item?.slot" :name="item?.prop"/>
+        </div>
+      </el-form-item>
     </el-col>
     <div v-if="$slots.default" class="flex-1 dis-flex flex-align-item-center flex-justify-end " style="padding-right: 20px">
       <slot />
@@ -69,12 +70,6 @@ const getComponent = (type: string) => {
   return types[type];
 };
 
-const compontWidth = (width: unknown) => {
-  if (!width) return "width:100%";
-  return {
-    width: width + "px",
-  };
-};
 
 const props = defineProps({
   formConfig: {
@@ -95,7 +90,13 @@ const props = defineProps({
       return "";
     },
   },
-  colNum: { type: Number, default: 0 },
+  contentWidth:{
+    type: String,
+    default: () => {
+      return "";
+    },
+  },
+  span: { type: Number, default: 6 },
   labelWidth: { type: Number, default: 80 },
   form: { type: Object, default: () => {} },
   disabled: { type: Boolean, default: false },
