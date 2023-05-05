@@ -1,7 +1,7 @@
 <template>
   <yto-c-table
     :columns="columns"
-    :tableData="tableData"
+    :table-data="tableData"
     :total="total"
     :current-page="paginationParams.pageNum"
     :page-size="paginationParams.pageSize"
