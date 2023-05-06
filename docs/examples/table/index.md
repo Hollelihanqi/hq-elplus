@@ -17,7 +17,7 @@
 
 ## Attributes
 
-[完整配置请参考-element-plus]('https://element-plus.org/zh-CN/component/table.html')
+[完整配置请参考-element-plus](https://element-plus.org/zh-CN/component/table.html)
 
 ### Table 属性
 
