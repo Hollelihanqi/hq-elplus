@@ -17,18 +17,18 @@ dns.setDefaultResultOrder("verbatim");
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
   const env = loadEnv(mode, process.cwd(), "VITE_");
   return {
-    ssr: {
-      noExternal: ["vue"], // 告诉 Vite 不要将 Vue 打包成外部模块，否则会出现 window is not defined 的错误
+    optimizeDeps: {
+      exclude: ["vitepress"],
+    },
+    server: {
+      hmr: {
+        overlay: false,
+      },
     },
     plugins: [
       AutoImport({
         imports: ["vue"],
       }),
-      // vue(),
-      // vueJsx({
-      //   transformOn: true,
-      //   mergeProps: true,
-      // })
     ],
   };
 });
