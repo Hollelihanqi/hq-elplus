@@ -8,7 +8,7 @@ import App from "./App.vue";
 // import 'yto-custom/dist/style.css'
 
 import YtoCustom from "@yto/custom";
-import "@yto/custom/es/style.css";
+import "@yto/custom/dist/es/style.css";
 
 const app = createApp(App);
 app.use(YtoCustom);
