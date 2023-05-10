@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<el-button @click="dialogVisible = true" class="a">基础弹框</el-button>
+		<el-button class="a" @click="dialogVisible = true">基础弹框</el-button>
 
 		<yto-cdialog v-model="dialogVisible" width="500px" @confirm="handleConfirm" @cancel="handleCancel">
 			<template #header> title </template>
@@ -8,8 +8,6 @@
 		</yto-cdialog>
 	</div>
 </template>
-
-<style></style>
 
 <script lang="ts">
 	import { defineComponent, ref, reactive } from "vue";
@@ -41,3 +39,5 @@
 		},
 	});
 </script>
+
+<style></style>

@@ -1,38 +1,32 @@
 <template>
-  <el-row class="dis-flex pad-tb-5">
-    <el-col
-      v-for="(item, index) in formConfig"
-      :key="index"
-      class="pad-tb-5"
-      :span="item.span || span"
-      style="padding: 0 10px"
-    >
-      <el-form-item :label="item?.label" :prop="item?.prop" :label-width="item.labelWidth">
-        <div :class="item.contentWidth || contentWidth">
+  <el-row class="dis-flex pad-tb-5" >
+    <el-col v-for="(item, index) in formConfig"  :key="index" class="pad-tb-5" :span="item.span || span"   style="padding: 0 10px">
+      <el-form-item
+          :label="item?.label"
+          :prop="item?.prop"
+          :label-width="item.labelWidth"
+      >
+        <div :class="item.contentWidth || contentWidth ">
           <component
-            v-if="!item?.slot"
-            v-bind="item"
-            :is="getComponent(item.itemType)"
-            :prop="item?.prop"
-            :form="form"
-            :options="item?.options || options"
-            :multiple="item?.multiple || false"
-            :active-color="item?.activeColor || activeColor"
-            :inactive-color="item?.inactiveColor || inactiveColor"
-            :active-value="item?.activeValue || activeValue"
-            :inactive-value="item?.inactiveValue || inactiveValue"
-            :disabled="item?.disabled || disabled"
-            :clearable="item?.clearable || clearable"
+              v-bind="item"
+              :is="getComponent(item.itemType)"
+              v-if="!item?.slot"
+              :prop="item?.prop"
+              :form="form"
+              :options="item?.options || options"
+              :multiple="item?.multiple || false"
+              :active-color="item?.activeColor || activeColor"
+              :inactive-color="item?.inactiveColor || inactiveColor"
+              :active-value="item?.activeValue || activeValue"
+              :inactive-value="item?.inactiveValue || inactiveValue"
+              :disabled="item?.disabled || disabled"
+              :clearable="item?.clearable || clearable"
           />
-          <slot v-if="item?.slot" :name="item?.prop" />
+          <slot  v-if="item?.slot" :name="item?.prop"/>
         </div>
       </el-form-item>
     </el-col>
-    <div
-      v-if="$slots.default"
-      class="flex-1 dis-flex flex-align-item-center flex-justify-end"
-      style="padding-right: 20px"
-    >
+    <div v-if="$slots.default" class="flex-1 dis-flex flex-align-item-center flex-justify-end " style="padding-right: 20px">
       <slot />
     </div>
   </el-row>
@@ -53,8 +47,8 @@ import itemInputNumber from "./block/itemInputNumber.vue";
 import itemRate from "./block/itemRate.vue";
 import itemTimePicker from "./block/itemTimePicker.vue";
 import itemTimeSelect from "./block/itemTimeSelect.vue";
-import { PropType } from "vue";
-import { ElInput } from "element-plus";
+import {PropType} from "vue";
+import { ElInput } from "element-plus"
 interface Obj {
   [key: string]: any;
 }
@@ -76,9 +70,10 @@ const getComponent = (type: string) => {
   return types[type];
 };
 
+
 const props = defineProps({
   formConfig: {
-    type: Array as PropType<{ [key: string]: any }[]>,
+    type: Array as PropType<{[key: string]: any}[]>,
     default: () => {
       return [];
     },
@@ -95,7 +90,7 @@ const props = defineProps({
       return "";
     },
   },
-  contentWidth: {
+  contentWidth:{
     type: String,
     default: () => {
       return "";
@@ -103,7 +98,10 @@ const props = defineProps({
   },
   span: { type: Number, default: 6 },
   labelWidth: { type: Number, default: 80 },
-  form: { type: Object, default: () => {} },
+  form: { type: Object, default: () => {
+      return{}
+    }
+  },
   disabled: { type: Boolean, default: false },
   clearable: { type: Boolean, default: true },
   activeColor: {
@@ -121,22 +119,13 @@ const props = defineProps({
   activeValue: { type: Boolean, default: true },
   inactiveValue: { type: Boolean, default: false },
 });
+
 </script>
 <style lang="scss" scoped>
-.dis-flex {
-  display: flex;
-}
-.flex-1 {
-  flex: 1;
-}
-.flex-align-item-center {
-  align-items: center;
-}
-.flex-justify-end {
-  justify-content: flex-end;
-}
-.pad-tb-5 {
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
+.dis-flex{display: flex;}
+.flex-1{flex: 1}
+.flex-align-item-center{align-items: center}
+.flex-justify-end{justify-content: flex-end}
+.pad-tb-5{padding-top: 5px;padding-bottom: 5px }
 </style>
+

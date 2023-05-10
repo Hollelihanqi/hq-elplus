@@ -1,15 +1,13 @@
 <template>
 	<div>
-		<el-button @click="dialogVisible = true" class="a">按钮定制</el-button>
+		<el-button class="a" @click="dialogVisible = true">按钮定制</el-button>
 
-		<yto-cdialog v-model="dialogVisible" @confirm="handleConfirm" @cancel="handleCancel" :confirmOption="confirm" :cancelOption="cancel">
+		<yto-cdialog v-model="dialogVisible" :confirm-option="confirm" :cancel-option="cancel" @confirm="handleConfirm" @cancel="handleCancel">
 			<template #header> title </template>
 			<p>这是一个示例对话框</p>
 		</yto-cdialog>
 	</div>
 </template>
-
-<style></style>
 
 <script lang="ts">
 	import { defineComponent, ref, reactive } from "vue";
@@ -50,3 +48,5 @@
 		},
 	});
 </script>
+
+<style></style>
