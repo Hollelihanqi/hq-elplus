@@ -1,8 +1,8 @@
 /*
  * @Author: DESKTOP-7338OS6\LHQ LHQ
  * @Date: 2023-03-24 17:52:24
- * @LastEditors: 魏春霈
- * @LastEditTime: 2023-04-14 10:59:36
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-05-10 15:21:40
  * @FilePath: \yto-engine\docs\docs\.vitepress\config.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AErts
  */
@@ -33,7 +33,7 @@ export default defineConfig({
               link: "/examples/table/index.md",
             },
             {
-              text: "BaseMenu",
+              text: "Menu",
               link: "/examples/menu/index.md",
             },
             {
