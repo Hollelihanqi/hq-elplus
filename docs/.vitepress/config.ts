@@ -40,6 +40,10 @@ export default defineConfig({
               text: "Echart",
               link: "/examples/echart/index.md",
             },
+            {
+              text: "fromItem",
+              link: "/examples/fromItem/index.md",
+            },
           ],
           collapsed: false,
         },
