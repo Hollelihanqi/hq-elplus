@@ -31,9 +31,9 @@
     <slot v-else></slot>
   </component>
   <RemoteSelect
-    v-if="column.search?.remote"
+    v-else
     v-model="searchParam[column.search.key ?? column.prop!]"
-    v-bind="column.search.attrs"
+    v-bind="{ ...column.search?.props, ...column.search?.remoteProps }"
   ></RemoteSelect>
 </template>
 
@@ -43,7 +43,8 @@ import { computed, inject, ref } from "vue";
 import RemoteSelect from "./RemoteSelect.vue";
 
 interface SearchFormItem {
-  column: ColumnProps; // 具体每一个搜索项的配置
+  // column: ColumnProps; // 具体每一个搜索项的配置
+  column: any; // 具体每一个搜索项的配置
   searchParam: { [key: string]: any }; // 搜索参数
 }
 const props = defineProps<SearchFormItem>();

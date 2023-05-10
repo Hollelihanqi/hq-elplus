@@ -15,7 +15,13 @@
           <el-table-column v-if="!item.hideCell && !item.type" show-overflow-tooltip v-bind="item">
             <template #default="scope">
               <slot v-if="item.slot" :name="item.slot" :index="scope.$index" :row="scope.row" v-bind="scope"></slot>
+              <template v-else-if="item.copy">
+                <span v-if="item.formatText" v-copy>{{ item.formatText(scope.row) }}</span>
+                <span v-else-if="item.enum" v-copy>{{ formatEnum(item, scope.row) }}</span>
+                <span v-else v-copy>{{ scope.row[item.prop] }}</span>
+              </template>
               <template v-else-if="item.formatText">{{ item.formatText(scope.row) }}</template>
+              <template v-else-if="item.enum">{{ formatEnum(item, scope.row) }}</template>
               <template v-else>{{ item.prop && scope.row[item.prop] }}</template>
             </template>
           </el-table-column>
@@ -39,6 +45,7 @@
 import { defineComponent, PropType, ExtractPropTypes } from "vue";
 import { ElConfigProvider } from "element-plus";
 import zhCn from "element-plus/dist/locale/zh-cn.mjs";
+import copy from "@/directives/modules/copy";
 
 export interface ColumnsItemProps {
   [propsName: string]: any;
@@ -111,6 +118,9 @@ export default defineComponent({
   components: {
     ElConfigProvider,
   },
+  directives: {
+    copy: copy,
+  },
   props,
   setup(props: Props) {
     const tableRef = ref();
@@ -120,6 +130,14 @@ export default defineComponent({
       currentPage: 1,
       pageSize: props.pageSize,
     });
+    const formatEnum = (column: any, row: any) => {
+      if (Array.isArray(column.enum)) {
+        const target = column.enum.find((e: any) => e.value === row[column.prop]);
+        return target.label || "";
+      } else {
+        return column.enum[row[column.prop]];
+      }
+    };
     const getTableData = async () => {
       let result = await props.requestApi({
         ...props.otherParams,
@@ -174,6 +192,7 @@ export default defineComponent({
       updateTableData,
       resetTableData,
       tableRef,
+      formatEnum,
       locale: zhCn,
     };
   },

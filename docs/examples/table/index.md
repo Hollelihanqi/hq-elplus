@@ -15,6 +15,10 @@
 
 <demo src="./request.vue"></demo>
 
+## 数据枚举
+
+<demo src="./enum.vue"></demo>
+
 ## Attributes
 
 [完整配置请参考-element-plus](https://element-plus.org/zh-CN/component/table.html)

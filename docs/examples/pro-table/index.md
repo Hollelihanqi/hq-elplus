@@ -56,14 +56,14 @@
 
 > 使用 `v-bind="column.search.props“` 通过属性透传将 **search.props** 属性全部透传到每一项搜索组件上，支持 **input、select、tree-select、date-packer、time-picker、time-select、switch** 大部分属性，扩展了以下 **Props：**
 
-| 属性名         | 说明                                                                                                                                           | 类型   | 默认值 |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ------ |
-| `el`           | 当前项搜索框的类型，支持：input、input-number、select、select-v2、tree-select、cascader、date-packer、time-picker、time-select、switch、slider | String | —      |
-| `props`        | 根据 element plus 官方文档来传递，该属性所有值会透传到组件                                                                                     | Object | —      |
-| `defaultValue` | 搜索项默认值                                                                                                                                   | —      | —      |
-| `key`          | 当搜索项 key 不为 prop 属性时，可通过 key 指定                                                                                                 | String | —      |
-| `span`         | 搜索项所占用的列数，默认为 1 列                                                                                                                | Number | 1      |
-| `offset`       | 搜索字段左侧偏移列数                                                                                                                           | Number | —      |
+| 属性名         | 说明                                                                                                                                                     | 类型   | 默认值 |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ------ |
+| `el`           | 当前项搜索框的类型，支持：input、input-number、select、select-v2、tree-select、cascader、date-packer、time-picker、time-select、switch、slider、checkbox | String | —      |
+| `props`        | 根据 element plus 官方文档来传递，该属性所有值会透传到组件                                                                                               | Object | —      |
+| `defaultValue` | 搜索项默认值                                                                                                                                             | —      | —      |
+| `key`          | 当搜索项 key 不为 prop 属性时，可通过 key 指定                                                                                                           | String | —      |
+| `span`         | 搜索项所占用的列数，默认为 1 列                                                                                                                          | Number | 1      |
+| `offset`       | 搜索字段左侧偏移列数                                                                                                                                     | Number | —      |
 
 ## Table 事件
 

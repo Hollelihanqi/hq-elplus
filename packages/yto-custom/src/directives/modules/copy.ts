@@ -11,11 +11,11 @@ interface ElType extends HTMLElement {
 }
 const copy: Directive = {
   mounted(el: ElType, binding: DirectiveBinding) {
-    el.copyData = binding.value;
+    el.copyData = binding.value || el.innerHTML;
     el.addEventListener("click", handleClick);
   },
   updated(el: ElType, binding: DirectiveBinding) {
-    el.copyData = binding.value;
+    el.copyData = binding.value || el.innerHTML;
   },
   beforeUnmount(el: ElType) {
     el.removeEventListener("click", el.__handleClick__);
@@ -24,6 +24,7 @@ const copy: Directive = {
 
 function handleClick(this: any) {
   const input = document.createElement("input");
+  console.log(this.copyData);
   input.value = this.copyData.toLocaleString();
   document.body.appendChild(input);
   input.select();

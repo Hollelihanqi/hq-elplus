@@ -3,52 +3,68 @@ import { defineComponent, h, ref } from "vue";
 import { ElSelect, ElOption } from "element-plus";
 import { request } from "@yto/utils";
 import { _edebounce } from "../../../utils";
+import type { ExtractPropTypes } from "vue";
+
+const props = {
+  valueKey: {
+    type: String,
+    default: "value",
+  },
+  labelKey: {
+    type: String,
+    default: "label",
+  },
+  w: {
+    type: String,
+    default: "auto",
+  },
+  url: {
+    type: String,
+    default: "",
+  },
+  method: {
+    type: String,
+    default: "GET",
+  },
+  dynamicSearch: {
+    type: Boolean,
+    default: true,
+  },
+  fieldName: {
+    type: String,
+    default: "",
+  },
+  optTemp: {
+    type: [Function, Object],
+    default: null,
+  },
+  dataCallback: {
+    type: [Function],
+    required: false,
+    default: null,
+  },
+  requestParams: {
+    type: Object,
+    default: () => ({
+      page: 1,
+      size: 1000,
+    }),
+  },
+  // modelValue: {
+  //   // 此属性是 vue3.0 默认的 v-model 双向数据绑定 prop，请在子组件上通过 v-model 进行传递
+  //   // 因为组件内部时通过 watch 监听 v-model 的值的变化来更新组件的内部 _value；
+  //   // 所以清除表单时一定要手动对 v-model 的值进行手动置空，否则组件下次不会更新 _value
+  //   type: String,
+  //   default: "",
+  // },
+};
+export type BaseSelectProps = Partial<ExtractPropTypes<typeof props>>;
 
 export default defineComponent({
-  props: {
-    valueKey: {
-      type: String,
-      default: "value",
-    },
-    labelKey: {
-      type: String,
-      default: "label",
-    },
-    w: {
-      type: String,
-      default: "auto",
-    },
-    url: {
-      type: String,
-      default: "",
-    },
-    method: {
-      type: String,
-      default: "GET",
-    },
-    field: {
-      type: String,
-      default: "",
-    },
-    optTemp: {
-      type: [Function, Object],
-      default: null,
-    },
-    dataCallback: {
-      type: [Function],
-      required: false,
-      default: null,
-    },
-    // modelValue: {
-    //   // 此属性是 vue3.0 默认的 v-model 双向数据绑定 prop，请在子组件上通过 v-model 进行传递
-    //   // 因为组件内部时通过 watch 监听 v-model 的值的变化来更新组件的内部 _value；
-    //   // 所以清除表单时一定要手动对 v-model 的值进行手动置空，否则组件下次不会更新 _value
-    //   type: String,
-    //   default: "",
-    // },
-  },
-  setup(props, { slots, attrs }) {
+  props,
+  setup(props: BaseSelectProps, { attrs }) {
     const options: any = ref([]);
+    const copyOptions: any = ref([]);
     const loading = ref(false);
     const searchData = (params = {}) => {
       return request.request({
@@ -58,19 +74,31 @@ export default defineComponent({
         data: JSON.stringify(params),
       });
     };
-    if (attrs.remote !== undefined && props.url && !attrs.remote) {
-      searchData().then((res: any) => {
+
+    // 一次性获取所有数据,不需要动态搜索
+    if (props.url && !props.dynamicSearch) {
+      searchData(props.requestParams).then((res: any) => {
         if (props.dataCallback) {
           options.value = props.dataCallback(res);
+          copyOptions.value = [...options.value];
           return;
         }
-        options.value = res;
+        if (Array.isArray(res)) {
+          options.value = res;
+          copyOptions.value = [...res];
+        } else {
+          options.value = res.items;
+          copyOptions.value = [...res.items];
+        }
       });
     }
+
     const remoteMethod = _edebounce(async (query: string) => {
       if (query) {
         loading.value = true;
-        const result: any = await searchData({ [props.field]: query });
+        let params = {};
+        props.fieldName && (params = { [props.fieldName]: query });
+        const result: any = await searchData(params);
         loading.value = false;
         if (result.items) {
           options.value = result.items;
@@ -87,8 +115,8 @@ export default defineComponent({
         return props.optTemp(item);
       }
       return h("div", { class: "cus-temp" }, [
-        h("span", { style: { color: "#000" } }, item[props.valueKey]),
-        h("span", {}, item[props.labelKey]),
+        // h("span", { style: { color: "#000" } }, props.valueKey && item[props.valueKey]),
+        h("span", {}, props.labelKey && item[props.labelKey]),
       ]);
     };
     return () => {
@@ -100,20 +128,26 @@ export default defineComponent({
           clearable: true,
           filterable: true,
           reserveKeyword: true,
+          placeholder: props.dynamicSearch ? "请输入" : "请选择",
           style: {
             width: props.w,
           },
           ...attrs,
           remoteMethod: remoteMethod,
+          onVisibleChange: (value: Boolean) => {
+            if (value) {
+              options.value = copyOptions.value;
+            }
+          },
         },
-        [
+        () => [
           options.value.map((item: any) => {
             return h(
               ElOption,
               {
-                key: item[props.valueKey],
-                label: item[props.labelKey],
-                value: item[props.valueKey],
+                key: props.valueKey && item[props.valueKey],
+                label: props.labelKey && item[props.labelKey],
+                value: props.valueKey && item[props.valueKey],
               },
               {
                 default: () => cusTemplate(item),
