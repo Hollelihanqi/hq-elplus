@@ -21,6 +21,7 @@ export default {
     app.component("demo", DemoBlock);
     // app.use(YtoCustom);
     app.use(ElementPlus);
+    // @ts-ignore
     if (import.meta.env.SSR) return;
     const YtoCustom = await import("@yto/custom").then((m) => m.default);
     app.use(YtoCustom);
