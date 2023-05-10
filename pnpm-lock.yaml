@@ -5,6 +5,7 @@ importers:
   .:
     specifiers:
       '@commitlint/cli': ^17.6.1
+      '@commitlint/config-conventional': ^17.6.3
       '@element-plus/icons-vue': ^2.1.0
       '@types/node': ^18.15.11
       '@typescript-eslint/eslint-plugin': ^5.59.1
@@ -60,6 +61,7 @@ importers:
       vue-router: 4.1.6_vue@3.2.47
     devDependencies:
       '@commitlint/cli': 17.6.3
+      '@commitlint/config-conventional': 17.6.3
       '@typescript-eslint/eslint-plugin': 5.59.5_jdo46vuzdvtqioigt7za7mzwma
       '@typescript-eslint/parser': 5.59.5_jgkqkwom7vrxl4kyi454n2sy2i
       '@vitejs/plugin-vue': 4.1.0_vite@4.3.1+vue@3.2.47
@@ -569,6 +571,13 @@ packages:
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
+    dev: true
+
+  /@commitlint/config-conventional/17.6.3:
+    resolution: {integrity: sha512-bLyHEjjRWqlLQWIgYFHmUPbEFMOOLXeF3QbUinDIJev/u9e769tkoTH9YPknEywiuIrAgZaVo+OfzAIsJP0fsw==}
+    engines: {node: '>=v14'}
+    dependencies:
+      conventional-changelog-conventionalcommits: 5.0.0
     dev: true
 
   /@commitlint/config-validator/17.4.4:
@@ -1492,7 +1501,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.3.1
+      vite: 4.3.1_ur4zelheimnpqamyxbxastocxy
       vue: 3.2.47
     dev: true
 
@@ -2144,6 +2153,15 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       compare-func: 2.0.0
+      q: 1.5.1
+    dev: true
+
+  /conventional-changelog-conventionalcommits/5.0.0:
+    resolution: {integrity: sha512-lCDbA+ZqVFQGUj7h9QBKoIpLhl8iihkO0nCTyRNzuXtcd7ubODpYB04IFy31JloiJgG0Uovu8ot8oxRzn7Nwtw==}
+    engines: {node: '>=10'}
+    dependencies:
+      compare-func: 2.0.0
+      lodash: 4.17.21
       q: 1.5.1
     dev: true
 
