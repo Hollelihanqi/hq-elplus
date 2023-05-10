@@ -1,6 +1,12 @@
+<!--
+ * @Description: 模块名称
+ * @Author: ym
+ * @Date: 2023-05-10 10:28:54
+ * @LastEditTime: 2023-05-10 10:30:39
+-->
 # Menu 菜单
 
-基于 element-plus：el-munu 二次封装，支持 element-plus 的所有属性
+基于 element-plus：el-munu 二次封装，支持 element-plus 的所有属性,具体查看element-plus 官网
 
 ### 功能
 
