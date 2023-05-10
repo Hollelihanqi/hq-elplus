@@ -3,12 +3,14 @@
 import { YtoEchart } from "@/components/echart";
 import { YtoProTable } from '@/components/pro-table'
 import { YtoTable } from '@/components/table'
-import {YtoFormItem} from '@/components/formItem/export/index'
+import { YtoFormItem } from '@/components/formItem/export/index'
+import { YtoDialog } from '@/components/dialog'
 
 
 export default [
   YtoEchart,
   YtoProTable,
   YtoTable,
-  YtoFormItem
+  YtoFormItem,
+  YtoDialog
 ] as any

@@ -44,6 +44,10 @@ export default defineConfig({
               text: "fromItem",
               link: "/examples/fromItem/index.md",
             },
+            {
+              text: "Dialog",
+              link: "/.vitepress/examples/dialog/index.md",
+            }
           ],
           collapsed: false,
         },
