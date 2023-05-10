@@ -19,40 +19,30 @@ export default defineConfig({
       "/": [
         {
           text: "快速开始",
-          link: "/.vitepress/guide/fast",
+          link: "/guide/fast",
         },
         {
           text: "组件",
           items: [
             {
               text: "ProTable",
-              link: "/.vitepress/examples/pro-table/index.md",
+              link: "/examples/pro-table/index.md",
             },
             {
               text: "BaseTable",
-              link: "/.vitepress/examples/table/index.md",
+              link: "/examples/table/index.md",
             },
             {
               text: "BaseMenu",
-              link: "/.vitepress/examples/menu/index.md",
+              link: "/examples/menu/index.md",
             },
             {
               text: "Echart",
-              link: "/.vitepress/examples/echart/index.md",
+              link: "/examples/echart/index.md",
             },
           ],
           collapsed: false,
         },
-        // {
-        //   text: "指令",
-        //   link: "/.vitepress/examples/directives/index.md",
-        //   items: [
-        //     {
-        //       text: "拖拽指令",
-        //       link: "/.vitepress/examples/directives/drag/index.md",
-        //     },
-        //   ],
-        // },
       ],
     },
     docFooter: {

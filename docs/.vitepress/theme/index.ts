@@ -12,14 +12,17 @@ import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 import "@ruabick/vitepress-demo-block/dist/style.css";
 import "./var.css";
-import YtoCustom from "@yto/custom";
+// import YtoCustom from "@yto/custom";
 import "@yto/custom/dist/es/style.css";
 
 export default {
   ...DefaultTheme,
-  enhanceApp: ({ app }) => {
+  enhanceApp: async ({ app }) => {
     app.component("demo", DemoBlock);
-    app.use(YtoCustom);
+    // app.use(YtoCustom);
     app.use(ElementPlus);
+    if (import.meta.env.SSR) return;
+    const YtoCustom = await import("@yto/custom").then((m) => m.default);
+    app.use(YtoCustom);
   },
 };
