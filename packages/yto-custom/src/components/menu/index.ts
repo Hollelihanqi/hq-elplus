@@ -1,3 +1,10 @@
+/*
+ * @Description: 模块名称
+ * @Author: ym
+ * @Date: 2023-05-10 13:12:55
+ * @LastEditTime: 2023-05-10 13:14:26
+ */
+// index
 import Menu from './src/index.vue'
 
 import { install } from '../../_utils'
