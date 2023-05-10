@@ -38,7 +38,7 @@
 
 ```ts
 interface IbtnProps extends ButtonProps {
-	txt: string;
-	[propName: string]: any;
+  txt: string;
+  [propName: string]: any;
 }
 ```
