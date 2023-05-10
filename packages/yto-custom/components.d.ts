@@ -3,7 +3,7 @@
 // Read more: https://github.com/vuejs/core/pull/3399
 import '@vue/runtime-core'
 
-export {}
+export { }
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -17,7 +17,7 @@ declare module '@vue/runtime-core' {
     ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
-    ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
+    ElDialog: typeof import('element-plus/es')['ElDialog']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElIcon: typeof import('element-plus/es')['ElIcon']
@@ -57,7 +57,7 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     SearchForm: typeof import('./src/components/pro-table/src/components/SearchForm/index.vue')['default']
     SearchFormItem: typeof import('./src/components/pro-table/src/components/SearchForm/components/SearchFormItem.vue')['default']
-    Src: typeof import('./src/components/echart/src/index.vue')['default']
+    Src: typeof import('./src/components/dialog/src/index.vue')['default']
     TableColumn: typeof import('./src/components/pro-table/src/components/TableColumn.vue')['default']
   }
 }
