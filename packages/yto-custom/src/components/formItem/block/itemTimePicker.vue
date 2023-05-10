@@ -1,8 +1,5 @@
 <template>
-  <el-time-picker
-    v-bind="$attrs"
-    v-model="form[$attrs.prop]"
-  ></el-time-picker>
+  <el-time-picker v-bind="$attrs" v-model="form[$attrs.prop]"></el-time-picker>
 </template>
 
 <script lang="ts" setup>

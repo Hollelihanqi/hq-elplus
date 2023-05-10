@@ -1,8 +1,5 @@
 <template>
-  <el-switch
-    v-bind="$attrs"
-    v-model="form[$attrs.prop]"
-  ></el-switch>
+  <el-switch v-bind="$attrs" v-model="form[$attrs.prop]"></el-switch>
 </template>
 
 <script lang="ts" setup>

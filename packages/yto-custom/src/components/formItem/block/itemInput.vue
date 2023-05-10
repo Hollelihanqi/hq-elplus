@@ -1,8 +1,5 @@
 <template>
-  <el-input
-    v-bind="$attrs"
-    v-model="form[$attrs.prop]"
-  />
+  <el-input v-bind="$attrs" v-model="form[$attrs.prop]" />
 </template>
 <script lang="ts" setup>
 // @ts-nocheck

@@ -1,8 +1,5 @@
 <template>
-  <el-date-picker
-    v-model="form[$attrs.prop]"
-    v-bind="$attrs"
-  ></el-date-picker>
+  <el-date-picker v-model="form[$attrs.prop]" v-bind="$attrs"></el-date-picker>
 </template>
 <script lang="ts" setup>
 // @ts-nocheck

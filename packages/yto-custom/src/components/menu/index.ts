@@ -5,12 +5,12 @@
  * @LastEditTime: 2023-05-10 13:16:10
  */
 // index
-import Menu from './src/index.vue'
+import Menu from "./src/index.vue";
 
-import { install } from '../../_utils'
+import { install } from "../../_utils";
 
-export const YtoMenu = install(Menu)
+export const YtoMenu = install(Menu);
 
-export type { MenuInstance } from './src/instance'
+export type { MenuInstance } from "./src/instance";
 
-export default YtoMenu
+export default YtoMenu;

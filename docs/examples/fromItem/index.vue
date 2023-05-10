@@ -1,16 +1,9 @@
 <template>
   <div style="padding: 0 10px">
     <el-form :form="form">
-      <yto-form-item
-          :form="form"
-          :formConfig="formConfig"
-          :span="12"
-          clearable
-      >
-        <template #cascader="scope">
-          测试卡槽
-        </template>
-        <div >
+      <yto-form-item :form="form" :form-config="formConfig" :span="12" clearable>
+        <template #cascader="scope"> 测试卡槽 </template>
+        <div>
           <el-button type="primary">测试</el-button>
         </div>
       </yto-form-item>
@@ -20,7 +13,7 @@
 
 <script lang="ts" setup>
 import { reactive } from "vue";
-import {ElForm,ElButton} from "element-plus";
+import { ElForm, ElButton } from "element-plus";
 const options = [
   {
     value: "zhinan",
@@ -294,7 +287,7 @@ const formConfig = [
   { itemType: "input", prop: "name", label: "文本框" },
   {
     itemType: "cascader",
-    slot:true,
+    slot: true,
     prop: "cascader",
     label: "级联选择",
     placeholder: "xxx",

@@ -11,7 +11,7 @@ module.exports = defineConfig({
     "plugin:@typescript-eslint/recommended",
     "plugin:markdown/recommended",
     "prettier",
-    './packages/yto-custom/types/.eslintrc-auto-import.json'
+    "./packages/yto-custom/types/.eslintrc-auto-import.json",
   ],
   overrides: [],
   parser: "vue-eslint-parser",

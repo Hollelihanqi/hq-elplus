@@ -5,20 +5,20 @@
  * @LastEditTime: 2023-05-11 13:13:10
 -->
 <script lang="ts">
-import { defineComponent, PropType, h } from 'vue'
-import { MenuItemProps, SubMenuProps, ElMenu, ElMenuItem, ElSubMenu, ElMenuItemGroup } from 'element-plus'
+import { defineComponent, PropType, h } from "vue";
+import { MenuItemProps, SubMenuProps, ElMenu, ElMenuItem, ElSubMenu, ElMenuItemGroup } from "element-plus";
 interface IMenuData {
-  name: string
-  path?: string
-  icon?: String
-  type?: 'group'
-  children: IMenuData[]
+  name: string;
+  path?: string;
+  icon?: String;
+  type?: "group";
+  children: IMenuData[];
 }
 type CanWrite<T> = {
-  -readonly [K in keyof T]?: T[K]
-}
+  -readonly [K in keyof T]?: T[K];
+};
 export default defineComponent({
-  name: 'Menu',
+  name: "CMenu",
   props: {
     menuData: {
       type: Array as PropType<IMenuData[]>,
@@ -45,22 +45,22 @@ export default defineComponent({
   },
   setup(props, context) {
     const renderTitle = (e: IMenuData) => {
-      const title = [h('span', e.name)]
-      e.icon && title.unshift(h('i', { class: `iconfont ${e.icon}` }))
-      return title
-    }
+      const title = [h("span", e.name)];
+      e.icon && title.unshift(h("i", { class: `iconfont ${e.icon}` }));
+      return title;
+    };
     const renderChildren = (meu: IMenuData[]) => {
-      console.log('***', meu)
+      console.log("***", meu);
 
       return meu.map((e: IMenuData) => {
-        if (e.type === 'group') {
+        if (e.type === "group") {
           return h(
             ElMenuItemGroup,
             { title: e.name },
             {
               default: () => renderChildren(e.children),
             }
-          )
+          );
         } else if (e.children && e.children.length) {
           return h(
             ElSubMenu,
@@ -72,13 +72,13 @@ export default defineComponent({
               default: () => renderChildren(e.children),
               title: () => renderTitle(e),
             }
-          )
+          );
         } else {
           return h(
             ElMenuItem,
             {
               onClick: () => {
-                context.emit('itemClick', e)
+                context.emit("itemClick", e);
               },
               ...props.subMenuConfig,
               index: e.path,
@@ -86,27 +86,27 @@ export default defineComponent({
             {
               title: () => renderTitle(e),
             }
-          )
+          );
         }
-      })
-    }
+      });
+    };
     return () =>
       h(
         ElMenu,
         {
           ...context.attrs,
-          'on-open': (index: string, indexPath: string) => {
-            context.emit('open', index, indexPath)
+          "on-open": (index: string, indexPath: string) => {
+            context.emit("open", index, indexPath);
           },
-          'on-Close': (index: string, indexPath: string) => {
-            context.emit('close', index, indexPath)
+          "on-Close": (index: string, indexPath: string) => {
+            context.emit("close", index, indexPath);
           },
-          'on-Select': (index: string, indexPath: string, item: IMenuData, routeResult: boolean) => {
-            context.emit('select', index, indexPath)
+          "on-Select": (index: string, indexPath: string, item: IMenuData, routeResult: boolean) => {
+            context.emit("select", index, indexPath);
           },
         },
         () => renderChildren(props.menuData)
-      )
+      );
   },
-})
+});
 </script>
