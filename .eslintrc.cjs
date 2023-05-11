@@ -34,6 +34,7 @@ module.exports = defineConfig({
     "@typescript-eslint/no-non-null-assertion": "off", // 禁止断言为 any
     "@typescript-eslint/ban-ts-comment": "off", // 禁止@ts-ignore
     "vue/no-mutating-props": "off",
+    "vue/no-reserved-component-names":"off", // 警用组件名使用 HTML 保留字段
     // "vue/no-unused-vars": "off", // 警用未使用的变量
     '@typescript-eslint/no-empty-function': 'off', //禁用空函数
     'vue/require-default-prop': "off", // 禁用属性默认值

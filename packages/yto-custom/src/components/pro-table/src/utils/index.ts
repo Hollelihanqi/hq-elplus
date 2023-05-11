@@ -27,7 +27,7 @@ export function filterEnum(
   let filterData: any = {};
   if (Array.isArray(enumData)) filterData = enumData.find((item: any) => item[value] === callValue);
   if (type == "tag") return filterData?.tagType ? filterData.tagType : "";
-  return filterData ? filterData[label] : "--";
+  return callValue === "" || callValue === null ? "--" : callValue;
 }
 
 /**
