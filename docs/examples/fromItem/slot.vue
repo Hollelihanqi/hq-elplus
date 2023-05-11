@@ -1,7 +1,7 @@
 <template>
   <div style="padding: 0 10px">
     <el-form :form="form">
-      <yto-form-item
+      <yto-c-form-item
           :form="form"
           :form-config="formConfig"
           :span="12"
@@ -14,7 +14,7 @@
           <el-button type="primary">测试</el-button>
         </div>
 
-      </yto-form-item>
+      </yto-c-form-item>
 
     </el-form>
   </div>
