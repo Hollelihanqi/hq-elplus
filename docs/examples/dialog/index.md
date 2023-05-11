@@ -31,8 +31,8 @@
 
 | 属性名     | 说明         | 类型     | 可选值 | 默认值    | 备注                             |
 | ---------- | ------------ | -------- | ------ | --------- | -------------------------------- |
-| `@confirm` | 确认按钮回调 | function | —      | undefined | 返回值：true/false, 弹框显示影藏 |
-| `@cancel`  | 取消按钮回调 | function | —      | undefined | 返回值：true/false, 弹框显示影藏 |
+| `@confirm` | 确认按钮回调 | function | —      | undefined | 返回值：true/false, 弹框显示隐藏 |
+| `@cancel`  | 取消按钮回调 | function | —      | undefined | 返回值：true/false, 弹框显示隐藏 |
 
 ### Interface
 
