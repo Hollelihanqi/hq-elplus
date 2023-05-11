@@ -20,4 +20,5 @@ import YtoCustom from "@yto/custom";
 import "@yto/custom/dist/style.css";
 
 createApp(App).use(YtoCustom).mount("#app");
+
 ```

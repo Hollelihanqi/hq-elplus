@@ -149,6 +149,7 @@ export const useTable = (
   return {
     ...toRefs(state),
     getTableList,
+    updatePageable,
     search,
     reset,
     handleSizeChange,

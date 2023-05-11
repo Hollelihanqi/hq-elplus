@@ -27,22 +27,25 @@ export default defineComponent({
     menuItemConfig: {
       type: Object as PropType<CanWrite<MenuItemProps>>,
       required: false,
+      default:()=>{return{}}
     },
     subMenuConfig: {
       type: Object as PropType<CanWrite<SubMenuProps>>,
       required: false,
+      default:()=>({})
     },
     showCollapse: {
       type: Boolean,
       default: false,
     },
   },
-  emit: {
-    open(index: string, indexPath: string) {},
-    close(index: string, indexPath: string) {},
-    select(index: string, indexPath: string, item: IMenuData, routeResult: boolean) {},
-    itemClick(item: IMenuData) {},
-  },
+  // emit: {
+  //   open(index: string, indexPath: string) {},
+  //   close(index: string, indexPath: string) {},
+  //   select(index: string, indexPath: string, item: IMenuData, routeResult: boolean) {},
+  //   itemClick(item: IMenuData) {},
+  // },
+  emits: ['open', 'close', 'select', 'itemClick'],
   setup(props, context) {
     const renderTitle = (e: IMenuData) => {
       const title = [h("span", e.name)];

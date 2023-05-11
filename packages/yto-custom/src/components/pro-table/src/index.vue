@@ -150,6 +150,7 @@ const {
   searchParam,
   searchInitParam,
   getTableList,
+  updatePageable,
   search,
   reset,
   handleSizeChange,
@@ -281,6 +282,7 @@ defineExpose({
   searchParam,
   pageable,
   reset,
+  updatePageable,
   getTableList,
   clearSelection,
 });
