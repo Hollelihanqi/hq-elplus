@@ -34,13 +34,13 @@ module.exports = defineConfig({
     "@typescript-eslint/no-non-null-assertion": "off", // 禁止断言为 any
     "@typescript-eslint/ban-ts-comment": "off", // 禁止@ts-ignore
     "vue/no-mutating-props": "off",
-    "vue/no-unused-vars": "off",
-    '@typescript-eslint/no-empty-function': 'off',
-    'vue/require-default-prop': 0,
-    'vue/component-tags-order': 'off',
-    "vue/attributes-order": 0,
-    'vue/attribute-hyphenation': 0,
-    'vue/require-explicit-emits': 0
+    // "vue/no-unused-vars": "off",
+    '@typescript-eslint/no-empty-function': 'off', //禁用空函数
+    'vue/require-default-prop': "off", // 禁用属性默认值
+    // 'vue/component-tags-order': 'off',
+    // "vue/attributes-order": 0,
+    // 'vue/attribute-hyphenation': 0,
+    // 'vue/require-explicit-emits': 0
   },
   settings: {
     "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
