@@ -45,7 +45,7 @@ export default defineConfig({
               link: "/examples/fromItem/index.md",
             },
             {
-              text: "Dialog",
+              text: "弹出框",
               link: "/examples/dialog/index.md",
             }
           ],
