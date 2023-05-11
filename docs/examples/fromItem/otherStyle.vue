@@ -1,20 +1,20 @@
 <template>
   <div style="padding: 0 10px">
     <el-form :form="form">
-      <yto-form-item
+      <yto-c-form-item
           :form="form"
           :form-config="formConfig"
           :span="12"
           clearable
       >
-      </yto-form-item>
+      </yto-c-form-item>
     </el-form>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { reactive } from "vue";
-import {ElForm,ElButton} from "element-plus";
+import {ElForm} from "element-plus";
 
 const form = reactive({});
 const formConfig = [
