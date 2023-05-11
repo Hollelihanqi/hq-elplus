@@ -3,7 +3,7 @@
 // Read more: https://github.com/vuejs/core/pull/3399
 import '@vue/runtime-core'
 
-export { }
+export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -35,7 +35,6 @@ declare module '@vue/runtime-core' {
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTimePicker: typeof import('element-plus/es')['ElTimePicker']
     ElTimeSelect: typeof import('element-plus/es')['ElTimeSelect']
-    FormItem: typeof import('./src/components/formItem/index.vue')['default']
     Grid: typeof import('./src/components/pro-table/src/components/Grid/index.vue')['default']
     GridItem: typeof import('./src/components/pro-table/src/components/Grid/components/GridItem.vue')['default']
     ItemCascader: typeof import('./src/components/formItem/block/itemCascader.vue')['default']

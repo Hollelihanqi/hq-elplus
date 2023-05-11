@@ -18,7 +18,7 @@ type CanWrite<T> = {
   -readonly [K in keyof T]?: T[K];
 };
 export default defineComponent({
-  name: "CMenu",
+  name: "Menu",
   props: {
     menuData: {
       type: Array as PropType<IMenuData[]>,

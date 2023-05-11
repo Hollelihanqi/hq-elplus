@@ -1,6 +1,6 @@
-import formItem from "../index.vue";
+import formItem from "./src/index.vue";
 
-import { install } from "../../../_utils";
+import { install } from '../../_utils'
 
 export const YtoFormItem = install(formItem);
 export type FormItemInstance = InstanceType<typeof formItem>;

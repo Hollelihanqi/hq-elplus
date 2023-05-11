@@ -2,10 +2,10 @@
 	<div>
 		<el-button class="a" @click="dialogVisible = true">按钮定制</el-button>
 
-		<yto-cdialog v-model="dialogVisible" :confirm-option="confirm" :cancel-option="cancel" @confirm="handleConfirm" @cancel="handleCancel">
+		<yto-c-dialog v-model="dialogVisible" :confirm-option="confirm" :cancel-option="cancel" @confirm="handleConfirm" @cancel="handleCancel">
 			<template #header> title </template>
 			<p>这是一个示例对话框</p>
-		</yto-cdialog>
+		</yto-c-dialog>
 	</div>
 </template>
 

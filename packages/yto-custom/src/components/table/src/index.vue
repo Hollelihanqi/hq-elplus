@@ -114,7 +114,7 @@ const props = {
 type Props = ExtractPropTypes<typeof props>;
 
 export default defineComponent({
-  name: "CTable",
+  name: "Table",
   components: {
     ElConfigProvider,
   },

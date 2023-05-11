@@ -2,10 +2,10 @@
 	<div>
 		<el-button class="a" @click="dialogVisible = true">基础弹框</el-button>
 
-		<yto-cdialog v-model="dialogVisible" width="500px" @confirm="handleConfirm" @cancel="handleCancel">
+		<yto-c-dialog v-model="dialogVisible" width="500px" @confirm="handleConfirm" @cancel="handleCancel">
 			<template #header> title </template>
 			<p>这是一个示例对话框</p>
-		</yto-cdialog>
+		</yto-c-dialog>
 	</div>
 </template>
 

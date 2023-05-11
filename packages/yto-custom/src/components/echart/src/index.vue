@@ -2,7 +2,7 @@
   <component :is="getRenderChart()" ref="chartRef" :options="optins" :width="width" :height="height"></component>
 </template>
 
-<script lang="ts" setup name="CEchart">
+<script lang="ts" setup name="Echart">
 import LineChart from "./LineChart.vue";
 import BarChart from "./BarChart.vue";
 import BaseChart from "./BaseChart.vue";
