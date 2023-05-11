@@ -5,7 +5,7 @@
 使用快速的，节省磁盘空间的包管理工具 [pnpm](https://pnpm.io/zh) 进行安装
 
 ```shell
-pnpm add --save-dev @yto/custom
+pnpm add @yto/custom
 ```
 
 ## 完整引入
@@ -17,7 +17,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 
 import YtoCustom from "@yto/custom";
-import "@yto/custom/dist/style.css";
+import "@yto/custom/es/style.css";
 
 createApp(App).use(YtoCustom).mount("#app");
 
