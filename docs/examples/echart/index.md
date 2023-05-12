@@ -11,19 +11,19 @@
 
 ## 基本使用
 
-### 折线图
+## 折线图
 
 <demo src="./lineChart.vue"></demo>
 
-### 柱状图
+## 柱状图
 
 <demo src="./barChart.vue"></demo>
 
-### 饼图
+## 饼图
 
 <demo src="./pieChart.vue"></demo>
 
-### 其他图形
+## 其他图形
 
 <demo src="./otherChart.vue"></demo>
 
