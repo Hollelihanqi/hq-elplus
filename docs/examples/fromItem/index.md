@@ -1,7 +1,46 @@
-# BaseMenu 菜单
+# FromItems 菜单
 
 基于 element-plus：form表单 二次封装，支持 element-plus 的所有属性
-### formItem属性
+
+## itemType 支持类型
+input  select  switch  radio  cascader checkbox
+date   dateTime  inputNumber  rate  timePicker  timeSelect
+
+### 功能
+
+- JSON 数据渲染 fromItems
+
+
+## 基本使用
+
+<demo src="./index.vue"></demo>
+
+
+## formItems  卡槽使用方式
+```
+slot = true
+<template #cascader="scope">
+测试卡槽
+</template>
+
+```
+<demo src="./slot.vue"></demo>
+
+## formItems  设置全局labelWidth
+```
+span = 12
+ <yto-form-item :span="12 clearable >   </yto-form-item>  
+```
+<demo src="./slot.vue"></demo>
+
+
+## formItems  设置formContent样式
+```
+contentWidth 设置class 样式
+      
+```
+<demo src="./otherStyle.vue"></demo>
+### formItems属性
 | 属性名                | 说明                                                                            | 类型      | 可选值     | 默认值                     | 备注  |
 |--------------------|-------------------------------------------------------------------------------|---------| ---------- |-------------------------|-----|
 | `fromConfig`       | 表单配置项                                                                         | Array   | —          | []                      | _   |
@@ -18,42 +57,3 @@
 | `options`        | 下拉框list数据 | Array   | —        | []    | inputType等于 select radio  cascader checkbox 可用 例：[{label:‘’，value:'''}] |
 | `contentWidth`        | 自定义class | string   | —        | _    | -|
 
-
-## itemType 支持类型
-input  select  switch  radio  cascader checkbox
-date   dateTime  inputNumber  rate  timePicker  timeSelect
-
-### 功能
-
-- JSON 数据渲染 fromITem
-
-
-## 基本使用
-
-<demo src="./index.vue"></demo>
-
-
-## formItem  卡槽使用方式
-```
-slot = true
-<template #cascader="scope">
-测试卡槽
-</template>
-
-```
-<demo src="./slot.vue"></demo>
-
-## formItem  设置全局labelWidth
-```
-span = 12
- <yto-form-item :span="12 clearable >   </yto-form-item>  
-```
-<demo src="./slot.vue"></demo>
-
-
-## formItem  设置formContent样式
-```
-contentWidth 设置class 样式
-      
-```
-<demo src="./otherStyle.vue"></demo>

@@ -32,7 +32,7 @@
   </el-row>
 </template>
 
-<script lang="ts" setup name="FormItem">
+<script lang="ts" setup name="FormItems">
 // @ts-nocheck
 
 import itemInput from "./block/itemInput.vue";
@@ -48,7 +48,6 @@ import itemRate from "./block/itemRate.vue";
 import itemTimePicker from "./block/itemTimePicker.vue";
 import itemTimeSelect from "./block/itemTimeSelect.vue";
 import {PropType} from "vue";
-import { ElInput } from "element-plus"
 interface Obj {
   [key: string]: any;
 }

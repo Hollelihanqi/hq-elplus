@@ -1,13 +1,13 @@
 <template>
   <div style="padding: 0 10px">
     <el-form :form="form">
-      <yto-c-form-item
+      <yto-c-form-items
           :form="form"
           :form-config="formConfig"
           :span="12"
           clearable
       >
-      </yto-c-form-item>
+      </yto-c-form-items>
     </el-form>
   </div>
 </template>
