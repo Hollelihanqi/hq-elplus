@@ -4,98 +4,112 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import * as echarts from "echarts";
 import { guid, debounce } from "@yto/utils";
-// import { directivesList } from "@/directives/index";
-import resizeElement from "./common/resizeElement";
+import{ resizeElement as vResizeElement} from "./common/resizeElement";
+interface Props {
+  echartId?:string;
+  options:object;
+  height?:string;
+  width?:string;
+  showLoading?:boolean;
+}
+const props = withDefaults(defineProps<Props>(), {
+  echartId:'',
+  height:'400px',
+  width:'100%',
+  showLoading:true,
+  options:()=> {return {}}
+})
 
-export default defineComponent({
-  directives: {
-    "resize-element": resizeElement,
-  },
-  props: {
-    echartId: {
-      type: String,
-      default: "",
-    },
-    options: {
-      type: Object,
-      default: () => ({}),
-      required: true,
-    },
-    height: {
-      type: String,
-      default: "400px",
-    },
-    width: {
-      type: String,
-      default: "100%",
-    },
-  },
-  setup(props, { expose }) {
-    let myChart: any | null;
+let myChart: any | null;
 
-    const containerId = computed(() => {
-      return props.echartId || `baseChart_${guid()}`;
+const containerId = computed(() => {
+  return props.echartId || `baseChart_${guid()}`;
+});
+
+/**
+ * @description: 图形加载动画
+ * @param {*}
+ * @return {*}
+ */
+const showLoading = () => {
+  props.showLoading && myChart &&
+    myChart.showLoading({
+      text: "正在加载...",
+      color: "#2c3cd8",
+      textColor: "#2c3cd8",
+      zlevel: 0,
     });
-    const showLoading = () => {
-      myChart &&
-        myChart.showLoading({
-          text: "正在加载...",
-          color: "#2c3cd8",
-          textColor: "#2c3cd8",
-          zlevel: 0,
-        });
-    };
+};
 
-    const initChart = () => {
-      myChart = echarts.init(document.querySelector(`#${containerId.value}`) as HTMLElement);
-      showLoading();
-      setChartOption();
-      //窗口大小改变，重新绘图
-      // window.addEventListener("resize", resizeHandler);
-    };
-    const setChartOption = async (options?: any) => {
-      await nextTick();
-      console.log("setChartOption", options || props.options);
-      myChart && myChart.setOption(options || props.options);
-      myChart && myChart.hideLoading();
-    };
+/**
+ * @description: 初始化图形
+ * @return {*}
+ */
+const initChart = () => {
+  myChart = echarts.init(document.querySelector(`#${containerId.value}`) as HTMLElement);
+  showLoading();
+  setChartOption();
+  //窗口大小改变，重新绘图
+  // window.addEventListener("resize", resizeHandler);
+};
 
-    const resizeHandler = debounce(() => {
-      myChart && myChart.resize();
-    }, 300);
+/**
+ * @description: 设置图形数据
+ * @param {*} options 
+ * @return {*}
+ */
+const setChartOption = async (options?: any) => {
+  await nextTick();
+  console.log("setChartOption", options || props.options);
+  myChart && myChart.setOption(options || props.options);
+  myChart && myChart.hideLoading();
+};
 
-    const disposeChart = () => {
-      myChart && myChart.dispose();
-      myChart = null;
-    };
-    const getEchartInstance = () => myChart;
+/**
+ * @description: 页面重绘
+ * @param {*}
+ * @return {*}
+ */
+const resizeHandler = debounce(() => {
+  myChart && myChart.resize();
+}, 300);
 
-    watch(
-      () => props.options,
-      (value) => {
-        showLoading();
-        setChartOption(value);
-      },
-      {
-        deep: true,
-      }
-    );
+/**
+ * @description: 销毁图形
+ * @param {*}
+ * @return {*}
+ */
+const disposeChart = () => {
+  myChart && myChart.dispose();
+  myChart = null;
+};
 
-    onActivated(resizeHandler);
-    onMounted(initChart);
-    onUnmounted(disposeChart);
+/**
+ * @description: 获取图形实例
+ * @param {*}
+ * @return {*}
+ */
+const getEchartInstance = () => myChart;
 
-    expose({
-      getEchartInstance,
-    });
-
-    return {
-      resizeHandler,
-      containerId,
-    };
+watch(
+  () => props.options,
+  (value) => {
+    showLoading();
+    setChartOption(value);
   },
+  {
+    deep: true,
+  }
+);
+
+onActivated(resizeHandler);
+onMounted(initChart);
+onUnmounted(disposeChart);
+
+defineExpose({
+  getEchartInstance,
 });
 </script>
