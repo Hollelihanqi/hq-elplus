@@ -69,7 +69,6 @@ export const getLineChartConfig = () => {
 /***************柱状图基础配置----start*****************/
 export const getBarChartBaseOptions = () => {
   return {
-    backgroundColor: "#fff",
     animation: true,
     title: {
       show: false,
