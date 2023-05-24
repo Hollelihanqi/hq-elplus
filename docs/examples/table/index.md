@@ -40,7 +40,7 @@
 | `requestApi`       | 表格数据获取 API，返回一个 Promise                                                                                              | Function | —          |                         |                                                |
 | `requestAuto`      | 是否立即触发 requestApi ,如果依赖于 otherParams，可设置为 false，手动调用 updateTableData 方法获取列表数据                      | Boolean  | true/false | true                    |                                                |
 | `dataCallback`     | 表格数据获取成功后的回调函数，接收 API 请求回的结果，可在数据渲染之前进行格式化操作，且必须返回: {items:[],total:0}或者一个数组 | Function | —          | —                       | —                                              |
-| `otherParams`      | 表格数据获取时，其它参数                                                                                                        | Object   | —          | —                       |
+| `requestParams`      | 表格数据获取时，其它参数                                                                                                        | Object   | —          | —                       |
 
 ### Column 属性
 

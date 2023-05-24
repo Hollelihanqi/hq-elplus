@@ -12,7 +12,7 @@
 
 <script lang="tsx" setup>
 import { inject, ref, useSlots } from "vue";
-import { ElTableColumn, ElTag } from "element-plus";
+import { ElTableColumn, ElTag, ElMessage } from "element-plus";
 import { filterEnum, formatValue } from "../utils";
 import { ColumnProps } from "../interface";
 
@@ -34,17 +34,42 @@ const getTagType = (item: ColumnProps, scope: any) => {
   return filterEnum(scope.row[item.prop!], enumMap.value.get(item.prop), item.fieldNames, "tag") as any;
 };
 
+// 复制
+const handleCopyClick = (copyData = "") => {
+  const input = document.createElement("input");
+  console.log(copyData);
+  input.value = copyData.toLocaleString();
+  document.body.appendChild(input);
+  input.select();
+  document.execCommand("Copy");
+  document.body.removeChild(input);
+  ElMessage({
+    type: "success",
+    message: "复制成功",
+  });
+};
+
 const renderLoop = (item: ColumnProps) => {
   return (
     <>
       {item.isShow && (
-        <ElTableColumn {...item} showOverflowTooltip={item.showOverflowTooltip ?? item.prop !== "operation"}>
+        <ElTableColumn {...item} showOverflowTooltip={item.showOverflowTooltip ?? item.prop !== "action"}>
           {{
             default: (scope: any) => {
               if (item._children) return item._children.map((child) => renderLoop(child));
               if (item.render) return item.render(scope);
               if (slots[item.prop!]) return slots[item.prop!]!(scope);
               if (item.tag) return <ElTag type={getTagType(item, scope)}>{renderCellData(item, scope)}</ElTag>;
+              if (item.copy)
+                return (
+                  <div
+                    onClick={(e: any) => {
+                      handleCopyClick(e.target.innerText);
+                    }}
+                  >
+                    {renderCellData(item, scope)}
+                  </div>
+                );
               return renderCellData(item, scope);
             },
             header: () => {

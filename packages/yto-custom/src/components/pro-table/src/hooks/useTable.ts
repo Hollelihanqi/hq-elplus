@@ -9,7 +9,7 @@ import { reactive, computed, onMounted, toRefs } from "vue";
  * @param {Function} dataCallBack 对后台返回的数据进行处理的方法(非必传)
  * */
 export const useTable = (
-  api: (params: any) => Promise<any>,
+  api: Function,
   initParam: object = {},
   isPageable: boolean = true,
   dataCallBack?: (data: any) => any

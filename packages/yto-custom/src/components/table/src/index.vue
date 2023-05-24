@@ -106,7 +106,7 @@ const props = {
     type: Function,
     default: null,
   },
-  otherParams: {
+  requestParams: {
     type: Object,
     default: () => ({}),
   },
@@ -138,11 +138,12 @@ export default defineComponent({
         return column.enum[row[column.prop]];
       }
     };
-    const getTableData = async () => {
+    const getTableData = async (params = {}) => {
       let result = await props.requestApi({
-        ...props.otherParams,
+        ...props.requestParams,
         [props.currentPageField]: paginationParams.value.currentPage,
         [props.pageSizeField]: paginationParams.value.pageSize,
+        ...params,
       });
       if (props.dataCallback && typeof props.dataCallback === "function") {
         result = props.dataCallback(result);
@@ -169,8 +170,8 @@ export default defineComponent({
     const tableClearSelection = () => {
       tableRef.value.clearSelection();
     };
-    const updateTableData = () => {
-      getTableData();
+    const updateTableData = (params = {}) => {
+      getTableData(params);
     };
     const resetTableData = () => {
       paginationParams.value.currentPage = 1;

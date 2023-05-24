@@ -116,7 +116,7 @@ interface AnyObj {
 }
 interface ProTableProps extends TableProps<AnyObj> {
   columns: ColumnProps[]; // 列配置项
-  requestApi: (params: any) => Promise<any>; // 请求表格数据的api ==> 必传
+  requestApi: Function; // 请求表格数据的api ==> 必传
   dataCallback?: (data: any) => any; // 返回数据的回调函数，可以对数据进行处理 ==> 非必传
   title?: string; // 表格标题，目前只在打印的时候用到 ==> 非必传
   pagination?: boolean; // 是否需要分页组件 ==> 非必传（默认为true）
