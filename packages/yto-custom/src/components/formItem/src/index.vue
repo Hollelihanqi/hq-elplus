@@ -10,7 +10,7 @@
           <component
               v-bind="item"
               :is="getComponent(item.itemType)"
-              v-if="!item?.slot"
+              v-if="!$slots[item.prop]"
               :prop="item?.prop"
               :form="form"
               :options="item?.options || options"
@@ -22,7 +22,7 @@
               :disabled="item?.disabled || disabled"
               :clearable="item?.clearable || clearable"
           />
-          <slot  v-if="item?.slot" :name="item?.prop"/>
+          <slot  v-if="$slots[item.prop]" :name="item?.prop"/>
         </div>
       </el-form-item>
     </el-col>

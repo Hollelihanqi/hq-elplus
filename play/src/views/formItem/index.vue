@@ -1,7 +1,7 @@
 <template>
     <div style="padding: 0 10px">
       <el-form :form="form">
-          <yto-form-items
+          <yto-c-form-items
               :form="form"
               :form-config="formConfig"
               :span="12"
@@ -13,7 +13,7 @@
             <div >
               <el-button type="primary">测试</el-button>
             </div>
-          </yto-form-items>
+          </yto-c-form-items>
       </el-form>
   </div>
 </template>
@@ -295,7 +295,6 @@ const formConfig = [
   { itemType: "input", prop: "name", label: "文本框",contentWidth:"test" },
   {
     itemType: "cascader",
-    slot:true,
     prop: "cascader",
     label: "级联选择",
     placeholder: "xxx",

@@ -39,7 +39,6 @@ const formConfig = [
   { itemType: "input", prop: "name", label: "文本框",span:12 },
   {
     itemType: "cascader",
-    slot:true,
     prop: "cascader",
     label: "级联选择",
     placeholder: "xxx",
