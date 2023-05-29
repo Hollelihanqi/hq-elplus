@@ -20,12 +20,12 @@
 
 ### 自定义 dialog 属性
 
-| 属性名          | 说明     | 类型              | 可选值 | 默认值                   | 备注                                                  |
-| --------------- | -------- | ----------------- | ------ | ------------------------ | ----------------------------------------------------- |
-| `confirmOption` | 确认按钮 | Object, undefined | —      | undefined                | IbtnProps, 默认不显示按钮， 支持 el-button 的所有属性 |
-| `cancelOption`  | 取消按钮 | Object, undefined | —      | undefined                | IbtnProps， 默认不限制按钮，支持 el-button 的所有属性 |
-| `offset`        | 弹出位置 | array             | —      | [], elementPlus 弹出位置 | [marginLeft, marginTop]                               |
-| `draggable`     | 拖动     | boolean           | —      | false                    |                                                       |
+| 属性名          | 说明     | 类型              | 可选值 | 默认值                   | 备注                                                    |
+| --------------- | -------- | ----------------- | ------ | ------------------------ | ------------------------------------------------------- |
+| `confirmOption` | 确认按钮 | Object, undefined | —      | undefined                | IbtnProps, 默认显示确认按钮， 支持 el-button 的所有属性 |
+| `cancelOption`  | 取消按钮 | Object, undefined | —      | undefined                | IbtnProps， 默认取消按钮，支持 el-button 的所有属性     |
+| `offset`        | 弹出位置 | array             | —      | [], elementPlus 弹出位置 | [marginLeft, marginTop]                                 |
+| `draggable`     | 拖动     | boolean           | —      | false                    |                                                         |
 
 ### 回调方法
 
