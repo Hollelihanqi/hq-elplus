@@ -18,6 +18,10 @@
 
 <demo src="./basic.vue"></demo>
 
+## Attributes
+
+[完整配置请参考-element-plus](https://element-plus.org/zh-CN/component/menu.html)
+
 ### Menu 属性
 
 | 属性名           | 说明             | 类型          | 可选值 | 默认值 | 备注                        |
@@ -35,7 +39,3 @@
 | `open`          | sub-menu 展开的回调                      | index: 打开的 sub-menu 的 index, indexPath: 打开的 sub-menu 的 index path                                                                |
 | `close`         | sub-menu 收起的回调                      | index: 收起的 sub-menu 的 index, indexPath: 收起的 sub-menu 的 index path                                                                |
 | `menuItemClick` | element 的 meunItem 标签点击时的回调函数 | （item: IMenuData）=> vo                                                                                                                 |
-
-## elemet-plus menu Attributes
-
-[完整配置请参考-element-plus](https://element-plus.org/zh-CN/component/menu.html)

@@ -1,4 +1,4 @@
-# BaseTable 表格
+# Table 表格
 
 基于 element-plus：el-table el-pagination 二次封装，支持 element-plus 的所有属性
 

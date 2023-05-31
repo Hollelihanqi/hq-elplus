@@ -1,4 +1,4 @@
-# 弹出框
+# Dialog 弹出框
 
 基于 element-plus：dialog 二次封装，支持 el-dialog 的所有属性
 
