@@ -43,15 +43,13 @@ console.log("attrs", attrs, props);
 // -------------------------------- header start--------------------------
 const maxminFun = () => {
   nextTick(() => {
-    let dialogBody = document.querySelector("." + "dialog-cst" + " .el-dialog__body");
+    let dialogBody: HTMLElement = document.querySelector("." + "dialog-cst" + " .el-dialog__body") as HTMLElement;
 
     if (props.mimIcon == ZoomIn) {
-      // @ts-ignore
       dialogBody!.style.display = "none";
       props.mimIcon = ZoomOut;
       $emit("maxminFun");
     } else {
-      // @ts-ignore
       dialogBody!.style.display = "block";
       props.mimIcon = ZoomIn;
       $emit("reductionFun");
