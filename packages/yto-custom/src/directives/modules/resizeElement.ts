@@ -2,7 +2,7 @@ import { Directive } from "vue";
 const map = new WeakMap();
 const ob = new ResizeObserver((entries) => {
   for (const entry of entries) {
-    console.log("ResizeObserver", entry);
+    // console.log("resize-Observer", entry);
     const handle = map.get(entry.target);
     if (handle) {
       const box = entry.borderBoxSize[0];
@@ -14,7 +14,7 @@ const ob = new ResizeObserver((entries) => {
   }
 });
 
-const resizeElement: Directive = {
+export const resizeElement: Directive = {
   mounted: function (el, binding) {
     ob.observe(el);
     map.set(el, binding.value);
@@ -23,4 +23,3 @@ const resizeElement: Directive = {
     ob.unobserve(el);
   },
 };
-export default resizeElement;

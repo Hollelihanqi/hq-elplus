@@ -9,7 +9,7 @@ import { Map } from "immutable";
 import { getBarChartBaseOptions } from "./common/chartConfig";
 import { getOptiops } from "./common/util";
 import echartsComposable from "./common/echartsComposable";
-import { isEmpty } from "@yto/utils";
+import { isEmptyFun } from "@yto/utils";
 
 interface Props {
   options?: any;
@@ -32,8 +32,8 @@ const chartOptions = computed(() => {
  */
 const dealNodata = (options: any) => {
   if (
-    isEmpty(options.series) ||
-    (Array.isArray(options.series) && options.series.every((item: any) => isEmpty(item.data)))
+    isEmptyFun(options.series) ||
+    (Array.isArray(options.series) && options.series.every((item: any) => isEmptyFun(item.data)))
   ) {
     options.title.show = true;
     options.yAxis.show = false;

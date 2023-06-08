@@ -1,4 +1,4 @@
-export const isEmpty = (value: any): boolean => {
+export const isEmptyFun = (value: any): boolean => {
   if (value == null) {
     // undefined 或 null
     return true;
@@ -19,11 +19,11 @@ export const isEmpty = (value: any): boolean => {
   return false;
 };
 
-export const isFunction = (value: any): boolean => {
+export const isFunctionFun = (value: any): boolean => {
   return typeof value === "function";
 };
 
-export function debounce<F extends (...args: any[]) => any>(
+export function debounceFun<F extends (...args: any[]) => any>(
   func: F,
   wait: number
 ): (...args: Parameters<F>) => ReturnType<F> | undefined {

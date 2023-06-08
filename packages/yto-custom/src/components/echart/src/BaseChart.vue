@@ -6,22 +6,24 @@
 
 <script lang="ts" setup>
 import * as echarts from "echarts";
-import { guid, debounce } from "@yto/utils";
-import{ resizeElement as vResizeElement} from "./common/resizeElement";
+import { guid, debounceFun } from "@yto/utils";
+import { resizeElement as vResizeElement } from "@/directives";
 interface Props {
-  echartId?:string;
-  options:object;
-  height?:string;
-  width?:string;
-  showLoading?:boolean;
+  echartId?: string;
+  options: object;
+  height?: string;
+  width?: string;
+  showLoading?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
-  echartId:'',
-  height:'400px',
-  width:'100%',
-  showLoading:true,
-  options:()=> {return {}}
-})
+  echartId: "",
+  height: "400px",
+  width: "100%",
+  showLoading: true,
+  options: () => {
+    return {};
+  },
+});
 
 let myChart: any | null;
 
@@ -35,7 +37,8 @@ const containerId = computed(() => {
  * @return {*}
  */
 const showLoading = () => {
-  props.showLoading && myChart &&
+  props.showLoading &&
+    myChart &&
     myChart.showLoading({
       text: "正在加载...",
       color: "#2c3cd8",
@@ -58,7 +61,7 @@ const initChart = () => {
 
 /**
  * @description: 设置图形数据
- * @param {*} options 
+ * @param {*} options
  * @return {*}
  */
 const setChartOption = async (options?: any) => {
@@ -73,7 +76,7 @@ const setChartOption = async (options?: any) => {
  * @param {*}
  * @return {*}
  */
-const resizeHandler = debounce(() => {
+const resizeHandler = debounceFun(() => {
   myChart && myChart.resize();
 }, 300);
 
