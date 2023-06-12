@@ -10,35 +10,31 @@ type MyParital<T> = {
 type MyButtonProps = MyParital<ButtonProps> & {
   // 在这里添加自己的属性
   txt?: string;
-  showConfirm?: boolean;
-  showCancel?: boolean;
+  hidden?: boolean | undefined;
 };
 
 interface IProps {
   visible: boolean;
   headerBgColor?: string; // 头部颜色
-
   offset?: Array<string>;
-
   mimIcon?: Component; //最小化最大化按钮
   maxmin?: boolean; // 最小化最大化按钮显示隐藏
 
-  footerVisible?: boolean;
+  hiddenFooter?: boolean | undefined;
+  hiddenConfirm?: boolean | undefined;
+  hiddenCancel?: boolean | undefined;
   confirmOption?: MyButtonProps | undefined;
   cancelOption?: MyButtonProps | undefined;
 }
 const props = withDefaults(defineProps<IProps>(), {
   visible: false,
   offset: () => {
-    return ["auto", "15vh"];
+    return ["auto", "20vh"];
   },
   mimIcon: ZoomIn,
   maxmin: false,
-  footerVisible: true,
 });
 const $emit = defineEmits(["update:visible", "cancel", "confirm", "maxminFun", "reductionFun"]);
-const attrs = useAttrs();
-console.log("attrs", attrs, props);
 
 // -------------------------------- header start--------------------------
 const maxminFun = () => {
@@ -59,19 +55,13 @@ const maxminFun = () => {
 // -------------------------------- header end--------------------------
 
 // -------------------------------- footer btn start--------------------------
-// const _showConfirm = computed(() => {
-//   return Reflect.has(props, "confirmOption") && props.confirmOption != undefined;
-// });
-// const _showCancel = computed(() => {
-//   return Reflect.has(props, "cancelOption") && props.cancelOption != undefined;
-// });
 
 const _confirmOption = computed(() => {
   let option: MyButtonProps = {
     type: "primary",
     size: "default",
     txt: "确认",
-    showConfirm: true,
+    hidden: false,
   };
   option = Object.assign({}, option, props.confirmOption);
   return reactive(option);
@@ -81,21 +71,41 @@ const _cancelOption = computed(() => {
     type: "default",
     size: "default",
     txt: "取消",
-    showCancel: true,
+    hidden: false,
   };
   option = Object.assign({}, option, props.cancelOption);
   return reactive(option);
 });
 
-const _footerVisible = computed(() => {
-  return props.footerVisible === false ? false : true;
+const _hiddenFooter = computed(() => {
+  if (Reflect.has(props, "hiddenFooter") && typeof props.hiddenFooter == "boolean") return props.hiddenFooter;
+  return Reflect.has(props, "hiddenFooter");
+});
+const _hiddenConfirm = computed(() => {
+  if (Reflect.has(props, "hiddenConfirm") && typeof props.hiddenConfirm == "boolean") return props.hiddenConfirm;
+  return Reflect.has(props, "hiddenConfirm");
+});
+const _hiddenCancel = computed(() => {
+  if (Reflect.has(props, "hiddenCancel") && typeof props.hiddenCancel == "boolean") return props.hiddenCancel;
+  return Reflect.has(props, "hiddenCancel");
 });
 
+console.log("props", props);
+
 const _showConfirm = computed(() => {
-  return props.confirmOption?.showConfirm === false ? false : true;
+  if (_hiddenConfirm.value) return false;
+  const { confirmOption } = props;
+  if (!confirmOption) return true;
+  if (Reflect.has(confirmOption, "hidden") && typeof confirmOption.hidden == "boolean") return !confirmOption.hidden;
+  return !Reflect.has(confirmOption!, "hidden");
 });
 const _showCancel = computed(() => {
-  return props.confirmOption?.showCancel === false ? false : true;
+  if (_hiddenCancel.value) return false;
+  const { cancelOption } = props;
+  console.log("cancelOption", cancelOption);
+  if (!cancelOption) return true;
+  if (Reflect.has(cancelOption, "hidden") && typeof cancelOption.hidden == "boolean") return !cancelOption.hidden;
+  return !Reflect.has(cancelOption!, "hidden");
 });
 
 const handleClose = () => {
@@ -118,7 +128,7 @@ const handleConfirm = () => {
     <slot />
 
     <template #footer>
-      <slot name="footer" v-if="_footerVisible">
+      <slot name="footer" v-if="!_hiddenFooter">
         <el-button v-if="_showCancel" v-bind="_cancelOption" @click="handleClose">{{
           _cancelOption.txt ? _cancelOption.txt : "取消"
         }}</el-button>

@@ -6,7 +6,6 @@
       v-model="dialogVisible"
       :confirm-option="confirm"
       :cancel-option="cancel"
-      :footerVisible="btnVisible"
       @confirm="handleConfirm"
       @cancel="handleCancel"
     >
@@ -29,7 +28,7 @@ export default defineComponent({
       // type: "primary",
       size: "large",
       txt: "confirm",
-      showConfirm: true, // 显示隐藏按钮
+      hidden: false, // 显示隐藏按钮
     });
 
     const cancel = reactive({
@@ -37,6 +36,7 @@ export default defineComponent({
       type: "warning",
       size: "large",
       txt: "cancel",
+      hidden: false,
     });
 
     const dialogVisible = ref(false);
