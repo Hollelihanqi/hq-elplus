@@ -4,7 +4,7 @@
 
 ### 功能
 
-- JSON 数据渲染 fromItems
+- JSON 数据渲染 from表单
 
 ## 基本使用
 
