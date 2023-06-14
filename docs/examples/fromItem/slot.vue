@@ -1,11 +1,10 @@
 <template>
   <div style="padding: 0 10px">
     <el-form :form="form">
-      <yto-c-form-items
+      <yto-c-form
           :form="form"
           :form-config="formConfig"
           :span="12"
-          clearable
       >
         <template #cascader>
           测试卡槽
@@ -14,7 +13,7 @@
           <el-button type="primary">测试</el-button>
         </div>
 
-      </yto-c-form-items>
+      </yto-c-form>
 
     </el-form>
   </div>

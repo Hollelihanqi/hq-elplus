@@ -1,14 +1,11 @@
 <template>
   <div style="padding: 0 10px">
-    <el-form :form="form">
-      <yto-c-form-items
+      <yto-c-form
           :form="form"
           :form-config="formConfig"
           :span="12"
-          clearable
       >
-      </yto-c-form-items>
-    </el-form>
+      </yto-c-form>
   </div>
 </template>
 
@@ -18,7 +15,7 @@ import {ElForm} from "element-plus";
 
 const form = reactive({});
 const formConfig = [
-  { itemType: "input", prop: "name", label: "文本框",contentWidth:"test" },
+  { itemType: "input", prop: "name", label: "文本框",contentClass:"test" },
 ];
 </script>
 

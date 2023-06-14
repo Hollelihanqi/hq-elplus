@@ -1,11 +1,13 @@
 <template>
     <div style="padding: 0 10px">
-      <el-form :form="form">
-          <yto-c-form-items
+          <yto-c-form
               :form="form"
+              ref="test"
               :form-config="formConfig"
               :span="12"
-              clearable
+              :item-config="{
+                clearable:true
+              }"
           >
             <template #cascader>
               测试卡槽
@@ -13,8 +15,7 @@
             <div >
               <el-button type="primary">测试</el-button>
             </div>
-          </yto-c-form-items>
-      </el-form>
+          </yto-c-form>
   </div>
 </template>
 
@@ -292,7 +293,7 @@ const options = [
 ];
 const form = reactive({});
 const formConfig = [
-  { itemType: "input", prop: "name", label: "文本框",contentWidth:"test" },
+  { itemType: "input", prop: "name", label: "文本框",contentClass:"test" },
   {
     itemType: "cascader",
     prop: "cascader",
@@ -325,6 +326,11 @@ const formConfig = [
     label: "时间区间",
   },
 ];
+
+const test = ref()
+onMounted(()=>{
+  console.log("???????????????:",test.value);
+})
 </script>
 
 <style scoped lang="scss">
