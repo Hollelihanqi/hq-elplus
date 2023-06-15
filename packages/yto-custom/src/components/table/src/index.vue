@@ -1,6 +1,11 @@
 <template>
   <ElConfigProvider :locale="locale">
-    <div class="table-w">
+    <div class="table-w" :style="{ paddingBottom: paginationHide ? '16px' : '0' }">
+      <div class="table-header">
+        <div class="header-button-lf">
+          <slot name="tableHeader"></slot>
+        </div>
+      </div>
       <el-table
         ref="tableRef"
         :data="!requestApi ? tableData : list"
@@ -22,7 +27,7 @@
               </template>
               <template v-else-if="item.formatText">{{ item.formatText(scope.row) }}</template>
               <template v-else-if="item.enum">{{ formatEnum(item, scope.row) }}</template>
-              <template v-else>{{ item.prop && scope.row[item.prop] }}</template>
+              <template v-else>{{ item.prop && scope.row[item.prop] || '--'}}</template>
             </template>
           </el-table-column>
         </template>
@@ -204,6 +209,21 @@ export default defineComponent({
   height: 100%;
   display: flex;
   flex-direction: column;
+  padding: 16px;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.table-header {
+  .header-button-lf {
+    float: left;
+  }
+  .header-button-ri {
+    float: right;
+  }
+  .el-button {
+    margin-bottom: 15px;
+  }
 }
 
 .my-table {
@@ -245,10 +265,6 @@ export default defineComponent({
 :deep(.el-pagination span:not([class*="suffix"]), .el-pagination button) {
   font-size: 14px;
 }
-
-// :deep(.btn-quicknext + li.number) {
-//   display: none;
-// }
 :deep(.el-input__inner:focus) {
   border-color: var(--el-color-primary) !important;
 }
@@ -292,12 +308,16 @@ export default defineComponent({
   font-size: var(--el-pagination-font-size);
   min-width: var(--el-pagination-button-width);
   height: var(--el-pagination-button-height);
-  //line-height: var(--el-pagination-button-height);
   line-height: 36px;
   vertical-align: top;
   box-sizing: border-box;
 }
 :deep(.el-pagination span:not([class*="suffix"])) {
   align-items: center;
+}
+</style>
+<style lang="scss">
+.el-card__body .table-w {
+  padding: 0;
 }
 </style>
