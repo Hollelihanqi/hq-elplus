@@ -194,9 +194,6 @@ const getTableData = async (params = {}) => {
     if (dataCallback && typeof dataCallback === "function") {
       result = dataCallback(result);
     }
-    console.log(result);
-    console.log(dataKey);
-    console.log(result[dataKey]);
     _tableData.value = result[dataKey];
     _tableDataTotal.value = result.total || 0;
   } catch (error) {
