@@ -24,10 +24,10 @@ export default defineConfig({
         {
           text: "组件",
           items: [
-            {
-              text: "ProTable",
-              link: "/examples/pro-table/index.md",
-            },
+            // {
+            //   text: "ProTable",
+            //   link: "/examples/pro-table/index.md",
+            // },
             {
               text: "Table 表格",
               link: "/examples/table/index.md",

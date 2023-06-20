@@ -16,7 +16,6 @@ declare module '@vue/runtime-core' {
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup']
     ElCol: typeof import('element-plus/es')['ElCol']
-    ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
     ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElForm: typeof import('element-plus/es')['ElForm']
@@ -59,5 +58,8 @@ declare module '@vue/runtime-core' {
     SearchFormItem: typeof import('./src/components/pro-table/src/components/SearchForm/components/SearchFormItem.vue')['default']
     Src: typeof import('./src/components/dialog/src/index.vue')['default']
     TableColumn: typeof import('./src/components/pro-table/src/components/TableColumn.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

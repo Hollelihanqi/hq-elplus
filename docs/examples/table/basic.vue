@@ -5,7 +5,7 @@
     :total="total"
     :current-page="paginationParams.pageNum"
     :page-size="paginationParams.pageSize"
-    :handle-change="handleTableChange"
+    :table-change="handleTableChange"
   >
     <template #callStatus="scope">
       <span>{{ scope.row.status }}</span>
