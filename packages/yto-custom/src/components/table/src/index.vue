@@ -155,7 +155,6 @@ const {
   columns,
   cellEmptyText,
   dataKey,
-  dataCallback,
   requestParams,
   paginationHide,
   paginationOptions,
@@ -164,17 +163,15 @@ const {
   pageSize,
   pageSizes,
   currentPage,
-  requestApi,
   currentPageKey,
   pageSizeKey,
-  tableChange,
   requestAuto,
-} = props as any;
+} = toRefs(props) as any;
 const loading = ref(false);
 const _tableData = ref([]);
 const _tableDataTotal = ref(0);
 const paginationParams = ref({
-  currentPage: currentPage,
+  currentPage: props.currentPage,
   pageSize: pageSize,
 });
 
@@ -189,10 +186,10 @@ const getTableData = async (params = {}) => {
     _params[pageSizeKey] = paginationParams.value.pageSize;
   }
   try {
-    let result = await requestApi(_params);
+    let result = await props.requestApi(_params);
     loading.value = false;
-    if (dataCallback && typeof dataCallback === "function") {
-      result = dataCallback(result);
+    if (props.dataCallback && typeof props.dataCallback === "function") {
+      result = props.dataCallback(result);
     }
     _tableData.value = result[dataKey];
     _tableDataTotal.value = result.total || 0;
@@ -204,16 +201,16 @@ const getTableData = async (params = {}) => {
 };
 
 const handleSizeChange = (val: number): void => {
-  if (!requestApi) {
-    tableChange("size", val);
+  if (!props.requestApi) {
+    props.tableChange("size", val);
   } else {
     getTableData();
   }
 };
 
 const handlePageChange = (num: number) => {
-  if (!requestApi) {
-    tableChange("page", num);
+  if (!props.requestApi) {
+    props.tableChange("page", num);
   } else {
     getTableData();
   }
@@ -229,8 +226,12 @@ const resetTableData = () => {
   getTableData();
 };
 
+const getData = () => {
+  return _tableData.value;
+};
+
 onMounted(() => {
-  if (requestApi && requestAuto && typeof requestApi === "function") {
+  if (props.requestApi && requestAuto && typeof props.requestApi === "function") {
     getTableData();
   }
 });
@@ -238,11 +239,11 @@ onMounted(() => {
 defineExpose({
   updateTableData,
   resetTableData,
+  getData,
 });
 </script>
 <style lang="scss" scoped>
 .table-w {
-  padding: 16px;
   background: #fff;
   border-radius: 4px;
 }
@@ -253,6 +254,8 @@ defineExpose({
   display: none;
 }
 :deep(.my-el-pagination) {
+  display: flex;
+  justify-content: flex-end;
   .btn-prev,
   .btn-next {
     border: 1px solid #dcdee0;
@@ -272,5 +275,13 @@ defineExpose({
       border: 1px solid var(--el-color-primary);
     }
   }
+}
+</style>
+<style lang="scss">
+.el-card__body .table-w {
+  padding: 0;
+}
+.el-card__body .my-el-pagination {
+  margin-top: 16px;
 }
 </style>

@@ -12,8 +12,7 @@ import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 import "@ruabick/vitepress-demo-block/dist/style.css";
 import "./var.css";
-// import YtoCustom from "@yto/custom";
-import "@yto/custom/dist/es/style.css";
+import "@yto/custom/es/style.css";
 
 export default {
   ...DefaultTheme,
