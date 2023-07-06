@@ -52,7 +52,7 @@
 | `hide`         | 隐藏列                                   | Boolean       |                 |
 | `copy`         | 鼠标左键点击后复制列文本                 | Boolean       |                 |
 | `enum`         | 字典，可格式化单元格内容                 | Array、Object |                 |
-| `formatText`   | 列文本格式化                             | Function      | formatText(row) |
+| `formatText`   | 列文本格式化                             | Function      | `formatText(row)` |
 | `render`       | 自定义单元格内容渲染（tsx 语法、h 语法） | Function      |                 |
 | `headerRender` | 自定义单元格内容渲染（tsx 语法、h 语法） | Function      |                 |
 | `_children`    | 多级表头                                 | Array         |                 |
@@ -74,5 +74,5 @@
 
 | 名称                     | 说明                                                |
 | ------------------------ | --------------------------------------------------- |
-| `—`                      | 自定义列的内容 作用域参数为 { row, column, $index } |
-| `column.prop + "Header"` | 自定义表头的内容 ， 作用域参数为 { column, $index } |
+| `—`                      | 自定义列的内容 作用域参数为 `{ row, column, $index }` |
+| `column.prop + "Header"` | 自定义表头的内容 ， 作用域参数为 `{ column, $index }` |
