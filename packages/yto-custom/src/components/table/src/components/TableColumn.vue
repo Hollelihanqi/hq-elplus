@@ -67,6 +67,11 @@ const renderColumn = (column: any) => {
                 );
               return renderCellData(column, scope);
             },
+            header: () => {
+              if (column.headerRender) return column.headerRender(column);
+              if (slots[`${column.prop}Header`]) return slots[`${column.prop}Header`]!({ row: column });
+              return column.label;
+            },
           }}
         </el-table-column>
       )}

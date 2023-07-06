@@ -52,7 +52,8 @@ const showLoading = () => {
  * @return {*}
  */
 const initChart = () => {
-  myChart = echarts.init(document.querySelector(`#${containerId.value}`) as HTMLElement);
+  const container: any = document.querySelector(`#${containerId.value}`);
+  myChart = echarts.init(container);
   showLoading();
   setChartOption();
   //窗口大小改变，重新绘图

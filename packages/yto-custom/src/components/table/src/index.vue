@@ -169,7 +169,7 @@ const {
   pageSizeKey,
   tableChange,
   requestAuto,
-} = props as any;
+} = toRefs(props) as any;
 const loading = ref(false);
 const _tableData = ref([]);
 const _tableDataTotal = ref(0);
@@ -229,6 +229,10 @@ const resetTableData = () => {
   getTableData();
 };
 
+const getData = () => {
+  return _tableData.value;
+};
+
 onMounted(() => {
   if (requestApi && requestAuto && typeof requestApi === "function") {
     getTableData();
@@ -238,11 +242,11 @@ onMounted(() => {
 defineExpose({
   updateTableData,
   resetTableData,
+  getData,
 });
 </script>
 <style lang="scss" scoped>
 .table-w {
-  padding: 16px;
   background: #fff;
   border-radius: 4px;
 }
@@ -272,5 +276,13 @@ defineExpose({
       border: 1px solid var(--el-color-primary);
     }
   }
+}
+</style>
+<style lang="scss">
+.el-card__body .table-w {
+  padding: 0;
+}
+.el-card__body .my-el-pagination {
+  margin-top: 16px;
 }
 </style>

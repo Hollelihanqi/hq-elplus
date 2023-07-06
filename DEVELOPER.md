@@ -36,3 +36,8 @@
 ```shell
   pnpm add --save-peer xxx
 ```
+
+安装 workspace 下的包
+```shell
+  pnpm add <packageName> --workspace
+```

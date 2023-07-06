@@ -1,0 +1,211 @@
+<script lang="ts">
+import { defineComponent, h, ref } from "vue";
+import { ElSelect, ElOption } from "element-plus";
+import { request, debounce } from "@/_utils";
+import type { ExtractPropTypes } from "vue";
+
+const props = {
+  valueKey: {
+    type: String,
+    default: "id",
+  },
+  labelKey: {
+    type: String,
+    default: "label",
+  },
+  w: {
+    type: String,
+    default: "100%",
+  },
+  url: {
+    type: String,
+    default: "",
+  },
+  baseURL: {
+    type: String,
+    default: "/api",
+  },
+  method: {
+    type: String,
+    default: "GET",
+  },
+  isRemoteSearch: {
+    type: Boolean,
+    default: true,
+  },
+  fieldName: {
+    type: String,
+    default: "",
+  },
+  resultKey: {
+    type: String,
+    default: "items",
+  },
+  modelItem: {
+    type: Boolean,
+    default: false,
+  },
+  optTemp: {
+    type: [Function, Object],
+    default: null,
+  },
+  dataCallback: {
+    type: [Function],
+    required: false,
+    default: null,
+  },
+  requestAuto: {
+    type: Boolean,
+    default: true,
+  },
+  requestParams: {
+    type: Object,
+    default: () => ({}),
+  },
+  // modelValue: {
+  //   // 此属性是 vue3.0 默认的 v-model 双向数据绑定 prop，请在子组件上通过 v-model 进行传递
+  //   // 因为组件内部时通过 watch 监听 v-model 的值的变化来更新组件的内部 _value；
+  //   // 所以清除表单时一定要手动对 v-model 的值进行手动置空，否则组件下次不会更新 _value
+  //   type: String,
+  //   default: "",
+  // },
+};
+export type BaseSelectProps = Partial<ExtractPropTypes<typeof props>>;
+
+export default defineComponent({
+  props,
+  setup(props: BaseSelectProps, { attrs }) {
+    const {
+      baseURL,
+      url,
+      method,
+      resultKey,
+      dataCallback,
+      fieldName,
+      requestAuto,
+      isRemoteSearch,
+      requestParams,
+      optTemp,
+      labelKey,
+      valueKey,
+      w,
+      modelItem,
+    } = props as any;
+    const options: any = ref([]);
+    const copyOptions: any = ref([]);
+    const loading = ref(false);
+    const updateData = (params = {}) => {
+      const _params = {
+        ...requestParams,
+        ...params,
+      };
+      request
+        .request({
+          baseURL,
+          url,
+          method,
+          params: _params,
+          data: JSON.stringify(_params),
+        })
+        .then((res: any) => {
+          if (dataCallback) {
+            options.value = dataCallback(res);
+            copyOptions.value = [...options.value];
+            return;
+          }
+          if (Array.isArray(res)) {
+            options.value = res;
+            copyOptions.value = [...res];
+          } else {
+            options.value = resultKey && res[resultKey];
+            copyOptions.value = resultKey && [...res[resultKey]];
+          }
+        });
+    };
+
+    // 一次性获取所有数据,不需要动态搜索
+    if (requestAuto && url && !isRemoteSearch) {
+      updateData(requestParams);
+    }
+    const remoteMethod = debounce(async (query: string) => {
+      if (query) {
+        loading.value = true;
+        let params = {};
+        fieldName && (params = { [fieldName]: query });
+        updateData(params);
+        loading.value = false;
+      } else {
+        options.value = [];
+      }
+    });
+
+    const cusTemplate = (item: any) => {
+      if (optTemp && typeof optTemp === "function") {
+        return optTemp(item);
+      }
+      return h("div", { class: "cus-temp" }, [
+        // h("span", { style: { color: "#000" } }, props.valueKey && item[props.valueKey]),
+        h("span", {}, labelKey && item[labelKey]),
+      ]);
+    };
+
+    watch(
+      () => props.requestParams,
+      (newValue) => {
+        updateData({ ...newValue });
+      },
+      {
+        deep: true,
+      }
+    );
+    return () => {
+      return h(
+        ElSelect,
+        {
+          loading: loading.value,
+          "value-key": valueKey,
+          remote: false,
+          clearable: true,
+          filterable: true,
+          reserveKeyword: true,
+          placeholder: isRemoteSearch ? "请输入" : "请选择",
+          style: {
+            width: w,
+          },
+          ...attrs,
+          remoteMethod: remoteMethod,
+          onVisibleChange: (value: Boolean) => {
+            if (value) {
+              options.value = copyOptions.value;
+            }
+          },
+        },
+        () => [
+          options.value.map((item: any, index: number) => {
+            return h(
+              ElOption,
+              {
+                key: index,
+                label: labelKey && item[labelKey],
+                value: modelItem ? item : valueKey && item[valueKey],
+              },
+              {
+                default: () => cusTemplate(item),
+              }
+            );
+          }),
+        ]
+      );
+    };
+  },
+});
+</script>
+
+<style lang="scss">
+.cus-temp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+</style>

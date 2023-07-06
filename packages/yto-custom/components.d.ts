@@ -56,6 +56,7 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     SearchForm: typeof import('./src/components/pro-table/src/components/SearchForm/index.vue')['default']
     SearchFormItem: typeof import('./src/components/pro-table/src/components/SearchForm/components/SearchFormItem.vue')['default']
+    SearchSelect: typeof import('./src/components/staff-search/src/components/SearchSelect.vue')['default']
     Src: typeof import('./src/components/dialog/src/index.vue')['default']
     TableColumn: typeof import('./src/components/pro-table/src/components/TableColumn.vue')['default']
   }

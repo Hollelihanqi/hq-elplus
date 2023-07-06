@@ -20,15 +20,21 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     optimizeDeps: {
       exclude: ["vitepress"],
     },
-    server: {
-      hmr: {
-        overlay: false,
-      },
-    },
     plugins: [
       AutoImport({
         imports: ["vue"],
       }),
     ],
+    server: {
+      hmr: {
+        overlay: false,
+      },
+      proxy: {
+        "/service-api": {
+          target: "http://10.130.16.149:8082",
+          changeOrigin: true,
+        },
+      },
+    },
   };
 });
