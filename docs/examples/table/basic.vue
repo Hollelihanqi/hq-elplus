@@ -1,12 +1,5 @@
 <template>
-  <yto-c-table
-    :columns="columns"
-    :table-data="tableData"
-    :total="total"
-    :current-page="paginationParams.pageNum"
-    :page-size="paginationParams.pageSize"
-    :table-change="handleTableChange"
-  >
+  <yto-c-table :columns="columns" :table-data="tableData" :total="total" :table-change="handleTableChange">
     <template #callStatus="scope">
       <span>{{ scope.row.status }}</span>
     </template>

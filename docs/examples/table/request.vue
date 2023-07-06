@@ -42,7 +42,6 @@ const getList = () => {
 
 // 数据 success callback
 const dataCallback = (data: any) => {
-  console.log(data)
   return data;
 };
 // 列配置
