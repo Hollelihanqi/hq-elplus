@@ -153,8 +153,6 @@ const props = defineProps({
 const {
   tableData,
   columns,
-  cellEmptyText,
-  dataKey,
   requestParams,
   paginationHide,
   paginationOptions,
@@ -162,9 +160,6 @@ const {
   total,
   pageSize,
   pageSizes,
-  currentPage,
-  currentPageKey,
-  pageSizeKey,
   requestAuto,
 } = toRefs(props) as any;
 const loading = ref(false);
@@ -182,8 +177,8 @@ const getTableData = async (params = {}) => {
     ...params,
   };
   if (!paginationHide) {
-    _params[currentPageKey] = paginationParams.value.currentPage;
-    _params[pageSizeKey] = paginationParams.value.pageSize;
+    _params[props.currentPageKey] = paginationParams.value.currentPage;
+    _params[props.pageSizeKey] = paginationParams.value.pageSize;
   }
   try {
     let result = await props.requestApi(_params);
@@ -191,7 +186,7 @@ const getTableData = async (params = {}) => {
     if (props.dataCallback && typeof props.dataCallback === "function") {
       result = props.dataCallback(result);
     }
-    _tableData.value = result[dataKey];
+    _tableData.value = result[props.dataKey];
     _tableDataTotal.value = result.total || 0;
   } catch (error) {
     loading.value = false;
@@ -256,6 +251,7 @@ defineExpose({
 :deep(.my-el-pagination) {
   display: flex;
   justify-content: flex-end;
+  padding-right: 16px;
   .btn-prev,
   .btn-next {
     border: 1px solid #dcdee0;

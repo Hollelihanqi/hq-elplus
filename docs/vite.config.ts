@@ -9,6 +9,8 @@
 
 import { defineConfig, ConfigEnv, UserConfig, loadEnv } from "vite";
 import AutoImport from "unplugin-auto-import/vite";
+import vue from "@vitejs/plugin-vue";
+import vueJsx from "@vitejs/plugin-vue-jsx";
 // import vue from "@vitejs/plugin-vue";
 // import vueJsx from "@vitejs/plugin-vue-jsx";
 import dns from "dns";
@@ -21,6 +23,11 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       exclude: ["vitepress"],
     },
     plugins: [
+      // vue(),
+      vueJsx({
+        transformOn: true,
+        mergeProps: true,
+      }),
       AutoImport({
         imports: ["vue"],
       }),

@@ -23,51 +23,66 @@ const handleTableChange = async (type: string, num: number) => {
   }
 };
 
-// 列配置
-const columns = [
-  {
-    label: "调用方编码",
-    prop: "callerCode",
-  },
-  {
-    label: "调用方名称",
-    prop: "callerName",
-  },
-  {
-    label: "调用方负责人",
-    prop: "ownerStr",
-  },
-  {
-    label: "调用状态",
-    slot: "callStatus",
-  },
-  {
-    label: "最后调用时间",
-    prop: "lastCallTime",
-  },
-];
 
 const tableData = [
   {
-    callerCode: "YTO-5464564",
-    callerName: "CALL-NAME",
-    ownerStr: "LIHANQI",
-    status: "已调用",
-    lastCallTime: "2023.01.10",
+    name: "魏春霈",
+    age: "26岁",
+    sex: "男",
+    isWife: "未婚",
+    dream: "妻妾成群",
   },
   {
-    callerCode: "YTO-5464564",
-    callerName: "CALL-NAME",
-    ownerStr: "LIHANQI",
-    status: "已调用",
-    lastCallTime: "2023.01.10",
+    name: "李涵祺",
+    age: "26岁",
+    sex: "男",
+    isWife: "未婚",
+    dream: "你好，我是 李涵祺",
   },
   {
-    callerCode: "YTO-5464564",
-    callerName: "CALL-NAME",
-    ownerStr: "LIHANQI",
-    status: "已调用",
-    lastCallTime: "2023.01.10",
+    name: "闫萌",
+    age: "26岁",
+    sex: "女",
+    isWife: "已婚",
+    dream: "按时下班",
+  },
+  {
+    name: "李炳儒",
+    age: "26岁",
+    sex: "男",
+    isWife: "已婚",
+    dream: "有为青年",
+  },
+  {
+    name: "柯发泽",
+    age: "26岁",
+    sex: "男",
+    isWife: "已婚",
+    dream: "天天发财",
+  },
+];
+
+// 列配置
+const columns = [
+  {
+    label: "姓名",
+    prop: "name",
+  },
+  {
+    label: "年龄",
+    prop: "age",
+  },
+  {
+    label: "性别",
+    prop: "sex",
+  },
+  {
+    label: "是否已婚",
+    prop: "isWife",
+  },
+  {
+    label: "梦想",
+    prop: "dream",
   },
 ];
 </script>
