@@ -3,6 +3,9 @@
     <template #ageHeader>
       <el-button type="primary">年龄</el-button>
     </template>
+    <template #sexHeader>
+      <el-text type="danger">性别</el-text>
+    </template>
   </yto-c-table>
 </template>
 <script lang="tsx" setup>
@@ -72,6 +75,9 @@ const columns = [
     prop: "isWife",
     render: (scope: any) => {
       return scope.row.isWife === 0 ? "未婚" : "已婚";
+    },
+    headerRender: () => {
+      return <el-button type="success">是否已婚</el-button>
     },
   },
   {
