@@ -11,7 +11,7 @@
     />
 
     <!-- 表格内容 card -->
-    <div class="card table" style="display: flex">
+    <div class="card pro-table-box" style="display: flex">
       <!-- 表格头部 操作按钮 -->
       <div class="table-header">
         <div class="header-button-lf">

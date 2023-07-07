@@ -6,8 +6,7 @@
       </div>
       <el-table
         v-loading="loading"
-        class="my-el-table flex-1"
-        :style="styles"
+        class="my-el-table flex-1 w-[100%]"
         :data="requestApi ? _tableData : tableData"
         v-bind="$attrs"
       >
@@ -68,11 +67,6 @@ export interface ColumnsItemProps {
 
 type CanWrite<T> = {
   -readonly [K in keyof T]?: T[K];
-};
-
-const styles = {
-  width: "100%",
-  flex: 1,
 };
 
 const props = defineProps({
@@ -263,6 +257,27 @@ defineExpose({
     }
     .is-active {
       border: 1px solid var(--el-color-primary);
+    }
+  }
+}
+:deep(.my-el-table) {
+  .el-table__header th {
+    height: 45px;
+    font-weight: bold;
+    color: #252525;
+    background: #fafafa;
+  }
+  .el-table__row {
+    height: 45px;
+  }
+  // 解决表格数据为空时样式不居中问题(仅在element-plus中)
+  .el-table__empty-block {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    .table-empty {
+      line-height: 30px;
     }
   }
 }

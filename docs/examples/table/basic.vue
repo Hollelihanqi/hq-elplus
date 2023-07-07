@@ -1,5 +1,11 @@
 <template>
-  <yto-c-table :columns="columns" :table-data="tableData" :total="total" :table-change="handleTableChange">
+  <yto-c-table
+    :columns="columns"
+    :table-data="tableData"
+    :total="total"
+    :table-change="handleTableChange"
+    :border="false"
+  >
     <template #callStatus="scope">
       <span>{{ scope.row.status }}</span>
     </template>
@@ -22,7 +28,6 @@ const handleTableChange = async (type: string, num: number) => {
     paginationParams.value.pageSize = num;
   }
 };
-
 
 const tableData = [
   {

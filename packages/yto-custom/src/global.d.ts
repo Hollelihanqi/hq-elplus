@@ -8,7 +8,6 @@ import type * as components from "./components";
 
 declare module "@vue/runtime-core" {
   export interface GlobalComponents {
-    YtoProTable: typeof components.YtoProTable;
     YtoTable: typeof components.YtoTable;
     YtoMenu: typeof components.YtoMenu;
     YtoEchart: typeof components.YtoEchart;
@@ -19,4 +18,4 @@ declare global {
   const __DEV__: boolean;
 }
 
-export {};
+export { };

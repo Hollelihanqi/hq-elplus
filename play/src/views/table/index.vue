@@ -8,7 +8,11 @@
 -->
 <template>
   <div class="table-box">
-    <yto-c-table :columns="columns" :request-api="getList"> </yto-c-table>
+    <yto-c-table :columns="columns" :request-api="getList">
+      <template #tableHeader>
+        <el-button type="primary" class="el-button">新增</el-button>
+      </template>
+    </yto-c-table>
   </div>
 </template>
 <script lang="tsx" setup>
