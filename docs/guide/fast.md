@@ -8,6 +8,13 @@
 pnpm add @yto/custom
 ```
 
+## 更新
+
+```shell
+    pnpm up @yto/custom@latest
+
+```
+
 ## 完整引入
 
 在 `main.ts` 中引入下面内容
@@ -20,5 +27,5 @@ import YtoCustom from "@yto/custom";
 import "@yto/custom/es/style.css";
 
 createApp(App).use(YtoCustom).mount("#app");
-
 ```
+
