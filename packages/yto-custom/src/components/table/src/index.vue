@@ -196,7 +196,6 @@ const getTableData = async (params = {}) => {
 };
 
 const handleSizeChange = (val: number): void => {
-  console.log("handleSizeChange", props.requestApi);
   if (!props.requestApi) {
     props.tableChange("size", val);
   } else {
@@ -205,7 +204,6 @@ const handleSizeChange = (val: number): void => {
 };
 
 const handlePageChange = (num: number) => {
-  console.log("handlePageChange", props.requestApi);
   if (!props.requestApi) {
     props.tableChange("page", num);
   } else {
