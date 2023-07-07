@@ -70,6 +70,7 @@ const setChartOption = async (options?: any) => {
   console.log("setChartOption", options || props.options);
   myChart && myChart.setOption(options || props.options);
   myChart && myChart.hideLoading();
+  resizeChart();
 };
 
 /**
@@ -78,7 +79,7 @@ const setChartOption = async (options?: any) => {
  * @return {*}
  */
 const resizeHandler = debounceFun(() => {
-  myChart && myChart.resize();
+  resizeChart();
 }, 300);
 
 /**
@@ -89,6 +90,15 @@ const resizeHandler = debounceFun(() => {
 const disposeChart = () => {
   myChart && myChart.dispose();
   myChart = null;
+};
+
+/**
+ * @description: 重绘图形
+ * @param {*}
+ * @return {*}
+ */
+const resizeChart = () => {
+  myChart && myChart.resize();
 };
 
 /**

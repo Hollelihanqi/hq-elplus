@@ -9,8 +9,15 @@ import FromItem from "./views/formItem/index.vue";
   <div class="app">
     <!-- <CustomTable />
       <Menu/> -->
-    <!--      <Chart></Chart>-->
-    <FromItem></FromItem>
+    <!-- <Chart></Chart> -->
+    <!-- <FromItem></FromItem> -->
+    <router-link class="mr-[10px]" to="/form">form</router-link>
+    <router-link class="mr-[10px]" to="/chart">chart</router-link>
+    <router-view v-slot="{ Component }">
+      <KeepAlive>
+        <component :is="Component" :key="$route.fullPath"></component>
+      </KeepAlive>
+    </router-view>
   </div>
 </template>
 
