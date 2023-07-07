@@ -1,9 +1,4 @@
-<script setup lang="ts">
-import CustomTable from "./views/index.vue";
-import Menu from "./components/Menu.vue";
-import Chart from "./views/chart.vue";
-import FromItem from "./views/formItem/index.vue";
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="app">

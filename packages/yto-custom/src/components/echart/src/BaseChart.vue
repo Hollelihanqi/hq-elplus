@@ -65,12 +65,14 @@ const initChart = () => {
  * @param {*} options
  * @return {*}
  */
-const setChartOption = async (options?: any) => {
-  await nextTick();
-  console.log("setChartOption", options || props.options);
-  myChart && myChart.setOption(options || props.options);
-  myChart && myChart.hideLoading();
-  resizeChart();
+const setChartOption = (options?: any) => {
+  myChart && myChart.clear();
+  setTimeout(() => {
+    //为了解决绘制图形时无动画效果的问题
+    myChart && myChart.hideLoading();
+    console.log("setChartOption", options || props.options);
+    myChart && myChart.setOption(options || props.options);
+  }, 350);
 };
 
 /**
