@@ -7,7 +7,7 @@ import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import ElementPlus from "unplugin-element-plus/vite";
 import vueSetupExtend from "vite-plugin-vue-setup-extend";
-import dts from "vite-plugin-dts";
+import WindiCSS from 'vite-plugin-windicss'
 import { copyFileSync } from "fs";
 import { readFile } from "fs/promises";
 //@ts-ignore
@@ -24,6 +24,11 @@ export default defineConfig({
       transformOn: true,
       mergeProps: true,
     }),
+    WindiCSS({
+      scan: {
+        fileExtensions: ['vue', 'ts', 'js', 'jsx', 'tsx'],
+      },
+    }),
     AutoImport({
       imports: ["vue", "vue-router"],
       resolvers: [ElementPlusResolver()],
@@ -38,6 +43,7 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
     ElementPlus(),
+
     vueSetupExtend(),
     // dts({
     //   skipDiagnostics: true /** 是否跳过类型诊断 */,

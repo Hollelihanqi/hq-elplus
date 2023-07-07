@@ -13,6 +13,7 @@
 //     }
 // }
 
+import 'windi.css'
 import installer from "./defaults";
 
 export * from "./component";

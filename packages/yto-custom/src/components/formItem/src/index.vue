@@ -1,13 +1,15 @@
 <template>
   <el-form :model="form" v-bind="$attrs" ref="myForm">
-    <el-row class="dis-flex pad-tb-5" >
-      <el-col v-for="(item, index) in formConfig"  :key="index" class="pad-tb-5" :span="item.span || span"   style="padding: 0 10px">
-        <el-form-item
-          :label="item?.label"
-          :prop="item?.prop"
-          :label-width="item.labelWidth"
-        >
-          <div :class="item.contentClass ">
+    <el-row class="dis-flex pad-tb-5">
+      <el-col
+        v-for="(item, index) in formConfig"
+        :key="index"
+        class="pad-tb-5"
+        :span="item.span || span"
+        style="padding: 0 10px"
+      >
+        <el-form-item :label="item?.label" :prop="item?.prop" :label-width="item.labelWidth">
+          <div :class="item.contentClass">
             <component
               v-bind="item"
               :is="getComponent(item.itemType)"
@@ -23,11 +25,15 @@
               :disabled="item?.disabled || itemConfig.disabled"
               :clearable="item?.clearable || itemConfig.clearable"
             />
-            <slot  v-if="$slots[item.prop]" :name="item?.prop"/>
+            <slot v-if="$slots[item.prop]" :name="item?.prop" />
           </div>
         </el-form-item>
       </el-col>
-      <div v-if="$slots.default" class="flex-1 dis-flex flex-align-item-center flex-justify-end " style="padding-right: 20px">
+      <div
+        v-if="$slots.default"
+        class="flex-1 dis-flex flex-align-item-center flex-justify-end"
+        style="padding-right: 20px"
+      >
         <slot />
       </div>
     </el-row>
@@ -49,7 +55,7 @@ import itemInputNumber from "./block/itemInputNumber.vue";
 import itemRate from "./block/itemRate.vue";
 import itemTimePicker from "./block/itemTimePicker.vue";
 import itemTimeSelect from "./block/itemTimeSelect.vue";
-import {PropType} from "vue";
+import { PropType } from "vue";
 interface Obj {
   [key: string]: any;
 }
@@ -72,7 +78,7 @@ const getComponent = (type: string) => {
 };
 const props = defineProps({
   formConfig: {
-    type: Array as PropType<{[key: string]: any}[]>,
+    type: Array as PropType<{ [key: string]: any }[]>,
     default: () => {
       return [];
     },
@@ -86,38 +92,49 @@ const props = defineProps({
   },
   span: { type: Number, default: 6 },
   labelWidth: { type: Number, default: 80 },
-  form: { type: Object, default: () => {
-      return{}
-    }
+  form: {
+    type: Object,
+    default: () => {
+      return {};
+    },
   },
-  itemConfig:{
-    type:Object,
-    default:()=>({
-      options:[],
-      contentClass:"",
-      disabled: false,
-      clearable:true,
-      activeColor:"#13ce66",
-      inactiveColor: "",
-      activeValue: true,
-      inactiveValue: false
-    })
+  itemConfig: {
+    type: Object,
+    default: () => {
+      return {
+        options: [],
+        contentClass: "",
+        disabled: false,
+        clearable: true,
+        activeColor: "#13ce66",
+        inactiveColor: "",
+        activeValue: true,
+        inactiveValue: false,
+      };
+    },
   },
-
-
 });
 
-const myForm = ref()
+const myForm = ref();
 defineExpose({
-  myForm
-})
-
+  myForm,
+});
 </script>
 <style lang="scss" scoped>
-.dis-flex{display: flex;}
-.flex-1{flex: 1}
-.flex-align-item-center{align-items: center}
-.flex-justify-end{justify-content: flex-end}
-.pad-tb-5{padding-top: 5px;padding-bottom: 5px }
+.dis-flex {
+  display: flex;
+}
+.flex-1 {
+  flex: 1;
+}
+.flex-align-item-center {
+  align-items: center;
+}
+.flex-justify-end {
+  justify-content: flex-end;
+}
+.pad-tb-5 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 </style>
-

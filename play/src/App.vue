@@ -11,8 +11,12 @@ import FromItem from "./views/formItem/index.vue";
       <Menu/> -->
     <!-- <Chart></Chart> -->
     <!-- <FromItem></FromItem> -->
-    <router-link class="mr-[10px]" to="/form">form</router-link>
-    <router-link class="mr-[10px]" to="/chart">chart</router-link>
+    <div class="flex flex-col">
+      <router-link class="mr-[10px]" to="/form">form</router-link>
+      <router-link class="mr-[10px]" to="/chart">chart</router-link>
+      <router-link class="mr-[10px]" to="/table">table</router-link>
+    </div>
+
     <router-view v-slot="{ Component }">
       <KeepAlive>
         <component :is="Component" :key="$route.fullPath"></component>
@@ -24,5 +28,6 @@ import FromItem from "./views/formItem/index.vue";
 <style lang="scss" scoped>
 .app {
   /* display: flex; */
+  height: 100%;
 }
 </style>

@@ -1,10 +1,12 @@
 <template>
   <ElConfigProvider :locale="zhCn">
     <div class="table-w h-[100%] flex flex-col">
-      <div v-if="$slots.tableHeader" class="table-header flex items-center"></div>
+      <div v-if="$slots.tableHeader" class="table-header flex items-center">
+        <slot name="tableHeader"></slot>
+      </div>
       <el-table
         v-loading="loading"
-        class="my-el-table"
+        class="my-el-table flex-1"
         :style="styles"
         :data="requestApi ? _tableData : tableData"
         v-bind="$attrs"
@@ -150,36 +152,28 @@ const props = defineProps({
   },
 });
 
-const {
-  tableData,
-  columns,
-  requestParams,
-  paginationHide,
-  paginationOptions,
-  layout,
-  total,
-  pageSize,
-  pageSizes,
-  requestAuto,
-} = toRefs(props) as any;
+const { total, pageSizes, requestAuto } = toRefs(props) as any;
 const loading = ref(false);
 const _tableData = ref([]);
 const _tableDataTotal = ref(0);
 const paginationParams = ref({
   currentPage: props.currentPage,
-  pageSize: pageSize,
+  pageSize: props.pageSize,
 });
 
 const getTableData = async (params = {}) => {
   loading.value = true;
   const _params: any = {
-    ...requestParams,
+    ...props.requestParams,
     ...params,
   };
-  if (!paginationHide) {
+  if (!props.paginationHide) {
     _params[props.currentPageKey] = paginationParams.value.currentPage;
     _params[props.pageSizeKey] = paginationParams.value.pageSize;
   }
+  console.log(props.paginationHide);
+  console.log(paginationParams.value);
+  console.log(_params);
   try {
     let result = await props.requestApi(_params);
     loading.value = false;
@@ -271,13 +265,5 @@ defineExpose({
       border: 1px solid var(--el-color-primary);
     }
   }
-}
-</style>
-<style lang="scss">
-.el-card__body .table-w {
-  padding: 0;
-}
-.el-card__body .my-el-pagination {
-  margin-top: 16px;
 }
 </style>
