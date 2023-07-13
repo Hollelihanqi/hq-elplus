@@ -37,6 +37,10 @@ export default defineConfig({
         target: "http://10.130.14.191:9999",
         changeOrigin: true,
       },
+      "/service-api": {
+        target: "http://10.130.16.149:8082",
+        changeOrigin: true,
+      },
     },
   },
 });

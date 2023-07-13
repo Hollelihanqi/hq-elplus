@@ -7,6 +7,7 @@
       <el-table
         v-loading="loading"
         class="my-el-table flex-1 w-[100%]"
+        :class="{ 'header-bg-hide': !headerbgHide, 'pagination-hide-table': paginationHide }"
         :data="requestApi ? _tableData : tableData"
         v-bind="$attrs"
       >
@@ -28,13 +29,13 @@
             v-bind="item"
             :align="item.align ?? 'center'"
           >
-            <component :is="item.render" v-if="item.render" :row="scope.row"> </component>
+            <component :is="item.render" v-if="item.render" :row="scope.row" v-bind="scope"> </component>
             <slot v-else :name="item.type" :row="scope.row"></slot>
           </el-table-column>
           <!-- other 循环递归 -->
           <TableColumn v-else :column="item">
             <template v-for="slot in Object.keys($slots)" #[slot]="scope">
-              <slot :name="slot" :row="scope.row"></slot>
+              <slot :name="slot" :row="scope.row" v-bind="scope"></slot>
             </template>
           </TableColumn>
         </template>
@@ -144,6 +145,10 @@ const props = defineProps({
     type: String,
     default: "--",
   },
+  headerbgHide: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const { total, pageSizes, requestAuto } = toRefs(props) as any;
@@ -165,9 +170,6 @@ const getTableData = async (params = {}) => {
     _params[props.currentPageKey] = paginationParams.value.currentPage;
     _params[props.pageSizeKey] = paginationParams.value.pageSize;
   }
-  console.log(props.paginationHide);
-  console.log(paginationParams.value);
-  console.log(_params);
   try {
     let result = await props.requestApi(_params);
     loading.value = false;
@@ -233,13 +235,13 @@ defineExpose({
 .table-header {
   margin-bottom: 15px;
 }
-:deep(.el-table__inner-wrapper::before) {
+:deep(.pagination-hide-table > div::before) {
   display: none;
 }
 :deep(.my-el-pagination) {
   display: flex;
   justify-content: flex-end;
-  padding-right: 16px;
+  padding: 16px 16px 0 0;
   .btn-prev,
   .btn-next {
     border: 1px solid #dcdee0;
@@ -260,7 +262,7 @@ defineExpose({
     }
   }
 }
-:deep(.my-el-table) {
+:deep(.header-bg-hide) {
   .el-table__header th {
     height: 45px;
     font-weight: bold;
@@ -270,6 +272,8 @@ defineExpose({
   .el-table__row {
     height: 45px;
   }
+}
+:deep(.my-el-table) {
   // 解决表格数据为空时样式不居中问题(仅在element-plus中)
   .el-table__empty-block {
     position: absolute;

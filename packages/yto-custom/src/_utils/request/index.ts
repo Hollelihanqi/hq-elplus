@@ -35,7 +35,7 @@ export class RequestHttp {
 
         this.resInterceptors = this.instance.interceptors.response.use(
             (res: AxiosResponse) => {
-                if (res.status === 200 && res.data.success) {
+                if (res.status === 200 && (res.data.success || res.data.status === 0)) {
                     return Promise.resolve(res.data.data);
                 } else {
                     console.error(res.data.message)

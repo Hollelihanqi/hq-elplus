@@ -9,6 +9,7 @@
 
 import { defineConfig } from "vitepress";
 import { applyPlugins } from "@ruabick/md-demo-plugins";
+import WindiCSS from 'vite-plugin-windicss'
 
 export default defineConfig({
   title: "技术平台部-业务组件库",
@@ -47,6 +48,10 @@ export default defineConfig({
             {
               text: "Dialog 弹框",
               link: "/examples/dialog/index.md",
+            },
+            {
+              text: "RemoteSearch 远程搜索",
+              link: "/examples/remote-search/index.md",
             }
           ],
           collapsed: false,
@@ -73,4 +78,7 @@ export default defineConfig({
       applyPlugins(md);
     },
   },
+  plugins: [
+    WindiCSS(),
+  ],
 });

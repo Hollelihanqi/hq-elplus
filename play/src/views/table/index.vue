@@ -8,9 +8,12 @@
 -->
 <template>
   <div class="table-box">
-    <yto-c-table :columns="columns" :request-api="getList">
+    <yto-c-table :columns="columns" :request-api="getList" headerbgHide>
       <template #tableHeader>
         <el-button type="primary" class="el-button">新增</el-button>
+      </template>
+      <template #idx="scope">
+        <el-button type="primary" class="el-button">{{ scope.$index }}</el-button>
       </template>
     </yto-c-table>
   </div>
@@ -20,6 +23,10 @@ import { getList } from "./api";
 
 // 表格配置项
 const columns = [
+  {
+    label: "Index",
+    prop: "idx",
+  },
   {
     label: "ID",
     prop: "id",

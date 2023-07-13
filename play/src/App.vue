@@ -6,10 +6,11 @@
       <Menu/> -->
     <!-- <Chart></Chart> -->
     <!-- <FromItem></FromItem> -->
-    <div class="flex flex-col">
+    <div class="router-box">
       <router-link class="mr-[10px]" to="/form">form</router-link>
       <router-link class="mr-[10px]" to="/chart">chart</router-link>
       <router-link class="mr-[10px]" to="/table">table</router-link>
+      <router-link class="mr-[10px]" to="/staffSearch">StaffSearch</router-link>
     </div>
 
     <router-view v-slot="{ Component }">
@@ -24,5 +25,10 @@
 .app {
   /* display: flex; */
   height: 100%;
+}
+.router-box{
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 </style>

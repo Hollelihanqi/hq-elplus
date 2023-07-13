@@ -5,25 +5,13 @@ import { request, debounce } from "@/_utils";
 import type { ExtractPropTypes } from "vue";
 
 const props = {
-  valueKey: {
+  baseURL: {
     type: String,
-    default: "id",
-  },
-  labelKey: {
-    type: String,
-    default: "label",
-  },
-  w: {
-    type: String,
-    default: "100%",
+    default: "/api",
   },
   url: {
     type: String,
     default: "",
-  },
-  baseURL: {
-    type: String,
-    default: "/api",
   },
   method: {
     type: String,
@@ -33,13 +21,34 @@ const props = {
     type: Boolean,
     default: true,
   },
-  fieldName: {
+  requestAuto: {
+    type: Boolean,
+    default: true,
+  },
+  searchField: {
     type: String,
     default: "",
+  },
+  requestParams: {
+    type: Object,
+    default: () => ({}),
   },
   resultKey: {
     type: String,
     default: "items",
+  },
+  dataCallback: {
+    type: [Function],
+    required: false,
+    default: null,
+  },
+  valueKey: {
+    type: String,
+    default: "id",
+  },
+  labelKey: {
+    type: String,
+    default: "label",
   },
   modelItem: {
     type: Boolean,
@@ -49,18 +58,9 @@ const props = {
     type: [Function, Object],
     default: null,
   },
-  dataCallback: {
-    type: [Function],
-    required: false,
-    default: null,
-  },
-  requestAuto: {
-    type: Boolean,
-    default: true,
-  },
-  requestParams: {
-    type: Object,
-    default: () => ({}),
+  w: {
+    type: String,
+    default: "100%",
   },
   // modelValue: {
   //   // 此属性是 vue3.0 默认的 v-model 双向数据绑定 prop，请在子组件上通过 v-model 进行传递
@@ -73,6 +73,7 @@ const props = {
 export type BaseSelectProps = Partial<ExtractPropTypes<typeof props>>;
 
 export default defineComponent({
+  name: "RemoteSearch",
   props,
   setup(props: BaseSelectProps, { attrs }) {
     const {
@@ -81,7 +82,7 @@ export default defineComponent({
       method,
       resultKey,
       dataCallback,
-      fieldName,
+      searchField,
       requestAuto,
       isRemoteSearch,
       requestParams,
@@ -99,28 +100,32 @@ export default defineComponent({
         ...requestParams,
         ...params,
       };
-      request
-        .request({
-          baseURL,
-          url,
-          method,
-          params: _params,
-          data: JSON.stringify(_params),
-        })
-        .then((res: any) => {
-          if (dataCallback) {
-            options.value = dataCallback(res);
-            copyOptions.value = [...options.value];
-            return;
-          }
-          if (Array.isArray(res)) {
-            options.value = res;
-            copyOptions.value = [...res];
-          } else {
-            options.value = resultKey && res[resultKey];
-            copyOptions.value = resultKey && [...res[resultKey]];
-          }
-        });
+      try {
+        request
+          .request({
+            baseURL,
+            url,
+            method,
+            params: _params,
+            data: JSON.stringify(_params),
+          })
+          .then((res: any) => {
+            if (dataCallback) {
+              options.value = dataCallback(res);
+              copyOptions.value = [...options.value];
+              return;
+            }
+            if (Array.isArray(res)) {
+              options.value = res;
+              copyOptions.value = [...res];
+            } else {
+              options.value = resultKey && res[resultKey];
+              copyOptions.value = resultKey && [...res[resultKey]];
+            }
+          });
+      } catch (error) {
+        console.error("获取数据失败", error);
+      }
     };
 
     // 一次性获取所有数据,不需要动态搜索
@@ -131,7 +136,7 @@ export default defineComponent({
       if (query) {
         loading.value = true;
         let params = {};
-        fieldName && (params = { [fieldName]: query });
+        searchField && (params = { [searchField]: query });
         updateData(params);
         loading.value = false;
       } else {

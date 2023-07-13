@@ -3,6 +3,7 @@ const routes = [
   { path: '/chart', component: () => import('@/views/chart.vue') },
   { path: '/form', component: () => import('@/views/formItem/index.vue') },
   { path: '/table', component: () => import('@/views/table/index.vue') },
+  { path: '/staffSearch', component: () => import('@/views/staffSearch.vue') },
 ]
 
 export const router = createRouter({

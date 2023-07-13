@@ -11,6 +11,7 @@ import App from "./App.vue";
 import YtoCustom from "@yto/custom";
 import "@yto/custom/es/style.css";
 
+
 const app = createApp(App);
 app.use(router);
 app.use(YtoCustom);
