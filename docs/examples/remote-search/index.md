@@ -17,13 +17,6 @@
 
 <demo src="./customTemp.vue"></demo>
 
-<!-- ## 数据枚举
-
-<demo src="./enum.vue"></demo>
-
-## 自定义列头
-
-<demo src="./customColumnHeader.vue"></demo> -->
 
 ## Attributes
 

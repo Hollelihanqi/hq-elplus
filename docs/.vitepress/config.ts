@@ -9,7 +9,6 @@
 
 import { defineConfig } from "vitepress";
 import { applyPlugins } from "@ruabick/md-demo-plugins";
-import WindiCSS from 'vite-plugin-windicss'
 
 export default defineConfig({
   title: "技术平台部-业务组件库",
@@ -78,7 +77,4 @@ export default defineConfig({
       applyPlugins(md);
     },
   },
-  plugins: [
-    WindiCSS(),
-  ],
 });
