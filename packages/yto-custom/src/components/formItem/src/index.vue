@@ -1,6 +1,36 @@
 <template>
   <el-form :model="form" v-bind="$attrs" ref="myForm">
-    <el-row class="dis-flex pad-tb-5">
+    <div class="dis-flex flex-wrap" v-if="layoutAuto">
+      <el-form-item   v-for="(item, index) in formConfig" :label="item?.label" :prop="item?.prop" :label-width="item.labelWidth" class="mx-[10px]">
+        <div :class="item.contentClass">
+          <component
+            v-bind="item"
+            :is="getComponent(item.itemType)"
+            v-if="!$slots[item.prop]"
+            :prop="item?.prop"
+            :form="form"
+            :options="item?.options || itemConfig.options"
+            :multiple="item?.multiple || false"
+            :active-color="item?.activeColor || itemConfig.activeColor"
+            :inactive-color="item?.inactiveColor || itemConfig.inactiveColor"
+            :active-value="item?.activeValue || itemConfig.activeValue"
+            :inactive-value="item?.inactiveValue || itemConfig.inactiveValue"
+            :disabled="item?.disabled || itemConfig.disabled"
+            :clearable="item?.clearable || itemConfig.clearable"
+          />
+          <slot v-if="$slots[item.prop]" :name="item?.prop" />
+        </div>
+      </el-form-item>
+      <div
+        v-if="$slots.default"
+        class="flex-1 dis-flex flex-align-item-center flex-justify-end"
+        style="padding-right: 20px"
+      >
+        <slot />
+      </div>
+    </div>
+
+    <el-row class="dis-flex pad-tb-5" v-if="!layoutAuto">
       <el-col
         v-for="(item, index) in formConfig"
         :key="index"
@@ -83,7 +113,7 @@ const props = defineProps({
       return [];
     },
   },
-
+  layoutAuto:{type:Boolean,default:false},
   size: {
     type: String,
     default: () => {
@@ -91,7 +121,6 @@ const props = defineProps({
     },
   },
   span: { type: Number, default: 6 },
-  labelWidth: { type: Number, default: 80 },
   form: {
     type: Object,
     default: () => {

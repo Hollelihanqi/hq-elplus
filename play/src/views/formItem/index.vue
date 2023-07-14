@@ -5,6 +5,7 @@
               ref="test"
               :form-config="formConfig"
               :span="12"
+              layoutAuto
               :item-config="{
                 clearable:true
               }"

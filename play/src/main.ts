@@ -5,10 +5,10 @@ import App from "./App.vue";
 
 // 开发阶段引入
 
-// import YtoCustom from 'yto-custom'
+import YtoCustom from '@yto/custom'
 // import 'yto-custom/dist/style.css'
 
-import YtoCustom from "@yto/custom";
+// import YtoCustom from "@yto/custom";
 import "@yto/custom/es/style.css";
 
 
