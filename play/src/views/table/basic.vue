@@ -1,5 +1,5 @@
 <template>
-  <yto-c-table :columns="columns" :table-data="tableData" :total="total" :table-change="handleTableChange">
+  <yto-c-table :columns="columns" row-key="id" :table-data="tableData" :total="total" :table-change="handleTableChange">
     <template #tableHeader>
       <el-button>新增</el-button>
     </template>
@@ -28,18 +28,45 @@ const handleTableChange = async (type: string, num: number) => {
 
 const tableData = [
   {
+    id: 1,
     name: "魏春霈",
     age: "26岁",
     sex: "男",
     isWife: "未婚",
     dream: "妻妾成群",
+    children: [
+      {
+        name: "李炳儒",
+        age: "26岁",
+        sex: "男",
+        isWife: "已婚",
+        dream: "有为青年",
+      },
+      {
+        name: "柯发泽",
+        age: "26岁",
+        sex: "男",
+        isWife: "已婚",
+        dream: "天天发财",
+      },
+    ],
   },
   {
+    id: 2,
     name: "李涵祺",
     age: "26岁",
     sex: "男",
     isWife: "未婚",
     dream: "你好，我是 李涵祺",
+    children: [
+      {
+        name: "闫萌",
+        age: "26岁",
+        sex: "女",
+        isWife: "已婚",
+        dream: "按时下班",
+      },
+    ],
   },
   {
     name: "闫萌",

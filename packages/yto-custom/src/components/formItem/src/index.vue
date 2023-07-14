@@ -91,7 +91,6 @@ const props = defineProps({
     },
   },
   span: { type: Number, default: 6 },
-  labelWidth: { type: Number, default: 80 },
   form: {
     type: Object,
     default: () => {

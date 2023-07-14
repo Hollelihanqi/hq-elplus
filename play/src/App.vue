@@ -11,6 +11,7 @@
       <router-link class="mr-[10px]" to="/chart">chart</router-link>
       <router-link class="mr-[10px]" to="/table">table</router-link>
       <router-link class="mr-[10px]" to="/staffSearch">StaffSearch</router-link>
+      <router-link class="mr-[10px]" to="/dialog">dialog</router-link>
     </div>
 
     <router-view v-slot="{ Component }">
@@ -26,7 +27,7 @@
   /* display: flex; */
   height: 100%;
 }
-.router-box{
+.router-box {
   display: flex;
   align-items: center;
   gap: 16px;
