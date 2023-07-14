@@ -13,8 +13,8 @@ importers:
       '@vitejs/plugin-vue': ^4.0.0
       '@vitejs/plugin-vue-jsx': ^3.0.1
       '@vue/runtime-core': ^3.2.47
-      '@yto/custom': workspace:0.0.4-beta
-      '@yto/utils': workspace:^1.0.0
+      '@yto/custom': workspace:^
+      '@yto/utils': workspace:^
       cz-git: ^1.6.1
       echarts: ^5.4.2
       element-plus: ^2.3.3
