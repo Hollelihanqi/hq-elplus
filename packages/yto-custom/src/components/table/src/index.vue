@@ -16,15 +16,15 @@
         <template v-for="item in columns" :key="item">
           <!-- selection || index -->
           <el-table-column
-            v-if="item.type == 'selection' || item.type == 'index'"
+            v-if="item.type === 'selection' || item.type === 'index'"
             v-bind="item"
             :align="item.align ?? 'center'"
-            :reserve-selection="item.type == 'selection'"
+            :reserve-selection="item.type === 'selection'"
           >
           </el-table-column>
           <!-- expand 支持 tsx 语法 && 作用域插槽 (tsx > slot) -->
           <el-table-column
-            v-else-if="item.type == 'expand'"
+            v-else-if="item.type === 'expand'"
             v-slot="scope"
             v-bind="item"
             :align="item.align ?? 'center'"

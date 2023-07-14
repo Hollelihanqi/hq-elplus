@@ -53,6 +53,7 @@
 | `dataKey`           | 自动调用 requestApi 返回结果后，读取列表数据的 key                                               | String   | —          | items                                     |
 | `dataCallback`      | 自动调用 requestApi 返回结果后，可通过此方法对数据进行处理，并返回一个对象。'{total:0,items:[]}' | Function | —          | —                                         |
 | `requestParams`     | 表格数据获取时，其它参数                                                                         | Object   | —          | —                                         |
+| `headerbgHide`      | 表格 Header 部分是否增加背景                                                                     | Boolean  | —          | —                                         |
 
 ### Column 属性
 
