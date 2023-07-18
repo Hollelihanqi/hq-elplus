@@ -43,7 +43,7 @@ const columns = [
 </script>
 <style lang="scss" scoped>
 .table-box {
-  height: 100%;
+  height: 50vh;
   :deep(.table-w) {
     padding: 16px;
   }

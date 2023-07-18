@@ -97,7 +97,7 @@ const props = defineProps({
     default: null,
   },
   requestParams: {
-    type: Object,
+    type: [Object, Function],
     default: () => ({}),
   },
   paginationHide: {
@@ -151,24 +151,28 @@ const props = defineProps({
   },
 });
 
-const { total, pageSizes, requestAuto } = toRefs(props) as any;
+const { total, pageSizes } = toRefs(props) as any;
 const loading = ref(false);
 const _tableData = ref([]);
 const _tableDataTotal = ref(0);
-const paginationParams = ref({
+const paginationParams = reactive({
   currentPage: props.currentPage,
   pageSize: props.pageSize,
 });
 
 const getTableData = async (params = {}) => {
   loading.value = true;
+  let _requestParams = props.requestParams;
+  if (typeof props.requestParams === "function") {
+    _requestParams = props.requestParams();
+  }
   const _params: any = {
-    ...props.requestParams,
+    ..._requestParams,
     ...params,
   };
   if (!props.paginationHide) {
-    _params[props.currentPageKey] = paginationParams.value.currentPage;
-    _params[props.pageSizeKey] = paginationParams.value.pageSize;
+    _params[props.currentPageKey] = paginationParams.currentPage;
+    _params[props.pageSizeKey] = paginationParams.pageSize;
   }
   try {
     let result = await props.requestApi(_params);
@@ -186,6 +190,7 @@ const getTableData = async (params = {}) => {
 };
 
 const handleSizeChange = (val: number): void => {
+  paginationParams.currentPage = 1;
   if (!props.requestApi) {
     props.tableChange("size", val);
   } else {
@@ -206,8 +211,8 @@ const updateTableData = (params = {}) => {
 };
 
 const resetTableData = () => {
-  paginationParams.value.currentPage = 1;
-  paginationParams.value.pageSize = props.pageSize;
+  paginationParams.currentPage = 1;
+  paginationParams.pageSize = props.pageSize;
   getTableData();
 };
 
@@ -216,7 +221,7 @@ const getData = () => {
 };
 
 onMounted(() => {
-  if (props.requestApi && requestAuto && typeof props.requestApi === "function") {
+  if (props.requestAuto && props.requestApi && typeof props.requestApi === "function") {
     getTableData();
   }
 });
@@ -275,14 +280,8 @@ defineExpose({
 }
 :deep(.my-el-table) {
   // 解决表格数据为空时样式不居中问题(仅在element-plus中)
-  .el-table__empty-block {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    .table-empty {
-      line-height: 30px;
-    }
+  .el-scrollbar__view {
+    height: 100%;
   }
 }
 </style>
