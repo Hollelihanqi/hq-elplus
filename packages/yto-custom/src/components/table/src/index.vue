@@ -35,7 +35,7 @@
           <!-- other 循环递归 -->
           <TableColumn v-else :column="item">
             <template v-for="slot in Object.keys($slots)" #[slot]="scope">
-              <slot :name="slot" :row="scope.row" v-bind="scope"></slot>
+              <slot :name="slot" :row="scope.row" :index="scope.$index" v-bind="scope"></slot>
             </template>
           </TableColumn>
         </template>
@@ -57,7 +57,7 @@
 </template>
 
 <script lang="tsx" setup name="Table">
-import { PropType, ref, onMounted } from "vue";
+import { PropType, ref, onMounted, defineEmits } from "vue";
 import { PaginationProps, ElConfigProvider } from "element-plus";
 import TableColumn from "./components/TableColumn.vue";
 import zhCn from "element-plus/dist/locale/zh-cn.mjs";
@@ -151,6 +151,7 @@ const props = defineProps({
   },
 });
 
+const emits = defineEmits(["on-table"]);
 const { total, pageSizes } = toRefs(props) as any;
 const loading = ref(false);
 const _tableData = ref([]);
@@ -191,6 +192,7 @@ const getTableData = async (params = {}) => {
 
 const handleSizeChange = (val: number): void => {
   paginationParams.currentPage = 1;
+  emits("on-table", "size", { currentPage: 1, pageSize: val });
   if (!props.requestApi) {
     props.tableChange("size", val);
   } else {
@@ -199,6 +201,7 @@ const handleSizeChange = (val: number): void => {
 };
 
 const handlePageChange = (num: number) => {
+  emits("on-table", "page", { currentPage: num, pageSize: paginationParams.pageSize });
   if (!props.requestApi) {
     props.tableChange("page", num);
   } else {
