@@ -95,7 +95,11 @@ export default defineComponent({
     const options: any = ref([]);
     const copyOptions: any = ref([]);
     const loading = ref(false);
+    const collapse = ref(true);
     const updateData = (params = {}) => {
+      if (!collapse.value) {
+        return;
+      }
       const _params = {
         ...requestParams,
         ...params,
@@ -181,7 +185,10 @@ export default defineComponent({
           remoteMethod: remoteMethod,
           onVisibleChange: (value: Boolean) => {
             if (value) {
+              collapse.value = true;
               options.value = copyOptions.value;
+            } else {
+              collapse.value = false;
             }
           },
         },

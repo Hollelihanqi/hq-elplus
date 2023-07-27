@@ -1,14 +1,14 @@
+一个基于 Element Plus 的综合业务组件库，适用于 vue3 项目当中。
 # 安装
 
 ## pnpm
 
-使用快速的，节省磁盘空间的包管理工具 [pnpm](https://pnpm.io/zh) 进行安装
 
 ```shell
 pnpm add  @yto/custom
 ```
 
-## 完整引入
+# 完整引入
 
 在 `main.ts` 中引入下面内容
 
