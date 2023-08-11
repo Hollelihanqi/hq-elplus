@@ -67,6 +67,8 @@
     "print-js": "^1.6.0",
     "remove": "^0.1.5",
     "rimraf": "^5.0.0",
+    "simple-uploader.js": "^0.6.0",
+    "spark-md5": "^3.0.2",
     "vue": "^3.2.45",
     "vue-router": "4"
   }

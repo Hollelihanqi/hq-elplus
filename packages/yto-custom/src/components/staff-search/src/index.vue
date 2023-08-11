@@ -27,8 +27,6 @@ export default defineComponent({
         },
         ...context.attrs,
         dataCallback: (data: any) => {
-          console.log("dataCallback");
-          console.log(data);
           return data.results.map((item: any) => {
             return { ...item, selText: `${item.userName} (${item.userCode})` };
           });

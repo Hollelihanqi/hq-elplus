@@ -20,6 +20,7 @@ declare module '@vue/runtime-core' {
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
+    ElIcon: typeof import('element-plus/es')['ElIcon']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElInputNumber: typeof import('element-plus/es')['ElInputNumber']
     ElPagination: typeof import('element-plus/es')['ElPagination']
@@ -57,6 +58,9 @@ declare module '@vue/runtime-core' {
     SearchFormItem: typeof import('./src/components/pro-table/src/components/SearchForm/components/SearchFormItem.vue')['default']
     Src: typeof import('./src/components/dialog/src/index.vue')['default']
     TableColumn: typeof import('./src/components/pro-table/src/components/TableColumn.vue')['default']
+    Uploader: typeof import('./src/components/uploader/index.vue')['default']
+    UploadInfo: typeof import('./src/components/uploader/components/UploadInfo.vue')['default']
+    UploadList: typeof import('./src/components/uploader/components/UploadList.vue')['default']
   }
   export interface ComponentCustomProperties {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']

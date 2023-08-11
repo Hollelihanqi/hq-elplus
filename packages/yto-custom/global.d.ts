@@ -4,3 +4,5 @@ declare module "fs-extra/esm" {
 }
 
 declare module "element-plus/dist/locale/zh-cn.mjs";
+declare module "simple-uploader.js";
+declare module "spark-md5";

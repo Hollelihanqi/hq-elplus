@@ -35,6 +35,8 @@ importers:
       rimraf: ^5.0.0
       rollup-plugin-visualizer: ^5.9.0
       sass: ^1.56.1
+      simple-uploader.js: ^0.6.0
+      spark-md5: ^3.0.2
       typescript: ^4.8.4
       unplugin-auto-import: ^0.11.2
       unplugin-element-plus: ^0.4.1
@@ -53,7 +55,7 @@ importers:
       '@types/node': 18.15.13
       '@vitejs/plugin-vue-jsx': 3.0.1_vite@4.3.5+vue@3.2.47
       '@vue/runtime-core': 3.2.47
-      '@yto/custom': link:packages/yto-custom/dist
+      '@yto/custom': link:packages/yto-custom
       '@yto/utils': link:packages/yto-utils
       echarts: 5.4.2
       eslint-plugin-markdown: 3.0.0_eslint@8.40.0
@@ -63,6 +65,8 @@ importers:
       print-js: 1.6.0
       remove: 0.1.5
       rimraf: 5.0.0
+      simple-uploader.js: 0.6.0
+      spark-md5: 3.0.2
       vue: 3.2.47
       vue-router: 4.1.6_vue@3.2.47
     devDependencies:
@@ -6057,6 +6061,10 @@ packages:
     engines: {node: '>=14'}
     dev: false
 
+  /simple-uploader.js/0.6.0:
+    resolution: {integrity: sha512-EXN+o+LD6PVnfzTq/usP8k8yYrI6wKrAx8e+fPcPLVzzttonkyn1KT+Ycx5JnPBSnp6lpiVhNG4JhDJucdPnhA==}
+    dev: false
+
   /slash/3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
@@ -6133,6 +6141,10 @@ packages:
   /sourcemap-codec/1.4.8:
     resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
     deprecated: Please use @jridgewell/sourcemap-codec instead
+
+  /spark-md5/3.0.2:
+    resolution: {integrity: sha512-wcFzz9cDfbuqe0FZzfi2or1sgyIrsDwmPwfZC4hiNidPdPINjeUwNfv5kldczoEAcjl9Y1L3SM7Uz2PUEQzxQw==}
+    dev: false
 
   /spdx-correct/3.2.0:
     resolution: {integrity: sha512-kN9dJbvnySHULIluDHy32WHRUu3Og7B9sbY7tsFLctQkIqnMh3hErYgdMjTYuqmcXX+lK5T1lnUt3G7zNswmZA==}

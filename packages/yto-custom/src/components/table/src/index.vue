@@ -6,6 +6,7 @@
       </div>
       <el-table
         v-loading="loading"
+        ref="ElTableInstance"
         class="my-el-table flex-1 w-[100%]"
         :class="{ 'header-bg-hide': !headerbgHide, 'pagination-hide-table': paginationHide }"
         :data="requestApi ? _tableData : tableData"
@@ -151,6 +152,7 @@ const props = defineProps({
   },
 });
 
+const ElTableInstance = ref();
 const emits = defineEmits(["on-table"]);
 const { total, pageSizes } = toRefs(props) as any;
 const loading = ref(false);
@@ -230,6 +232,7 @@ onMounted(() => {
 });
 
 defineExpose({
+  ElTableInstance,
   updateTableData,
   resetTableData,
   getData,

@@ -5,6 +5,7 @@
 <script lang="tsx" setup>
 import { useSlots } from "vue";
 import { ElMessage } from "element-plus";
+import { CopyDocument } from "@element-plus/icons-vue";
 
 const props = defineProps({
   column: {
@@ -57,12 +58,17 @@ const renderColumn = (column: any) => {
               if (column.prop && slots[column.prop]) return slots?.[column.prop]?.(scope);
               if (column.copy)
                 return (
-                  <div
-                    onClick={(e: any) => {
-                      handleCopyClick(e.target.innerText);
-                    }}
-                  >
-                    {renderCellData(column, scope)}
+                  <div class="flex items-center gap-2">
+                    <span>{renderCellData(column, scope)}</span>
+                    <el-icon
+                      color="#3c74e1"
+                      class="cursor-pointer"
+                      onClick={() => {
+                        handleCopyClick(renderCellData(column, scope));
+                      }}
+                    >
+                      <CopyDocument />
+                    </el-icon>
                   </div>
                 );
               return renderCellData(column, scope);

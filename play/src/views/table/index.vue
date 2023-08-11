@@ -8,7 +8,7 @@
 -->
 <template>
   <div class="table-box">
-    <yto-c-table :columns="columns" :request-api="getList" headerbgHide>
+    <yto-c-table :columns="columns" :request-api="getList" headerbgHide ref="YtoCTableInstance">
       <template #tableHeader>
         <el-button type="primary" class="el-button">新增</el-button>
       </template>
@@ -21,6 +21,7 @@
 <script lang="tsx" setup>
 import { getList } from "./api";
 
+const YtoCTableInstance = ref()
 // 表格配置项
 const columns = [
   {
@@ -40,6 +41,10 @@ const columns = [
     prop: "desc",
   },
 ];
+
+onMounted(() => {
+  console.log(YtoCTableInstance.value.ElTableInstance.clearSort)
+})
 </script>
 <style lang="scss" scoped>
 .table-box {

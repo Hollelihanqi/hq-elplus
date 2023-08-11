@@ -45,6 +45,7 @@ const columns = [
   {
     label: "姓名",
     prop: "name",
+    copy:true
   },
   {
     label: "年龄",
