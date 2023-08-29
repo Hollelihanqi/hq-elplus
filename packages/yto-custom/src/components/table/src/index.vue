@@ -221,6 +221,11 @@ const resetTableData = () => {
   getTableData();
 };
 
+const resetPagination = ({ currentPage = 1, pageSize = props.pageSize }) => {
+  paginationParams.currentPage = currentPage;
+  paginationParams.pageSize = pageSize;
+};
+
 const getData = () => {
   return _tableData.value;
 };
@@ -235,6 +240,7 @@ defineExpose({
   ElTableInstance,
   updateTableData,
   resetTableData,
+  resetPagination,
   getData,
 });
 </script>

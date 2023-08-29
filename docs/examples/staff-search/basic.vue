@@ -1,6 +1,6 @@
 <template>
   <div class="basic-com">
-    <yto-c-staff-search v-model="user"></yto-c-staff-search>
+    <yto-c-staff-search v-model="user" :requestHeaders="getHeaders"></yto-c-staff-search>
   </div>
 </template>
 <script lang="tsx" setup>
@@ -13,6 +13,18 @@ watch(
     ElMessage.success(user.value);
   }
 );
+
+const getHeaders = () => {
+  let token = sessionStorage.getItem("authorization") as string;
+  if (token) {
+    if (token.indexOf('"') !== -1) {
+      const regex = /^"(.*)"$/;
+      const matches: any = token.match(regex);
+      token = matches[1];
+    }
+  }
+  return { authorization: token };
+};
 </script>
 <style lang="scss" scoped>
 .basic-com {

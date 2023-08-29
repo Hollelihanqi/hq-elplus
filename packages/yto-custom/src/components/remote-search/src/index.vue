@@ -5,10 +5,10 @@ import { request, debounce } from "@/_utils";
 import type { ExtractPropTypes } from "vue";
 
 const props = {
-  baseURL: {
-    type: String,
-    default: "/api",
-  },
+  // baseURL: {
+  //   type: String,
+  //   default: "/api",
+  // },
   url: {
     type: String,
     default: "",
@@ -21,6 +21,10 @@ const props = {
     type: Boolean,
     default: true,
   },
+  requestApi: {
+    type: Function,
+    default: null,
+  },
   requestAuto: {
     type: Boolean,
     default: true,
@@ -31,6 +35,10 @@ const props = {
   },
   requestParams: {
     type: Object,
+    default: () => ({}),
+  },
+  requestHeaders: {
+    type: [Object, Function],
     default: () => ({}),
   },
   resultKey: {
@@ -77,7 +85,6 @@ export default defineComponent({
   props,
   setup(props: BaseSelectProps, { attrs }) {
     const {
-      baseURL,
       url,
       method,
       resultKey,
@@ -97,6 +104,10 @@ export default defineComponent({
     const loading = ref(false);
     const collapse = ref(true);
     const updateData = (params = {}) => {
+      let _headers = { ...props.requestHeaders };
+      if (typeof props.requestHeaders === "function") {
+        _headers = props.requestHeaders();
+      }
       if (!collapse.value) {
         return;
       }
@@ -107,11 +118,11 @@ export default defineComponent({
       try {
         request
           .request({
-            baseURL,
             url,
             method,
             params: _params,
             data: JSON.stringify(_params),
+            headers: _headers,
           })
           .then((res: any) => {
             if (dataCallback) {
@@ -135,6 +146,10 @@ export default defineComponent({
     // 一次性获取所有数据,不需要动态搜索
     if (requestAuto && url && !isRemoteSearch) {
       updateData(requestParams);
+    } else if (requestAuto && props.requestApi && !url && !isRemoteSearch) {
+      const list = props.requestApi();
+      options.value = list;
+      copyOptions.value = [...list];
     }
     const remoteMethod = debounce(async (query: string) => {
       if (query) {
@@ -167,6 +182,7 @@ export default defineComponent({
         deep: true,
       }
     );
+    
     return () => {
       return h(
         ElSelect,

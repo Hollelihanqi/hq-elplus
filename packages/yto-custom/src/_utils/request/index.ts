@@ -18,20 +18,20 @@ export class RequestHttp {
     constructor(config: AxiosRequestConfig) {
         // 创建 axios 实例
         this.instance = axios.create(config);
-        this.instance.interceptors.request.use(
-            (config) => {
-                // 添加 token
-                let token = sessionStorage.getItem("authorization") as string;
-                if (token) {
-                    token = JSON.parse(token);
-                    config.headers.authorization = token;
-                }
-                return config;
-            },
-            (error) => {
-                return Promise.reject(error);
-            }
-        );
+        // this.instance.interceptors.request.use(
+        //     (config) => {
+        //         // 添加 token
+        //         let token = sessionStorage.getItem("authorization") as string;
+        //         if (token) {
+        //             token = JSON.parse(token);
+        //             config.headers.authorization = token;
+        //         }
+        //         return config;
+        //     },
+        //     (error) => {
+        //         return Promise.reject(error);
+        //     }
+        // );
 
         this.resInterceptors = this.instance.interceptors.response.use(
             (res: AxiosResponse) => {

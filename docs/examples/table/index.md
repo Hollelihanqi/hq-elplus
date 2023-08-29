@@ -69,10 +69,11 @@
 
 ### Table 方法
 
-| 属性名            | 说明                                      | 类型     | 备注 |
-| ----------------- | ----------------------------------------- | -------- | ---- |
-| `updateTableData` | 更新表格数据,调用此方法会执行 requestAPI  | Function |      |
-| `resetTableData`  | 重置表格数据 ,调用此方法会执行 requestAPI | Function |      |
+| 属性名            | 说明                                                                               | 备注 |
+| ----------------- | ---------------------------------------------------------------------------------- | ---- |
+| `updateTableData` | 更新表格数据,调用此方法会执行 requestAPI                                           |      
+| `resetTableData`  | 重置表格数据 ,调用此方法会执行 requestAPI                                          |      |
+| `resetPagination` | 重置表格分页参数,接收一个对象传参 `{ currentPage = 1, pageSize = props.pageSize }` |      |
 
 ### ElTable 实例调用
 

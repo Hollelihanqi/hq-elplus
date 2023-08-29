@@ -14,7 +14,6 @@ export default defineComponent({
   setup(props, context) {
     return () => {
       return h(SearchSelect, {
-        baseURL: "",
         url: "/service-api/index/user/search",
         remote: true,
         searchField: "keyword",
