@@ -54,6 +54,7 @@
 | `dataCallback`      | 自动调用 requestApi 返回结果后，可通过此方法对数据进行处理，并返回一个对象。'{total:0,items:[]}' | Function | —          | —                                         |
 | `requestParams`     | 表格数据获取时，其它参数                                                                         | Object   | —          | —                                         |
 | `headerbgHide`      | 表格 Header 部分是否增加背景                                                                     | Boolean  | —          | —                                         |
+| `loading`           | 数据渲染前是否显示 loading,如果传入 `requestApi`,不需要绑定此属性                                | Boolean  | true/false | false                                     |
 
 ### Column 属性
 
@@ -71,7 +72,7 @@
 
 | 属性名            | 说明                                                                               | 备注 |
 | ----------------- | ---------------------------------------------------------------------------------- | ---- |
-| `updateTableData` | 更新表格数据,调用此方法会执行 requestAPI                                           |      
+| `updateTableData` | 更新表格数据,调用此方法会执行 requestAPI                                           |
 | `resetTableData`  | 重置表格数据 ,调用此方法会执行 requestAPI                                          |      |
 | `resetPagination` | 重置表格分页参数,接收一个对象传参 `{ currentPage = 1, pageSize = props.pageSize }` |      |
 

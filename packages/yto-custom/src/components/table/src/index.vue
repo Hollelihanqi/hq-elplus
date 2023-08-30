@@ -5,7 +5,7 @@
         <slot name="tableHeader"></slot>
       </div>
       <el-table
-        v-loading="loading"
+        v-loading="requestApi ? _loading : loading"
         ref="ElTableInstance"
         class="my-el-table flex-1 w-[100%]"
         :class="{ 'header-bg-hide': !headerbgHide, 'pagination-hide-table': paginationHide }"
@@ -150,12 +150,16 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  loading: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const ElTableInstance = ref();
 const emits = defineEmits(["on-table"]);
 const { total, pageSizes } = toRefs(props) as any;
-const loading = ref(false);
+const _loading = ref(false);
 const _tableData = ref([]);
 const _tableDataTotal = ref(0);
 const paginationParams = reactive({
@@ -164,7 +168,7 @@ const paginationParams = reactive({
 });
 
 const getTableData = async (params = {}) => {
-  loading.value = true;
+  _loading.value = true;
   let _requestParams = props.requestParams;
   if (typeof props.requestParams === "function") {
     _requestParams = props.requestParams();
@@ -179,14 +183,14 @@ const getTableData = async (params = {}) => {
   }
   try {
     let result = await props.requestApi(_params);
-    loading.value = false;
+    _loading.value = false;
     if (props.dataCallback && typeof props.dataCallback === "function") {
       result = props.dataCallback(result);
     }
     _tableData.value = result[props.dataKey];
     _tableDataTotal.value = result.total || 0;
   } catch (error) {
-    loading.value = false;
+    _loading.value = false;
     console.error("表格请求数据发生错误...");
     console.error(error);
   }
