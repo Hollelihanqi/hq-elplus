@@ -1,8 +1,9 @@
 <script lang="ts">
-import { defineComponent, h, ref } from "vue";
-import { ElSelect, ElOption } from "element-plus";
+import { defineComponent, h, ref, getCurrentInstance } from "vue";
+import { ElSelect, ElOption, ElConfigProvider } from "element-plus";
 import { request, debounce } from "@/_utils";
 import type { ExtractPropTypes } from "vue";
+import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 
 const props = {
   // baseURL: {
@@ -70,6 +71,10 @@ const props = {
     type: String,
     default: "100%",
   },
+  getInstance: {
+    type: Function,
+    default: null,
+  },
   // modelValue: {
   //   // 此属性是 vue3.0 默认的 v-model 双向数据绑定 prop，请在子组件上通过 v-model 进行传递
   //   // 因为组件内部时通过 watch 监听 v-model 的值的变化来更新组件的内部 _value；
@@ -83,22 +88,8 @@ export type BaseSelectProps = Partial<ExtractPropTypes<typeof props>>;
 export default defineComponent({
   name: "RemoteSearch",
   props,
-  setup(props: BaseSelectProps, { attrs }) {
-    const {
-      url,
-      method,
-      resultKey,
-      dataCallback,
-      searchField,
-      requestAuto,
-      isRemoteSearch,
-      requestParams,
-      optTemp,
-      labelKey,
-      valueKey,
-      w,
-      modelItem,
-    } = props as any;
+  setup(props: BaseSelectProps, { attrs, expose }) {
+    const _RemoteSearchInstance = ref();
     const options: any = ref([]);
     const copyOptions: any = ref([]);
     const loading = ref(false);
@@ -112,21 +103,21 @@ export default defineComponent({
         return;
       }
       const _params = {
-        ...requestParams,
+        ...props.requestParams,
         ...params,
       };
       try {
         request
           .request({
-            url,
-            method,
+            url: props.url,
+            method: props.method,
             params: _params,
             data: JSON.stringify(_params),
             headers: _headers,
           })
           .then((res: any) => {
-            if (dataCallback) {
-              options.value = dataCallback(res);
+            if (props.dataCallback) {
+              options.value = props.dataCallback(res);
               copyOptions.value = [...options.value];
               return;
             }
@@ -134,8 +125,8 @@ export default defineComponent({
               options.value = res;
               copyOptions.value = [...res];
             } else {
-              options.value = resultKey && res[resultKey];
-              copyOptions.value = resultKey && [...res[resultKey]];
+              options.value = props.resultKey && res[props.resultKey];
+              copyOptions.value = props.resultKey && [...res[props.resultKey]];
             }
           });
       } catch (error) {
@@ -144,9 +135,9 @@ export default defineComponent({
     };
 
     // 一次性获取所有数据,不需要动态搜索
-    if (requestAuto && url && !isRemoteSearch) {
-      updateData(requestParams);
-    } else if (requestAuto && props.requestApi && !url && !isRemoteSearch) {
+    if (props.requestAuto && props.url && !props.isRemoteSearch) {
+      updateData(props.requestParams);
+    } else if (props.requestAuto && props.requestApi && !props.url && !props.isRemoteSearch) {
       const list = props.requestApi();
       options.value = list;
       copyOptions.value = [...list];
@@ -155,7 +146,7 @@ export default defineComponent({
       if (query) {
         loading.value = true;
         let params = {};
-        searchField && (params = { [searchField]: query });
+        props.searchField && (params = { [props.searchField]: query });
         updateData(params);
         loading.value = false;
       } else {
@@ -164,65 +155,75 @@ export default defineComponent({
     });
 
     const cusTemplate = (item: any) => {
-      if (optTemp && typeof optTemp === "function") {
-        return optTemp(item);
+      if (props.optTemp && typeof props.optTemp === "function") {
+        return props.optTemp(item);
       }
       return h("div", { class: "cus-temp" }, [
         // h("span", { style: { color: "#000" } }, props.valueKey && item[props.valueKey]),
-        h("span", {}, labelKey && item[labelKey]),
+        h("span", {}, props.labelKey && item[props.labelKey]),
       ]);
     };
 
-    watch(
-      () => props.requestParams,
-      (newValue) => {
-        updateData({ ...newValue });
-      },
-      {
-        deep: true,
+    const getOptions = (params = {}) => {
+      updateData(params);
+    };
+
+    const clearOptions = () => {
+      options.value = [];
+    };
+
+    onMounted(() => {
+      if (props.getInstance && typeof props.getInstance === "function") {
+        props.getInstance(getCurrentInstance());
       }
-    );
-    
+    });
+    expose({ getOptions, clearOptions });
     return () => {
       return h(
-        ElSelect,
+        ElConfigProvider,
         {
-          loading: loading.value,
-          "value-key": valueKey,
-          remote: false,
-          clearable: true,
-          filterable: true,
-          reserveKeyword: true,
-          placeholder: isRemoteSearch ? "请输入" : "请选择",
-          style: {
-            width: w,
-          },
-          ...attrs,
-          remoteMethod: remoteMethod,
-          onVisibleChange: (value: Boolean) => {
-            if (value) {
-              collapse.value = true;
-              options.value = copyOptions.value;
-            } else {
-              collapse.value = false;
-            }
-          },
+          locale: zhCn,
         },
-        () => [
-          options.value.map((item: any, index: number) => {
-            return h(
-              ElOption,
-              {
-                key: index,
-                label: labelKey && item[labelKey],
-                value: modelItem ? item : valueKey && item[valueKey],
-              },
-              {
-                default: () => cusTemplate(item),
+        h(
+          ElSelect,
+          {
+            loading: loading.value,
+            "value-key": props.valueKey,
+            remote: false,
+            clearable: true,
+            filterable: true,
+            reserveKeyword: true,
+            placeholder: props.isRemoteSearch ? "请输入" : "请选择",
+            style: {
+              width: props.w,
+            },
+            ...attrs,
+            remoteMethod: remoteMethod,
+            onVisibleChange: (value: Boolean) => {
+              if (value) {
+                collapse.value = true;
+                options.value = copyOptions.value;
+              } else {
+                collapse.value = false;
               }
-            );
-          }),
-        ]
+            },
+          },
+          () => [
+            options.value.map((item: any, index: number) => {
+              return h(
+                ElOption,
+                {
+                  key: index,
+                  label: props.labelKey && item[props.labelKey],
+                  value: props.modelItem ? item : props.valueKey && item[props.valueKey],
+                },
+                {
+                  default: () => cusTemplate(item),
+                }
+              );
+            }),
+          ]
+        )
       );
     };
   },

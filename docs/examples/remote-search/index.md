@@ -40,3 +40,10 @@
 | `modelItem`      | 绑定的 value 值是否为当前选择中的数据对象     | Boolean          | —                  | false   |
 | `optTemp`        | 自定义下拉模板                                | Funtion          | h() 函数、jsx 语法 | null    |
 | `w`              | 控件的宽度                                    | String           | —                  | "100%"  |
+
+### RemoteSearch 方法
+
+| 属性名         | 说明         |
+| -------------- | ------------ |
+| `getOptions`   | 获取下拉列表 |
+| `clearOptions` | 情况下拉列表 |
