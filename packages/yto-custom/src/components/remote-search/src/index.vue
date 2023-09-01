@@ -165,6 +165,8 @@ export default defineComponent({
     };
 
     const getOptions = (params = {}) => {
+      options.value = [];
+      collapse.value = true;
       updateData(params);
     };
 
@@ -184,46 +186,47 @@ export default defineComponent({
         {
           locale: zhCn,
         },
-        h(
-          ElSelect,
-          {
-            loading: loading.value,
-            "value-key": props.valueKey,
-            remote: false,
-            clearable: true,
-            filterable: true,
-            reserveKeyword: true,
-            placeholder: props.isRemoteSearch ? "请输入" : "请选择",
-            style: {
-              width: props.w,
-            },
-            ...attrs,
-            remoteMethod: remoteMethod,
-            onVisibleChange: (value: Boolean) => {
-              if (value) {
-                collapse.value = true;
-                options.value = copyOptions.value;
-              } else {
-                collapse.value = false;
-              }
-            },
-          },
-          () => [
-            options.value.map((item: any, index: number) => {
-              return h(
-                ElOption,
-                {
-                  key: index,
-                  label: props.labelKey && item[props.labelKey],
-                  value: props.modelItem ? item : props.valueKey && item[props.valueKey],
-                },
-                {
-                  default: () => cusTemplate(item),
+        () =>
+          h(
+            ElSelect,
+            {
+              loading: loading.value,
+              "value-key": props.valueKey,
+              remote: false,
+              clearable: true,
+              filterable: true,
+              reserveKeyword: true,
+              placeholder: props.isRemoteSearch ? "请输入" : "请选择",
+              style: {
+                width: props.w,
+              },
+              ...attrs,
+              remoteMethod: remoteMethod,
+              onVisibleChange: (value: Boolean) => {
+                if (value) {
+                  collapse.value = true;
+                  options.value = copyOptions.value;
+                } else {
+                  collapse.value = false;
                 }
-              );
-            }),
-          ]
-        )
+              },
+            },
+            () => [
+              options.value.map((item: any, index: number) => {
+                return h(
+                  ElOption,
+                  {
+                    key: index,
+                    label: props.labelKey && item[props.labelKey],
+                    value: props.modelItem ? item : props.valueKey && item[props.valueKey],
+                  },
+                  {
+                    default: () => cusTemplate(item),
+                  }
+                );
+              }),
+            ]
+          )
       );
     };
   },
