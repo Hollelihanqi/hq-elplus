@@ -75,6 +75,10 @@ const props = {
     type: Function,
     default: null,
   },
+  getExposed: {
+    type: Function,
+    default: null,
+  },
   // modelValue: {
   //   // 此属性是 vue3.0 默认的 v-model 双向数据绑定 prop，请在子组件上通过 v-model 进行传递
   //   // 因为组件内部时通过 watch 监听 v-model 的值的变化来更新组件的内部 _value；
@@ -89,7 +93,6 @@ export default defineComponent({
   name: "RemoteSearch",
   props,
   setup(props: BaseSelectProps, { attrs, expose }) {
-    const _RemoteSearchInstance = ref();
     const options: any = ref([]);
     const copyOptions: any = ref([]);
     const loading = ref(false);
@@ -178,8 +181,13 @@ export default defineComponent({
       if (props.getInstance && typeof props.getInstance === "function") {
         props.getInstance(getCurrentInstance());
       }
+      if (props.getExposed && typeof props.getExposed === "function") {
+        props.getExposed(getCurrentInstance()?.exposed);
+      }
     });
+
     expose({ getOptions, clearOptions });
+
     return () => {
       return h(
         ElConfigProvider,
