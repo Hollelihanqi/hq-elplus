@@ -187,6 +187,7 @@ export default defineComponent({
 
     const clearOptions = () => {
       options.value = [];
+      copyOptions.value = [];
     };
 
     onMounted(() => {
