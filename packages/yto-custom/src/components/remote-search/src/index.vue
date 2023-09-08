@@ -163,7 +163,7 @@ export default defineComponent({
       ]);
     };
 
-    if (props.requestAuto && props.requestParams && Object.keys(props.requestParams).length) {
+    if (props.requestParams && Object.keys(props.requestParams).length) {
       watch(
         () => props.requestParams,
         (newValue) => {
