@@ -34,6 +34,10 @@ const props = {
     type: Object,
     default: () => ({}),
   },
+  defaultParams: {
+    type: Object,
+    default: () => ({}),
+  },
   requestHeaders: {
     type: [Object, Function],
     default: () => ({}),
@@ -102,6 +106,7 @@ export default defineComponent({
         return;
       }
       const _params = {
+        ...props.defaultParams,
         ...props.requestParams,
         ...params,
       };
@@ -163,25 +168,8 @@ export default defineComponent({
       ]);
     };
 
-    if (props.requestParams && Object.keys(props.requestParams).length) {
-      watch(
-        () => props.requestParams,
-        (newValue) => {
-          if (newValue && Object.values(newValue).every((val) => val)) {
-            updateData({ ...newValue });
-          } else {
-            clearOptions();
-          }
-        },
-        {
-          deep: true,
-        }
-      );
-    }
-
     const getOptions = (params = {}) => {
       options.value = [];
-      collapse.value = true;
       updateData(params);
     };
 
@@ -225,10 +213,7 @@ export default defineComponent({
               remoteMethod: remoteMethod,
               onVisibleChange: (value: Boolean) => {
                 if (value) {
-                  collapse.value = true;
                   options.value = copyOptions.value;
-                } else {
-                  collapse.value = false;
                 }
               },
             },
