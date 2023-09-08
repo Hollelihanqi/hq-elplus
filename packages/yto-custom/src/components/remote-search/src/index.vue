@@ -6,10 +6,6 @@ import type { ExtractPropTypes } from "vue";
 import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 
 const props = {
-  // baseURL: {
-  //   type: String,
-  //   default: "/api",
-  // },
   url: {
     type: String,
     default: "",
@@ -166,6 +162,22 @@ export default defineComponent({
         h("span", {}, props.labelKey && item[props.labelKey]),
       ]);
     };
+
+    if (props.requestAuto && props.requestParams && Object.keys(props.requestParams).length) {
+      watch(
+        () => props.requestParams,
+        (newValue) => {
+          if (newValue && Object.values(newValue).every((val) => val)) {
+            updateData({ ...newValue });
+          } else {
+            clearOptions();
+          }
+        },
+        {
+          deep: true,
+        }
+      );
+    }
 
     const getOptions = (params = {}) => {
       options.value = [];
