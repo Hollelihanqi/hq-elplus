@@ -225,9 +225,9 @@ const resetTableData = () => {
   getTableData();
 };
 
-const resetPagination = ({ currentPage = 1, pageSize = props.pageSize }) => {
-  paginationParams.currentPage = currentPage;
-  paginationParams.pageSize = pageSize;
+const resetPagination = (obj?: { currentPage: number; pageSize: number }) => {
+  paginationParams.currentPage = obj ? obj.currentPage : 1;
+  paginationParams.pageSize = obj ? obj.pageSize : props.pageSize;
 };
 
 const getData = () => {

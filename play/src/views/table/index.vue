@@ -21,12 +21,20 @@
 <script lang="tsx" setup>
 import { getList } from "./api";
 
-const YtoCTableInstance = ref()
+const YtoCTableInstance = ref();
 // 表格配置项
 const columns = [
   {
     label: "Index",
     prop: "idx",
+    _children: [
+      {
+        label: "李瀚祺",
+      },
+      {
+        label: "Hello",
+      },
+    ],
   },
   {
     label: "ID",
@@ -43,8 +51,21 @@ const columns = [
 ];
 
 onMounted(() => {
-  console.log(YtoCTableInstance.value.ElTableInstance.clearSort)
-})
+  console.log(YtoCTableInstance.value.ElTableInstance.clearSort);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 <style lang="scss" scoped>
 .table-box {

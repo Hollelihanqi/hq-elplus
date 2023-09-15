@@ -9,7 +9,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="Uploader">
 import { ref, onMounted, provide, defineEmits } from "vue";
 import SimpleUploader from "simple-uploader.js";
 import SparkMD5 from "spark-md5";
@@ -146,9 +146,9 @@ const initUploaderEvent = () => {
 // function kebabCase(s) {
 //   return s.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
 // }
-const uploadStart = () => {
-  started.value = true;
-};
+// const uploadStart = () => {
+//   started.value = true;
+// };
 
 // 只允许一次添加一个文件
 const setInputAttrs = () => {
@@ -186,7 +186,7 @@ const fileLimitOver = (file: any) => {
 //文件添加到上传队列之前调用，可用于文件校验，返回 false 禁止文件上传,并且从列表中移除当前文件
 const fileAdded = (file: any) => {
   const fileList = UPLOADER.value.fileList;
-  // 如何上传文件数量超过最大上传数 limit
+  // 如果上传文件数量超过最大上传数 limit
   if (props.limit && fileList.length > props.limit) {
     fileLimitOver(file);
     return false;
@@ -308,8 +308,6 @@ onMounted(() => {
   props.getInstance(UPLOADER);
   setInputAttrs();
 });
-
-// defineExpose({ clearFiles, getFileList, _removeFile, _upload });
 </script>
 
 <style lang="scss" scoped>

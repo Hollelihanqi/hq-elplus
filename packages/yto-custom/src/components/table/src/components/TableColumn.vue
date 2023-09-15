@@ -53,7 +53,7 @@ const renderColumn = (column: any) => {
         <el-table-column show-overflow-tooltip {...column}>
           {{
             default: (scope: any) => {
-              if (column._children) return column.map((child: any) => renderColumn(child));
+              if (column._children) return column._children.map((child: any) => renderColumn(child));
               if (column.render) return column.render(scope);
               if (column.prop && slots[column.prop]) return slots?.[column.prop]?.(scope);
               if (column.copy)

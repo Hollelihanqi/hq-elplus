@@ -1,7 +1,7 @@
 <template>
   <div class="search-box">
-    <yto-c-staff-search v-model="user" key="3"></yto-c-staff-search>
-    <CustomLeakagewaySelect key="1" v-model="user2" ref="testInstance" />
+    <yto-c-staff-search v-model="user" multiple key="3"></yto-c-staff-search>
+    <CustomLeakagewaySelect key="1" v-model="user2" multiple ref="testInstance" />
     <el-button @click="testInstance.testFun()">test</el-button>
   </div>
 </template>
