@@ -97,6 +97,12 @@ export default defineComponent({
     const copyOptions: any = ref([]);
     const loading = ref(false);
     const collapse = ref(true);
+
+    const setData = (list: any) => {
+      options.value = list;
+      copyOptions.value = [...list];
+    };
+
     const updateData = (params = {}) => {
       let _headers = { ...props.requestHeaders };
       if (typeof props.requestHeaders === "function") {
@@ -126,8 +132,7 @@ export default defineComponent({
               return;
             }
             if (Array.isArray(res)) {
-              options.value = res;
-              copyOptions.value = [...res];
+              setData(res);
             } else {
               options.value = props.resultKey && res[props.resultKey];
               copyOptions.value = props.resultKey && [...res[props.resultKey]];
@@ -138,26 +143,39 @@ export default defineComponent({
       }
     };
 
+    const callRequestApi = async (keywords?: string) => {
+      if (props.requestApi) {
+        try {
+          const list = await props.requestApi(keywords);
+          setData(list);
+          loading.value = false;
+        } catch (error) {
+          console.error("请求报错", error);
+        }
+      }
+    };
+
     // 一次性获取所有数据,不需要动态搜索
     if (props.requestAuto && props.url && !props.isRemoteSearch) {
       updateData(props.requestParams);
-    } else if (props.requestAuto && props.requestApi && !props.url && !props.isRemoteSearch) {
-      const list = props.requestApi();
-      options.value = list;
-      copyOptions.value = [...list];
+    } else if (props.requestAuto && props.requestApi && !props.isRemoteSearch) {
+      callRequestApi();
     }
-    const remoteMethod = debounce(async (query: string) => {
+    const remoteMethod = debounce((query: string) => {
       if (query) {
         loading.value = true;
-        let params = {};
-        props.searchField && (params = { [props.searchField]: query });
-        updateData(params);
-        loading.value = false;
+        if (!props.url && props.requestApi) {
+          callRequestApi(query);
+        } else {
+          let params = {};
+          props.searchField && (params = { [props.searchField]: query });
+          updateData(params);
+          loading.value = false;
+        }
       } else {
         options.value = [];
       }
     });
-
     const cusTemplate = (item: any) => {
       if (props.optTemp && typeof props.optTemp === "function") {
         return props.optTemp(item);
@@ -170,7 +188,11 @@ export default defineComponent({
 
     const getOptions = (params = {}) => {
       options.value = [];
-      updateData(params);
+      if (!props.url && props.requestApi) {
+        callRequestApi();
+      } else {
+        updateData(params);
+      }
     };
 
     const clearOptions = () => {

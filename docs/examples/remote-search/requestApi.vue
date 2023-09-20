@@ -1,19 +1,17 @@
 <template>
-  <div class="search-box">
-    <yto-c-staff-search v-model="user" key="3"></yto-c-staff-search>
-    <CustomLeakagewaySelect key="1" v-model="user2" multiple ref="testInstance" />
-    <yto-c-staff-search v-model="user2" url="" :requestApi="getList"></yto-c-staff-search>
-    <el-button @click="testInstance.testFun()">test</el-button>
-  </div>
+  <yto-c-remote-search
+    v-model="user"
+    remote
+    valueKey="userCode"
+    :optTemp="optTemp"
+    :requestApi="getList"
+  ></yto-c-remote-search>
 </template>
 <script lang="ts" setup>
-import { ref } from "vue";
-import CustomLeakagewaySelect from "./CustomLeakagewaySelect.vue";
-import { request } from "@yto/utils/dist";
+import { request } from "@yto/utils";
+import { h, ref } from "vue";
 
 const user = ref("");
-const user2 = ref("");
-const testInstance = ref();
 const _headers = () => {
   let token = sessionStorage.getItem("authorization") as string;
   if (token) {
@@ -28,8 +26,6 @@ const _headers = () => {
   };
 };
 const getList = (keywords: string) => {
-  console.log("开始调用 getList");
-  console.log(keywords);
   return new Promise((resolve, reject) => {
     request
       .request({
@@ -44,15 +40,27 @@ const getList = (keywords: string) => {
       .then((res: any) => {
         resolve(res.results);
       })
-      .catch((error:any) => {
+      .catch((error: any) => {
         reject(error);
       });
   });
 };
+const optTemp = (item: any) => {
+  return h(
+    "div",
+    {
+      class: "option-c",
+      style: {
+        display: "flex",
+        alignItems: "center",
+      },
+    },
+    [
+      h("span", {}, `${item.userName} -`),
+      h("span", {}, `${item.userCode} -`),
+      h("span", {}, `${item.deptName} -`),
+      h("span", {}, item.jobName),
+    ]
+  );
+};
 </script>
-<style lang="scss" scoped>
-.search-box {
-  width: 500px;
-  padding: 60px;
-}
-</style>

@@ -17,6 +17,10 @@
 
 <demo src="./customTemp.vue"></demo>
 
+## requestApi
+
+<demo src="./requestApi.vue"></demo>
+
 ## Attributes
 
 [完整配置请参考-element-plus](https://element-plus.org/zh-CN/component/table.html)
@@ -28,7 +32,7 @@
 | `url`            | 远程搜索地址                                                                                                                                                        | String           | —                  | ""      |
 | `method`         | 请求方式                                                                                                                                                            | String           | —                  | "GET"   |
 | `isRemoteSearch` | 如果只需要请求一次，请设置为 false                                                                                                                                  | Boolean          | —                  | true    |
-| `requestApi`     | 自定义调用方法，返回一个数组,优先级低于 `url`                                                                                                                       | Function         | —                  |         |
+| `requestApi`     | 自定义调用方法，返回一个 `Promise`,优先级低于`url`。不建议这样使用，会出现请求竞态问题                                                                              | Function         | —                  |         |
 | `requestAuto`    | 是否立即请求，如需手动请求，请设置为 false                                                                                                                          | Boolean          | —                  | true    |
 | `searchField`    | 搜索字段名称                                                                                                                                                        | String           | —                  | ""      |
 | `requestHeaders` | 请求 Headers                                                                                                                                                        | Object、Function | —                  | {}      |
