@@ -10,7 +10,7 @@
 import { defineComponent, h } from "vue";
 import SearchSelect from "@/components/remote-search";
 export default defineComponent({
-  name: "StaffSearch",
+  name: "UserSearch",
   setup(props, context) {
     return () => {
       return h(SearchSelect, {

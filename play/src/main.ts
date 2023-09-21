@@ -3,6 +3,8 @@ import "./style.css";
 import { router } from "./router";
 import App from "./App.vue";
 
+import "virtual:windi.css";
+
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 // 开发阶段引入

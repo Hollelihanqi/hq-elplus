@@ -1,6 +1,6 @@
 <template>
   <div class="basic-com">
-    <yto-c-staff-search v-model="user" :requestHeaders="getHeaders"></yto-c-staff-search>
+    <yto-c-user-search v-model="user" :requestHeaders="getHeaders"></yto-c-user-search>
   </div>
 </template>
 <script lang="tsx" setup>

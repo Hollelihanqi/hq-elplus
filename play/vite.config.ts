@@ -2,11 +2,12 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import path, { resolve } from "path";
 import AutoImport from "unplugin-auto-import/vite";
-
+import WindiCSS from "vite-plugin-windicss";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
+    WindiCSS(),
     AutoImport({
       imports: ["vue"],
     }),
@@ -26,7 +27,8 @@ export default defineConfig({
         changeOrigin: true,
       },
       "/api": {
-        target: "http://10.130.137.53:8080",
+        // target: "http://10.130.137.53:8080",
+        target: "http://10.130.15.223:8100", // UAT,
         changeOrigin: true,
       },
       "/_search": {

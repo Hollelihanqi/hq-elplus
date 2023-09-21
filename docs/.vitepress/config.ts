@@ -53,8 +53,8 @@ export default defineConfig({
               link: "/examples/remote-search/index.md",
               items: [
                 {
-                  text: "StaffSearch 用户搜索",
-                  link: "/examples/staff-search/index.md",
+                  text: "UserSearch 用户搜索",
+                  link: "/examples/user-search/index.md",
                 },
               ]
             }

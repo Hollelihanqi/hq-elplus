@@ -1,14 +1,16 @@
 <template>
   <div class="search-box">
-    <yto-c-staff-search v-model="user" key="3"></yto-c-staff-search>
-    <CustomLeakagewaySelect key="1" v-model="user2" multiple ref="testInstance" />
-    <yto-c-staff-search v-model="user2" url="" :requestApi="getList"></yto-c-staff-search>
+    <!-- <yto-c-staff-search v-model="user" key="3"></yto-c-staff-search>
+    <CustomLeakagewaySelect key="1" v-model="user2" multiple ref="testInstance" /> -->
+    <!-- <yto-c-user-search v-model="user2" url="" :requestApi="getList"></yto-c-user-search> -->
+    <TestSearch />
     <el-button @click="testInstance.testFun()">test</el-button>
   </div>
 </template>
 <script lang="ts" setup>
 import { ref } from "vue";
 import CustomLeakagewaySelect from "./CustomLeakagewaySelect.vue";
+import TestSearch from "./TestSearch.vue";
 import { request } from "@yto/utils/dist";
 
 const user = ref("");
@@ -34,7 +36,7 @@ const getList = (keywords: string) => {
     request
       .request({
         baseURL: "",
-        url: "/service-api/index/user/search",
+        url: "/category/user/searchUser",
         method: "get",
         params: {
           keyword: keywords,
@@ -44,7 +46,7 @@ const getList = (keywords: string) => {
       .then((res: any) => {
         resolve(res.results);
       })
-      .catch((error:any) => {
+      .catch((error: any) => {
         reject(error);
       });
   });

@@ -4,6 +4,7 @@ const routes = [
   { path: '/form', component: () => import('@/views/formItem/index.vue') },
   { path: '/table', component: () => import('@/views/table/index.vue') },
   { path: '/staffSearch', component: () => import('@/views/staffSearch.vue') },
+  { path: '/userSearch', component: () => import('@/views/TestSearch.vue') },
   { path: '/dialog', component: () => import('@/views/dialog.vue') },
 ]
 

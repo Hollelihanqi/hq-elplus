@@ -15,9 +15,11 @@ export const baseConfig = {
 export class RequestHttp {
     instance: AxiosInstance;
     resInterceptors: any;
+    CancelToken: any;
     constructor(config: AxiosRequestConfig) {
         // 创建 axios 实例
         this.instance = axios.create(config);
+        this.CancelToken = axios.CancelToken
         // this.instance.interceptors.request.use(
         //     (config) => {
         //         // 添加 token

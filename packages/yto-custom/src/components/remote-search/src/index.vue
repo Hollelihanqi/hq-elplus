@@ -97,13 +97,19 @@ export default defineComponent({
     const copyOptions: any = ref([]);
     const loading = ref(false);
     const collapse = ref(true);
-
+    let resListCache: any = [];
     const setData = (list: any) => {
       options.value = list;
       copyOptions.value = [...list];
     };
 
+    const setResListCache = (list = []) => {
+      resListCache.push({ timestamp: Date.now(), list });
+    };
+    const source = request.CancelToken.source();
     const updateData = (params = {}) => {
+      source.cancel();
+      source.token = request.CancelToken.source().token;
       let _headers = { ...props.requestHeaders };
       if (typeof props.requestHeaders === "function") {
         _headers = props.requestHeaders();
@@ -124,6 +130,7 @@ export default defineComponent({
             params: _params,
             data: JSON.stringify(_params),
             headers: _headers,
+            cancelToken: source.token,
           })
           .then((res: any) => {
             if (props.dataCallback) {
@@ -148,9 +155,10 @@ export default defineComponent({
         try {
           const list = await props.requestApi(keywords);
           setData(list);
-          loading.value = false;
         } catch (error) {
           console.error("请求报错", error);
+        } finally {
+          loading.value = false;
         }
       }
     };
