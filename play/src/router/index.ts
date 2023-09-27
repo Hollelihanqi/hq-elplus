@@ -6,6 +6,7 @@ const routes = [
   { path: '/staffSearch', component: () => import('@/views/staffSearch.vue') },
   { path: '/userSearch', component: () => import('@/views/TestSearch.vue') },
   { path: '/dialog', component: () => import('@/views/dialog.vue') },
+  { path: '/uploaderf', component: () => import('@/views/UploaderF.vue') },
 ]
 
 export const router = createRouter({

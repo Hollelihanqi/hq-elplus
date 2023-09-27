@@ -1,13 +1,17 @@
 <template>
   <div class="upload-info" :status="status">
-    <div class="uploader-file-progress" :class="progressingClass" :style="progressStyle"></div>
+    <div
+      class="uploader-file-progress"
+      :class="file.error ? 'error-uploader-file-progress' : progressingClass"
+      :style="progressStyle"
+    ></div>
     <div class="uploader-file-info">
       <div class="name">
         <span> {{ file.name }}</span>
       </div>
       <div class="size">{{ fileSize }}</div>
       <div class="status">
-        <span v-show="status !== 'uploading'">{{ statusText[status] }}</span>
+        <span v-show="status !== 'uploading'">{{ file.error ? statusText.error : statusText[status] }}</span>
         <div v-show="status === 'uploading'" class="flex items-center gap-2">
           <span>{{ progressStyle.progress }}</span>
           <span>{{ uploadAverageSpeed }}</span>
@@ -16,7 +20,7 @@
       <div class="uploader-file-actions">
         <span v-if="isUploading" class="uploader-file-pause" @click="pause"></span>
         <span v-if="paused" class="uploader-file-resume" @click="resume">️</span>
-        <span v-if="error" class="uploader-file-retry" @click="retry"></span>
+        <span v-if="error || file.error" class="uploader-file-retry" @click="retry"></span>
         <span class="uploader-file-remove" @click="remove"></span>
       </div>
     </div>
@@ -160,12 +164,20 @@ const processResponse = (message: any) => {
 const _fileComplete = () => {
   _fileSuccess();
 };
-const _fileError = (rootFile: any, file: any, message: any) => {
-  _fileProgress();
-  processResponse(message);
+
+const _errorStatus = () => {
   error.value = true;
   isComplete.value = false;
   isUploading.value = false;
+};
+const _fileError = (rootFile: any, file: any, message: any) => {
+  _fileProgress();
+  processResponse(message);
+  _errorStatus();
+};
+
+const _setErrorStatus = () => {
+  props.file.error = true;
 };
 onMounted(() => {
   averageSpeed.value = props.file.averageSpeed;
@@ -180,6 +192,7 @@ onMounted(() => {
   timeRemaining.value = props.file.timeRemaining();
   currentSpeed.value = props.file.currentSpeed;
   error.value = props.file.error;
+  props.file.setErrorStatus = _setErrorStatus;
   props.file.uploader.on("fileProgress", _fileProgress);
   props.file.uploader.on("fileSuccess", _fileSuccess);
   props.file.uploader.on("fileComplete", _fileComplete);
@@ -209,6 +222,9 @@ onMounted(() => {
 }
 .upload-info[status="error"] .uploader-file-progress {
   background: #ffe0e0;
+}
+.error-uploader-file-progress {
+  background: #ffe0e0 !important;
 }
 .upload-info:hover {
   background-color: rgba(240, 240, 240);

@@ -3,7 +3,6 @@ import { defineComponent, h, ref, getCurrentInstance } from "vue";
 import { ElSelect, ElOption, ElConfigProvider } from "element-plus";
 import { request, debounce } from "@/_utils";
 import type { ExtractPropTypes } from "vue";
-import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 
 const props = {
   url: {
@@ -97,14 +96,9 @@ export default defineComponent({
     const copyOptions: any = ref([]);
     const loading = ref(false);
     const collapse = ref(true);
-    let resListCache: any = [];
     const setData = (list: any) => {
       options.value = list;
       copyOptions.value = [...list];
-    };
-
-    const setResListCache = (list = []) => {
-      resListCache.push({ timestamp: Date.now(), list });
     };
     const source = request.CancelToken.source();
     const updateData = (params = {}) => {
@@ -221,48 +215,41 @@ export default defineComponent({
 
     return () => {
       return h(
-        ElConfigProvider,
+        ElSelect,
         {
-          locale: zhCn,
+          loading: loading.value,
+          "value-key": props.valueKey,
+          remote: false,
+          clearable: true,
+          filterable: true,
+          reserveKeyword: true,
+          placeholder: props.isRemoteSearch ? "请输入" : "请选择",
+          style: {
+            width: props.w,
+          },
+          ...attrs,
+          remoteMethod: remoteMethod,
+          onVisibleChange: (value: Boolean) => {
+            if (value) {
+              options.value = copyOptions.value;
+            }
+          },
         },
-        () =>
-          h(
-            ElSelect,
-            {
-              loading: loading.value,
-              "value-key": props.valueKey,
-              remote: false,
-              clearable: true,
-              filterable: true,
-              reserveKeyword: true,
-              placeholder: props.isRemoteSearch ? "请输入" : "请选择",
-              style: {
-                width: props.w,
+        () => [
+          options.value.map((item: any, index: number) => {
+            return h(
+              ElOption,
+              {
+                key: index,
+                label: props.labelKey && item[props.labelKey],
+                value: props.modelItem ? item : props.valueKey && item[props.valueKey],
               },
-              ...attrs,
-              remoteMethod: remoteMethod,
-              onVisibleChange: (value: Boolean) => {
-                if (value) {
-                  options.value = copyOptions.value;
-                }
-              },
-            },
-            () => [
-              options.value.map((item: any, index: number) => {
-                return h(
-                  ElOption,
-                  {
-                    key: index,
-                    label: props.labelKey && item[props.labelKey],
-                    value: props.modelItem ? item : props.valueKey && item[props.valueKey],
-                  },
-                  {
-                    default: () => cusTemplate(item),
-                  }
-                );
-              }),
-            ]
-          )
+              {
+                default: () => cusTemplate(item),
+              }
+            );
+          }),
+        ]
       );
     };
   },

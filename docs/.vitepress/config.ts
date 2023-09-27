@@ -57,7 +57,11 @@ export default defineConfig({
                   link: "/examples/user-search/index.md",
                 },
               ]
-            }
+            },
+            {
+              text: "Uploader 大文件上传",
+              link: "/examples/uploader/index.md",
+            },
           ],
           collapsed: false,
         },

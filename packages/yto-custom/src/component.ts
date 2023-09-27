@@ -5,8 +5,9 @@ import { YtoTable } from "@/components/table";
 import { YtoForm } from "@/components/formItem";
 import { YtoRemoteSearch } from "@/components/remote-search";
 import { YtoUserSearch } from "@/components/user-search";
+import { YtoUploader } from "@/components/uploader";
 
 export {
-    YtoEchart, YtoTable, YtoForm, YtoMenu, YtoDialog, YtoUserSearch, YtoRemoteSearch
+    YtoEchart, YtoTable, YtoForm, YtoMenu, YtoDialog, YtoUserSearch, YtoRemoteSearch, YtoUploader
 }
-export default [YtoEchart, YtoTable, YtoForm, YtoMenu, YtoDialog, YtoUserSearch, YtoRemoteSearch] as any;
+export default [YtoEchart, YtoTable, YtoForm, YtoMenu, YtoDialog, YtoUserSearch, YtoRemoteSearch, YtoUploader] as any;

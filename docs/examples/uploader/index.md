@@ -10,32 +10,80 @@
 
 ## 基本使用
 
-<!-- <demo src="./basic.vue"></demo> -->
+<demo src="./basic.vue"></demo>
 
 ### Uploader 属性
 
-| 属性名          | 说明                                                                                                                                                                                                                                                        | 类型            | 可选值     | 默认值               |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- | ---------- | -------------------- |
-| options         | uploader 实例配置项                                                                                                                                                                                                                                         | Object          | —          | {}                   |
-| autoUpload      | 文件添加后是否立即上传                                                                                                                                                                                                                                      | Boolean         | true/false | true                 |
-| multiple        | 是否支持文件多选                                                                                                                                                                                                                                            | Boolean         | true/false | true                 |
-| limit           | 最大上传文件数(0 代表没有限制)                                                                                                                                                                                                                              | Number          | —          | 0                    |
-| listHide        | 是否隐藏文件上传列表                                                                                                                                                                                                                                        | Boolean         | true/false | false                |
-| accept          | 指定文件上传控件可接受的文件类型                                                                                                                                                                                                                            | String          | —          | ""                   |
-| isCheckFileType | 是否检查文件类型 <span title="内部会调用 `checkFileType` 方法，根据 `accept` 属性进行文件后缀名检查，如果上传的文件类型不符合`accept`可接受的文件类型，直接移除文件，并且调用`on-type-error`事件。如果 `accept`为空，不会调用`checkFileType`方法">？</span> | Boolean         | true/false | true                 |
-| headers         | 上传文件时额外发送的 HTTP 请求头                                                                                                                                                                                                                            | Object/Function | —          | {}                   |
-| requestParams   | 额外的自定义请求参数                                                                                                                                                                                                                                        | Object          | —          | {}                   |
-| onFileAdded     | 文件添加到上传队列之前调用,可用于文件校验，返回 false 禁止文件上传,并且从列表中移除当前文件                                                                                                                                                                 | Function        | —          | null                 |
-| onFileSuccess   | 单个文件上传成功后触发                                                                                                                                                                                                                                      | Function        | —          | null                 |
-| onFileComplete  | 所有文件上传完成后触发                                                                                                                                                                                                                                      | Function        | —          | null                 |
-| onFileRemoved   | 特定文件已从上传队列中移除后触发                                                                                                                                                                                                                            | Function        | —          | null                 |
-| getInstance     | 返回 `Uploader 实例`                                                                                                                                                                                                                                        | Function        | —          | `(UPLOADER) => ({})` |
+| 属性名          | 说明                                                                                                                                                                                                                                                        | 类型            | 可选值     | 默认值 |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- | ---------- | ------ |
+| options         | uploader 实例配置项                                                                                                                                                                                                                                         | Object          | —          | {}     |
+| autoUpload      | 文件添加后是否立即上传                                                                                                                                                                                                                                      | Boolean         | true/false | true   |
+| multiple        | 是否支持文件多选                                                                                                                                                                                                                                            | Boolean         | true/false | true   |
+| limit           | 最大上传文件数(0 代表没有限制)                                                                                                                                                                                                                              | Number          | —          | 0      |
+| listHide        | 是否隐藏文件上传列表                                                                                                                                                                                                                                        | Boolean         | true/false | false  |
+| accept          | 指定文件上传控件可接受的文件类型                                                                                                                                                                                                                            | String          | —          | ""     |
+| isCheckFileType | 是否检查文件类型 <span title="内部会调用 `checkFileType` 方法，根据 `accept` 属性进行文件后缀名检查，如果上传的文件类型不符合`accept`可接受的文件类型，直接移除文件，并且调用`on-type-error`事件。如果 `accept`为空，不会调用`checkFileType`方法">？</span> | Boolean         | true/false | true   |
+| headers         | 上传文件时额外发送的 HTTP 请求头                                                                                                                                                                                                                            | Object/Function | —          | {}     |
+| requestParams   | 额外的自定义请求参数                                                                                                                                                                                                                                        | Object          | —          | {}     |
+| onFileAdded     | 文件添加到上传队列之前调用,可用于文件校验，返回 false 禁止文件上传,并且从列表中移除当前文件。`(file)=>{}`                                                                                                                                                   | Function        | —          | null   |
+| onFileSuccess   | 单个文件上传成功后触发。`(rootFile, file, message, chunk)=>{}`                                                                                                                                                                                              | Function        | —          | null   |
+| onFileComplete  | 所有文件上传完成后触发。`(rootFile)=>{}`                                                                                                                                                                                                                    | Function        | —          | null   |
+| onFileRemoved   | 特定文件已从上传队列中移除后触发,返回当前删除文件。`(file)=>{}`                                                                                                                                                                                             | Function        | —          | null   |
+| getInstance     | 返回 Uploader 实例`(UPLOADER) => ({})`                                                                                                                                                                                                                      | Function        | —          | null   |
 
 ### options 属性
 
+| 属性                           | 说明                                                                                                      | 类型           | 默认值     |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------- | -------------- | ---------- |
+| `target`                       | 目标上传 URL                                                                                              | String         | ''         |
+| `chunkSize`                    | 分片大小                                                                                                  | Number         | 4M         |
+| `connectionCount`              | 同时上传的连接数                                                                                          | Number         | 3          |
+| `fileParameterName`            | 上传文件时文件的参数名                                                                                    | String         | 'file'     |
+| `maxChunkRetries`              | 最大自动失败重试上传次数                                                                                  | Number         | 3          |
+| `simultaneousUploads`          | 并发上传数                                                                                                | Number         | 3          |
+| `testChunks`                   | 是否开启服务器分片校验                                                                                    | Boolean        | true       |
+| `checkChunkUploadedByResponse` | 该函数的作用是检查分片是否已经上传成功，如果上传成功则返回 true，否则返回 false。                         | Functon        | -          |
+| `headers`                      | 请求头参数                                                                                                | Functon/Object | () => ({}) |
+| `query`                        | POST 请求时额外参数。如果是函数，它将传递一个 Uploader.File、一个 Uploader.Chunk 对象和一个 isTest 布尔值 | Functon/Object | {}         |
+
+```js
+checkChunkUploadedByResponse: function (chunk, message) {
+    var objMessage = {}
+    try {
+    objMessage = JSON.parse(message)
+    } catch (e) {}
+    return (objMessage.uploaded_chunks || []).indexOf(chunk.offset + 1) >= 0
+}
+
+query: (file: any, chunk: any) => {
+    return {
+    chunk: chunk.offset, // 当前切片id
+    task_id: file.uniqueIdentifier, // 当前文件id
+    ...file.params,
+    ...props.requestParams,
+    };
+}
+
+```
+
+### File 方法
+
+| 名称             | 说明                      | 备注                                                              |
+| ---------------- | ------------------------- | ----------------------------------------------------------------- |
+| `setErrorStatus` | 设置文件状态为 Error 状态 | 当接口上传错误时，可以调用此方法将，当前上传列表项置为 error 状态 |
+
+### UploaderInstance 方法
+
+| 名称          | 说明                                                                                       | 备注                                                                                                                                                                                                 |
+| ------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `clearFiles`  | 清空上传列表                                                                               |                                                                                                                                                                                                      |
+| `removeFile`  | 移除上传列表中的某一个文件，此方法接收一个文件的唯一标识属性（如果没有直接传入 File 对象） |                                                                                                                                                                                                      |
+| `getFileList` | 获取上传文件列表                                                                           |                                                                                                                                                                                                      |
+| `_upload`     | 手动触发上传                                                                               | 一个页面上有多处上传的时候（列表这种情况比较多），`Uploader` 组件只需要引入一次，避免组件多次渲染。在需要上传的地方放一个普通的按钮（点击后调用此方法即可）。例：`UploaderInstance.value._upload();` |
+
 ### 事件
 
-| 名称              | 说明                       | 类型     |
-| ----------------- | -------------------------- | -------- |
-| `on-type-error`   | 文件校验错误后触发         | Function |
-| `on-exceed-limit` | 文件超出最大上传数量后触发 | Function |
+| 名称              | 说明                       |
+| ----------------- | -------------------------- |
+| `on-type-error`   | 文件校验错误后触发         |
+| `on-exceed-limit` | 文件超出最大上传数量后触发 |

@@ -13,6 +13,7 @@
       <router-link class="mr-[10px]" to="/staffSearch">StaffSearch</router-link>
       <router-link class="mr-[10px]" to="/dialog">dialog</router-link>
       <router-link class="mr-[10px]" to="/userSearch">userSearch</router-link>
+      <router-link class="mr-[10px]" to="/uploaderf">Uploader</router-link>
     </div>
 
     <router-view v-slot="{ Component }">

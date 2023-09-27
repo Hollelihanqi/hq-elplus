@@ -27,8 +27,7 @@ export default defineConfig({
         changeOrigin: true,
       },
       "/api": {
-        // target: "http://10.130.137.53:8080",
-        target: "http://10.130.15.223:8100", // UAT,
+        target: "http://10.130.137.53:8080",
         changeOrigin: true,
       },
       "/_search": {

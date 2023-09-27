@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 16px">
+  <div class="p-4">
     <yto-c-uploader
       :get-instance="getInstance"
       :options="options"
@@ -13,10 +13,10 @@
 
 <script lang="ts" setup>
 import { Plus } from "@element-plus/icons-vue";
-import { request } from "@yto/utils/dist";
+import _request from "../request";
 const UploaderInstance = ref();
 const mergeFile = (params = {}) => {
-  return request.request({
+  return _request.request({
     url: "/v2/mergeChunks",
     method: "POST",
     data: params,
@@ -29,8 +29,7 @@ const getInstance = (uploader: any) => {
 };
 // 附件上传结果回调
 const handleUploadSuccess = async (rootFile: any, file: any, message: any, chunk: any) => {
-  console.log("上传成功");
-  let msg = message;
+  let msg = JSON.parse(message);
   try {
     msg = JSON.parse(message);
   } catch (e) {
@@ -48,7 +47,7 @@ const handleUploadSuccess = async (rootFile: any, file: any, message: any, chunk
     file.fileID = res.fileID;
   } else {
     await nextTick();
-    file.setErrorStatus(file);
+    file.setErrorStatus();
   }
 };
 // 附件移除
@@ -65,19 +64,11 @@ const options = ref({
   testChunks: true, // 是否开启服务器分片校验
   // 服务器分片校验函数，秒传及断点续传基础
   checkChunkUploadedByResponse: function (chunk: any, message: any) {
-    if (message) {
-      let _message = message;
-      try {
-        _message = JSON.parse(message);
-      } catch (e) {
-        console.error("json.parse error", e);
-      }
-      if (_message.data.ifExist) {
-        return true;
-      }
-      return (_message.data.chunks || []).indexOf(chunk.offset + 1) >= 0;
+    const _message = JSON.parse(message);
+    if (_message.data.ifExist) {
+      return true;
     }
-    return false;
+    return (_message.data.chunks || []).indexOf(chunk.offset + 1) >= 0;
   },
   headers: {},
   // 额外的自定义查询参数
