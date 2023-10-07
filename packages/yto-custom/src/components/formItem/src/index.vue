@@ -38,7 +38,7 @@
         :span="item.span || span"
         style="padding: 0 10px"
       >
-        <el-form-item :label="item?.label" :prop="item?.prop" :label-width="item.labelWidth">
+        <el-form-item :label="item?.label" :prop="item?.prop" :label-width="item.labelWidth" v-bind="item?.formItemBinds">
           <div :class="item.contentClass">
             <component
               v-bind="item"
