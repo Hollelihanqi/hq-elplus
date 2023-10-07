@@ -41,7 +41,7 @@
       </template>
     </el-table>
     <el-pagination
-      v-if="!paginationHide"
+      v-if="!cpaginationHide"
       v-model:page-size="paginationParams.pageSize"
       v-model:current-page="paginationParams.currentPage"
       class="my-el-pagination"
@@ -162,6 +162,14 @@ const _tableDataTotal = ref(0);
 const paginationParams = reactive({
   currentPage: props.currentPage,
   pageSize: props.pageSize,
+});
+
+const cpaginationHide = computed(() => {
+  return (
+    props.paginationHide ||
+    (props.requestApi && _tableDataTotal.value === 0) ||
+    (!props.requestApi && props.total === 0)
+  );
 });
 
 const getTableData = async (params = {}) => {
