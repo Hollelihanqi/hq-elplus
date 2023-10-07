@@ -291,7 +291,10 @@ const options = [
 ];
 const form = reactive({});
 const formConfig = [
-  { itemType: "input", prop: "name", label: "文本框" },
+  { itemType: "input", prop: "name", label: "文本框",formItemBinds:{
+      class:'testClass',
+      id:"testId"
+    } },
   {
     itemType: "cascader",
     slot:true,

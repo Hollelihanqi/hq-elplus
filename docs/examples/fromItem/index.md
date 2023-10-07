@@ -46,6 +46,7 @@
 | `label`        | 表单label   | string  | —        | -     | — |
 | `options`        | 下拉框list数据 | Array   | —        | []    | inputType等于 select radio  cascader checkbox 可用 例：[{label:‘’，value:'''}] |
 | `contentWidth`        | 自定义class | string   | —        | _    | -|
+| `formItemBinds`        | Element所有fromItem属性 | object   | —        | _    | 详见element官网|
 
 ### itemType 支持类型
 
