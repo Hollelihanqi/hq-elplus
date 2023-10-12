@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import "./style.css";
 import { router } from "./router";
 import App from "./App.vue";
-
+import '@/icon-font/iconfont.css' // 字体文件
 import "virtual:windi.css";
 
 import ElementPlus from "element-plus";
@@ -13,7 +13,7 @@ import YtoCustom from '@yto/custom'
 // import 'yto-custom/dist/style.css'
 
 // import YtoCustom from "@yto/custom";
-import "@yto/custom/dist/es/style.css";
+import "@yto/custom/es/style.css";
 
 
 const app = createApp(App);

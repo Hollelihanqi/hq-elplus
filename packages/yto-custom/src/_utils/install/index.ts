@@ -13,7 +13,6 @@ export type Install<T> = T & {
 export const install = <T extends Component>(main: T): Install<T> => {
   (main as Record<string, unknown>).install = (app: App): void => {
     const { name } = main;
-    console.log(name);
     name && app.component(`YtoC${name}`, main);
   };
   return main as Install<T>;
