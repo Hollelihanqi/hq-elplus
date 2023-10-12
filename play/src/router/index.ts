@@ -6,28 +6,11 @@ const routes = [
   { path: '/staffSearch', component: () => import('@/views/staffSearch.vue') },
   { path: '/userSearch', component: () => import('@/views/TestSearch.vue') },
   { path: '/dialog', component: () => import('@/views/dialog.vue') },
-  { path: '/layout-frame', component: () => import('@/views/layout-frame.vue') },
-  {
-    path: '/layout-router', component: () => import('@/views/layout-router.vue'),
-    children: [
-      {
-        path: 'child-1',
-        component: () => import('@/views/layout-router-child-1.vue')
-      },
-      {
-        path: 'child-2',
-        component: () => import('@/views/layout-router-child-2.vue')
-      }
-    ]
-  },
-  {
-    path: '/layout-child-1',
-    component: () => import('@/views/layout-router-child-1.vue')
-  },
-  {
-    path: '/layout-child-2',
-    component: () => import('@/views/layout-router-child-2.vue')
-  }
+  { path: '/uploaderf', component: () => import('@/views/UploaderF.vue') },
+  { path: '/layoutFrom', component: () => import('@/views/layoutFrom.vue') },
+  { path: '/layoutFrame', component: () => import('@/views/layout-frame.vue') },
+  { path: '/layout-child-1', component: () => import('@/views/layout-router-child-1.vue') },
+  { path: '/layout-child-2', component: () => import('@/views/layout-router-child-2.vue') },
 ]
 
 export const router = createRouter({

@@ -1,7 +1,7 @@
 <template>
   <div class="uploader-w" :style="{ width: listHide ? 'auto' : '100%' }">
     <label ref="uploadBtn">
-      <slot>
+      <slot name="uploaderBtn">
         <el-button>上传文件</el-button>
       </slot>
     </label>
@@ -97,7 +97,7 @@ const _options = {
   connectionCount: 3, //同时上传的连接数
   fileParameterName: "file", // 上传文件时文件的参数名，默认file
   maxChunkRetries: 3, // 最大自动失败重试上传次数
-  simultaneousUploads: 12, // 并发上传数 默认为 3
+  simultaneousUploads: 3, // 并发上传数 默认为 3
   testChunks: true, // 是否开启服务器分片校验
   // 服务器分片校验函数，秒传及断点续传基础
   checkChunkUploadedByResponse: function (chunk: any, message: any) {
@@ -293,6 +293,9 @@ const clearFiles = () => {
 const getFileList = () => {
   return UPLOADER.value.fileList;
 };
+const removeFile = (file: any) => {
+  file._removeFile(file);
+};
 const _upload = () => {
   uploadBtn.value.click();
 };
@@ -303,6 +306,7 @@ onBeforeMount(() => {
 onMounted(() => {
   initUploaderEvent();
   UPLOADER.value.clearFiles = clearFiles;
+  UPLOADER.value.removeFile = removeFile;
   UPLOADER.value.getFileList = getFileList;
   UPLOADER.value._upload = _upload;
   props.getInstance(UPLOADER);

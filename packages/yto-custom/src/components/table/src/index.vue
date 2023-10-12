@@ -1,67 +1,64 @@
 <template>
-  <ElConfigProvider :locale="zhCn">
-    <div class="table-w h-[100%] flex flex-col">
-      <div v-if="$slots.tableHeader" class="table-header flex items-center">
-        <slot name="tableHeader"></slot>
-      </div>
-      <el-table
-        v-loading="requestApi ? _loading : loading"
-        ref="ElTableInstance"
-        class="my-el-table flex-1 w-[100%]"
-        :class="{ 'header-bg-hide': !headerbgHide, 'pagination-hide-table': paginationHide }"
-        :data="requestApi ? _tableData : tableData"
-        v-bind="$attrs"
-      >
-        <!-- 默认插槽 -->
-        <slot></slot>
-        <template v-for="item in columns" :key="item">
-          <!-- selection || index -->
-          <el-table-column
-            v-if="item.type === 'selection' || item.type === 'index'"
-            v-bind="item"
-            :align="item.align ?? 'center'"
-            :reserve-selection="item.type === 'selection'"
-          >
-          </el-table-column>
-          <!-- expand 支持 tsx 语法 && 作用域插槽 (tsx > slot) -->
-          <el-table-column
-            v-else-if="item.type === 'expand'"
-            v-slot="scope"
-            v-bind="item"
-            :align="item.align ?? 'center'"
-          >
-            <component :is="item.render" v-if="item.render" :row="scope.row" v-bind="scope"> </component>
-            <slot v-else :name="item.type" :row="scope.row"></slot>
-          </el-table-column>
-          <!-- other 循环递归 -->
-          <TableColumn v-else :column="item">
-            <template v-for="slot in Object.keys($slots)" #[slot]="scope">
-              <slot :name="slot" :row="scope.row" :index="scope.$index" v-bind="scope"></slot>
-            </template>
-          </TableColumn>
-        </template>
-      </el-table>
-      <el-pagination
-        v-if="!paginationHide"
-        v-model:page-size="paginationParams.pageSize"
-        v-model:current-page="paginationParams.currentPage"
-        class="my-el-pagination"
-        :layout="layout"
-        :total="requestApi ? _tableDataTotal : total"
-        :page-sizes="pageSizes"
-        v-bind="paginationOptions"
-        @update:page-size="handleSizeChange"
-        @update:current-page="handlePageChange"
-      ></el-pagination>
+  <div class="table-w h-[100%] flex flex-col">
+    <div v-if="$slots.tableHeader" class="table-header flex items-center">
+      <slot name="tableHeader"></slot>
     </div>
-  </ElConfigProvider>
+    <el-table
+      v-loading="requestApi ? _loading : loading"
+      ref="ElTableInstance"
+      class="my-el-table flex-1 w-[100%]"
+      :class="{ 'header-bg-hide': !headerbgHide, 'pagination-hide-table': paginationHide }"
+      :data="requestApi ? _tableData : tableData"
+      v-bind="$attrs"
+    >
+      <!-- 默认插槽 -->
+      <slot></slot>
+      <template v-for="item in columns" :key="item">
+        <!-- selection || index -->
+        <el-table-column
+          v-if="item.type === 'selection' || item.type === 'index'"
+          v-bind="item"
+          :align="item.align ?? 'center'"
+          :reserve-selection="item.type === 'selection'"
+        >
+        </el-table-column>
+        <!-- expand 支持 tsx 语法 && 作用域插槽 (tsx > slot) -->
+        <el-table-column
+          v-else-if="item.type === 'expand'"
+          v-slot="scope"
+          v-bind="item"
+          :align="item.align ?? 'center'"
+        >
+          <component :is="item.render" v-if="item.render" :row="scope.row" v-bind="scope"> </component>
+          <slot v-else :name="item.type" :row="scope.row"></slot>
+        </el-table-column>
+        <!-- other 循环递归 -->
+        <TableColumn v-else :column="item">
+          <template v-for="slot in Object.keys($slots)" #[slot]="scope">
+            <slot :name="slot" :row="scope.row" :index="scope.$index" v-bind="scope"></slot>
+          </template>
+        </TableColumn>
+      </template>
+    </el-table>
+    <el-pagination
+      v-if="!cpaginationHide"
+      v-model:page-size="paginationParams.pageSize"
+      v-model:current-page="paginationParams.currentPage"
+      class="my-el-pagination"
+      :layout="layout"
+      :total="requestApi ? _tableDataTotal : total"
+      :page-sizes="pageSizes"
+      v-bind="paginationOptions"
+      @update:page-size="handleSizeChange"
+      @update:current-page="handlePageChange"
+    ></el-pagination>
+  </div>
 </template>
 
 <script lang="tsx" setup name="Table">
 import { PropType, ref, onMounted, defineEmits } from "vue";
 import { PaginationProps, ElConfigProvider } from "element-plus";
 import TableColumn from "./components/TableColumn.vue";
-import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 
 export interface ColumnsItemProps {
   [propsName: string]: any;
@@ -165,6 +162,14 @@ const _tableDataTotal = ref(0);
 const paginationParams = reactive({
   currentPage: props.currentPage,
   pageSize: props.pageSize,
+});
+
+const cpaginationHide = computed(() => {
+  return (
+    props.paginationHide ||
+    (props.requestApi && _tableDataTotal.value === 0) ||
+    (!props.requestApi && props.total === 0)
+  );
 });
 
 const getTableData = async (params = {}) => {

@@ -42,7 +42,9 @@ export default defineConfig({
     Components({
       resolvers: [ElementPlusResolver()],
     }),
-    ElementPlus(),
+    ElementPlus({
+      defaultLocale: 'zh-cn'
+    }),
 
     vueSetupExtend(),
     // dts({

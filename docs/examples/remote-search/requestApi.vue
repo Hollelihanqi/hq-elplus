@@ -1,11 +1,13 @@
 <template>
-  <yto-c-remote-search
-    v-model="user"
-    remote
-    valueKey="userCode"
-    :optTemp="optTemp"
-    :requestApi="getList"
-  ></yto-c-remote-search>
+  <div class="basic-com">
+    <yto-c-remote-search
+      v-model="user"
+      remote
+      valueKey="userCode"
+      :optTemp="optTemp"
+      :requestApi="getList"
+    ></yto-c-remote-search>
+  </div>
 </template>
 <script lang="ts" setup>
 import { request } from "@yto/utils";
@@ -64,3 +66,8 @@ const optTemp = (item: any) => {
   );
 };
 </script>
+<style lang="scss" scoped>
+.basic-com {
+  padding: 16px;
+}
+</style>

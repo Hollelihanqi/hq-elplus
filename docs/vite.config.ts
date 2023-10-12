@@ -38,6 +38,10 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
           target: "http://10.130.16.149:8082",
           changeOrigin: true,
         },
+        "/api/v2": {
+          target: "http://10.130.137.53:8000", // sit
+          changeOrigin: true,
+        },
       },
     },
   };
