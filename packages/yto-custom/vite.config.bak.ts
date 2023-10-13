@@ -8,7 +8,7 @@ import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import ElementPlus from "unplugin-element-plus/vite";
 import vueSetupExtend from "vite-plugin-vue-setup-extend";
 import WindiCSS from 'vite-plugin-windicss'
-import { copyFileSync } from "fs";
+import { copyFileSync, existsSync, readdirSync, rmSync } from "fs";
 import { readFile } from "fs/promises";
 //@ts-ignore
 import { outputFile } from "fs-extra/esm";
@@ -16,6 +16,9 @@ import { outputFile } from "fs-extra/esm";
 import { visualizer } from "rollup-plugin-visualizer";
 //@ts-ignore
 import MoveFile from "./vite-plugin-move";
+import dts from 'vite-plugin-dts'
+emptyDir(resolve(__dirname, 'dist'))
+emptyDir(resolve(__dirname, 'types'))
 
 export default defineConfig({
   plugins: [
@@ -42,25 +45,25 @@ export default defineConfig({
     Components({
       resolvers: [ElementPlusResolver()],
     }),
-    ElementPlus({
-      defaultLocale: 'zh-cn'
-    }),
+    ElementPlus(),
 
     vueSetupExtend(),
-    // dts({
-    //   skipDiagnostics: true /** 是否跳过类型诊断 */,
-    //   staticImport: true /** 是否将动态引入转换为静态 */,
-    //   outputDir: ['./dist/es']/** 可以指定一个数组来输出到多个目录中 */,
-    //   insertTypesEntry: true /** 是否生成类型声明入口 */,
-    //   cleanVueFileName: true /** 是否将 '.vue.d.ts' 文件名转换为 '.d.ts' */,
-    //   copyDtsFiles: true /** 是否将源码里的 .d.ts 文件复制到 outputDir */,
-    //   include: ['./packages/yto-custom'] /** 手动设置包含路径的 glob */,
-    //   // exclude:['./src/directives'],
-    //   // /** 构建后回调钩子 */
-    //   // afterBuild: (): void => {
-    //   //   move()
-    //   // }
-    // }),
+    dts({
+      copyDtsFiles: true,
+      outputDir: [
+        'dist',
+        'types'
+        // 'types/inner'
+      ],
+      // include: ['src/index.ts'],
+      exclude: ['src/ignore'],
+      staticImport: true,
+      // rollupTypes: true,
+      insertTypesEntry: true,
+      compilerOptions: {
+        declarationMap: true
+      }
+    }),
     MoveFile(() => {
       move();
     }),
@@ -72,26 +75,27 @@ export default defineConfig({
     },
   },
   build: {
-    target: "modules", // 支持原生 ES 模块、原生 ESM 动态导入 和 import.meta 的浏览器。
-    minify: true,
-    emptyOutDir: false,
-    outDir: resolve(__dirname, "./dist") /** 指定输出路径 */,
+    // target: "modules", // 支持原生 ES 模块、原生 ESM 动态导入 和 import.meta 的浏览器。
+    // minify: true,
+    // emptyOutDir: false,
+    // outDir: resolve(__dirname, "./dist") /** 指定输出路径 */,
     lib: {
-      entry: "./src/index.ts",
+      entry: [resolve(__dirname, 'src/index.ts')],
       name: "YtoCustom",
+      formats: ['es']
     },
     rollupOptions: {
-      external: ["vue", "vue-router", "echarts", "axios", "@vue/runtime-core", "gold-core"],
-      output: [
-        {
-          name: "YtoCustom",
-          format: "es",
-          dir: "dist/es",
-          // 输出后的文件名
-          entryFileNames: "index.js",
-          exports: "named",
-        },
-      ],
+      external: ["vue", "vue-router", "echarts", "axios", "@vue/runtime-core"],
+      // output: [
+      //   {
+      //     name: "YtoCustom",
+      //     format: "es",
+      //     dir: "dist/es",
+      //     // 输出后的文件名
+      //     entryFileNames: "index.js",
+      //     exports: "named",
+      //   },
+      // ],
     },
   },
 });
@@ -117,3 +121,13 @@ const move = (): void => {
     console.warn("\n" + `${json.name} ${json.version} 版本打包成功! ` + "\n");
   });
 };
+
+function emptyDir(dir: string) {
+  if (!existsSync(dir)) {
+    return
+  }
+
+  for (const file of readdirSync(dir)) {
+    rmSync(resolve(dir, file), { recursive: true, force: true })
+  }
+}
