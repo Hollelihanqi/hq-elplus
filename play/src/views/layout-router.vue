@@ -17,7 +17,9 @@
 </template>
 
 <script lang="ts" setup>
-import { IOptionTabPane, session, tabPaneAdd } from "../../../packages/yto-custom/src/gold-core";
+// import { IOptionTabPane, session, tabPaneAdd } from "../../../packages/yto-custom/src/gold-core";
+
+import { IOptionTabPane, session, tabPaneAdd } from "gold-core";
 import logo from "@/assets/vue.svg";
 import { useRouter } from "vue-router";
 const router = useRouter();

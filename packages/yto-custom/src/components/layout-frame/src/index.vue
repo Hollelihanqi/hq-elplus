@@ -34,7 +34,7 @@
 </template>
 <script lang="ts" setup name="LayoutFrame">
 import { provide } from "vue";
-import { useFrame, tabPaneClose, isBoolean } from "@/gold-core";
+import { useFrame, tabPaneClose, isBoolean } from "gold-core";
 import { EnumSessionKey } from "@/common/EnumConstant";
 
 const props = defineProps({

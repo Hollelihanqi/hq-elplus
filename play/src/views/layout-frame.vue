@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import { IOptionTabPane, session, tabPaneAdd } from "gold-core";
+import { IOptionTabPane, session, tabPaneAdd } from "@/gold-core";
 import logo from "@/assets/vue.svg";
 
 const collapse = ref(false);

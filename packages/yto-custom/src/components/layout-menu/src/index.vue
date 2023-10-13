@@ -32,7 +32,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useMenu } from "@/composable/menu";
-import { isArray, toURL } from "@/gold-core";
+import { isArray, toURL } from "gold-core";
 import InnerNodeMenu from "./NodeMenu.vue";
 
 const props = defineProps({

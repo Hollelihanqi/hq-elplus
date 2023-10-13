@@ -81,7 +81,7 @@ export default defineConfig({
       name: "YtoCustom",
     },
     rollupOptions: {
-      external: ["vue", "vue-router", "echarts", "axios", "@vue/runtime-core"],
+      external: ["vue", "vue-router", "echarts", "axios", "@vue/runtime-core", "gold-core"],
       output: [
         {
           name: "YtoCustom",

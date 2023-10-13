@@ -12,7 +12,7 @@ import { inject } from "vue";
 import { ElIcon } from "element-plus";
 import "element-plus/es/components/icon/style/css";
 
-import { isBlank, isEmpty } from "@/gold-core";
+import { isBlank, isEmpty } from "gold-core";
 import { EnumSessionKey } from "@/common/EnumConstant";
 defineProps({ data: Object, showIcon: { type: Boolean, default: true } });
 const keyLabel = inject<any>(EnumSessionKey.MenuKeyLabel);

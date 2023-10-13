@@ -20,7 +20,7 @@
 // import { useGlobalStore, useTabsStore } from "@/store";
 import { Close } from "@element-plus/icons-vue";
 import { EnumSessionKey } from "@/common/EnumConstant";
-import { tabPaneClose, tabPaneAdd, toURL, IOptionTabPane } from "@/gold-core";
+import { tabPaneClose, tabPaneAdd, toURL, IOptionTabPane } from "gold-core";
 import { useRouter } from "vue-router";
 
 const props = defineProps({
@@ -34,25 +34,6 @@ const props = defineProps({
 
 const tabsMenuValue = inject(EnumSessionKey.TabsActivate);
 const router = useRouter();
-
-// // 监听路由的变化（防止浏览器后退/前进不变化 tabsMenuValue）
-// watch(
-//   () => route.path,
-//   (newVal) => {
-//     if (newVal === "/") return;
-//     tabsMenuValue.value = route.path;
-//     const tabsParams = {
-//       icon: route.meta.icon as string,
-//       title: route.meta.title as string,
-//       path: route.path,
-//       close: !route.meta.isAffix,
-//     };
-//     tabStore.addTabs(tabsParams);
-//   },
-//   {
-//     immediate: true,
-//   }
-// );
 
 watch(
   () => tabsMenuValue.value,

@@ -39,7 +39,7 @@
 import { ref } from "vue";
 import { ElIcon } from "element-plus";
 import { SwitchButton } from "@element-plus/icons-vue";
-import { session } from "@/gold-core";
+import { session } from "gold-core";
 import { EnumSessionKey } from "@/common/EnumConstant";
 import useFullScreen from "@/composable/fullScreen";
 
