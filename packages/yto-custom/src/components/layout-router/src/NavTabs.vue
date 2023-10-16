@@ -17,22 +17,21 @@
 </template>
 
 <script lang="ts" setup>
-// import { useGlobalStore, useTabsStore } from "@/store";
 import { Close } from "@element-plus/icons-vue";
 import { EnumSessionKey } from "@/common/EnumConstant";
 import { tabPaneClose, tabPaneAdd, toURL, IOptionTabPane } from "gold-core";
 import { useRouter } from "vue-router";
 
-const props = defineProps({
-  tabsMenuList: {
-    type: Array,
-    default: () => {
-      return [];
-    },
+interface Props {
+  tabsMenuList: IOptionTabPane[];
+}
+const props = withDefaults(defineProps<Props>(), {
+  tabsMenuList: () => {
+    return [];
   },
 });
 
-const tabsMenuValue = inject(EnumSessionKey.TabsActivate);
+const tabsMenuValue: any = inject(EnumSessionKey.TabsActivate);
 const router = useRouter();
 
 watch(
@@ -41,7 +40,7 @@ watch(
     if (!value) return;
     const { mode, href } = unref(props.tabsMenuList).find((tab) => tab.code === value) || {};
     if (mode === "router") {
-      const url = toURL(href);
+      const url = toURL(href as string);
       router.push(url.pathname + url.search);
     }
   },
@@ -53,14 +52,14 @@ watch(
 const tabClick = (tabItem: IOptionTabPane) => {
   const { href, code } = tabItem;
   console.log("tabClick", href);
-  tabPaneAdd(href, { ...tabItem, href });
+  tabPaneAdd(href as string, { ...tabItem, href });
   // tabsMenuValue.value = code;
 };
 
 // // Remove Tab
 const tabRemove = (tabItem: IOptionTabPane) => {
   // tabStore.removeTabs(activeTabPath);
-  tabPaneClose(tabItem.code);
+  tabPaneClose(tabItem.code as string);
 };
 
 provide(EnumSessionKey.TabsActivate, tabsMenuValue);
