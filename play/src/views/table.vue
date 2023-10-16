@@ -7,9 +7,9 @@
     :current-page="1"
     :tableChange="handleTableChange"
   >
-    <template #callStatus="scope">
+    <!-- <template #callStatus="scope">
       <span>{{ scope.row.status }}</span>
-    </template>
+    </template> -->
   </yto-c-table>
 </template>
 <script lang="ts" setup>
@@ -33,7 +33,7 @@ const columns = [
   },
   {
     label: "调用状态",
-    slot: "callStatus",
+    prop: "status",
   },
   {
     label: "最后调用时间",
@@ -43,17 +43,17 @@ const columns = [
 
 const tableData = [
   {
-    callerCode: "YTO-5464564",
-    callerName: "CALL-NAME",
-    ownerStr: "LIHANQI",
-    status: "已调用",
-    lastCallTime: "2023.01.10",
+    callerCode: 0,
+    callerName: undefined,
+    ownerStr: null,
+    status: "",
+    lastCallTime: false,
   },
   {
-    callerCode: "YTO-5464564",
-    callerName: "CALL-NAME",
-    ownerStr: "LIHANQI",
-    status: "已调用",
+    callerCode: "0",
+    callerName: null,
+    ownerStr: undefined,
+    status: true,
     lastCallTime: "2023.01.10",
   },
 ];

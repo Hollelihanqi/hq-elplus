@@ -37,13 +37,8 @@ module.exports = defineConfig({
       "shallowOnly": true
     }],
     "vue/no-reserved-component-names":"off", // 警用组件名使用 HTML 保留字段
-    // "vue/no-unused-vars": "off", // 警用未使用的变量
     '@typescript-eslint/no-empty-function': 'off', //禁用空函数
     'vue/require-default-prop': "off", // 禁用属性默认值
-    // 'vue/component-tags-order': 'off', // 禁用标签顺序
-    // "vue/attributes-order": 0, //禁用属性顺序
-    // 'vue/attribute-hyphenation': 0, // 禁用使用驼峰式绑定属性
-    // 'vue/require-explicit-emits': 0 // 禁用未使用 emits 选项声明的事件触发器
   },
   settings: {
     "import/extensions": [".js", ".jsx", ".ts", ".tsx"],

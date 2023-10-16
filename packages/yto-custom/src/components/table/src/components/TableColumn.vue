@@ -43,7 +43,9 @@ const renderCellData = (item: any, scope: any) => {
     ? item.formatText(scope.row)
     : item.enum
     ? formatEnum(item, scope.row)
-    : (item.prop && scope.row[item.prop]) || "--";
+    : item.prop && scope.row[item.prop] === ""
+    ? "--"
+    : scope.row[item.prop] ?? "--";
 };
 
 const renderColumn = (column: any) => {
