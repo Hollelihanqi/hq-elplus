@@ -41,3 +41,8 @@
 ```shell
   pnpm add <packageName> --workspace
 ```
+
+删除已发布的指定版本
+```shell
+  npm unpublish @yto/custom@x.x.x-beta
+```

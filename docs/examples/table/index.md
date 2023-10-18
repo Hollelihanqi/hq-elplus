@@ -39,7 +39,7 @@
 | `columns`           | 表头 columns 配置项兼容 Table-column 属性                                                        | Array           | —          | []                                        |
 | `tableData`         | 数据源                                                                                           | Array           | —          | []                                        |
 | `paginationHide`    | 是否隐藏分页功能                                                                                 | Boolean         | —          | false                                     |
-| `paginationOptions` | 分页组件 props                                                                                   | Boolean         | —          | false                                     |
+| `paginationOptions` | 分页组件 props (参考 element-plus)                                                               | Boolean         | —          | {}                                        |
 | `layout`            | 分页组件布局，子组件名用逗号分隔                                                                 | String          | —          | "total, sizes, prev, pager, next, jumper" |
 | `total`             | 总条目数                                                                                         | Number          | —          | 0                                         |
 | `pageSize`          | 分页大小                                                                                         | Number          | —          | 10                                        |
@@ -70,11 +70,12 @@
 
 ### Table 方法
 
-| 属性名            | 说明                                                                               | 备注 |
-| ----------------- | ---------------------------------------------------------------------------------- | ---- |
-| `updateTableData` | 更新表格数据,调用此方法会执行 requestAPI。此方法可接收一个传参对象 `{...}`         |
-| `resetTableData`  | 重置表格数据 ,调用此方法会执行 requestAPI                                          |      |
-| `resetPagination` | 重置表格分页参数,接收一个对象传参 `{ currentPage = 1, pageSize = props.pageSize }` |      |
+| 属性名            | 说明                                                                                               | 备注 |
+| ----------------- | -------------------------------------------------------------------------------------------------- | ---- |
+| `updateTableData` | 更新表格数据,调用此方法会执行 requestAPI。此方法可接收一个传参对象 `{...}`                         |
+| `resetTableData`  | 重置表格数据 ,调用此方法会执行 requestAPI                                                          |      |
+| `resetPage`       | 重置表格分页参数                                                                                   |      |
+| `updatePage`      | 手动更新分页大小(pageSize)和当前页码(currentPage) `{ currentPage = 1, pageSize = props.pageSize }` |      |
 
 ### ElTable 实例调用
 

@@ -4,8 +4,8 @@
       <slot name="tableHeader"></slot>
     </div>
     <el-table
-      v-loading="requestApi ? _loading : loading"
       ref="ElTableInstance"
+      v-loading="requestApi ? _loading : loading"
       class="my-el-table flex-1 w-[100%]"
       :class="{ 'header-bg-hide': !headerbgHide, 'pagination-hide-table': paginationHide }"
       :data="requestApi ? _tableData : tableData"
@@ -230,9 +230,14 @@ const resetTableData = () => {
   getTableData();
 };
 
-const resetPagination = (obj?: { currentPage: number; pageSize: number }) => {
-  paginationParams.currentPage = obj ? obj.currentPage : 1;
-  paginationParams.pageSize = obj ? obj.pageSize : props.pageSize;
+const resetPage = () => {
+  paginationParams.currentPage = 1;
+  paginationParams.pageSize = props.pageSize;
+};
+
+const updatePage = (obj: { currentPage?: number; pageSize?: number }) => {
+  paginationParams.currentPage = obj?.currentPage || 1;
+  paginationParams.pageSize = obj?.pageSize || props.pageSize;
 };
 
 const getData = () => {
@@ -249,7 +254,8 @@ defineExpose({
   ElTableInstance,
   updateTableData,
   resetTableData,
-  resetPagination,
+  resetPage,
+  updatePage,
   getData,
 });
 </script>
