@@ -10,7 +10,12 @@
         }"
       >
         <span class="py-[8px] inline-block h-full mr-[8px]" @click="tabClick(tab)">{{ tab.label }}</span>
-        <el-icon class="!text-[#151719]" v-if="tab.closable !== false" @click="tabRemove(tab)"><Close /></el-icon>
+        <el-icon
+          v-if="tab.closable !== false && tabsMenuList.length > 1"
+          class="!text-[#151719]"
+          @click="tabRemove(tab)"
+          ><Close
+        /></el-icon>
       </li>
     </ul>
   </div>
@@ -48,19 +53,15 @@ watch(
     immediate: true,
   }
 );
-// // Tab Click
+// Tab Click
 const tabClick = (tabItem: IOptionTabPane) => {
   const { href, code } = tabItem;
   console.log("tabClick", href);
   tabPaneAdd(href as string, { ...tabItem, href });
-  // tabsMenuValue.value = code;
 };
 
-// // Remove Tab
-const tabRemove = (tabItem: IOptionTabPane) => {
-  // tabStore.removeTabs(activeTabPath);
-  tabPaneClose(tabItem.code as string);
-};
+// Remove Tab
+const tabRemove = (tabItem: IOptionTabPane) => tabPaneClose(tabItem.code as string);
 
 provide(EnumSessionKey.TabsActivate, tabsMenuValue);
 </script>

@@ -2,7 +2,7 @@
 
 <template>
   <div class="app">
-    <div class="router-box">
+    <!-- <div class="router-box">
       <router-link class="mr-[10px]" to="/form">form</router-link>
       <router-link class="mr-[10px]" to="/chart">chart</router-link>
       <router-link class="mr-[10px]" to="/table">table</router-link>
@@ -11,16 +11,16 @@
       <router-link class="mr-[10px]" to="/userSearch">userSearch</router-link>
       <router-link class="mr-[10px]" to="/uploaderf">Uploader</router-link>
       <router-link class="mr-[10px]" to="/layoutFrom">layoutFrom</router-link>
-      <router-link class="mr-[10px]" to="/layoutFrame">layoutFrom</router-link>
+      <router-link class="mr-[10px]" to="/layoutFrame">layoutFrame</router-link>
     </div>
 
     <router-view v-slot="{ Component }">
       <KeepAlive>
         <component :is="Component" :key="$route.fullPath"></component>
       </KeepAlive>
-    </router-view>
+    </router-view> -->
 
-    <!-- <LayoutRouter class="h-full"></LayoutRouter> -->
+    <LayoutRouter class="h-full"></LayoutRouter>
   </div>
 </template>
 <script lang="ts" setup>

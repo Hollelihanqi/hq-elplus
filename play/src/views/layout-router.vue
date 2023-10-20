@@ -65,7 +65,7 @@ const listNavigation: any[] = [
         label: "公告列表",
         href: "/layout-child-1?abc=1",
         code: "/layout-child-1",
-        closable: false,
+        // closable: false,
         mode: "router",
       },
     ],
