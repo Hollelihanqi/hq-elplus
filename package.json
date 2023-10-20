@@ -58,7 +58,7 @@
     "@types/node": "^18.18.5",
     "@vitejs/plugin-vue-jsx": "^3.0.2",
     "@vue/runtime-core": "^3.3.4",
-    "@yto/custom": "workspace:^0.0.50-beta",
+    "@yto/custom": "workspace:^",
     "@yto/utils": "workspace:^1.0.0",
     "echarts": "^5.4.3",
     "eslint-plugin-markdown": "^3.0.1",
