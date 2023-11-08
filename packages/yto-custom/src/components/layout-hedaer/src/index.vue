@@ -19,7 +19,7 @@
         </div>
       </slot>
     </div>
-    <slot name="right" v-if="user">
+    <slot v-if="user" name="right">
       <div class="flex items-center text-[14px] text-[#fff]">
         <div class="mr-[5px]">{{ user.userName }}</div>
         <div class="mr-[10px]">（{{ user.userCode }}）</div>
@@ -28,9 +28,11 @@
           :class="fullscreen ? 'layout-icon_guanbiquanju' : 'layout-icon_kaiqiquanju'"
           @click="onFullScreen"
         ></i>
-        <div class="flex items-center cursor-pointer text-[#fff]" @click="onLogout">
-          <span class="mr-[5px]">退出</span> <el-icon size="16"><SwitchButton /></el-icon>
-        </div>
+        <slot name="logout">
+          <div class="flex items-center cursor-pointer text-[#fff]" @click="onLogout">
+            <span class="mr-[5px]">退出</span> <el-icon size="16"><SwitchButton /></el-icon>
+          </div>
+        </slot>
       </div>
     </slot>
   </div>

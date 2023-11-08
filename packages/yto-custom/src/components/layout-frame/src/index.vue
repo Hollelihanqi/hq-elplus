@@ -4,24 +4,24 @@
     <div class="flex flex-1 overflow-hidden">
       <slot></slot>
       <el-tabs
+        v-model="activate"
         class="flex flex-col flex-1 bg-white overflow-hidden"
         type="border-card"
-        v-model="activate"
         @tab-remove="tabPaneClose"
       >
-        <template v-for="{ href, code, label, closable } in listRoute">
+        <template v-for="{ href, code, label, closable } in listRoute" :key="href">
           <el-tab-pane
-            class="flex-1 bg-white p-4 overflow-hidden"
+            class="flex-1 bg-[#f0f1f5] px-[10px] pb-[10px] overflow-hidden"
             :closable="isBoolean(closable) ? closable : true"
             :label="label"
             :name="code"
           >
             <iframe
+              :id="code"
               scrolling="auto"
               allowfullscreen="true"
               frameborder="0"
               class="w-full h-full"
-              :id="code"
               :name="code"
               :src="href"
             ></iframe>
@@ -29,7 +29,7 @@
         </template>
       </el-tabs>
     </div>
-    <slot name="footer" v-if="footer"></slot>
+    <slot v-if="footer" name="footer"></slot>
   </div>
 </template>
 <script lang="ts" setup name="LayoutFrame">
@@ -56,15 +56,31 @@ provide(EnumSessionKey.TabsActivate, activate);
 <style scoped lang="scss">
 .layout-frame {
   --layout-frame-bg: white;
+  --nav-tabs-bg: #e2e6e8;
+  --active-tabs-bg: white;
+  iframe {
+    background-color: var(--layout-frame-bg);
+  }
   :deep(.el-tabs) {
+    --el-tabs-header-height: 30px;
     @apply border-none;
     .el-tabs__header {
-      background-color: var(--layout-frame-bg);
+      @apply px-[16px] pt-[10px];
+      background-color: var(--nav-tabs-bg);
+      .el-tabs__item {
+        @apply rounded-t-[4px];
+        &.is-active {
+          background-color: var(--active-tabs-bg);
+        }
+        &:nth-child(2):not(.is-active).is-closable:hover {
+          @apply pl-[20px];
+        }
+      }
     }
 
     .el-tabs__content {
       display: flex;
-      padding: 0.5rem;
+      padding: 0;
       flex: 1 1 0%;
       overflow: hidden;
     }

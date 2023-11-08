@@ -1,7 +1,7 @@
 <template>
   <div class="layout-menu flex flex-col bg-slate-100 overflow-auto">
     <el-menu v-bind="$attrs" class="layout-menu-v flex-1 overflow-auto" :collapse="collapse" :default-active="activate">
-      <div class="layout-menu-search w-full bg-[#fff] p-[12px] box-border" v-if="!collapse">
+      <div v-if="!collapse" class="layout-menu-search w-full bg-[#fff] p-[12px] box-border">
         <el-input v-model="searchVal" placeholder="菜单查询" />
       </div>
       <template v-for="(item, index) in menuData" :key="index">
@@ -19,7 +19,7 @@
             </el-menu-item>
           </template>
         </el-sub-menu>
-        <el-menu-item v-else :index="getHref(item)" @click="menuClick(item)">
+        <el-menu-item v-else :index="item.code" @click="menuClick(item)">
           <slot name="label" v-bind="item">
             <inner-node-menu :data="item"></inner-node-menu>
           </slot>
@@ -104,10 +104,13 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
 
       &.is-active {
         @apply bg-[var(--layout-menu-background)];
+        .el-sub-menu__title {
+          @apply border-color-[#e5e7eb];
+        }
       }
 
       .el-sub-menu__title {
-        @apply text-[#000] opacity-80;
+        @apply text-[#000] opacity-80 border-b;
         &:hover {
           @apply bg-[var(--layout-menu-hover-color)];
         }
@@ -118,7 +121,7 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
     }
 
     .el-menu-item {
-      @apply h-[40px] bg-[var(--layout-menu-background)] leading-[40px] text-white opacity-80 text-[#000] border;
+      @apply h-[40px] bg-[var(--layout-menu-background)] leading-[40px] text-white opacity-80 text-[#000] border-b;
       &:hover {
         @apply bg-[var(--layout-menu-hover-color)];
       }
