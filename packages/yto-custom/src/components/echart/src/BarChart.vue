@@ -11,6 +11,7 @@ import { getOptiops } from "./common/util";
 import echartsComposable from "./common/echartsComposable";
 import { isEmptyFun } from "@yto/utils";
 
+console.log("isEmptyFun", isEmptyFun);
 interface Props {
   options?: any;
 }

@@ -1,0 +1,30 @@
+{
+  "name": "docs2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "unocss": "^0.57.0",
+    "unplugin-icons": "^0.17.1",
+    "unplugin-vue-macros": "^2.6.1",
+    "vite-plugin-inspect": "^0.7.40",
+    "vite-plugin-mkcert": "^1.16.0",
+    "vitepress": "1.0.0-alpha.74"
+  },
+  "dependencies": {
+    "@unocss/vite": "^0.57.0",
+    "fast-glob": "^3.3.1",
+    "markdown-it": "^13.0.1",
+    "normalize.css": "^8.0.1",
+    "nprogress": "^0.2.0"
+  }
+}

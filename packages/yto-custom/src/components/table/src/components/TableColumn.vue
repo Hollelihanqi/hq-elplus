@@ -17,9 +17,9 @@ const slots = useSlots();
 const formatEnum = (column: any, row: any) => {
   if (Array.isArray(column.enum)) {
     const target = column.enum.find((e: any) => e.value === row[column.prop]);
-    return target.label || "";
+    return target?.label || "--";
   } else {
-    return column.enum[row[column.prop]];
+    return column.enum[row[column.prop]] || '--';
   }
 };
 // 复制

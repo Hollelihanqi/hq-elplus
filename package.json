@@ -2,6 +2,9 @@
   "name": "yto",
   "version": "0.0.1",
   "type": "module",
+  "workspaces": [
+    "packages/yto-custom"
+  ],
   "scripts": {
     "build": "pnpm run -C packages/yto-custom build",
     "build:watch": "pnpm run -C packages/yto-custom watch",
@@ -16,7 +19,13 @@
     "format": "prettier --write .",
     "prepare": "husky install",
     "commit": "git add -A && git-cz && git push",
-    "publisher": "pnpm run -C packages/yto-custom/dist pnpm publish"
+    "publisher": "pnpm run -C packages/yto-custom/dist pnpm publish",
+    "release": "npm run release --workspaces && release-it"
+  },
+  "release-it": {
+    "git": {
+      "requireCleanWorkingDir": false
+    }
   },
   "config": {
     "commitizen": {
@@ -26,6 +35,8 @@
   "devDependencies": {
     "@commitlint/cli": "^17.8.0",
     "@commitlint/config-conventional": "^17.8.0",
+    "@release-it/bumper": "^5.1.0",
+    "@release-it/conventional-changelog": "^7.0.2",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "@vitejs/plugin-vue": "^4.4.0",
@@ -58,8 +69,9 @@
     "@types/node": "^18.18.5",
     "@vitejs/plugin-vue-jsx": "^3.0.2",
     "@vue/runtime-core": "^3.3.4",
-    "@yto/custom": "workspace:^0.0.50-beta",
-    "@yto/utils": "workspace:^1.0.0",
+    "@vueuse/core": "^10.5.0",
+    "@yto/custom": "workspace:^",
+    "@yto/utils": "workspace:^",
     "echarts": "^5.4.3",
     "eslint-plugin-markdown": "^3.0.1",
     "fs-extra": "^11.1.1",
