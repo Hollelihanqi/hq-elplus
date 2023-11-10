@@ -11,7 +11,7 @@
       <router-link class="mr-[10px]" to="/userSearch">userSearch</router-link>
       <router-link class="mr-[10px]" to="/uploaderf">Uploader</router-link>
       <router-link class="mr-[10px]" to="/layoutFrom">layoutFrom</router-link>
-      <router-link class="mr-[10px]" to="/layoutFrame">layoutFrom</router-link>
+      <router-link class="mr-[10px]" to="/layoutFrame">layoutFrame</router-link>
     </div>
 
     <router-view v-slot="{ Component }">

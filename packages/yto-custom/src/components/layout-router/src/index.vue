@@ -4,31 +4,31 @@
     <div class="flex flex-1 overflow-hidden">
       <slot></slot>
       <div class="w-full flex flex-col flex-1 bg-[#F0F1F5]">
-        <NavTabs class="h-[40px]" :tabsMenuList="listRoute"></NavTabs>
+        <NavTabs class="h-[40px]" :tabs-menu-list="listRoute"></NavTabs>
         <div class="flex-1 px-[10px] pb-[10px]">
           <router-view v-slot="{ Component, route }">
             <keep-alive>
               <component
-                v-if="route.meta && route.meta.keepAlive"
                 :is="Component"
+                v-if="route.meta && route.meta.keepAlive"
                 :key="route.meta.usePathKey ? route.fullPath : undefined"
               />
             </keep-alive>
             <component
-              v-if="!(route.meta && route.meta.keepAlive)"
               :is="Component"
+              v-if="!(route.meta && route.meta.keepAlive)"
               :key="route.meta.usePathKey ? route.fullPath : undefined"
             />
           </router-view>
         </div>
       </div>
     </div>
-    <slot name="footer" v-if="footer"></slot>
+    <slot v-if="footer" name="footer"></slot>
   </div>
 </template>
 <script lang="ts" setup name="LayoutRouter">
 import { provide } from "vue";
-import { useFrame, tabPaneClose, isBoolean } from "gold-core";
+import { useFrame } from "gold-core";
 import { EnumSessionKey } from "@/common/EnumConstant";
 import NavTabs from "./NavTabs.vue";
 

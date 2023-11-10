@@ -32,7 +32,6 @@ function labelFirst(target: any) {
 }
 
 function getIcon(target: any) {
-  console.log("getIcon", target, keyIcon);
   if (isEmpty(target)) {
     return "";
   }

@@ -2,7 +2,7 @@
  * @Author: DESKTOP-7338OS6\LHQ LHQ
  * @Date: 2023-03-24 17:52:24
  * @LastEditors: weichunpei
- * @LastEditTime: 2023-05-12 16:35:48
+ * @LastEditTime: 2023-10-20 13:13:57
  * @FilePath: \yto-engine\docs\docs\.vitepress\config.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AErts
  */
@@ -61,6 +61,18 @@ export default defineConfig({
             {
               text: "Uploader 大文件上传",
               link: "/examples/uploader/index.md",
+            },
+            {
+              text: "LayoutHeader",
+              link: "/examples/layout-header/index.md",
+            },
+            {
+              text: "LayoutMenu",
+              link: "/examples/layout-menu/index.md",
+            },
+            {
+              text: "LayoutRouter",
+              link: "/examples/layout-router/index.md",
             },
           ],
           collapsed: false,
