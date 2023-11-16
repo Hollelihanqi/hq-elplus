@@ -88,14 +88,14 @@ document.addEventListener("fullscreenchange", () => {
   --layout-header-text-color: #fff;
   --layout-header-background: #409eff;
   --layout-header-left-width: 200px;
-  --layout-header-collapse-width: 60px;
+  --layout-header-left-collapse-width: 60px;
   background: var(--layout-header-background);
   color: var(--layout-header-text-color);
   .left-header {
     width: var(--layout-header-left-width);
   }
   .left-header-collapse {
-    width: var(--layout-header-collapse-width);
+    width: var(--layout-header-left-collapse-width);
   }
 }
 </style>

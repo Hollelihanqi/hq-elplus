@@ -106,3 +106,9 @@ tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
 | `default` | 内容区域左侧插槽 |
 | `header`  | 顶部区域插槽     |
 | `footer`  | 底部区域插槽     |
+
+### layoutHeader 样式变量
+
+| 属性名               | 说明     |
+| -------------------- | -------- |
+| `--layout-router-bg` | 背景颜色 |

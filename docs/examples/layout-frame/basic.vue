@@ -1,0 +1,65 @@
+<template>
+  <div class="layout h-full">
+    <yto-c-layout-frame class="frame">
+      <template #header>
+        <yto-c-layout-header
+          title="圆通党建"
+          :collapse="collapse"
+          :logo="logo"
+          :user-info="userInfo"
+          @collapse="collapse = !collapse"
+        >
+          <template #logout>
+            <span>退出登录</span>
+          </template>
+        </yto-c-layout-header>
+      </template>
+      <yto-c-layout-menu :unique-opened="true" :collapse="collapse" :menus="listNavigation"></yto-c-layout-menu>
+    </yto-c-layout-frame>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { ref } from "vue";
+import { IOptionTabPane, tabPaneAdd } from "gold-core";
+import logo from "./vue.svg";
+
+const collapse = ref(false);
+const userInfo = {
+  userCode: "02348618",
+  userName: "魏春霈",
+};
+const listNavigation: IOptionTabPane[] = [
+  { label: "百度", href: "https://www.baidu.com", code: "www.baidu.com" },
+  { label: "测试", href: "/demo/list", closable: false, code: "/demo/list" },
+  { label: "必应", href: "https://cn.bing.com/", code: "cn.bing.com" },
+  {
+    label: "组件管理",
+    children: [
+      { label: "组件配置", href: "/widget/component/list", code: "/widget/component/list" },
+      { label: "属性配置", href: "/widget/component-attribute/list", code: "/widget/component-attribute/list" },
+      { label: "事件配置", href: "/widget/component-event/list", code: "/widget/component-event/list" },
+    ],
+  },
+];
+const frist = listNavigation[0];
+
+tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
+</script>
+<style lang="scss">
+:root {
+  // --el-color-primary: #ef1017;
+}
+.layout {
+  .layout-header {
+    --layout-header-background: #900808;
+  }
+  .layout-menu {
+    --layout-menu-active-color: #ef1017;
+    --layout-menu-active-background: rgba(239, 16, 23, 0.1);
+  }
+  .frame {
+    height: 100%;
+  }
+}
+</style>

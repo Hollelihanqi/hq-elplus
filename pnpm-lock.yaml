@@ -25,7 +25,7 @@ importers:
         version: 10.5.0(vue@3.3.4)
       '@yto/custom':
         specifier: workspace:^
-        version: link:packages/yto-custom
+        version: link:packages/yto-custom/dist
       '@yto/utils':
         specifier: workspace:^
         version: link:packages/yto-utils
@@ -162,6 +162,9 @@ importers:
       '@vitejs/plugin-vue-jsx':
         specifier: ^3.0.1
         version: 3.0.1(vite@4.4.11)(vue@3.3.4)
+      gold-core:
+        specifier: 0.1.17
+        version: 0.1.17
       markdown-it:
         specifier: ^13.0.1
         version: 13.0.1
@@ -221,7 +224,7 @@ importers:
     dependencies:
       '@yto/custom':
         specifier: workspace:^
-        version: link:../packages/yto-custom
+        version: link:../packages/yto-custom/dist
       '@yto/utils':
         specifier: workspace:^
         version: link:../packages/yto-utils
