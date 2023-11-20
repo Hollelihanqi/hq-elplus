@@ -3,6 +3,12 @@
     "pushArgs": []
   },
   "npm": {
-    "publishPath": "https://npm.yto.net.cn/"
+    "publish": false
+  },
+  "gitlab": {
+    "release": false
+  },
+  "hooks": {
+    "after:bump": "echo 更新版本成功"
   }
 }
