@@ -1,5 +1,8 @@
 {
   "git": {
-    "git": false
+    "pushArgs": []
+  },
+  "npm": {
+    "publishPath": "https://npm.yto.net.cn/"
   }
 }
