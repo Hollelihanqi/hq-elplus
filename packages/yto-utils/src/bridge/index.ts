@@ -1,12 +1,11 @@
 import { JsBridge } from "./basic"
 class Bridge {
-  private isCallback = false //回调方法是否返回值
   constructor() {
     console.log("JsBridge.first：setupWebViewJavascriptBridge")
     JsBridge.first();
   }
-  callHandler(funName, params) {
-    this.isCallback = false
+  callHandler(funName, funParams = {}, otherParams = { timeout: 3000 }) {
+    let isCallback = false; //回调方法是否返回值
     return new Promise<any>((resolve, reject) => {
       try {
         JsBridge.init((bridge: any) => {
@@ -14,13 +13,13 @@ class Bridge {
           bridge.registerHandler(funName, (data, responseCallback) => {
             responseCallback(data);
           });
-          bridge.callHandler(funName, params, (res: any) => {
-            this.isCallback = true;
+          bridge.callHandler(funName, funParams, (res: any) => {
+            isCallback = true;
             resolve(res)
           })
           setTimeout(() => {
-            if (!this.isCallback) resolve('返回值为空')
-          }, 3 * 1000)
+            if (!isCallback) resolve('返回值为空')
+          }, otherParams.timeout)
         })
       } catch (error) {
         reject(error)
