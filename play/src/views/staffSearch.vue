@@ -11,7 +11,7 @@
 import { ref } from "vue";
 import CustomLeakagewaySelect from "./CustomLeakagewaySelect.vue";
 import TestSearch from "./TestSearch.vue";
-import { request } from "@yto/utils/dist";
+import { request } from "@yto/utils";
 
 const user = ref("");
 const user2 = ref("");

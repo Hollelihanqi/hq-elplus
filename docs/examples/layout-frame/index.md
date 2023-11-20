@@ -2,13 +2,13 @@
  * @Author: weichunpei
  * @Date: 2023-10-20 13:07:20
  * @LastEditors: weichunpei
- * @LastEditTime: 2023-10-20 13:25:54
+ * @LastEditTime: 2023-11-16 16:53:49
  * @Description:
 -->
 
-# LayoutRouter
+# LayoutFrame
 
-用于职能类后台管理项目布局组件(路由模式)。
+用于职能类后台管理项目布局组件(iFrame 模式)。
 
 ### 功能
 
@@ -21,8 +21,8 @@
 
 ```vue
 <template>
-  <div id="layout">
-    <yto-c-layout-router class="router-class">
+  <div class="layout h-full">
+    <yto-c-layout-frame class="frame">
       <template #header>
         <yto-c-layout-header
           title="圆通党建"
@@ -31,53 +31,48 @@
           :user-info="userInfo"
           @collapse="collapse = !collapse"
         >
+          <template #logout>
+            <span>退出登录</span>
+          </template>
         </yto-c-layout-header>
       </template>
       <yto-c-layout-menu :unique-opened="true" :collapse="collapse" :menus="listNavigation"></yto-c-layout-menu>
-    </yto-c-layout-router>
+    </yto-c-layout-frame>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { IOptionTabPane, tabPaneAdd } from "gold-core";
+import { IOptionTabPane, session, tabPaneAdd } from "gold-core";
 import logo from "@/assets/vue.svg";
+
 const collapse = ref(false);
 const userInfo = {
   userCode: "02348618",
   userName: "魏春霈",
 };
-const listNavigation: any[] = [
+const listNavigation: IOptionTabPane[] = [
+  { label: "百度", href: "https://www.baidu.com", code: "www.baidu.com" },
+  { label: "测试", href: "/demo/list", closable: false, code: "/demo/list" },
+  { label: "必应", href: "https://cn.bing.com/", code: "cn.bing.com" },
   {
-    label: "公告管理",
-    icon: "icon iconfont party-web-icon-caidan3",
+    label: "组件管理",
     children: [
-      {
-        label: "公告列表",
-        href: "/layout-child-1?abc=1",
-        code: "/layout-child-1",
-        closable: false,
-        mode: "router",
-      },
-    ],
-  },
-  {
-    label: "资讯管理",
-    icon: "icon iconfont party-web-icon-caidan3",
-    children: [
-      {
-        label: "资讯列表",
-        href: "/layout-child-2",
-        code: "/layout-child-2",
-        mode: "router",
-      },
+      { label: "组件配置", href: "/widget/component/list", code: "/widget/component/list" },
+      { label: "属性配置", href: "/widget/component-attribute/list", code: "/widget/component-attribute/list" },
+      { label: "事件配置", href: "/widget/component-event/list", code: "/widget/component-event/list" },
     ],
   },
 ];
-const frist = listNavigation[0].children[0];
+
+const frist = listNavigation[0];
+
 tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
 </script>
 <style lang="scss">
-#layout {
+:root {
+  // --el-color-primary: #ef1017;
+}
+.layout {
   .layout-header {
     --layout-header-background: #900808;
   }
@@ -85,21 +80,21 @@ tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
     --layout-menu-active-color: #ef1017;
     --layout-menu-active-background: rgba(239, 16, 23, 0.1);
   }
-  .router-class {
+  .frame {
     height: 100%;
   }
 }
 </style>
 ```
 
-### LayoutRouter 属性
+### LayoutFrame 属性
 
 | 属性名   | 说明         | 类型    | 可选值 | 默认值   | 备注 |
 | -------- | ------------ | ------- | ------ | -------- | ---- |
 | `footer` | 显示底部区域 | boolean | -      | false    |      |
 | `max`    | 最大页签数   | number  | -      | undefind |      |
 
-### LayoutRouter 插槽
+### LayoutFrame 插槽
 
 | 属性名    | 说明             |
 | --------- | ---------------- |
@@ -109,6 +104,8 @@ tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
 
 ### layoutHeader 样式变量
 
-| 属性名               | 说明     |
-| -------------------- | -------- |
-| `--layout-router-bg` | 背景颜色 |
+| 属性名              | 说明                 |
+| ------------------- | -------------------- |
+| `--layout-frame-bg` | 背景颜色             |
+| `--nav-tabs-bg`     | 导航页签背景颜色     |
+| `--active-tabs-bg`  | 导航页签激活背景颜色 |

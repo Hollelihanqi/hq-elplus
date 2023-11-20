@@ -1,8 +1,8 @@
 <!--
  * @Author: weichunpei
  * @Date: 2023-10-20 09:30:23
- * @LastEditors: weichunpei
- * @LastEditTime: 2023-10-20 11:10:11
+ * @LastEditors: error: git config user.name & please set dead value or install git
+ * @LastEditTime: 2023-11-16 11:14:29
  * @Description: layoutHeader 组件
 -->
 
@@ -27,6 +27,16 @@
 | `collapse` | 系统名称 | boolean          | -      | ""     |      |
 | `menus`    | 菜单数据 | IOptionTabPane[] | -      | []     |      |
 | `width`    | 菜单宽度 | Img              | —      | -      |      |
+
+### LayoutMenu 样式变量
+
+| 属性名                            | 说明            |
+| --------------------------------- | --------------- |
+| `--layout-menu-background`        | 背景色          |
+| `--layout-menu-color`             | 文字颜色        |
+| `--layout-menu-active-background` | 激活背景色      |
+| `--layout-menu-active-color`      | 激活文字颜色    |
+| `--layout-menu-hover-color`       | 鼠标 hover 颜色 |
 
 ### Interface
 
