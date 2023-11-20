@@ -197,6 +197,7 @@ importers:
       gold-core:
         specifier: 0.1.17
         version: 0.1.17
+    publishDirectory: dist
 
   packages/yto-custom/dist:
     dependencies:
