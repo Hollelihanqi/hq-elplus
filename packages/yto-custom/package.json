@@ -1,6 +1,6 @@
 {
   "name": "@yto/custom",
-  "version": "0.0.51",
+  "version": "0.0.52",
   "type": "module",
   "main": "./dist/es/index.js",
   "module": "./dist/es/index.js",
@@ -24,6 +24,8 @@
   "repository": "https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine",
   "publishConfig": {
     "access": "public",
+    "directory": "dist",
+    "linkDirectory": true,
     "registry": "https://npm.yto.net.cn/"
   },
   "peerDependencies": {

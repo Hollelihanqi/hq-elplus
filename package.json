@@ -23,11 +23,6 @@
     "release:ui":"pnpm run -C packages/yto-custom release",
     "release": "npm run release --workspaces && release-it"
   },
-  "release-it": {
-    "git": {
-      "requireCleanWorkingDir": false
-    }
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-git"
