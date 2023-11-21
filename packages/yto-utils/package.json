@@ -13,7 +13,8 @@
     "registry": "https://npm.yto.net.cn/"
   },
   "scripts": {
-    "build": "vite build"
+    "build": "vite build",
+    "release": "release-it"
   },
   "keywords": [],
   "author": "",

@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "type": "module",
   "workspaces": [
-    "packages/yto-custom"
+    "packages/yto-custom",
+    "packages/yto-utils"
   ],
   "scripts": {
     "build": "pnpm run -C packages/yto-custom build",
