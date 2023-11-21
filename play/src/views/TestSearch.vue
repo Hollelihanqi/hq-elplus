@@ -5,10 +5,8 @@
   </div>
 </template>
 <script lang="ts" setup>
-// import { request } from "@yto/utils/dist";
 import { h, ref } from "vue";
 import _request from "../request";
-import axios from "axios";
 
 const user1 = ref("");
 const user = ref("");

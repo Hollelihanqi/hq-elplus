@@ -13,7 +13,7 @@
 
 <script lang="ts" setup>
 import { Plus } from "@element-plus/icons-vue";
-import { request } from "@yto/utils/dist";
+import { request } from "../../utils";
 const UploaderInstance = ref();
 const mergeFile = (params = {}) => {
   return request.request({

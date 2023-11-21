@@ -3,24 +3,28 @@
 function useFullScreen(): any {
   /**判断是否全屏*/
   function isFullScreen() {
-    return document.fullscreenElement || document.msFullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement ? true : false;
+    return document.fullscreenElement ||
+      document.msFullscreenElement ||
+      document.mozFullScreenElement ||
+      document.webkitFullscreenElement
+      ? true
+      : false;
   }
 
   /**实现F11全屏效果*/
   function fullScreen() {
     if (isFullScreen()) return;
-    var docElm = document.documentElement;
+    const docElm = document.documentElement;
     /*W3C*/
     if (docElm.requestFullscreen) {
       docElm.requestFullscreen();
-    }/*FireFox */ else if (docElm.mozRequestFullScreen) {
+    } /*FireFox */ else if (docElm.mozRequestFullScreen) {
       docElm.mozRequestFullScreen();
-    }/*Chrome等 */ else if (docElm.webkitRequestFullScreen) {
+    } /*Chrome等 */ else if (docElm.webkitRequestFullScreen) {
       docElm.webkitRequestFullScreen();
-    }/*IE11*/ else if (docElm.msRequestFullscreen) {
+    } /*IE11*/ else if (docElm.msRequestFullscreen) {
       docElm.msRequestFullscreen();
     }
-
   }
   /**退出F11全屏*/
   function exitFullScreen() {
@@ -40,7 +44,7 @@ function useFullScreen(): any {
     isFullScreen() ? exitFullScreen() : fullScreen();
   }
   return {
-    toggleFullScreen
-  }
-};
-export default useFullScreen
+    toggleFullScreen,
+  };
+}
+export default useFullScreen;

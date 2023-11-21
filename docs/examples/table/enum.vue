@@ -1,5 +1,5 @@
 <template>
-  <yto-c-table :columns="columns" :table-data="tableData" paginationHide></yto-c-table>
+  <yto-c-table :columns="columns" :table-data="tableData" pagination-hide></yto-c-table>
 </template>
 <script lang="ts" setup>
 const tableData = [
@@ -45,7 +45,7 @@ const columns = [
   {
     label: "姓名",
     prop: "name",
-    copy:true
+    copy: true,
   },
   {
     label: "年龄",

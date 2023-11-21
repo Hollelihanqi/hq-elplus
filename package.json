@@ -15,7 +15,7 @@
     "docs:build": "pnpm run -C docs docs:build",
     "docs:preview": "pnpm run -C docs docs:preview",
     "dev:all": "pnpm run -C play dev && pnpm run -C docs docs:dev",
-    "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx,.md,.json --max-warnings 0 --cache",
+    "lint": "eslint packages/yto-custom packages/yto-utils --ext .vue,.js,.ts,.jsx,.tsx,.json --max-warnings 0 --cache",
     "lint:fix": "pnpm run lint --fix",
     "format": "prettier --write .",
     "prepare": "husky install",

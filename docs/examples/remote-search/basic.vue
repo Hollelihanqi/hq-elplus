@@ -2,13 +2,13 @@
   <div class="basic-com">
     <yto-c-remote-search
       v-model="user"
-      baseURL=""
+      base-u-r-l=""
       url="/service-api/index/user/search"
       remote
-      searchField="keyword"
-      valueKey="userCode"
-      labelKey="userName"
-      :dataCallback="dataCallback"
+      search-field="keyword"
+      value-key="userCode"
+      label-key="userName"
+      :data-callback="dataCallback"
     ></yto-c-remote-search>
   </div>
 </template>
