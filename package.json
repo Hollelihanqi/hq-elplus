@@ -83,17 +83,6 @@
     "vue-router": "^4.2.5"
   },
   "release-it": {
-    "git": false,
-    "plugins": {
-      "@release-it/bumper": {
-        "out": {
-          "file": "package.json",
-          "path": [
-            "dependencies.@yto/custom",
-            "dependencies.@yto/utils"
-          ]
-        }
-      }
-    }
+    "git": false
   }
 }
