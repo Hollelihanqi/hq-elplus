@@ -3,15 +3,56 @@
     <!-- <yto-c-staff-search v-model="user" key="3"></yto-c-staff-search>
     <CustomLeakagewaySelect key="1" v-model="user2" multiple ref="testInstance" /> -->
     <!-- <yto-c-user-search v-model="user2" url="" :requestApi="getList"></yto-c-user-search> -->
-    <TestSearch />
+    <!-- <TestSearch /> -->
     <el-button @click="testInstance.testFun()">test</el-button>
   </div>
+  <el-form ref="FormInstanceRef" :model="formModel" :rules="rules" label-width="80px" label-position="right">
+    <el-form-item label="标准字段" prop="columns">
+      <CustomRuleCategoryName v-model="formModel.columns" multiple />
+    </el-form-item>
+  </el-form>
+  <el-button @click="handleSubmit">Submit</el-button>
 </template>
 <script lang="ts" setup>
 import { ref } from "vue";
 import CustomLeakagewaySelect from "./CustomLeakagewaySelect.vue";
+import CustomRuleCategoryName from "../components/CustomRuleCategoryName.vue";
 import TestSearch from "./TestSearch.vue";
 import { request } from "@yto/utils";
+
+const FormInstanceRef = ref();
+const formModel = ref<any>({});
+
+const validatePass = (rule: any, value: any, callback: any) => {
+  if (value && value.length) {
+    callback();
+  } else {
+    callback(new Error("请输入"));
+  }
+};
+
+const rules = {
+  columns: [{ required: true, validator: validatePass, trigger: ["change", "blur"] }],
+};
+
+const handleSubmit = (): void => {
+  FormInstanceRef.value?.validate((valid: any) => {
+    if (valid) {
+      const params: any = {
+        ...formModel.value,
+      };
+      console.log(params);
+      // createItem(params).then(() => {
+      //   YtoTableInstance.value.updateTableData()
+      //   dialogVisible.value = false
+      //   window._message({
+      //     message: formModel.value.id ? "编辑成功" : "新建成功",
+      //     type: "success",
+      //   })
+      // })
+    }
+  });
+};
 
 const user = ref("");
 const user2 = ref("");

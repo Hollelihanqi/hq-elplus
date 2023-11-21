@@ -10,10 +10,7 @@ import "element-plus/dist/index.css";
 // 开发阶段引入
 
 import YtoCustom from '@yto/custom'
-// import 'yto-custom/dist/style.css'
-
-// import YtoCustom from "@yto/custom";
-import "@yto/custom/dist/es/style.css";
+import "@yto/custom/es/style.css";
 
 
 const app = createApp(App);

@@ -78,33 +78,24 @@ const props = {
     type: Function,
     default: null,
   },
-  modelValue: {
-    // 此属性是 vue3.0 默认的 v-model 双向数据绑定 prop，请在子组件上通过 v-model 进行传递
-    // 因为组件内部时通过 watch 监听 v-model 的值的变化来更新组件的内部 _value；
-    // 所以清除表单时一定要手动对 v-model 的值进行手动置空，否则组件下次不会更新 _value
-    type: [String, Array],
-    default: "",
-  },
+  // modelValue: {
+  //   // 此属性是 vue3.0 默认的 v-model 双向数据绑定 prop，请在子组件上通过 v-model 进行传递
+  //   // 因为组件内部时通过 watch 监听 v-model 的值的变化来更新组件的内部 _value；
+  //   // 所以清除表单时一定要手动对 v-model 的值进行手动置空，否则组件下次不会更新 _value
+  //   type: [String, Array],
+  //   default: "",
+  // },
 };
 export type BaseSelectProps = Partial<ExtractPropTypes<typeof props>>;
 
 export default defineComponent({
   name: "RemoteSearch",
   props,
-  emits: ["update:modelValue"],
   setup(props: BaseSelectProps, { attrs, expose, emit }) {
     const options: any = ref([]);
     const copyOptions: any = ref([]);
     const loading = ref(false);
     const collapse = ref(true);
-    const _value = computed({
-      get() {
-        return props.modelValue;
-      },
-      set(value) {
-        emit("update:modelValue", value);
-      },
-    });
     const setData = (list: any) => {
       options.value = list;
       copyOptions.value = [...list];
@@ -226,10 +217,6 @@ export default defineComponent({
       return h(
         ElSelect,
         {
-          modelValue: _value.value,
-          "onUpdate:modelValue": (value) => {
-            _value.value = value;
-          },
           loading: loading.value,
           "value-key": props.valueKey,
           remote: false,

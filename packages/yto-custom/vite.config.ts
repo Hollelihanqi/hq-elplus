@@ -39,12 +39,12 @@ export default defineConfig({
         globalsPropValue: true,
       },
     }),
-    Components({
-      resolvers: [ElementPlusResolver()],
-    }),
-    ElementPlus({
-      defaultLocale: 'zh-cn'
-    }),
+    // Components({
+    //   resolvers: [ElementPlusResolver()],
+    // }),
+    // ElementPlus({
+    //   defaultLocale: 'zh-cn'
+    // }),
 
     vueSetupExtend(),
     // dts({
@@ -81,7 +81,7 @@ export default defineConfig({
       name: "YtoCustom",
     },
     rollupOptions: {
-      external: ["vue", "vue-router", "echarts", "axios", "@vue/runtime-core", "gold-core"],
+      external: ["vue", "vue-router", "echarts", "axios", "@vue/runtime-core", "gold-core", "element-plus", "immutable", "simple-uploader.js", "spark-md5"],
       output: [
         {
           name: "YtoCustom",

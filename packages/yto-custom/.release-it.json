@@ -1,6 +1,6 @@
 {
   "git": {
-    "pushArgs": []
+    "git": false
   },
   "npm": {
     "publish": false
