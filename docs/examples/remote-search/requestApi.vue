@@ -3,18 +3,18 @@
     <yto-c-remote-search
       v-model="user"
       remote
-      valueKey="userCode"
-      :optTemp="optTemp"
-      :requestApi="getList"
+      value-key="userCode"
+      :opt-temp="optTemp"
+      :request-api="getList"
     ></yto-c-remote-search>
   </div>
 </template>
 <script lang="ts" setup>
-import { request } from "@yto/utils";
+import { request } from "../../utils";
 import { h, ref } from "vue";
 
 const user = ref("");
-const _headers = () => {
+const _headers: any = () => {
   let token = sessionStorage.getItem("authorization") as string;
   if (token) {
     if (token.indexOf('"') !== -1) {

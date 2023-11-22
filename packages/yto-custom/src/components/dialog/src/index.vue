@@ -37,21 +37,21 @@ const props = withDefaults(defineProps<IProps>(), {
 const $emit = defineEmits(["update:visible", "cancel", "confirm", "maxminFun", "reductionFun"]);
 
 // -------------------------------- header start--------------------------
-const maxminFun = () => {
-  nextTick(() => {
-    let dialogBody: HTMLElement = document.querySelector("." + "dialog-cst" + " .el-dialog__body") as HTMLElement;
+// const maxminFun = () => {
+//   nextTick(() => {
+//     let dialogBody: HTMLElement = document.querySelector("." + "dialog-cst" + " .el-dialog__body") as HTMLElement;
 
-    if (props.mimIcon == ZoomIn) {
-      dialogBody!.style.display = "none";
-      props.mimIcon = ZoomOut;
-      $emit("maxminFun");
-    } else {
-      dialogBody!.style.display = "block";
-      props.mimIcon = ZoomIn;
-      $emit("reductionFun");
-    }
-  });
-};
+//     if (props.mimIcon == ZoomIn) {
+//       dialogBody!.style.display = "none";
+//       props.mimIcon = ZoomOut;
+//       $emit("maxminFun");
+//     } else {
+//       dialogBody!.style.display = "block";
+//       props.mimIcon = ZoomIn;
+//       $emit("reductionFun");
+//     }
+//   });
+// };
 // -------------------------------- header end--------------------------
 
 // -------------------------------- footer btn start--------------------------
@@ -128,7 +128,7 @@ const handleConfirm = () => {
     <slot />
 
     <template #footer>
-      <slot name="footer" v-if="!_hiddenFooter">
+      <slot v-if="!_hiddenFooter" name="footer">
         <el-button v-if="_showCancel" v-bind="_cancelOption" @click="handleClose">{{
           _cancelOption.txt ? _cancelOption.txt : "取消"
         }}</el-button>

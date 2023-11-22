@@ -1,7 +1,15 @@
 <template>
-  <el-form :model="form" v-bind="$attrs" ref="myForm">
-    <div class="dis-flex flex-wrap" v-if="layoutAuto">
-      <el-form-item   v-for="(item, index) in formConfig" v-bind="item?.formItemBinds" :label="item?.label" :prop="item?.prop" :label-width="item.labelWidth" class="mx-[10px]">
+  <el-form v-bind="$attrs" ref="myForm" :model="form">
+    <div v-if="layoutAuto" class="dis-flex flex-wrap">
+      <el-form-item
+        v-for="item in formConfig"
+        v-bind="item?.formItemBinds"
+        :key="item.prop"
+        :label="item?.label"
+        :prop="item?.prop"
+        :label-width="item.labelWidth"
+        class="mx-[10px]"
+      >
         <div :class="item.contentClass">
           <component
             v-bind="item"
@@ -30,7 +38,7 @@
       </div>
     </div>
 
-    <el-row class="dis-flex pad-tb-5" v-if="!layoutAuto">
+    <el-row v-if="!layoutAuto" class="dis-flex pad-tb-5">
       <el-col
         v-for="(item, index) in formConfig"
         :key="index"
@@ -38,7 +46,12 @@
         :span="item.span || span"
         style="padding: 0 10px"
       >
-        <el-form-item :label="item?.label" :prop="item?.prop" :label-width="item.labelWidth" v-bind="item?.formItemBinds">
+        <el-form-item
+          :label="item?.label"
+          :prop="item?.prop"
+          :label-width="item.labelWidth"
+          v-bind="item?.formItemBinds"
+        >
           <div :class="item.contentClass">
             <component
               v-bind="item"
@@ -113,7 +126,7 @@ const props = defineProps({
       return [];
     },
   },
-  layoutAuto:{type:Boolean,default:false},
+  layoutAuto: { type: Boolean, default: false },
   size: {
     type: String,
     default: () => {

@@ -3,27 +3,27 @@
     <h3>自定义 option</h3>
     <yto-c-remote-search
       v-model="user"
-      baseURL=""
+      base-u-r-l=""
       url="/service-api/index/user/search"
       remote
-      searchField="keyword"
-      valueKey="userCode"
-      labelKey="userName"
-      :dataCallback="dataCallback"
-      :optTemp="optTemp"
+      search-field="keyword"
+      value-key="userCode"
+      label-key="userName"
+      :data-callback="dataCallback"
+      :opt-temp="optTemp"
     ></yto-c-remote-search>
     <h3>自定义 label</h3>
     <yto-c-remote-search
       v-model="user2"
-      baseURL=""
+      base-u-r-l=""
       url="/service-api/index/user/search"
       remote
-      searchField="keyword"
-      valueKey="userCode"
-      labelKey="selText"
+      search-field="keyword"
+      value-key="userCode"
+      label-key="selText"
       placeholder="请输入用户编号/姓名"
-      :dataCallback="dataCallback2"
-      :optTemp="optTemp"
+      :data-callback="dataCallback2"
+      :opt-temp="optTemp"
     ></yto-c-remote-search>
   </div>
 </template>

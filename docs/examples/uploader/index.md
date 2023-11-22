@@ -47,7 +47,7 @@
 | `query`                        | POST 请求时额外参数。如果是函数，它将传递一个 Uploader.File、一个 Uploader.Chunk 对象和一个 isTest 布尔值 | Functon/Object | {}         |
 
 ```js
-checkChunkUploadedByResponse: function (chunk, message) {
+checkChunkUploadedByResponse: function(chunk, message) {
     var objMessage = {}
     try {
     objMessage = JSON.parse(message)
