@@ -18,7 +18,7 @@ import { ref } from "vue";
 import CustomLeakagewaySelect from "./CustomLeakagewaySelect.vue";
 import CustomRuleCategoryName from "../components/CustomRuleCategoryName.vue";
 import TestSearch from "./TestSearch.vue";
-import { request } from "@yto/utils";
+import { request } from "@/utils";
 
 const FormInstanceRef = ref();
 const formModel = ref<any>({});
