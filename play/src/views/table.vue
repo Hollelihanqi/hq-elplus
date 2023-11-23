@@ -5,7 +5,8 @@
     :page-size="10"
     :total="30"
     :current-page="1"
-    :tableChange="handleTableChange"
+    :table-change="handleTableChange"
+    @sort-change="handleSortChange"
   >
     <!-- <template #callStatus="scope">
       <span>{{ scope.row.status }}</span>
@@ -13,15 +14,20 @@
   </yto-c-table>
 </template>
 <script lang="ts" setup>
+const handleSortChange = (item) => {
+  console.log(item);
+};
 const columns = [
   {
     label: "序号",
     type: "index",
     width: 80,
+    sortable: "custom",
   },
   {
     label: "调用方编码",
     prop: "callerCode",
+    sortable: "custom",
   },
   {
     label: "调用方名称",

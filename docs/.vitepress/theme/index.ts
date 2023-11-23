@@ -13,7 +13,7 @@ import "element-plus/dist/index.css";
 import "@ruabick/vitepress-demo-block/dist/style.css";
 import "./var.css";
 import "./style.css";
-import "@yto/custom/dist/es/style.css";
+import "@yto/custom/es/style.css";
 
 export default {
   ...DefaultTheme,

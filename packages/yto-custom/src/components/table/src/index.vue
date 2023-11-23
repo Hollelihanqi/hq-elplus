@@ -10,6 +10,7 @@
       :class="{ 'header-bg-hide': !headerbgHide, 'pagination-hide-table': paginationHide }"
       :data="requestApi ? _tableData : tableData"
       v-bind="$attrs"
+      @sort-change="handleSortChange"
     >
       <!-- 默认插槽 -->
       <slot></slot>
@@ -57,7 +58,7 @@
 
 <script lang="tsx" setup name="Table">
 import { PropType, ref, onMounted, defineEmits } from "vue";
-import { PaginationProps, ElConfigProvider } from "element-plus";
+import { PaginationProps } from "element-plus";
 import TableColumn from "./components/TableColumn.vue";
 
 export interface ColumnsItemProps {
@@ -83,6 +84,10 @@ const props = defineProps({
     default: null,
   },
   requestAuto: {
+    type: Boolean,
+    default: true,
+  },
+  tableActionIsCallApi: {
     type: Boolean,
     default: true,
   },
@@ -201,27 +206,42 @@ const getTableData = async (params = {}) => {
   }
 };
 
-const handleSizeChange = (num: number): void => {
-  paginationParams.currentPage = 1;
-  emits("on-table", "size", { currentPage: 1, pageSize: num });
-  if (!props.requestApi) {
-    props.tableChange("size", num);
-    return;
+const handlePaginationChange = (type: "size" | "page" | "sort", num: number): void => {
+  if (type === "size") {
+    paginationParams.currentPage = 1; // 只有在改变大小时才重置当前页码
   }
-  if (props.requestAuto) {
+
+  emits("on-table", type, {
+    currentPage: paginationParams.currentPage,
+    pageSize: type === "size" ? num : paginationParams.pageSize,
+  });
+
+  // 如果不需要通过API请求数据，则直接调用tableChange
+  if (!props.requestApi) {
+    props.tableChange(type, num);
+    return; // 提前返回，避免不必要的条件判断
+  }
+
+  // 如果设置为调用API，则获取表格数据
+  if (props.tableActionIsCallApi) {
     getTableData();
   }
 };
 
+// 用于分页大小变化
+const handleSizeChange = (num: number): void => {
+  handlePaginationChange("size", num);
+};
+
+// 用于分页页码变化
 const handlePageChange = (num: number) => {
-  emits("on-table", "page", { currentPage: num, pageSize: paginationParams.pageSize });
-  if (!props.requestApi) {
-    props.tableChange("page", num);
-    return;
-  }
-  if (props.requestAuto) {
-    getTableData();
-  }
+  handlePaginationChange("page", num);
+};
+
+// 用于表格排序
+const handleSortChange = (item: { prop: string; order: string; column: any }) => {
+  paginationParams.currentPage = 1;
+  emits("on-table", "sort", item);
 };
 
 const updateTableData = (params = {}) => {
