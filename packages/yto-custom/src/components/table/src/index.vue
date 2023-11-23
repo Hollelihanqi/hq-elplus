@@ -201,12 +201,14 @@ const getTableData = async (params = {}) => {
   }
 };
 
-const handleSizeChange = (val: number): void => {
+const handleSizeChange = (num: number): void => {
   paginationParams.currentPage = 1;
-  emits("on-table", "size", { currentPage: 1, pageSize: val });
+  emits("on-table", "size", { currentPage: 1, pageSize: num });
   if (!props.requestApi) {
-    props.tableChange("size", val);
-  } else {
+    props.tableChange("size", num);
+    return;
+  }
+  if (props.requestAuto) {
     getTableData();
   }
 };
@@ -215,7 +217,9 @@ const handlePageChange = (num: number) => {
   emits("on-table", "page", { currentPage: num, pageSize: paginationParams.pageSize });
   if (!props.requestApi) {
     props.tableChange("page", num);
-  } else {
+    return;
+  }
+  if (props.requestAuto) {
     getTableData();
   }
 };
