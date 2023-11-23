@@ -21,7 +21,7 @@ export const downloadFileStream = (streamData: any, fileName?: string) => {
  *          downloadFileDataCSV({
  *           tableHeadArr:['姓名','年龄'],
  *           fileDataArr:[{name:'李',age:'55'},{name:'李',age:'44'},{name:'李',age:'33'}],
- *            templateFun:function (item) {
+ *            formatter:function (item) {
  *               return `${item.name}\t,${item.age}\t \n`
  *              }
  *         })
@@ -29,14 +29,14 @@ export const downloadFileStream = (streamData: any, fileName?: string) => {
 interface downLoadType {
   tableHeadArr: string[];
   fileDataArr: any[];
-  templateFun: Function;
+  formatter: Function;
   fileName?: string;
 }
 
 export const downloadFileDataCSV = (params: downLoadType) => {
   let str = `${params.tableHeadArr.toString()}\n`;
   params.fileDataArr.forEach((item: any) => {
-    str += params.templateFun(item);
+    str += params.formatter(item);
   });
   const url = "data:text/csv;charset=utf-8,\ufeff" + encodeURIComponent(str);
   const link = document.createElement("a");
