@@ -1,4 +1,3 @@
-// import '@/icon-font/iconfont.css'
 import "windi.css";
 import installer from "./defaults";
 

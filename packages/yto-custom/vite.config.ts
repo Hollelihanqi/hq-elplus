@@ -110,7 +110,7 @@ export default defineConfig({
           // preserveModules: true, // 保持文件结构
           // preserveModulesRoot: resolve('./src'),
           exports: "named",
-          sourcemap: true,
+          sourcemap: false,
           generatedCode: {
             symbols: true,
           },
