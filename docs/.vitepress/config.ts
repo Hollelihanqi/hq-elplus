@@ -56,7 +56,11 @@ export default defineConfig({
                   text: "UserSearch 用户搜索",
                   link: "/examples/user-search/index.md",
                 },
-              ]
+              ],
+            },
+            {
+              text: "SearchForm 表格搜索",
+              link: "/examples/search-form/index.md",
             },
             {
               text: "Uploader 大文件上传",

@@ -1,12 +1,23 @@
 {
   "name": "@yto/custom",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
-  "main": "./dist/es/index.js",
-  "module": "./dist/es/index.js",
+  "main": "./es/index.js",
+  "module": "./es/index.js",
   "files": [
     "dist/"
   ],
+  "exports": {
+    ".": {
+      "import": "./es/index.js",
+      "types": "./es/index.d.ts"
+    },
+    "./styles": "./es/style.css",
+    "./es": "./es/index.js",
+    "./es/*": "./es/*.js",
+    "./es/*.js": "./es/*.js",
+    "./*": "./*"
+  },
   "scripts": {
     "clean": "rimraf dist",
     "build": "pnpm clean && vue-tsc && vite build",

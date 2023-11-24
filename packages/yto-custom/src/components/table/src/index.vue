@@ -144,6 +144,10 @@ const props = defineProps({
     type: Function,
     default: () => ({}),
   },
+  dataUpdateAfter: {
+    type: Function,
+    default: () => ({}),
+  },
   cellEmptyText: {
     type: String,
     default: "--",
@@ -199,6 +203,8 @@ const getTableData = async (params = {}) => {
     }
     _tableData.value = result[props.dataKey];
     _tableDataTotal.value = result.total || 0;
+    await nextTick();
+    props.dataUpdateAfter(result);
   } catch (error) {
     _loading.value = false;
     console.error("表格请求数据发生错误...");

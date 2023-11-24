@@ -7,8 +7,8 @@ import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import ElementPlus from "unplugin-element-plus/vite";
 import vueSetupExtend from "vite-plugin-vue-setup-extend";
-import WindiCSS from 'vite-plugin-windicss'
-import { copyFileSync } from "fs";
+import WindiCSS from "vite-plugin-windicss";
+import fs, { copyFileSync } from "fs";
 import { readFile } from "fs/promises";
 //@ts-ignore
 import { outputFile } from "fs-extra/esm";
@@ -16,7 +16,40 @@ import { outputFile } from "fs-extra/esm";
 import { visualizer } from "rollup-plugin-visualizer";
 //@ts-ignore
 import MoveFile from "./vite-plugin-move";
+import dts from "vite-plugin-dts";
 
+const componentDirs = fs.readdirSync(resolve("src/components"));
+const input = {
+  main: resolve("src/index.ts"), // 全局入口
+  // 为每个组件创建一个入口
+  ...componentDirs.reduce((entries, dir) => {
+    const fullDir = resolve(`src/components/${dir}`);
+    if (fs.statSync(fullDir).isDirectory()) {
+      entries[dir] = resolve(`${fullDir}/index.ts`);
+    }
+    return entries;
+  }, {}),
+};
+
+// 获取所有组件的入口文件
+function getComponentEntries(dir) {
+  const files = fs.readdirSync(resolve(dir));
+  const componentEntries = {};
+  files.forEach((file) => {
+    const componentDir = path.join(dir, file);
+    if (fs.statSync(resolve(componentDir)).isDirectory()) {
+      const entryFile = path.join(componentDir, "index.ts");
+      if (fs.existsSync(resolve(entryFile))) {
+        // 注意：这里我们修改了输出路径，使其进入 components 目录
+        componentEntries[`components/${file}`] = resolve(entryFile);
+      }
+    }
+  });
+  return componentEntries;
+}
+
+const componentEntries = getComponentEntries("./src/components");
+console.log("__________", resolve("src/index.ts"));
 export default defineConfig({
   plugins: [
     vue(),
@@ -26,7 +59,7 @@ export default defineConfig({
     }),
     WindiCSS({
       scan: {
-        fileExtensions: ['vue', 'ts', 'js', 'jsx', 'tsx'],
+        fileExtensions: ["vue", "ts", "js", "jsx", "tsx"],
       },
     }),
     AutoImport({
@@ -39,27 +72,11 @@ export default defineConfig({
         globalsPropValue: true,
       },
     }),
-    // Components({
-    //   resolvers: [ElementPlusResolver()],
-    // }),
-    // ElementPlus({
-    //   defaultLocale: 'zh-cn'
-    // }),
-
     vueSetupExtend(),
     // dts({
-    //   skipDiagnostics: true /** 是否跳过类型诊断 */,
-    //   staticImport: true /** 是否将动态引入转换为静态 */,
-    //   outputDir: ['./dist/es']/** 可以指定一个数组来输出到多个目录中 */,
-    //   insertTypesEntry: true /** 是否生成类型声明入口 */,
-    //   cleanVueFileName: true /** 是否将 '.vue.d.ts' 文件名转换为 '.d.ts' */,
-    //   copyDtsFiles: true /** 是否将源码里的 .d.ts 文件复制到 outputDir */,
-    //   include: ['./packages/yto-custom'] /** 手动设置包含路径的 glob */,
-    //   // exclude:['./src/directives'],
-    //   // /** 构建后回调钩子 */
-    //   // afterBuild: (): void => {
-    //   //   move()
-    //   // }
+    //   outputDir: 'dist/es',
+    //   staticImport: true,
+    //   insertTypesEntry: true,
     // }),
     MoveFile(() => {
       move();
@@ -72,25 +89,48 @@ export default defineConfig({
     },
   },
   build: {
-    target: "modules", // 支持原生 ES 模块、原生 ESM 动态导入 和 import.meta 的浏览器。
+    target: "modules",
     minify: true,
     emptyOutDir: false,
-    outDir: resolve(__dirname, "./dist") /** 指定输出路径 */,
+    outDir: resolve(__dirname, "./dist"),
     lib: {
-      entry: "./src/index.ts",
+      entry: resolve("./src/index.ts"),
       name: "YtoCustom",
     },
     rollupOptions: {
-      external: ["vue", "vue-router", "echarts", "axios", "@vue/runtime-core", "gold-core", "element-plus", "immutable", "simple-uploader.js", "spark-md5"],
+      // input: {
+      //   index: resolve("./src/index.ts"),
+      //   ...componentEntries
+      // },
       output: [
         {
           name: "YtoCustom",
-          format: "es",
-          dir: "dist/es",
-          // 输出后的文件名
-          entryFileNames: "index.js",
+          format: "es", // ES模块格式
+          dir: "dist/es", // 输出目录
+          // preserveModules: true, // 保持文件结构
+          // preserveModulesRoot: resolve('./src'),
           exports: "named",
+          sourcemap: true,
+          generatedCode: {
+            symbols: true,
+          },
+          // assetFileNames: `[name]/[ext]/style.css`,
+          entryFileNames: `index.js`,
+          // chunkFileNames: 'shared/[name].js',
+          // manualChunks: () => 'everything.js'
         },
+      ],
+      external: [
+        "vue",
+        "vue-router",
+        "echarts",
+        "axios",
+        "@vue/runtime-core",
+        "gold-core",
+        "element-plus",
+        "immutable",
+        "simple-uploader.js",
+        "spark-md5",
       ],
     },
   },
@@ -100,10 +140,10 @@ export default defineConfig({
 const move = (): void => {
   readFile("./package.json").then((data: any) => {
     const json = JSON.parse(data);
-    json.main = "es/index.js";
-    json.module = "es/index.js";
+    // json.main = "es/index.js";
+    // json.module = "es/index.js";
     // json.types = "es/index.d.ts"
-    json.files = ["es/"];
+    // json.files = ["es/"];
     delete json.scripts;
     outputFile(path.resolve("./dist", `package.json`), JSON.stringify(json), "utf-8");
     const files = [

@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="app">
+  <div class="app flex flex-col p-[16px]">
     <div class="router-box">
       <router-link class="mr-[10px]" to="/form">form</router-link>
       <router-link class="mr-[10px]" to="/chart">chart</router-link>
@@ -14,7 +14,7 @@
       <router-link class="mr-[10px]" to="/layoutFrame">layoutFrame</router-link>
     </div>
 
-    <router-view v-slot="{ Component }">
+    <router-view v-slot="{ Component }" class="flex-1">
       <KeepAlive>
         <component :is="Component" :key="$route.fullPath"></component>
       </KeepAlive>

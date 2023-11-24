@@ -53,6 +53,7 @@
 | `tableActionIsCallApi` | 点击分页、排序在有 requestApi 的情况下是否自动调用 requestApi                                    | Boolean         | true/false | true                                      |
 | `dataKey`              | 自动调用 requestApi 返回结果后，读取列表数据的 key                                               | String          | —          | items                                     |
 | `dataCallback`         | 自动调用 requestApi 返回结果后，可通过此方法对数据进行处理，并返回一个对象。'{total:0,items:[]}' | Function        | —          | —                                         |
+| `dataUpdateAfter`      | 表格数据更新之后，在 nextTick 后执行                                                             | Function        | —          | —                                         |
 | `requestParams`        | 表格数据获取时，其它参数                                                                         | Object/Function | ()=>{}     | —                                         |
 | `headerbgHide`         | 表格 Header 部分是否增加背景                                                                     | Boolean         | —          | —                                         |
 | `loading`              | 数据渲染前是否显示 loading,如果传入 `requestApi`,不需要绑定此属性                                | Boolean         | true/false | false                                     |
