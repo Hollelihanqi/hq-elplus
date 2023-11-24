@@ -5,7 +5,9 @@
   "main": "./es/index.js",
   "module": "./es/index.js",
   "files": [
-    "dist/"
+    "dist/es/style.css",
+    "dist/es/*",
+    "dist/**/*"
   ],
   "exports": {
     ".": {

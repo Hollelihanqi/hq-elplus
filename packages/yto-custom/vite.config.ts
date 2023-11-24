@@ -18,38 +18,38 @@ import { visualizer } from "rollup-plugin-visualizer";
 import MoveFile from "./vite-plugin-move";
 import dts from "vite-plugin-dts";
 
-const componentDirs = fs.readdirSync(resolve("src/components"));
-const input = {
-  main: resolve("src/index.ts"), // 全局入口
-  // 为每个组件创建一个入口
-  ...componentDirs.reduce((entries, dir) => {
-    const fullDir = resolve(`src/components/${dir}`);
-    if (fs.statSync(fullDir).isDirectory()) {
-      entries[dir] = resolve(`${fullDir}/index.ts`);
-    }
-    return entries;
-  }, {}),
-};
+// const componentDirs = fs.readdirSync(resolve("src/components"));
+// const input = {
+//   main: resolve("src/index.ts"), // 全局入口
+//   // 为每个组件创建一个入口
+//   ...componentDirs.reduce((entries, dir) => {
+//     const fullDir = resolve(`src/components/${dir}`);
+//     if (fs.statSync(fullDir).isDirectory()) {
+//       entries[dir] = resolve(`${fullDir}/index.ts`);
+//     }
+//     return entries;
+//   }, {}),
+// };
 
-// 获取所有组件的入口文件
-function getComponentEntries(dir) {
-  const files = fs.readdirSync(resolve(dir));
-  const componentEntries = {};
-  files.forEach((file) => {
-    const componentDir = path.join(dir, file);
-    if (fs.statSync(resolve(componentDir)).isDirectory()) {
-      const entryFile = path.join(componentDir, "index.ts");
-      if (fs.existsSync(resolve(entryFile))) {
-        // 注意：这里我们修改了输出路径，使其进入 components 目录
-        componentEntries[`components/${file}`] = resolve(entryFile);
-      }
-    }
-  });
-  return componentEntries;
-}
+// // 获取所有组件的入口文件
+// function getComponentEntries(dir) {
+//   const files = fs.readdirSync(resolve(dir));
+//   const componentEntries = {};
+//   files.forEach((file) => {
+//     const componentDir = path.join(dir, file);
+//     if (fs.statSync(resolve(componentDir)).isDirectory()) {
+//       const entryFile = path.join(componentDir, "index.ts");
+//       if (fs.existsSync(resolve(entryFile))) {
+//         // 注意：这里我们修改了输出路径，使其进入 components 目录
+//         componentEntries[`components/${file}`] = resolve(entryFile);
+//       }
+//     }
+//   });
+//   return componentEntries;
+// }
 
-const componentEntries = getComponentEntries("./src/components");
-console.log("__________", resolve("src/index.ts"));
+// const componentEntries = getComponentEntries("./src/components");
+// console.log("__________", resolve("src/index.ts"));
 export default defineConfig({
   plugins: [
     vue(),
