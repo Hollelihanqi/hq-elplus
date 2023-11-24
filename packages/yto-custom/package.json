@@ -35,6 +35,7 @@
   "repository": "https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine",
   "publishConfig": {
     "access": "public",
+    "directory": "dist",
     "registry": "https://npm.yto.net.cn/"
   },
   "peerDependencies": {
