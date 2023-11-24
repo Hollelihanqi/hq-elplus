@@ -72,6 +72,12 @@ const menuData = computed(() => {
 const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
 </script>
 
+<style lang="scss">
+:root {
+  --el-menu-base-level-padding: 24px;
+  --el-menu-level-padding: 24px;
+}
+</style>
 <style lang="scss" scoped>
 .layout-menu {
   --layout-menu-background: rgb(255, 255, 255);
@@ -114,14 +120,17 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
         &:hover {
           @apply bg-[var(--layout-menu-hover-color)];
         }
-        .iconfont {
-          @apply mr-[10px];
+        .el-icon {
+          @apply mr-[8px] ml-[-8px];
         }
       }
     }
 
     .el-menu-item {
       @apply h-[40px] bg-[var(--layout-menu-background)] leading-[40px] text-white opacity-80 text-[#000] border-b;
+      .el-icon {
+        @apply mr-[8px] ml-[-8px];
+      }
       &:hover {
         @apply bg-[var(--layout-menu-hover-color)];
       }
