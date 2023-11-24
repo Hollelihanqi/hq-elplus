@@ -145,6 +145,7 @@ const move = (): void => {
     // json.types = "es/index.d.ts"
     // json.files = ["es/"];
     delete json.scripts;
+    delete json.publishConfig.directory;
     outputFile(path.resolve("./dist", `package.json`), JSON.stringify(json), "utf-8");
     const files = [
       { input: "./README.md", outDir: "dist/README.md" },

@@ -2,13 +2,8 @@
   "name": "@yto/custom",
   "version": "1.0.5",
   "type": "module",
-  "main": "./es/index.js",
-  "module": "./es/index.js",
-  "files": [
-    "dist/es/style.css",
-    "dist/es/*",
-    "dist/**/*"
-  ],
+  "main": "es/index.js",
+  "module": "es/index.js",
   "exports": {
     ".": {
       "import": "./es/index.js",

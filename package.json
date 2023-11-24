@@ -20,7 +20,6 @@
     "format": "prettier --write .",
     "prepare": "husky install",
     "commit": "git add -A && git-cz && git push",
-    "publisher": "pnpm publish packages/yto-custom/",
     "release:ui": "pnpm run -C packages/yto-custom release",
     "release": "npm run release --workspaces && release-it",
     "release:log": "release-it"
