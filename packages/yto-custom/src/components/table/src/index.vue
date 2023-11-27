@@ -108,6 +108,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  paginationHideAuto: {
+    type: Boolean,
+    default: true,
+  },
   paginationOptions: {
     type: Object as PropType<CanWrite<PaginationProps>>,
     default: () => ({}),
@@ -178,11 +182,10 @@ const paginationParams = reactive({
 });
 
 const cpaginationHide = computed(() => {
-  return (
-    props.paginationHide ||
-    (props.requestApi && _tableDataTotal.value === 0) ||
-    (!props.requestApi && props.total === 0)
-  );
+  const { paginationHide, requestApi, total, pageSize } = props;
+  const effectiveTotal = requestApi ? _tableDataTotal.value : total;
+  const effectivePageSize = pageSize || paginationParams.pageSize;
+  return paginationHide || effectiveTotal < effectivePageSize || effectiveTotal === 0;
 });
 
 const getTableData = async (params = {}) => {

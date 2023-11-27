@@ -45,6 +45,7 @@ interface SearchProps<T extends keyof FormEl> {
   label?: string;
   field?: string; // 搜索字段名称
   defaultValue?: string | number | boolean | Function | any[]; // 搜索项默认值
+  formatValue?: Function;
   span?: number; // 搜索项所占用的列数，默认为1列
   offset?: number; // 搜索字段左侧偏移列数
   options?: SelectOptionsProps[];
