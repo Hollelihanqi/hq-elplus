@@ -44,6 +44,7 @@ import { SwitchButton } from "@element-plus/icons-vue";
 import { session } from "gold-core";
 import { EnumSessionKey } from "@/common/EnumConstant";
 import useFullScreen from "@/composable/fullScreen";
+import "@/icon-font/iconfont.css";
 
 const props = defineProps({
   title: String,
