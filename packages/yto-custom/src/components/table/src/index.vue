@@ -183,9 +183,9 @@ const paginationParams = reactive({
 
 const cpaginationHide = computed(() => {
   const { paginationHide, requestApi, total, pageSize } = props;
-  const effectiveTotal = requestApi ? _tableDataTotal.value : total;
-  const effectivePageSize = pageSize || paginationParams.pageSize;
-  return paginationHide || effectiveTotal < effectivePageSize || effectiveTotal === 0;
+  const isDataEmpty = requestApi ? _tableDataTotal.value === 0 : total === 0;
+  const isLessThanPageSize = (total || _tableDataTotal.value) < pageSize;
+  return paginationHide || isDataEmpty || isLessThanPageSize;
 });
 
 const getTableData = async (params = {}) => {
