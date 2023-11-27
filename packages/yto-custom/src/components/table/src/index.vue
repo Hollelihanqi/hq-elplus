@@ -132,6 +132,10 @@ const props = defineProps({
     type: Number,
     default: 1,
   },
+  pageLimit: {
+    type: Number,
+    default: 1,
+  },
   currentPageKey: {
     type: String,
     default: "page",
@@ -192,16 +196,17 @@ const getTableData = async (params = {}) => {
     ...params,
   };
   if (!props.paginationHide) {
-    _params[props.currentPageKey] = paginationParams.currentPage;
+    _params[props.currentPageKey] =
+      props.pageLimit === 0 ? paginationParams.currentPage - 1 : paginationParams.currentPage;
     _params[props.pageSizeKey] = paginationParams.pageSize;
   }
   try {
-    let result = await props.requestApi(_params);
+    let result = (await props.requestApi(_params)) || [];
     _loading.value = false;
     if (props.dataCallback && typeof props.dataCallback === "function") {
       result = props.dataCallback(result);
     }
-    _tableData.value = result[props.dataKey];
+    _tableData.value = result[props.dataKey] || [];
     _tableDataTotal.value = result.total || 0;
     await nextTick();
     props.dataUpdateAfter(result);

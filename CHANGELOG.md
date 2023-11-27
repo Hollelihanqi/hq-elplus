@@ -1,4 +1,4 @@
-# 0.1.0 (2023-11-22)
+# 0.2.0 (2023-11-24)
 
 ### Bug Fixes
 
@@ -25,11 +25,16 @@
 - 修复 docs 文档无法 build 问题 ([40c613a](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/40c613af2e6110a4050f5aa71ac4b79d1e757492))
 - 修复 table 渲染列数据为 null、undefined、'' 情况下统一处理为 '--' ([c895730](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/c89573041881dda4fa32e675fcb33b62795a721c))
 - 修复列表无法清空的问题 ([3cc55d3](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/3cc55d33d577e4476d619ff6d8f7f01e00b30c9d))
+- 修复提交命令报错问题 ([7e80231](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/7e80231949c4b07e4edd5e356ac95a1d57c291c4))
 - 修复 windicss 无法生效的问题 ([a9d34ae](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/a9d34ae24cf29978315609e083972d09ffb51e84))
 - 修改 files 配置 ([8703b47](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/8703b47a75baec834421d291996d4b321b8d00a9))
+- 修改 play 工程引入 request 报错问题 ([2b00c22](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/2b00c228fbb09731405530a99bb0ea205599960c))
 - 修改 tableprops 属性 ([8b76cba](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/8b76cbaf3d7680cf1056de7cb95ca35a7ff0eace))
 - 移除条形图默认背景色 ([b507224](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/b507224deb97a0852ed8b72783684ddc835eb41a))
 - 优化表格属性 ([83be478](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/83be47826f70283e6c252b13d197490215eacb9c))
+- 优化 fromItem options ([21c951f](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/21c951fdaf3d772e2d39c5a69b4675317555be82))
+- 优化 fromItem options ([dbb6a02](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/dbb6a0280c8e147921f2f9eda3d8dab83190c3e6))
+- 组件库打包优化 ([413a8b0](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/413a8b019c984b6c6f0846bd2e467ce4085820b1))
 - 组件名字修改 ([4a94ec6](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/4a94ec653a05cf0780f8829f152dfb679f140f21))
 - bridge 代码优化 ([f3a210d](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/f3a210daf642bfd5fcfc5428828d38d7807a889d))
 - bug 修复 ([4667a73](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/4667a739549d3ccc8b401d9ecc979cf377d75e9e))
@@ -52,6 +57,7 @@
 - fromItem 修改卡槽 ([1f7b2c1](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/1f7b2c16875dcd095d0e18275bad9b9ba47209ac))
 - fromItem 修改名称与文档 ([0615498](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/0615498ea458e7eb109e45a160d69bd0f58d3dda))
 - gitignore 规则配置 ([a2caa00](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/a2caa00e842e44f2b894aa721caa2b84a1253dc0))
+- layout-menu 对齐问题修复 ([b386647](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/b38664757d017d2ccfd0a47ea99a483731afb104))
 - layoutRouter 组件 tab 页签默认第一个不关闭 ([188580f](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/188580febe67a204846ec2ad4db74a006c5976be))
 - lint fixed ([27eafda](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/27eafda200ca902bc04fbe6aa1e4cfe4f5abd760))
 - lock 文件变更 ([6613320](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/661332062c27118ec76caccdf9a8ebe07b54530b))
@@ -72,6 +78,7 @@
 - 更新 vue-tsc 版本 ([835c518](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/835c518ec0f17e18296463ed19478ffe06707eb7))
 - 功能优化 ([0be0e37](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/0be0e37621dfbf92ce5f721db6c33f886f2d4044))
 - 将组件库中的第三方依赖全部，提取为前置依赖，保持依赖版本统一，避免一个库多次打包 ([bd60c02](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/bd60c02e6a6d14d6a2ce70ed62dbff883cb8ea7b))
+- 数字展示格式沉淀 ([20ac83c](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/20ac83c07aeeec6be5fa7c6f84f0b040f7704ec5))
 - 搜索配置 local 中文、添加 getOptions、clearOptions 两个方法 ([b551d77](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/b551d77d2f21ce3fe515ca3fbd052ce9e262aaf9))
 - 添加 msg 校验 ([c23e9ef](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/c23e9ef183547d04521173ae65e4107701b8a26c))
 - 添加 msg 校验 ([ff78597](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/ff785975bee0a0e621a8a5629deab50e16f720dd))
@@ -110,6 +117,7 @@
 - layout 相关组件文档编写 ([ecd89ed](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/ecd89ed71ff87933e0cb506a62621eeff20d6555))
 - layout 相关组件文档完善 ([101c7b7](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/101c7b72e76e68cd9de8ff71ff28823995aad53d))
 - layout 组件开发 ([aff4711](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/aff47118a65444edbe93fe976b80960944385147))
+- pnpm 发布配置 ([bd328a8](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/bd328a88fc3b1d8668a9d39a3c76732e5a635d08))
 - pro-table 表格更新方法接收参数 ([b1e4e15](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/b1e4e150c932b6da0403da99b21db3e05a195892))
 - release-it set ([1c60808](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/1c60808688e106281c7e3bb04f43ce0d0bf0c646))
 - remote-search 远程搜索新增 requestApi 接口 ([1c76692](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/1c76692ee7eda2b38da75537068b56191dcdc406))
@@ -120,16 +128,19 @@
 - table 新增分页更新 updatePage 方法，原来重置分页方法 resetPagination 更新为 resetPage ([6a56c07](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/6a56c07964a8e28118c6c057eddd0bfdcfc768e2))
 - table 新增复制，枚举功能 ([22eff56](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/22eff565dbbe76c7b6b33d6f860e117d49146763))
 - table 优化 ([dc21438](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/dc21438ad8d22feb205f78be8210d815791a591c))
+- table 增加 dataUpdateAfter 数据，等待数据更新之后执行 ([3059ef6](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/3059ef6d4e52c060814ac10ec27a32980cc0dc76))
 - table 增加 loading 属性 ([1cbf0f6](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/1cbf0f6db6e9ae3463bd5b02ced289f1b52d5db1))
 - table 组件新增 el-table 实例对外暴漏 ([1a9a322](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/1a9a322a0578cbd2082b560d700e513ac1c26a4c))
 - table 新增重置功能 ([d7267cd](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/d7267cd8b206ca75d71fe3db6c3debafa5b167e1))
 - table 新增 api 自动请求数据 ([ff3c126](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/ff3c1266f19d984229464d0b30652b55916be2bb))
+- table 组件新增处理排序事件 ([5f43b87](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/5f43b8725d45e0f5a0a9048933c4741cab988130))
 - vite 更新 ([cd932d9](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/cd932d912022238b15eaf43ea6ca71c35a07f7df))
 - yto install ([90c8fe7](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/90c8fe7d1998d12209a25b54ffb36f0191c41853))
 - yto/cutome 组件打包配置进行优化，提取前置依赖 ([179fa71](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/179fa71af1d8fb1303bd813ea61bbbc0fdefbc6c))
 
 ### Performance Improvements
 
+- 表格分页事件添加对 requestAuto 判断，true 调用 api 否则不予调用 ([31b415d](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/31b415d3dcdf7c923b3c1c76421df177ad412454))
 - 优化 remote-search watch 监听条件 ([b0187f0](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/b0187f06f7dd87e7b2a42f5ed8b13c27375194c4))
 - 优化 remote-search 中的 watch 监听 ([32b8407](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/32b840713546031c0881703a09ae70eb866973ed))
 - vite 版本更新 ([bf403c7](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/software-development-kit/yto-engine/commits/bf403c75cd1229303e6407d42f41ce35f79e04fc))
@@ -140,7 +151,7 @@ All notable changes to this project will be documented in this file. Dates are d
 
 Generated by [`auto-changelog`](https://github.com/CookPete/auto-changelog).
 
-#### 0.1.0
+#### 0.2.0
 
 - fix: dialog props default [`#4`](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/pull/4)
 - docs: 文档更新 [`#3`](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/pull/3)
@@ -148,4 +159,4 @@ Generated by [`auto-changelog`](https://github.com/CookPete/auto-changelog).
 - Lhq components [`#1`](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/pull/1)
 - refactor: utils 重构，上传 pro-table [`aff67bc`](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/commit/aff67bc33a3b44a5136a773dd7fb173cdf006fdb)
 - feat: layout 相关组件开发 [`94788a1`](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/commit/94788a1c4ce8e643bad257161e41b21ab1484b85)
-- refactor: table 组件优化 [`252cbef`](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/commit/252cbefdc6865200992c0da79cac153e51029f18)
+- feat: layout 相关组件文档编写 [`ecd89ed`](https://git.yto.net.cn/XiAnCenter/XiAn_yto_t/commit/ecd89ed71ff87933e0cb506a62621eeff20d6555)
