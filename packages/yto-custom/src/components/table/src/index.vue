@@ -7,7 +7,7 @@
       ref="ElTableInstance"
       v-loading="requestApi ? _loading : loading"
       class="my-el-table w-[100%]"
-      :class="{ 'header-bg-hide': !headerbgHide, 'pagination-hide-table': paginationHide }"
+      :class="{ 'header-bg-hide': !headerbgHide, 'pagination-hide-table': paginationHide, 'flex-1': !isDataEmpty }"
       :data="requestApi ? _tableData : tableData"
       v-bind="$attrs"
       @sort-change="handleSortChange"
@@ -48,7 +48,7 @@
         </TableColumn>
       </template>
     </el-table>
-    <div class="flex-1 opacity-0 h-0">--</div>
+    <div v-if="isDataEmpty" class="flex-1 opacity-0 h-0">--</div>
     <el-pagination
       v-if="!cpaginationHide"
       v-model:page-size="paginationParams.pageSize"
