@@ -2,11 +2,10 @@
  * @Description: 配置主题色
  * @Author: ym
  * @Date: 2023-08-31 14:28:48
- * @LastEditTime: 2023-11-23 20:39:12
+ * @LastEditTime: 2023-11-28 19:40:44
  */
 function color(variable) {
   return (val) => {
-    console.debug(val);
     if (val.opacityValue === undefined) {
       return `rgb(var(${variable}))`;
     }
