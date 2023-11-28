@@ -6,7 +6,7 @@
     <el-table
       ref="ElTableInstance"
       v-loading="requestApi ? _loading : loading"
-      class="my-el-table flex-1 w-[100%]"
+      class="my-el-table w-[100%]"
       :class="{ 'header-bg-hide': !headerbgHide, 'pagination-hide-table': paginationHide }"
       :data="requestApi ? _tableData : tableData"
       v-bind="$attrs"
@@ -48,6 +48,7 @@
         </TableColumn>
       </template>
     </el-table>
+    <div class="flex-1 opacity-0 h-0">--</div>
     <el-pagination
       v-if="!cpaginationHide"
       v-model:page-size="paginationParams.pageSize"
@@ -372,9 +373,9 @@ defineExpose({
     bottom: 0;
     z-index: 88;
   }
-  .el-table__footer-wrapper {
+  /* .el-table__footer-wrapper {
     position: sticky;
     bottom: 0;
-  }
+  } */
 }
 </style>
