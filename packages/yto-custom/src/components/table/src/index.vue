@@ -14,6 +14,13 @@
     >
       <!-- 默认插槽 -->
       <slot></slot>
+
+      <template #append>
+        <slot name="append"></slot>
+      </template>
+      <template #empty>
+        <slot name="empty"></slot>
+      </template>
       <template v-for="item in columns" :key="item">
         <!-- selection || index -->
         <el-table-column
@@ -150,7 +157,7 @@ const props = defineProps({
   },
   tableChange: {
     type: Function,
-    default: () => ({}),
+    default: null,
   },
   dataUpdateAfter: {
     type: Function,
@@ -223,6 +230,7 @@ const getTableData = async (params = {}) => {
 const handlePaginationChange = (type: "size" | "page" | "sort", num: number): void => {
   if (type === "size") {
     paginationParams.currentPage = 1; // 只有在改变大小时才重置当前页码
+    paginationParams.pageSize = num;
   }
 
   emits("on-table", type, {
@@ -231,9 +239,8 @@ const handlePaginationChange = (type: "size" | "page" | "sort", num: number): vo
   });
 
   // 如果不需要通过API请求数据，则直接调用tableChange
-  if (!props.requestApi) {
+  if (props.tableChange && typeof props.tableChange === "function") {
     props.tableChange(type, num);
-    return; // 提前返回，避免不必要的条件判断
   }
 
   // 如果设置为调用API，则获取表格数据

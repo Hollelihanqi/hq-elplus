@@ -17,14 +17,24 @@ export class RequestHttp {
   resInterceptors: any;
   constructor(config: AxiosRequestConfig) {
     // 创建 axios 实例
-    console.log("config", config)
+    console.log("config", config);
     this.instance = axios.create(config);
     this.instance.interceptors.request.use(
       (config) => {
+        // 添加 token
+        let token = sessionStorage.getItem("authorization") as string;
+        if (token) {
+          if (token.indexOf('"') !== -1) {
+            const regex = /^"(.*)"$/;
+            const matches: any = token.match(regex);
+            token = matches[1];
+          }
+          config.headers.authorization = token;
+        }
         return config;
       },
       (error) => {
-        console.log("config2", error)
+        console.log("config2", error);
         // return Promise.reject(error);
       }
     );
