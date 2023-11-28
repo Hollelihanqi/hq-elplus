@@ -12,6 +12,7 @@
       <router-link class="mr-[10px]" to="/uploaderf">Uploader</router-link>
       <router-link class="mr-[10px]" to="/layoutFrom">layoutFrom</router-link>
       <router-link class="mr-[10px]" to="/layoutFrame">layoutFrame</router-link>
+      <router-link class="mr-[10px]" to="/theme">them</router-link>
     </div>
 
     <router-view v-slot="{ Component }" class="flex-1">

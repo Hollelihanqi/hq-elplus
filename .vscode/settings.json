@@ -17,5 +17,6 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "typescript.tsdk": "node_modules/typescript/lib",
-  "vue.features.codeActions.enable": false
+  "vue.features.codeActions.enable": false,
+  "editor.inlineSuggest.showToolbar": "onHover"
 }

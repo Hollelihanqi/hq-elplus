@@ -2,6 +2,19 @@
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
+  --el-color-primary: #3434ce;
+  --layout-header-background: #3434ce;
+  --el-color-primary-windi: 52, 52, 206;
+  --el-color-primary-light-9: #3434ce;
+  --el-color-primary-light-8: #3434ce;
+  --el-color-primary-light-7: #3434ce;
+  --el-color-primary-light-6: #3434ce;
+  --el-color-primary-light-5: #3434ce;
+  --el-color-primary-light-4: #3434ce;
+  --el-color-primary-light-3: #3434ce;
+  --el-color-primary-light-2: #3434ce;
+  --el-color-primary-light-1: #3434ce;
+  --el-button-active-color: #3434ce;
 }
 
 html,
