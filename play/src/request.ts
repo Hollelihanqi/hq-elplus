@@ -39,20 +39,20 @@ export class RequestHttp {
       }
     );
 
-    // this.resInterceptors = this.instance.interceptors.response.use(
-    //   (res: AxiosResponse) => {
-    //     console.log("resusule___", res)
-    //     if (res.status === 200 && (res.data.success || res.data.status === 0)) {
-    //       return Promise.resolve(res.data.data);
-    //     } else {
-    //       ElMessage.error(res.data.message);
-    //       return Promise.reject(res.data);
-    //     }
-    //   },
-    //   (error: AxiosError) => {
-    //     return Promise.reject(error.response);
-    //   }
-    // );
+    this.resInterceptors = this.instance.interceptors.response.use(
+      (res: AxiosResponse) => {
+        console.log("resusule___", res);
+        if (res.status === 200 && (res.data.success || res.data.status === 0)) {
+          return Promise.resolve(res.data.data);
+        } else {
+          ElMessage.error(res.data.message);
+          return Promise.reject(res.data);
+        }
+      },
+      (error: AxiosError) => {
+        return Promise.reject(error.response);
+      }
+    );
   }
 
   // 定义请求方法

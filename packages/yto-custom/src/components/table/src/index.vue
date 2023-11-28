@@ -15,7 +15,7 @@
       <!-- 默认插槽 -->
       <slot></slot>
 
-      <template #append>
+      <template v-if="isDataEmpty" #append>
         <slot name="append"></slot>
       </template>
       <template #empty>
@@ -117,7 +117,7 @@ const props = defineProps({
   },
   paginationHideAuto: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   paginationOptions: {
     type: Object as PropType<CanWrite<PaginationProps>>,
@@ -181,18 +181,21 @@ const ElTableInstance = ref();
 const emits = defineEmits(["on-table"]);
 const { total, pageSizes } = toRefs(props) as any;
 const _loading = ref(false);
-const _tableData = ref([]);
+const _tableData = ref<any>([]);
 const _tableDataTotal = ref(0);
 const paginationParams = reactive({
   currentPage: props.currentPage,
   pageSize: props.pageSize,
 });
 
+const isDataEmpty = computed(() => {
+  return props.requestApi ? _tableData.value.length : props.tableData.length;
+});
 const cpaginationHide = computed(() => {
-  const { paginationHide, requestApi, total, pageSize } = props;
+  const { paginationHide, requestApi, total, pageSize, paginationHideAuto } = props;
   const isDataEmpty = requestApi ? _tableDataTotal.value === 0 : total === 0;
   const isLessThanPageSize = (total || _tableDataTotal.value) < pageSize;
-  return paginationHide || isDataEmpty || isLessThanPageSize;
+  return paginationHide || isDataEmpty || (paginationHideAuto && isLessThanPageSize);
 });
 
 const getTableData = async (params = {}) => {
@@ -216,8 +219,14 @@ const getTableData = async (params = {}) => {
     if (props.dataCallback && typeof props.dataCallback === "function") {
       result = props.dataCallback(result);
     }
-    _tableData.value = result[props.dataKey] || [];
-    _tableDataTotal.value = result.total || 0;
+    if (Array.isArray(result)) {
+      _tableData.value = result;
+      _tableDataTotal.value = 0;
+    } else {
+      _tableData.value = result[props.dataKey] || [];
+      _tableDataTotal.value = result.total || 0;
+    }
+
     await nextTick();
     props.dataUpdateAfter(result);
   } catch (error) {
@@ -354,6 +363,18 @@ defineExpose({
   // 解决表格数据为空时样式不居中问题(仅在element-plus中)
   .el-scrollbar__view {
     height: 100%;
+  }
+  .el-scrollbar__wrap {
+    position: relative;
+  }
+  .el-table__append-wrapper {
+    position: sticky;
+    bottom: 0;
+    z-index: 88;
+  }
+  .el-table__footer-wrapper {
+    position: sticky;
+    bottom: 0;
   }
 }
 </style>

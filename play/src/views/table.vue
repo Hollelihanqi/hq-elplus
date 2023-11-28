@@ -1,12 +1,12 @@
 <template>
   <div class="flex flex-col overflow-hidden">
-    <yto-c-table :columns="columns" :request-api="getList" :data-callback="dataCallback">
+    <yto-c-table :columns="columns" :request-api="getList" show-summary>
       <!-- <template #callStatus="scope">
       <span>{{ scope.row.status }}</span>
     </template> -->
-    <template #append>
-      <div class="bg-yellow-500 h-[50px]">total</div>
-    </template>
+      <!-- <template #append>
+        <div class="bg-yellow-500 h-[50px]">total</div>
+      </template> -->
     </yto-c-table>
   </div>
 </template>
@@ -82,12 +82,25 @@ const getList = (params = {}) => {
     params,
   });
 };
+const getList2 = (params = {}) => {
+  const _params = {};
+  return request.request({
+    url: "v2/alert/detail",
+    method: "POST",
+    data: {
+      searchOrgCode: 999999,
+      hash: "26bf78636b742dc58a05ce36674213cb",
+      pageNum: 0,
+      pageSize: 20,
+    },
+  });
+};
 
 const dataCallback = (data: any) => {
   console.log(data);
   return {
-    items: data.data.data.items,
-    total: data.data.data.total,
+    items: data.data.data,
+    total: 0,
   };
 };
 </script>
