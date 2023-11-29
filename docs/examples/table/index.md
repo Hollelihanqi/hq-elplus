@@ -39,6 +39,7 @@
 | `columns`              | 表头 columns 配置项兼容 Table-column 属性                                                        | Array           | —          | []                                        |
 | `tableData`            | 数据源                                                                                           | Array           | —          | []                                        |
 | `paginationHide`       | 是否隐藏分页功能                                                                                 | Boolean         | —          | false                                     |
+| `paginationHideAuto`   | 当数据大于 `pageSize` 时显示分页，否则不显示分页                                                 | Boolean         | —          | true                                      |
 | `paginationOptions`    | 分页组件 props (参考 element-plus)                                                               | Boolean         | —          | {}                                        |
 | `layout`               | 分页组件布局，子组件名用逗号分隔                                                                 | String          | —          | "total, sizes, prev, pager, next, jumper" |
 | `total`                | 总条目数                                                                                         | Number          | —          | 0                                         |

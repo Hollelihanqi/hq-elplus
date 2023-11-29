@@ -50,7 +50,11 @@ export default defineComponent({
         return props.modelValue;
       },
       set(value) {
-        ctx.emit("update:modelValue", value);
+        if (props.control.formatValue && typeof props.control.formatValue === "function") {
+          ctx.emit("update:modelValue", props.control.formatValue(value));
+        } else {
+          ctx.emit("update:modelValue", value);
+        }
       },
     });
 
