@@ -4,7 +4,12 @@
     <div class="flex flex-1 overflow-hidden">
       <slot></slot>
       <div class="layout-content flex flex-col flex-1 bg-[#F0F1F5] overflow-auto">
-        <NavTabs class="h-[40px]" :tabs-menu-list="listRoute" :key-label="tabsKeyLabel"></NavTabs>
+        <NavTabs
+          class="h-[40px]"
+          :tabs-menu-list="listRoute"
+          :key-label="tabsKeyLabel"
+          :format-tab="formatTab"
+        ></NavTabs>
         <div class="router-view flex-1 px-[10px] pb-[10px] overflow-auto">
           <router-view v-slot="{ Component, route }">
             <keep-alive>
@@ -38,6 +43,7 @@ const props = defineProps({
   sso: Boolean,
   max: Number,
   tabsKeyLabel: String,
+  formatTab: Function,
 });
 
 const { listRoute, activate } = useFrame({
