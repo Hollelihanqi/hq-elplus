@@ -2,7 +2,7 @@
  * @Author: weichunpei
  * @Date: 2023-10-20 13:07:20
  * @LastEditors: weichunpei
- * @LastEditTime: 2023-11-16 16:53:49
+ * @LastEditTime: 2023-11-29 11:06:06
  * @Description:
 -->
 
@@ -89,10 +89,11 @@ tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
 
 ### LayoutFrame 属性
 
-| 属性名   | 说明         | 类型    | 可选值 | 默认值   | 备注 |
-| -------- | ------------ | ------- | ------ | -------- | ---- |
-| `footer` | 显示底部区域 | boolean | -      | false    |      |
-| `max`    | 最大页签数   | number  | -      | undefind |      |
+| 属性名      | 说明         | 类型    | 可选值 | 默认值   | 备注 |
+| ----------- | ------------ | ------- | ------ | -------- | ---- |
+| `footer`    | 显示底部区域 | boolean | -      | false    |      |
+| `max`       | 最大页签数   | number  | -      | undefind |      |
+| `cacheable` | 是否开启缓存 | boolean | -      | false    |      |
 
 ### LayoutFrame 插槽
 
@@ -104,8 +105,9 @@ tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
 
 ### layoutHeader 样式变量
 
-| 属性名              | 说明                 |
-| ------------------- | -------------------- |
-| `--layout-frame-bg` | 背景颜色             |
-| `--nav-tabs-bg`     | 导航页签背景颜色     |
-| `--active-tabs-bg`  | 导航页签激活背景颜色 |
+| 属性名                  | 说明                 |
+| ----------------------- | -------------------- |
+| `--layout-frame-bg`     | 背景颜色             |
+| `--nav-tabs-bg`         | 导航页签背景颜色     |
+| `--nav-tabs-active-bg`  | 导航页签激活背景颜色 |
+| `--nav-tabs-text-color` | 导航页签激活文字颜色 |
