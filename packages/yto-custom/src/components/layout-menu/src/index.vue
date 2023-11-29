@@ -45,6 +45,7 @@ const props = defineProps({
   width: { type: String, default: "210px" },
 });
 const router = useRouter();
+const emit = defineEmits(["menuClick"]);
 // 菜单过滤
 const searchVal = ref("");
 const fileNavMenu = (arr: any) => {
@@ -61,6 +62,7 @@ const fileNavMenu = (arr: any) => {
 };
 const menuClick = (item: any) => {
   const { href, code } = item;
+  emit("menuClick", item);
   paneAdd(item);
   // activate.value = code;
 };
@@ -87,20 +89,24 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
   --layout-sub-menu-box-shadow: inset 0px -1px 0px 0px rgba(0, 0, 0, 0.1);
   --layout-menu-hover-color: #e6e6e6;
 
-  :deep(.el-menu) {
-    @apply bg-[var(--layout-menu-background)] border-none;
-    .layout-menu-search {
-      :deep(.el-input) {
-        .el-input__wrapper {
+  .layout-menu-search {
+    :deep(.el-input) {
+      .el-input__wrapper {
+        box-shadow: none;
+        background: #f0f1f5;
+        &:is-focus {
           box-shadow: none;
-          border: 1px solid #ddd;
+        }
+        .el-input__inner {
+          color: #151719;
           background: #f0f1f5;
-          .el-input__inner {
-            color: #151719;
-          }
         }
       }
     }
+  }
+  :deep(.el-menu) {
+    @apply bg-[var(--layout-menu-background)] border-none;
+
     &:not(.el-menu--collapse) {
       width: v-bind("props.width");
     }

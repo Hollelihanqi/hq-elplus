@@ -1,6 +1,6 @@
 <template>
   <div id="layout">
-    <yto-c-layout-router class="frame">
+    <yto-c-layout-router class="frame" :cacheable="true" :max="10">
       <template #header>
         <yto-c-layout-header
           title="圆通党建"
@@ -11,7 +11,12 @@
         >
         </yto-c-layout-header>
       </template>
-      <yto-c-layout-menu :unique-opened="true" :collapse="collapse" :menus="listNavigation"></yto-c-layout-menu>
+      <yto-c-layout-menu
+        :unique-opened="true"
+        :collapse="collapse"
+        :menus="listNavigation"
+        @menuClick="handleMenuClick"
+      ></yto-c-layout-menu>
     </yto-c-layout-router>
   </div>
 </template>
@@ -21,8 +26,9 @@
 
 import { IOptionTabPane, session, tabPaneAdd } from "gold-core";
 import logo from "@/assets/vue.svg";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
+const route = useRoute();
 const collapse = ref(false);
 const userInfo = {
   userCode: "02348618",
@@ -82,12 +88,33 @@ const listNavigation: any[] = [
       },
     ],
   },
+  // {
+  //   label: "测试数据",
+  //   icon: "icon iconfont party-web-icon-caidan3",
+  //   children: [
+  //     {
+  //       label: "测试列表",
+  //       href: "/layout-child-3",
+  //       code: "/layout-child-3",
+  //       mode: "router",
+  //     },
+  //   ],
+  // },
 ];
 const frist = listNavigation[0].children[0];
-tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
+if (route.path === "/") {
+  tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
+}
+
+const handleMenuClick = (info: any) => {
+  console.log("handleMenuClick-----");
+};
 </script>
 <style lang="scss">
 #layout {
+  .layout-router {
+    --nav-tabs-text-color: #ef1017;
+  }
   .layout-header {
     --layout-header-background: #900808;
   }

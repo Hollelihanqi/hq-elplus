@@ -24,6 +24,7 @@
         <div class="mr-[5px]">{{ user.userName }}</div>
         <div class="mr-[10px]">（{{ user.userCode }}）</div>
         <i
+          v-if="isfullscreen"
           class="icon iconfont cursor-pointer mx-[25px] !text-[14px] text-[#fff]"
           :class="fullscreen ? 'layout-icon_guanbiquanju' : 'layout-icon_kaiqiquanju'"
           @click="onFullScreen"
@@ -50,6 +51,10 @@ const props = defineProps({
   title: String,
   logo: String,
   collapse: Boolean,
+  isfullscreen: {
+    type: Boolean,
+    default: true,
+  },
   userInfo: {
     type: Object,
     default: () => {},
@@ -80,7 +85,6 @@ const KeyDown = (event: any) => {
 };
 window.addEventListener("keydown", KeyDown, true);
 document.addEventListener("fullscreenchange", () => {
-  console.log("fullscreenchange---");
   fullscreen.value = !unref(fullscreen); //你要切换得图标使用得属性
 });
 </script>

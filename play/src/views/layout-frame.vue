@@ -1,6 +1,6 @@
 <template>
-  <div class="layout h-full">
-    <yto-c-layout-frame class="frame">
+  <div id="layout" class="layout h-full">
+    <yto-c-layout-frame class="frame" :cacheable="true">
       <template #header>
         <yto-c-layout-header
           title="圆通党建"
@@ -28,12 +28,19 @@ const userInfo = {
   userCode: "02348618",
   userName: "魏春霈",
 };
-const listNavigation: IOptionTabPane[] = [
-  { label: "百度", href: "https://www.baidu.com", code: "www.baidu.com" },
-  { label: "测试", href: "/demo/list", closable: false, code: "/demo/list" },
-  { label: "必应", href: "https://cn.bing.com/", code: "cn.bing.com" },
+const listNavigation: any[] = [
+  { label: "百度", href: "https://www.baidu.com", code: "www.baidu.com", icon: "icon iconfont party-web-icon-caidan3" },
+  {
+    label: "测试",
+    href: "/demo/list",
+    closable: false,
+    code: "/demo/list",
+    icon: "icon iconfont party-web-icon-caidan3",
+  },
+  { label: "必应", href: "https://cn.bing.com/", code: "cn.bing.com", icon: "icon iconfont party-web-icon-caidan3" },
   {
     label: "组件管理",
+    icon: "icon iconfont party-web-icon-caidan3",
     children: [
       { label: "组件配置", href: "/widget/component/list", code: "/widget/component/list" },
       { label: "属性配置", href: "/widget/component-attribute/list", code: "/widget/component-attribute/list" },
@@ -74,7 +81,11 @@ tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
 :root {
   // --el-color-primary: #ef1017;
 }
-.layout {
+
+#layout {
+  .layout-frame {
+    --nav-tabs-text-color: #ef1017;
+  }
   .layout-header {
     --layout-header-background: #900808;
   }

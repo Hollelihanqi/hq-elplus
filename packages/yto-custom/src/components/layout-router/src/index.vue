@@ -3,9 +3,9 @@
     <slot name="header"></slot>
     <div class="flex flex-1 overflow-hidden">
       <slot></slot>
-      <div class="w-full flex flex-col flex-1 bg-[#F0F1F5]">
-        <NavTabs class="h-[40px]" :tabs-menu-list="listRoute"></NavTabs>
-        <div class="flex-1 px-[10px] pb-[10px]">
+      <div class="layout-content flex flex-col flex-1 bg-[#F0F1F5] overflow-auto">
+        <NavTabs class="h-[40px]" :tabs-menu-list="listRoute" :key-label="tabsKeyLabel"></NavTabs>
+        <div class="router-view flex-1 px-[10px] pb-[10px] overflow-auto">
           <router-view v-slot="{ Component, route }">
             <keep-alive>
               <component
@@ -37,6 +37,7 @@ const props = defineProps({
   cacheable: Boolean,
   sso: Boolean,
   max: Number,
+  tabsKeyLabel: String,
 });
 
 const { listRoute, activate } = useFrame({
@@ -51,23 +52,8 @@ provide(EnumSessionKey.TabsActivate, activate);
 <style scoped lang="scss">
 .layout-router {
   --layout-router-bg: white;
-  :deep(.el-tabs) {
-    @apply border-none;
-    .el-tabs__header {
-      background-color: var(--layout-router-bg);
-    }
-
-    .el-tabs__content {
-      display: flex;
-      padding: 0.5rem;
-      flex: 1 1 0%;
-      overflow: hidden;
-    }
-
-    .el-tabs__content,
-    > .el-tabs__header .el-tabs__item.is-active {
-      background-color: rgb(241 245 249);
-    }
-  }
+  --nav-tabs-bg: #e2e6e8;
+  --nav-tabs-active-bg: white;
+  --nav-tabs-text-color: #151719;
 }
 </style>

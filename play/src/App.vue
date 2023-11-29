@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="app flex flex-col p-[16px]">
+  <div class="app flex flex-col">
     <div class="router-box">
       <router-link class="mr-[10px]" to="/form">form</router-link>
       <router-link class="mr-[10px]" to="/chart">chart</router-link>
@@ -21,10 +21,12 @@
     </router-view>
 
     <!-- <LayoutRouter class="h-full"></LayoutRouter> -->
+    <!-- <LayoutFrame class="h-full"></LayoutFrame> -->
   </div>
 </template>
 <script lang="ts" setup>
 import LayoutRouter from "@/views/layout-router.vue";
+import LayoutFrame from "@/views/layout-frame.vue";
 </script>
 <style lang="scss" scoped>
 .app {

@@ -57,37 +57,48 @@ provide(EnumSessionKey.TabsActivate, activate);
 .layout-frame {
   --layout-frame-bg: white;
   --nav-tabs-bg: #e2e6e8;
-  --active-tabs-bg: white;
+  --nav-tabs-active-bg: white;
+  --nav-tabs-text-color: #151719;
   iframe {
     background-color: var(--layout-frame-bg);
   }
   :deep(.el-tabs) {
-    --el-tabs-header-height: 30px;
+    --el-tabs-header-height: 31px;
     @apply border-none;
     .el-tabs__header {
-      @apply px-[16px] pt-[10px];
+      @apply px-[10px] pt-[10px];
+
       background-color: var(--nav-tabs-bg);
       .el-tabs__item {
-        @apply rounded-t-[4px];
+        @apply rounded-t-[4px]  border-none text-[#151719];
         &.is-active {
-          background-color: var(--active-tabs-bg);
+          color: var(--nav-tabs-text-color);
+          .is-icon-close {
+            color: #151719;
+            &:hover {
+              color: white;
+            }
+          }
+        }
+
+        &.is-active {
+          background-color: var(nav-tabs-active-bg);
         }
         &:nth-child(2):not(.is-active).is-closable:hover {
           @apply pl-[20px];
         }
       }
+      .el-tabs__nav-prev,
+      .el-tabs__nav-next {
+        height: var(--el-tabs-header-height);
+        line-height: var(--el-tabs-header-height);
+      }
     }
-
     .el-tabs__content {
       display: flex;
       padding: 0;
       flex: 1 1 0%;
       overflow: hidden;
-    }
-
-    .el-tabs__content,
-    > .el-tabs__header .el-tabs__item.is-active {
-      background-color: rgb(241 245 249);
     }
   }
 }
