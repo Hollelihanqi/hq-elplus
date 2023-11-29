@@ -21,7 +21,7 @@ import { useRouter } from "vue-router";
 interface Props {
   tabsMenuList: IOptionTabPane[];
   keyLabel: string;
-  formatTab?: (tabItem: IOptionTabPane) => IOptionTabPane;
+  formatTab?: Function;
 }
 const props = withDefaults(defineProps<Props>(), {
   keyLabel: "title",
