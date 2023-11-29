@@ -2,7 +2,7 @@
  * @Author: weichunpei
  * @Date: 2023-10-20 09:30:23
  * @LastEditors: weichunpei
- * @LastEditTime: 2023-11-16 11:05:14
+ * @LastEditTime: 2023-11-29 10:55:43
  * @Description: layoutHeader 组件
 -->
 
@@ -21,12 +21,13 @@
 
 ### layoutHeader 属性
 
-| 属性名     | 说明      | 类型                                | 可选值 | 默认值 | 备注 |
-| ---------- | --------- | ----------------------------------- | ------ | ------ | ---- |
-| `title`    | 系统名称  | string                              | -      | ""     |      |
-| `collapse` | 是否折叠  | boolean                             | -      | false  |      |
-| `width`    | 系统 logo | Img                                 | —      | -      |      |
-| `userInfo` | 用户信息  | `{userName:string,userCode:string}` | —      |        |
+| 属性名         | 说明             | 类型                                | 可选值 | 默认值 | 备注 |
+| -------------- | ---------------- | ----------------------------------- | ------ | ------ | ---- |
+| `title`        | 系统名称         | string                              | -      | ""     |      |
+| `collapse`     | 是否折叠         | boolean                             | -      | false  |      |
+| `width`        | 系统 logo        | Img                                 | —      | -      |      |
+| `userInfo`     | 用户信息         | `{userName:string,userCode:string}` | —      |        |
+| `isfullscreen` | 全屏按钮是否显示 | booleadn                            | —      | true   |
 
 ### layoutHeader 事件
 

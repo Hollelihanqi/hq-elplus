@@ -2,7 +2,7 @@
  * @Author: weichunpei
  * @Date: 2023-10-20 13:07:20
  * @LastEditors: weichunpei
- * @LastEditTime: 2023-10-20 13:25:54
+ * @LastEditTime: 2023-11-29 11:06:57
  * @Description:
 -->
 
@@ -94,10 +94,13 @@ tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
 
 ### LayoutRouter 属性
 
-| 属性名   | 说明         | 类型    | 可选值 | 默认值   | 备注 |
-| -------- | ------------ | ------- | ------ | -------- | ---- |
-| `footer` | 显示底部区域 | boolean | -      | false    |      |
-| `max`    | 最大页签数   | number  | -      | undefind |      |
+| 属性名         | 说明                | 类型     | 可选值 | 默认值   | 备注 |
+| -------------- | ------------------- | -------- | ------ | -------- | ---- |
+| `footer`       | 显示底部区域        | boolean  | -      | false    |      |
+| `max`          | 最大页签数          | number   | -      | undefind |      |
+| `cacheable`    | 是否开启缓存        | boolean  | -      | false    |      |
+| `tabsKeyLabel` | tabslabel 对应 key  | string   | -      | 'title'  |      |
+| `formatTab`    | tabsItem 格式化方法 | function | -      | -        |      |
 
 ### LayoutRouter 插槽
 
@@ -109,6 +112,9 @@ tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
 
 ### layoutHeader 样式变量
 
-| 属性名               | 说明     |
-| -------------------- | -------- |
-| `--layout-router-bg` | 背景颜色 |
+| 属性名                  | 说明                 |
+| ----------------------- | -------------------- |
+| `--layout-router-bg`    | 背景颜色             |
+| `--nav-tabs-bg`         | 导航页签背景颜色     |
+| `--nav-tabs-active-bg`  | 导航页签激活背景颜色 |
+| `--nav-tabs-text-color` | 导航页签激活文字颜色 |
