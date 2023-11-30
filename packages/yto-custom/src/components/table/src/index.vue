@@ -230,7 +230,7 @@ const getTableData = async (params = {}) => {
     }
 
     await nextTick();
-    props.dataUpdateAfter(result);
+    props.dataUpdateAfter(_params, result);
   } catch (error) {
     _loading.value = false;
     console.error("表格请求数据发生错误...");
