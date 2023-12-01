@@ -1,6 +1,6 @@
 <template>
   <div id="layout">
-    <yto-c-layout-router class="frame" :cacheable="true" :max="10">
+    <yto-c-layout-router class="frame" :cacheable="true">
       <template #header>
         <yto-c-layout-header
           title="圆通党建"
@@ -12,8 +12,8 @@
         </yto-c-layout-header>
       </template>
       <yto-c-layout-menu
-        :unique-opened="true"
         :collapse="collapse"
+        :unique-opened="true"
         :menus="listNavigation"
         @menuClick="handleMenuClick"
       ></yto-c-layout-menu>
@@ -35,33 +35,6 @@ const userInfo = {
   userName: "魏春霈",
 };
 
-// const listNavigation: any[] = [
-//   {
-//     label: "公告管理",
-//     // icon: "Setting",
-//     children: [
-//       {
-//         label: "公告列表",
-//         href: "/layout-router/child-1?abc=1",
-//         code: "/layout-child-1",
-//         closable: false,
-//         mode: "router",
-//       },
-//     ],
-//   },
-//   {
-//     label: "资讯管理",
-//     // icon: "icon iconfont party-web-icon-caidan2",
-//     children: [
-//       {
-//         label: "资讯列表",
-//         href: "/layout-router/child-2",
-//         code: "/layout-child-2",
-//         mode: "router",
-//       },
-//     ],
-//   },
-// ];
 const listNavigation: any[] = [
   {
     label: "公告管理",
@@ -102,13 +75,35 @@ const listNavigation: any[] = [
   // },
 ];
 const frist = listNavigation[0].children[0];
-if (route.path === "/") {
-  tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
-}
 
+// if (route.path === "/") {
+//   tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
+// }
+// tabPaneAdd(
+//   `/layout-child-3?iFrameUrl=${encodeURIComponent(
+//     "http://action-analysis-tst.ytokj.com/user-access-records"
+//   )}` as string,
+//   {
+//     label: "测试列表3",
+//     href: "/layout-child-3",
+//     code: "/layout-child-3",
+//     mode: "router",
+//     closable: false,
+//   }
+// );
+tabPaneAdd(`/layout-child-3?iFrameUrl=http://action-analysis-tst.ytokj.com/user-access-records` as string, {
+  label: "测试列表3",
+  href: "/layout-child-3",
+  code: "/layout-child-3",
+  mode: "router",
+  closable: false,
+});
 const handleMenuClick = (info: any) => {
   console.log("handleMenuClick-----");
 };
+onMounted(() => {
+  // router.push({ name: "layoutChild3" });
+});
 </script>
 <style lang="scss">
 #layout {

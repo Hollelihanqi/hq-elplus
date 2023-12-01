@@ -34,14 +34,27 @@ const tabsMenuValue: any = inject(EnumSessionKey.TabsActivate);
 const router = useRouter();
 const route = useRoute();
 
+watch(
+  () => tabsMenuValue.value,
+  (value) => {
+    if (!value) return;
+    const { mode, href } = unref(props.tabsMenuList).find((tab) => tab.code === value) || {};
+    if (mode === "router") {
+      const url = toURL(href as string);
+      router.push(url.pathname + url.search);
+    }
+  },
+  {
+    immediate: true,
+  }
+);
 const getUrl = (path: string) => {
   let href = path;
   const buildUrl = (obj: any) =>
     Object.keys(obj).forEach((key) => {
       href += href.includes("?") ? `&${key}=${obj[key]}` : `?${key}=${obj[key]}`;
     });
-  route.query && buildUrl(route.query);
-  route.params && buildUrl(route.params);
+  buildUrl(Object.assign({}, route.params, route.query));
   return href;
 };
 
@@ -55,6 +68,7 @@ const getTabsItem = (path: string): any => {
     href,
     label: curRoute.meta ? curRoute.meta[props.keyLabel] : curRoute.name,
     mode: "router",
+    closable: curRoute.meta ? curRoute.meta.closable !== false : true,
   };
   return props.formatTab ? props.formatTab(tabItem) : tabItem;
 };
@@ -76,20 +90,7 @@ watch(
     immediate: true,
   }
 );
-watch(
-  () => tabsMenuValue.value,
-  (value) => {
-    if (!value) return;
-    const { mode, href } = unref(props.tabsMenuList).find((tab) => tab.code === value) || {};
-    if (mode === "router") {
-      const url = toURL(href as string);
-      router.push(url.pathname + url.search);
-    }
-  },
-  {
-    immediate: true,
-  }
-);
+
 provide(EnumSessionKey.TabsActivate, tabsMenuValue);
 </script>
 <style lang="scss" scoped>

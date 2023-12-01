@@ -2,7 +2,7 @@
 
 <template>
   <div class="app flex flex-col">
-    <div class="router-box">
+    <!-- <div class="router-box">
       <router-link class="mr-[10px]" to="/form">form</router-link>
       <router-link class="mr-[10px]" to="/chart">chart</router-link>
       <router-link class="mr-[10px]" to="/table">table</router-link>
@@ -19,9 +19,9 @@
       <KeepAlive>
         <component :is="Component" :key="$route.fullPath"></component>
       </KeepAlive>
-    </router-view>
+    </router-view> -->
 
-    <!-- <LayoutRouter class="h-full"></LayoutRouter> -->
+    <LayoutRouter class="h-full"></LayoutRouter>
     <!-- <LayoutFrame class="h-full"></LayoutFrame> -->
   </div>
 </template>

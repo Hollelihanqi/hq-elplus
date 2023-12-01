@@ -11,6 +11,12 @@ const routes = [
   { path: "/layoutFrame", component: () => import("@/views/layout-frame.vue") },
   { path: "/layout-child-1", component: () => import("@/views/layout-router-child-1.vue") },
   { path: "/layout-child-2", component: () => import("@/views/layout-router-child-2.vue") },
+  {
+    path: "/layout-child-3",
+    name: "layoutChild3",
+    meta: { title: "测试页面3", closable: false },
+    component: () => import("@/views/layout-router-child-3.vue"),
+  },
   { path: "/theme", component: () => import("@/views/theme/index.vue") },
 ];
 

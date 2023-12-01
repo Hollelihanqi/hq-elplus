@@ -4,7 +4,7 @@
       <slot name="left">
         <div class="left-header flex items-center" :class="{ 'left-header-collapse': collapse }">
           <img v-if="logo" class="w-[30px] h-[30px] mr-[10px]" :src="logo" alt="logo" />
-          <span v-show="!collapse">{{ title }}</span>
+          <span v-show="!collapse" class="title">{{ title }}</span>
         </div>
       </slot>
     </div>
@@ -19,7 +19,8 @@
         </div>
       </slot>
     </div>
-    <slot v-if="user" name="right">
+    <slot v-if="user" name="right"
+      >@
       <div class="flex items-center text-[14px] text-[#fff]">
         <div class="mr-[5px]">{{ user.userName }}</div>
         <div class="mr-[10px]">（{{ user.userCode }}）</div>
@@ -94,10 +95,14 @@ document.addEventListener("fullscreenchange", () => {
   --layout-header-background: #409eff;
   --layout-header-left-width: 200px;
   --layout-header-left-collapse-width: 60px;
+  --layout-header-left-title-size: 20px;
   background: var(--layout-header-background);
   color: var(--layout-header-text-color);
   .left-header {
     width: var(--layout-header-left-width);
+    .title {
+      font-size: var(--layout-header-left-title-size);
+    }
   }
   .left-header-collapse {
     width: var(--layout-header-left-collapse-width);

@@ -1,16 +1,16 @@
 <template>
   <div class="layout-router flex flex-col flex-1 overflow-hidden">
     <slot name="header"></slot>
-    <div class="flex flex-1 overflow-hidden">
+    <div class="flex flex-1 overflow-hidden w-full">
       <slot></slot>
       <div class="layout-content flex flex-col flex-1 bg-[#F0F1F5] overflow-auto">
         <NavTabs
-          class="h-[40px]"
+          class="h-[40px] w-full"
           :tabs-menu-list="listRoute"
           :key-label="tabsKeyLabel"
           :format-tab="formatTab"
         ></NavTabs>
-        <div class="router-view flex-1 px-[10px] pb-[10px] overflow-auto">
+        <div class="router-view flex-1 px-[10px] pb-[10px] overflow-auto w-full">
           <router-view v-slot="{ Component, route }">
             <keep-alive>
               <component

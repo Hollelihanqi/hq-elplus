@@ -2,7 +2,7 @@
  * @Author: weichunpei
  * @Date: 2023-10-20 09:30:23
  * @LastEditors: weichunpei
- * @LastEditTime: 2023-11-29 10:55:43
+ * @LastEditTime: 2023-11-29 14:39:56
  * @Description: layoutHeader 组件
 -->
 
@@ -48,9 +48,10 @@
 
 ### layoutHeader 样式变量
 
-| 属性名                                | 说明               |
-| ------------------------------------- | ------------------ |
-| `--layout-header-text-color`          | 文字颜色           |
-| `--layout-header-background`          | 背景色             |
-| `--layout-header-left-width`          | 左侧区域宽度       |
-| `--layout-header-left-collapse-width` | 左侧区域折叠后宽度 |
+| 属性名                                | 说明                |
+| ------------------------------------- | ------------------- |
+| `--layout-header-text-color`          | 文字颜色            |
+| `--layout-header-background`          | 背景色              |
+| `--layout-header-left-width`          | 左侧区域宽度        |
+| `--layout-header-left-collapse-width` | 左侧区域折叠后宽度  |
+| `--layout-header-left-title-size`     | 左侧区域 title 大小 |
