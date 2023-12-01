@@ -48,7 +48,7 @@
         </TableColumn>
       </template>
     </el-table>
-    <div v-if="isDataEmpty" class="flex-1 opacity-0 h-0">--</div>
+    <div v-if="isDataEmpty" class="flex-1 opacity-0 h-0"></div>
     <el-pagination
       v-if="!cpaginationHide"
       v-model:page-size="paginationParams.pageSize"
@@ -200,6 +200,7 @@ const cpaginationHide = computed(() => {
 });
 
 const getTableData = async (params = {}) => {
+  if (!props.requestApi || typeof props.requestApi !== "function") return;
   _loading.value = true;
   let _requestParams = props.requestParams;
   if (typeof props.requestParams === "function") {
@@ -229,7 +230,7 @@ const getTableData = async (params = {}) => {
     }
 
     await nextTick();
-    props.dataUpdateAfter(result);
+    props.dataUpdateAfter(_params, result);
   } catch (error) {
     _loading.value = false;
     console.error("表格请求数据发生错误...");
@@ -300,7 +301,7 @@ const getData = () => {
 };
 
 onMounted(() => {
-  if (props.requestAuto && props.requestApi && typeof props.requestApi === "function") {
+  if (props.requestAuto) {
     getTableData();
   }
 });

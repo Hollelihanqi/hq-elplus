@@ -8,4 +8,4 @@ docs/.vitepress/cache
 stats.html
 .eslintcache
 /.idea
-/docs/.vitepress/*.zip
+.zip
