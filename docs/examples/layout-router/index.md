@@ -101,6 +101,7 @@ tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
 | `cacheable`    | 是否开启缓存        | boolean  | -      | false    |      |
 | `tabsKeyLabel` | tabslabel 对应 key  | string   | -      | 'title'  |      |
 | `formatTab`    | tabsItem 格式化方法 | function | -      | -        |      |
+| `showTab`      | 是否显示 tab 页签   | boolean  | -      | true     |      |
 
 ### LayoutRouter 插槽
 
@@ -109,6 +110,7 @@ tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
 | `default` | 内容区域左侧插槽 |
 | `header`  | 顶部区域插槽     |
 | `footer`  | 底部区域插槽     |
+| `tab`     | tab 页签插槽     |
 
 ### layoutHeader 样式变量
 

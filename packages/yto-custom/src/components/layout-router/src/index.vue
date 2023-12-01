@@ -4,12 +4,15 @@
     <div class="flex flex-1 overflow-hidden w-full">
       <slot></slot>
       <div class="layout-content flex flex-col flex-1 bg-[#F0F1F5] overflow-auto">
-        <NavTabs
-          class="h-[40px] w-full"
-          :tabs-menu-list="listRoute"
-          :key-label="tabsKeyLabel"
-          :format-tab="formatTab"
-        ></NavTabs>
+        <slot v-if="showTab" name="tab" :tab-data="listRoute">
+          <NavTabs
+            v-if="showTab"
+            class="h-[40px] w-full"
+            :tabs-menu-list="listRoute"
+            :key-label="tabsKeyLabel"
+            :format-tab="formatTab"
+          ></NavTabs>
+        </slot>
         <div class="router-view flex-1 px-[10px] pb-[10px] overflow-auto w-full">
           <router-view v-slot="{ Component, route }">
             <keep-alive>
@@ -44,6 +47,10 @@ const props = defineProps({
   max: Number,
   tabsKeyLabel: String,
   formatTab: Function,
+  showTab: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const { listRoute, activate } = useFrame({
