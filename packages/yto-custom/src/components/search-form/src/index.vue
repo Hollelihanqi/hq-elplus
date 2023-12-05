@@ -26,7 +26,7 @@ export default defineComponent({
     },
   },
   emits: ["update:searchModel", "on-search", "on-reset"],
-  setup(props, { emit, expose }) {
+  setup(props, { emit, expose, slots }) {
     const collapsed = ref(false);
     const _searchModel = computed({
       get() {
@@ -105,7 +105,11 @@ export default defineComponent({
                   <GridItem key={control.field} {...getResponsive(control, index)}>
                     <el-form-item label={control.label}>
                       {control.field ? (
-                        <SearchFormItem v-model={_searchModel.value[control.field]} control={control} />
+                        <SearchFormItem
+                          v-model={_searchModel.value[control.field]}
+                          control={control}
+                          cslot={slots[control.field]}
+                        />
                       ) : null}
                     </el-form-item>
                   </GridItem>

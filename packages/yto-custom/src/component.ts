@@ -36,3 +36,6 @@ export * from "./components/layout-router";
 
 export { YtoSearchForm } from "./components/search-form";
 export * from "./components/search-form";
+
+export { StickyContainer } from "./components/sticky-container";
+export * from "./components/sticky-container";

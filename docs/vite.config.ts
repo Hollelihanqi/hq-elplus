@@ -10,7 +10,6 @@
 import { defineConfig, ConfigEnv, UserConfig, loadEnv } from "vite";
 import AutoImport from "unplugin-auto-import/vite";
 import vueJsx from "@vitejs/plugin-vue-jsx";
-
 import dns from "dns";
 dns.setDefaultResultOrder("verbatim");
 // // https://vitejs.dev/config/

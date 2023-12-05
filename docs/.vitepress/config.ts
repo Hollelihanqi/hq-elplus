@@ -82,6 +82,10 @@ export default defineConfig({
               text: "LayoutFrame",
               link: "/examples/layout-frame/index.md",
             },
+            {
+              text: "stickyContainer 粘性布局",
+              link: "/examples/sticky-container/index.md",
+            },
           ],
           collapsed: false,
         },

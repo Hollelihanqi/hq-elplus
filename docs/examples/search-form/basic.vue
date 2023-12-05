@@ -5,7 +5,11 @@
       :form-controls="list"
       :col-config="{ xs: 1, sm: 2, md: 2, lg: 2, xl: 2 }"
       @on-search="handleSearch"
-    ></yto-c-search-form>
+    >
+      <template #input2="scope">
+        <el-input v-model="scope._value.value" placeholder="自定义插槽template"></el-input>
+      </template>
+    </yto-c-search-form>
   </div>
 </template>
 <script lang="tsx" setup>

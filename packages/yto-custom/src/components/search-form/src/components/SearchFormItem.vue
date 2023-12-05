@@ -28,9 +28,14 @@ export default defineComponent({
       type: [String, Number, Boolean, Array, Object],
       default: "",
     },
+    cslot: {
+      type: [Function],
+      default: null,
+    },
   },
   emits: ["update:modelValue"],
   setup(props, ctx) {
+    const _control = props.control;
     const _el: any = props?.control?.el;
     const _elName: any = _elNameMap[_el];
     const ElInputComponent = defineAsyncComponent(() => import("element-plus").then((module: any) => module[_elName]));
@@ -95,7 +100,15 @@ export default defineComponent({
     };
 
     return () => {
-      return <>{props.control?.render ? controlRender() : props.control?.el && renderEl()}</>;
+      return (
+        <>
+          {_control?.render
+            ? controlRender()
+            : props.cslot
+            ? props.cslot({ _value, control: _control })
+            : _control?.el && renderEl()}
+        </>
+      );
     };
   },
 });

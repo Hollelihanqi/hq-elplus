@@ -9,3 +9,4 @@ stats.html
 .eslintcache
 /.idea
 .zip
+/docs/.vitepress/*.zip
