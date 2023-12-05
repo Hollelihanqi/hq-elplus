@@ -1,5 +1,31 @@
 :root {
   /* --vp-c-bg-alt:#fff */
+  --wi-color-primary: 52, 52, 206;
+  --el-color-primary: #3434ce;
+  --el-color-primary-light-9: #3434ce;
+  --el-color-primary-light-8: #4646cc;
+  --el-color-primary-light-7: #4a4ace;
+  --el-color-primary-light-5: #5252bb;
+  --el-color-primary-light-3: #575792;
+  --el-button-active-color: #3434ce;
+  --vp-c-bg: #fff;
+  --vp-c-text-1: #000;
+  --vp-sidebar-bg-color: #f6f6f7;
+}
+[data-theme="theme1"] {
+  --vp-c-bg: #fdfefe;
+  --vp-c-text-1: #054b8d;
+  --vp-sidebar-bg-color: #e1e8ef;
+}
+[data-theme="theme2"] {
+  --vp-c-bg: #eaeaef;
+  --vp-c-text-1: #05058f;
+  --vp-sidebar-bg-color: #fff;
+}
+[data-theme="theme3"] {
+  --vp-c-bg: #395e45;
+  --vp-c-text-1: #f5f5f5;
+  --vp-sidebar-bg-color: #7b8d81;
 }
 
 .vitepress-demo .demo-slot {
