@@ -43,7 +43,17 @@ export default defineComponent({
       emit("update:searchModel", newModle);
     };
 
-    expose({ resetField });
+    const getFormatValues = () => {
+      return props.formControls.reduce(
+        (acc: any, item: SearchFormControlProps) => {
+          const { field, formatValue } = item as any;
+          const value = acc[field];
+          acc[field] = formatValue && typeof formatValue === "function" ? formatValue(value) : value;
+          return acc;
+        },
+        { ..._searchModel.value }
+      );
+    };
 
     // 获取响应式设置
     const getResponsive = (control: SearchFormControlProps, index: number) => {
@@ -90,6 +100,8 @@ export default defineComponent({
     const handleQuery = () => {
       emit("on-search", { ..._searchModel.value });
     };
+
+    expose({ resetField, getFormatValues, handleDefaultValue });
 
     onMounted(() => {
       isDefaultValue() && handleDefaultValue();

@@ -46,6 +46,7 @@
 | `label`        | 所有控件显示的 label 文字                                                                           | String                                          | -      |
 | `field`        | 搜索字段名称                                                                                        | String                                          | -      |
 | `defaultValue` | 搜索控件默认值                                                                                      | `String 、 Number 、 Boolean 、 Function 、 []` | -      |
+| `formatValue`  | 格式化表单值                                                                                        | Function                                        | -      |
 | `span`         | 搜索项所占用的列数，默认为 1 列                                                                     |                                                 | 1      |
 | `offset`       | 搜索字段左侧偏移列数                                                                                |                                                 | 0      |
 | `options`      | `el` 为 select 时，option 配置列表                                                                  | `[{label:string,value:any}]`                    | []     |
@@ -60,3 +61,9 @@
 | ----------- | -------------------- |
 | `on-search` | 点击搜索按钮回调函数 |
 | `on-reset`  | 点击重置回调函数     |
+
+## SearchForm 方法
+
+| 名称              | 说明                                                               |
+| ----------------- | ------------------------------------------------------------------ |
+| `getFormatValues` | 获取格式化后的 Form 值，会动态判断表单配置项中是否有 `formatValue` |
