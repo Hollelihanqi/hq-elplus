@@ -2,7 +2,7 @@
  * @Author: weichunpei
  * @Date: 2023-10-20 09:30:23
  * @LastEditors: weichunpei
- * @LastEditTime: 2023-12-07 15:43:07
+ * @LastEditTime: 2023-12-07 17:34:42
  * @Description: layoutHeader 组件
 -->
 
@@ -51,5 +51,6 @@ interface IOptionTabPane {
   label: string;
   href?: string;
   children?: IOptionTabPane[];
+  showIcon?: boolean;
 }
 ```
