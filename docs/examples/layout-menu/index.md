@@ -1,8 +1,8 @@
 <!--
  * @Author: weichunpei
  * @Date: 2023-10-20 09:30:23
- * @LastEditors: error: git config user.name & please set dead value or install git
- * @LastEditTime: 2023-11-16 11:14:29
+ * @LastEditors: weichunpei
+ * @LastEditTime: 2023-12-07 17:34:42
  * @Description: layoutHeader 组件
 -->
 
@@ -22,11 +22,12 @@
 
 ### LayoutMenu 属性
 
-| 属性名     | 说明     | 类型             | 可选值 | 默认值 | 备注 |
-| ---------- | -------- | ---------------- | ------ | ------ | ---- |
-| `collapse` | 系统名称 | boolean          | -      | ""     |      |
-| `menus`    | 菜单数据 | IOptionTabPane[] | -      | []     |      |
-| `width`    | 菜单宽度 | Img              | —      | -      |      |
+| 属性名       | 说明       | 类型             | 可选值 | 默认值  | 备注 |
+| ------------ | ---------- | ---------------- | ------ | ------- | ---- |
+| `collapse`   | 系统名称   | boolean          | -      | ""      |      |
+| `menus`      | 菜单数据   | IOptionTabPane[] | -      | []      |      |
+| `width`      | 菜单宽度   | string           | —      | "210px" |      |
+| `searchable` | 是否可搜索 | boolean          | —      | true    |      |
 
 ### LayoutMenu 样式变量
 
@@ -50,5 +51,6 @@ interface IOptionTabPane {
   label: string;
   href?: string;
   children?: IOptionTabPane[];
+  showIcon?: boolean;
 }
 ```

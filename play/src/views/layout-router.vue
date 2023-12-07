@@ -55,9 +55,19 @@ const listNavigation: any[] = [
     children: [
       {
         label: "资讯列表",
-        href: "/layout-child-2",
-        code: "/layout-child-2",
-        mode: "router",
+        // href: "/layout-child-2",
+        // code: "/layout-child-2",
+        // mode: "router",
+        icon: "",
+        showIcon: false,
+        children: [
+          {
+            label: "资讯详情",
+            href: "/layout-child-2",
+            code: "/layout-child-2",
+            mode: "router",
+          },
+        ],
       },
     ],
   },

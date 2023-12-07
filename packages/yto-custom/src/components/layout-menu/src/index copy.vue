@@ -1,26 +1,21 @@
 <template>
   <div class="layout-menu flex flex-col justify-between bg-slate-100 overflow-hidden">
-    <el-menu
-      v-bind="$attrs"
-      class="layout-menu-v flex-1 overflow-auto"
-      :collapse="menuCollapse"
-      :default-active="activate"
-    >
-      <div v-if="!menuCollapse" class="layout-menu-search w-full bg-[#fff] p-[12px] box-border">
+    <el-menu v-bind="$attrs" class="layout-menu-v flex-1 overflow-auto" :collapse="collapse" :default-active="activate">
+      <div v-if="!collapse && searchable" class="layout-menu-search w-full bg-[#fff] p-[12px] box-border">
         <el-input v-model="searchVal" placeholder="菜单查询" />
       </div>
       <template v-for="(item, index) in menuData" :key="index">
         <el-sub-menu v-if="isArray(item.children)" :index="getLabel(item)">
           <template #title>
-            <!-- <slot name="label" v-bind="item"> -->
-            <inner-node-menu :data="item"></inner-node-menu>
-            <!-- </slot> -->
+            <slot name="label" v-bind="item">
+              <inner-node-menu :data="item"></inner-node-menu>
+            </slot>
           </template>
           <template v-for="(itemSub, indexSub) in item.children" :key="`${index}-${indexSub}`">
             <el-menu-item :index="itemSub.code" @click="menuClick(itemSub)">
-              <!-- <slot name="label" v-bind="itemSub"> -->
-              <inner-node-menu :data="itemSub" :show-icon="false"></inner-node-menu>
-              <!-- </slot> -->
+              <slot name="label" v-bind="itemSub">
+                <inner-node-menu :data="itemSub" :show-icon="false"></inner-node-menu>
+              </slot>
             </el-menu-item>
           </template>
         </el-sub-menu>
@@ -31,13 +26,6 @@
         </el-menu-item>
       </template>
     </el-menu>
-    <div v-if="showCollapse" class="collapse-btn">
-      <i
-        class="icon iconfont cursor-pointer"
-        :class="menuCollapse ? 'layout-icon_daohangzhankai' : 'layout-icon_daohangshouqi'"
-        @click="handleCollapse"
-      ></i>
-    </div>
   </div>
 </template>
 <script lang="ts" setup name="LayoutMenu">
@@ -55,19 +43,14 @@ const props = defineProps({
   keySession: String,
   collapse: Boolean,
   menus: Array,
-  showCollapse: Boolean,
+  searchable: {
+    type: Boolean,
+    default: true,
+  },
   width: { type: String, default: "210px" },
 });
 const router = useRouter();
 const emit = defineEmits(["menuClick", "update:collapse"]);
-const menuCollapse = computed({
-  get() {
-    return props.collapse;
-  },
-  set(val) {
-    emit("update:collapse", val);
-  },
-});
 // 菜单过滤
 const searchVal = ref("");
 const fileNavMenu = (arr: any) => {
@@ -83,9 +66,6 @@ const fileNavMenu = (arr: any) => {
   });
 };
 
-const handleCollapse = () => {
-  menuCollapse.value = !menuCollapse.value;
-};
 const menuClick = (item: any) => {
   const { href, code } = item;
   emit("menuClick", item);
@@ -113,11 +93,6 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
   --layout-menu-active-color: #2c3cd8;
   --layout-sub-menu-box-shadow: inset 0px -1px 0px 0px rgba(0, 0, 0, 0.1);
   --layout-menu-hover-color: #e6e6e6;
-  .collapse-btn {
-    @apply w-full h-[48px] leading-[48px]  pl-[16px] text-[14px] text-[#9c9c9c] cursor-pointer;
-    background-color: var(--layout-menu-background);
-    border-top: 1px solid #f0f0f0;
-  }
   .layout-menu-search {
     :deep(.el-input) {
       .el-input__wrapper {

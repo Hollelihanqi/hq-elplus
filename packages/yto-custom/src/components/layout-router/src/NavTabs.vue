@@ -1,10 +1,15 @@
 <template>
   <div class="tabs-box">
-    <el-tabs v-model="tabsMenuValue" class="bg-[#E2E6E8] overflow-hidden" type="border-card" @tab-remove="tabPaneClose">
+    <el-tabs
+      v-model="tabsMenuValue"
+      class="bg-[#E2E6E8] overflow-hidden"
+      type="border-card"
+      @tab-remove="handleTabRemove"
+    >
       <template v-for="{ href, code, label, closable } in tabsMenuList" :key="href">
         <el-tab-pane
           class="flex-1 bg-[#f0f1f5] px-[10px] pb-[10px] overflow-hidden"
-          :closable="isBoolean(closable) ? closable : true"
+          :closable="isBoolean(closable) ? closable : tabsMenuList.length === 1 ? false : true"
           :label="label"
           :name="code"
         />
@@ -33,7 +38,10 @@ const props = withDefaults(defineProps<Props>(), {
 const tabsMenuValue: any = inject(EnumSessionKey.TabsActivate);
 const router = useRouter();
 const route = useRoute();
-
+const handleTabRemove = (code: any) => {
+  tabPaneClose(code);
+  // router.go(-1);
+};
 watch(
   () => tabsMenuValue.value,
   (value) => {

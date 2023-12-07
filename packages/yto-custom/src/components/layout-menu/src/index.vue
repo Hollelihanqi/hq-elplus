@@ -1,24 +1,50 @@
 <template>
   <div class="layout-menu flex flex-col justify-between bg-slate-100 overflow-hidden">
     <el-menu v-bind="$attrs" class="layout-menu-v flex-1 overflow-auto" :collapse="collapse" :default-active="activate">
-      <div v-if="!collapse" class="layout-menu-search w-full bg-[#fff] p-[12px] box-border">
+      <div v-if="!collapse && searchable" class="layout-menu-search w-full bg-[#fff] p-[12px] box-border">
         <el-input v-model="searchVal" placeholder="菜单查询" />
       </div>
+      <!-- 二级菜单 -->
       <template v-for="(item, index) in menuData" :key="index">
         <el-sub-menu v-if="isArray(item.children)" :index="getLabel(item)">
           <template #title>
             <slot name="label" v-bind="item">
-              <inner-node-menu :data="item"></inner-node-menu>
+              <inner-node-menu
+                :data="item"
+                :show-icon="isBoolean(item.showIcon) ? item.showIcon : true"
+              ></inner-node-menu>
             </slot>
           </template>
+          <!-- 三级菜单 -->
           <template v-for="(itemSub, indexSub) in item.children" :key="`${index}-${indexSub}`">
-            <el-menu-item :index="itemSub.code" @click="menuClick(itemSub)">
+            <el-sub-menu v-if="isArray(itemSub.children)" :index="getLabel(itemSub)">
+              <template #title>
+                <slot name="label" v-bind="itemSub">
+                  <inner-node-menu
+                    :data="itemSub"
+                    :show-icon="isBoolean(itemSub.showIcon) ? itemSub.showIcon : true"
+                  ></inner-node-menu>
+                </slot>
+              </template>
+              <template
+                v-for="(itemSecond, indexSecond) in itemSub.children"
+                :key="`${index}-${indexSub}-${indexSecond}`"
+              >
+                <el-menu-item :index="itemSecond.code" @click="menuClick(itemSecond)">
+                  <slot name="label" v-bind="itemSecond">
+                    <inner-node-menu :data="itemSecond" :show-icon="false"></inner-node-menu>
+                  </slot>
+                </el-menu-item>
+              </template>
+            </el-sub-menu>
+            <el-menu-item v-else :index="itemSub.code" @click="menuClick(itemSub)">
               <slot name="label" v-bind="itemSub">
                 <inner-node-menu :data="itemSub" :show-icon="false"></inner-node-menu>
               </slot>
             </el-menu-item>
           </template>
         </el-sub-menu>
+        <!-- 一级菜单 -->
         <el-menu-item v-else :index="item.code" @click="menuClick(item)">
           <slot name="label" v-bind="item">
             <inner-node-menu :data="item"></inner-node-menu>
@@ -32,7 +58,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useMenu } from "@/composable/menu";
-import { isArray, toURL } from "gold-core";
+import { isArray, isBoolean, toURL } from "gold-core";
 import InnerNodeMenu from "./NodeMenu.vue";
 import "@/icon-font/iconfont.css";
 
@@ -43,6 +69,10 @@ const props = defineProps({
   keySession: String,
   collapse: Boolean,
   menus: Array,
+  searchable: {
+    type: Boolean,
+    default: true,
+  },
   width: { type: String, default: "210px" },
 });
 const router = useRouter();
