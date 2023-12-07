@@ -12,7 +12,7 @@
         <template v-for="{ href, code, label, closable } in listRoute" :key="href">
           <el-tab-pane
             class="flex-1 bg-[#f0f1f5] px-[10px] pb-[10px] overflow-hidden"
-            :closable="isBoolean(closable) ? closable : true"
+            :closable="isBoolean(closable) ? closable : listRoute.length === 1 ? false : true"
             :label="label"
             :name="code"
           >

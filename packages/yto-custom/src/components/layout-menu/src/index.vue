@@ -1,7 +1,7 @@
 <template>
   <div class="layout-menu flex flex-col justify-between bg-slate-100 overflow-hidden">
     <el-menu v-bind="$attrs" class="layout-menu-v flex-1 overflow-auto" :collapse="collapse" :default-active="activate">
-      <div v-if="!collapse" class="layout-menu-search w-full bg-[#fff] p-[12px] box-border">
+      <div v-if="!collapse && searchable" class="layout-menu-search w-full bg-[#fff] p-[12px] box-border">
         <el-input v-model="searchVal" placeholder="菜单查询" />
       </div>
       <template v-for="(item, index) in menuData" :key="index">
@@ -43,6 +43,10 @@ const props = defineProps({
   keySession: String,
   collapse: Boolean,
   menus: Array,
+  searchable: {
+    type: Boolean,
+    default: true,
+  },
   width: { type: String, default: "210px" },
 });
 const router = useRouter();
