@@ -88,11 +88,11 @@ export default defineComponent({
     };
 
     const controlRender = () => {
-      return props.control.render && props.control.render(_value);
+      return _control.render && _control.render(_value, _control);
     };
 
     const selectRemoteRender = () => {
-      return props.control.isRemote && <YtoRemoteSearch v-model={_value.value} {...props.control.remoteProps} />;
+      return _control.isRemote && <YtoRemoteSearch v-model={_value.value} {..._control.remoteProps} />;
     };
 
     return () => {

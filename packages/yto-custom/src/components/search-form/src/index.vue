@@ -44,15 +44,18 @@ export default defineComponent({
     };
 
     const getFormatValues = () => {
-      return props.formControls.reduce(
-        (acc: any, item: SearchFormControlProps) => {
-          const { field, formatValue } = item as any;
-          const value = acc[field];
-          acc[field] = formatValue && typeof formatValue === "function" ? formatValue(value) : value;
-          return acc;
-        },
-        { ..._searchModel.value }
-      );
+      return props.formControls.reduce((acc: any, item: SearchFormControlProps) => {
+        const { field, formatValue } = item as any;
+        // const value = acc[field];
+        // acc[field] = formatValue && typeof formatValue === "function" ? formatValue(value) : value;
+        // 只处理那些有 formatValue 函数的属性
+        if (typeof formatValue === "function") {
+          const value = _searchModel.value[field];
+          // 只添加那些经过formatValue处理的属性到累加器对象中
+          acc[field] = formatValue(value);
+        }
+        return acc;
+      }, {});
     };
 
     // 获取响应式设置
