@@ -9,10 +9,7 @@
         <el-sub-menu v-if="isArray(item.children)" :index="getLabel(item)">
           <template #title>
             <slot name="label" v-bind="item">
-              <inner-node-menu
-                :data="item"
-                :show-icon="isBoolean(item.showIcon) ? item.showIcon : true"
-              ></inner-node-menu>
+              <inner-node-menu :data="item" :show-icon="!!item.icon"></inner-node-menu>
             </slot>
           </template>
           <!-- 三级菜单 -->
@@ -20,10 +17,7 @@
             <el-sub-menu v-if="isArray(itemSub.children)" :index="getLabel(itemSub)">
               <template #title>
                 <slot name="label" v-bind="itemSub">
-                  <inner-node-menu
-                    :data="itemSub"
-                    :show-icon="isBoolean(itemSub.showIcon) ? itemSub.showIcon : true"
-                  ></inner-node-menu>
+                  <inner-node-menu :data="itemSub" :show-icon="!!item.icon"></inner-node-menu>
                 </slot>
               </template>
               <template
@@ -47,7 +41,7 @@
         <!-- 一级菜单 -->
         <el-menu-item v-else :index="item.code" @click="menuClick(item)">
           <slot name="label" v-bind="item">
-            <inner-node-menu :data="item"></inner-node-menu>
+            <inner-node-menu :data="item" :show-icon="!!item.icon"></inner-node-menu>
           </slot>
         </el-menu-item>
       </template>
