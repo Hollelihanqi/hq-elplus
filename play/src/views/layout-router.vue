@@ -37,11 +37,18 @@ const userInfo = {
 
 const listNavigation: any[] = [
   {
-    label: "公告管理",
+    label: "首页",
+    href: "/layout-child-3",
+    code: "/layout-child-3",
+    // closable: false,
+    mode: "router",
+  },
+  {
+    label: "公告管理公告管理公告管理",
     icon: "icon iconfont party-web-icon-caidan3",
     children: [
       {
-        label: "公告列表",
+        label: "公告列表公告列表公告列表公告列表",
         href: "/layout-child-1?abc=1",
         code: "/layout-child-1",
         // closable: false,
@@ -58,7 +65,7 @@ const listNavigation: any[] = [
         // href: "/layout-child-2",
         // code: "/layout-child-2",
         // mode: "router",
-        icon: "",
+
         showIcon: false,
         children: [
           {
@@ -84,7 +91,7 @@ const listNavigation: any[] = [
   //   ],
   // },
 ];
-const frist = listNavigation[0].children[0];
+// const frist = listNavigation[0].children[0];
 
 // if (route.path === "/") {
 //   tabPaneAdd(frist?.href as string, frist as IOptionTabPane);

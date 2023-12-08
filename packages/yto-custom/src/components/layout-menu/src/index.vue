@@ -103,6 +103,7 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
 :root {
   --el-menu-base-level-padding: 24px;
   --el-menu-level-padding: 24px;
+  --el-menu-item-height: 48px;
 }
 </style>
 <style lang="scss" scoped>
