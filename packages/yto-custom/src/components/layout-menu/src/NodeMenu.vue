@@ -4,7 +4,7 @@
     <i v-if="!isBlank(getIcon(data))" :class="getIcon(data)"></i>
     <template v-else>{{ labelFirst(data) }}</template>
   </el-icon>
-  <span class="truncate ..." :style="{ width }">{{ getLable(data) }}</span>
+  <span class="truncate ...">{{ getLable(data) }}</span>
 </template>
 <script lang="ts" setup>
 import { inject } from "vue";
@@ -17,7 +17,7 @@ import { EnumSessionKey } from "@/common/EnumConstant";
 defineProps({ data: Object, showIcon: { type: Boolean, default: true } });
 const keyLabel = inject<any>(EnumSessionKey.MenuKeyLabel);
 const keyIcon = inject<any>(EnumSessionKey.MenuKeyIcon);
-const width = inject<any>(EnumSessionKey.MenuWidth);
+// const width = inject<any>(EnumSessionKey.MenuWidth);
 
 function getLable(target: any) {
   if (isEmpty(target)) {
