@@ -231,7 +231,9 @@ export default defineComponent({
           remoteMethod: remoteMethod,
           onVisibleChange: (value: Boolean) => {
             if (value) {
-              options.value = copyOptions.value;
+              setTimeout(() => {
+                options.value = copyOptions.value;
+              }, 0);
             }
           },
         },

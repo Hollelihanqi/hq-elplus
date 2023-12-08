@@ -1,13 +1,14 @@
 <template>
   <div class="p-5">
-    <yto-c-user-search v-model="user1"></yto-c-user-search>
+    <!-- <yto-c-user-search v-model="user1"></yto-c-user-search> -->
+    <textSearch2 v-model="user1"/>
     <!-- <yto-c-remote-search v-model="user" remote valueKey="userCode" :requestApi="getList"></yto-c-remote-search> -->
   </div>
 </template>
 <script lang="ts" setup>
 import { h, ref } from "vue";
 import _request from "../request";
-
+import textSearch2 from "./textSearch2.vue";
 const user1 = ref("");
 const user = ref("");
 const _headers = () => {
