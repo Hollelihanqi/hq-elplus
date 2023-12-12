@@ -10,7 +10,7 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const handleClick = () => {
-  router.push({ path: "/layout-child-3", query: { id: "123" } });
+  router.push({ path: "/layout-child-3", query: { id: "" } });
 };
 </script>
 <style lang="scss" scoped>

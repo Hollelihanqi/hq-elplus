@@ -2,7 +2,7 @@
  * @Author: weichunpei
  * @Date: 2023-10-20 09:30:23
  * @LastEditors: weichunpei
- * @LastEditTime: 2023-11-29 14:39:56
+ * @LastEditTime: 2023-12-12 20:02:56
  * @Description: layoutHeader 组件
 -->
 
@@ -25,7 +25,7 @@
 | -------------- | ---------------- | ----------------------------------- | ------ | ------ | ---- |
 | `title`        | 系统名称         | string                              | -      | ""     |      |
 | `collapse`     | 是否折叠         | boolean                             | -      | false  |      |
-| `width`        | 系统 logo        | Img                                 | —      | -      |      |
+| `logo`         | 系统 logo        | Img                                 | —      | -      |      |
 | `userInfo`     | 用户信息         | `{userName:string,userCode:string}` | —      |        |
 | `isfullscreen` | 全屏按钮是否显示 | booleadn                            | —      | true   |
 

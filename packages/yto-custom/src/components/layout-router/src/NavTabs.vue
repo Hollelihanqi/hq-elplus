@@ -86,7 +86,11 @@ watch(
   (newVal) => {
     if (!newVal) return;
     const url = getUrl(newVal);
-    const tabItem: any = unref(props.tabsMenuList).find((tab) => tab.href?.includes(url)) || {};
+    const tabItem: any =
+      unref(props.tabsMenuList).find((tab) => {
+        const urlObj = toURL(tab.href as string);
+        return urlObj.pathname + urlObj.search === url;
+      }) || {};
     const { href } = tabItem;
     if (tabItem && href) {
       tabPaneAdd(href as string, { ...tabItem });

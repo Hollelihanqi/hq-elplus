@@ -8,10 +8,10 @@
           <NavTabs
             v-if="showTab"
             class="h-[40px] w-full"
-            v-bind="$attrs"
             :tabs-menu-list="listRoute"
             :key-label="tabsKeyLabel"
             :format-tab="formatTab"
+            @tab-change="handleTabChange"
           ></NavTabs>
         </slot>
         <div class="router-view flex-1 px-[10px] pb-[10px] overflow-auto w-full">
@@ -59,7 +59,8 @@ const { listRoute, activate } = useFrame({
   sso: props.sso as boolean,
   max: props.max as number,
 });
-
+const emit = defineEmits(["tab-change"]);
+const handleTabChange = (tab: any) => emit("tab-change", tab);
 provide(EnumSessionKey.TabsActivate, activate);
 </script>
 

@@ -9,7 +9,11 @@ const routes = [
   { path: "/uploaderf", component: () => import("@/views/UploaderF.vue") },
   { path: "/layoutFrom", component: () => import("@/views/layoutFrom.vue") },
   { path: "/layoutFrame", component: () => import("@/views/layout-frame.vue") },
-  { path: "/layout-child-1", component: () => import("@/views/layout-router-child-1.vue") },
+  {
+    path: "/layout-child-1",
+    meta: { title: "测试页面1" },
+    component: () => import("@/views/layout-router-child-1.vue"),
+  },
   { path: "/layout-child-2", component: () => import("@/views/layout-router-child-2.vue") },
   {
     path: "/layout-child-3",

@@ -1,6 +1,6 @@
 <template>
   <div id="layout">
-    <yto-c-layout-router class="frame" :cacheable="true" @tab-change="handleTabClick">
+    <yto-c-layout-router :cacheable="true" @tab-change="handleTabChange">
       <template #header>
         <yto-c-layout-header
           title="圆通党建"
@@ -15,6 +15,7 @@
         :collapse="collapse"
         :unique-opened="true"
         :menus="listNavigation"
+        width="220px"
         @menuClick="handleMenuClick"
       ></yto-c-layout-menu>
     </yto-c-layout-router>
@@ -118,8 +119,8 @@ tabPaneAdd(`/layout-child-3?iFrameUrl=http://action-analysis-tst.ytokj.com/user-
 const handleMenuClick = (info: any) => {
   console.log("handleMenuClick-----");
 };
-const handleTabClick = (info: any) => {
-  console.log("handleTabClick-----", info);
+const handleTabChange = (info: any) => {
+  console.log("handleTabChange-----", info);
 };
 onMounted(() => {
   // router.push({ name: "layoutChild3" });
@@ -129,16 +130,15 @@ onMounted(() => {
 #layout {
   .layout-router {
     --nav-tabs-text-color: #ef1017;
+    @apply h-full;
   }
   .layout-header {
     --layout-header-background: #900808;
+    --layout-header-left-width: 220px;
   }
   .layout-menu {
     --layout-menu-active-color: #ef1017;
     --layout-menu-active-background: rgba(239, 16, 23, 0.1);
-  }
-  .frame {
-    height: 100%;
   }
 }
 </style>
