@@ -2,6 +2,7 @@
   <div class="tabs-box">
     <el-tabs
       v-model="tabsMenuValue"
+      v-bind="$attrs"
       class="bg-[#E2E6E8] overflow-hidden"
       type="border-card"
       @tab-remove="handleTabRemove"
