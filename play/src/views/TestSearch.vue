@@ -1,13 +1,19 @@
 <template>
   <div class="p-5">
-    <yto-c-user-search v-model="user1"></yto-c-user-search>
+    <!-- <yto-c-user-search v-model="user1"></yto-c-user-search> -->
+    <el-form>
+      <el-form-item label="testtwet"  class="non-interactive-label">
+        <textSearch2 v-model="user1" />
+      </el-form-item>
+    </el-form>
+
     <!-- <yto-c-remote-search v-model="user" remote valueKey="userCode" :requestApi="getList"></yto-c-remote-search> -->
   </div>
 </template>
 <script lang="ts" setup>
 import { h, ref } from "vue";
 import _request from "../request";
-
+import textSearch2 from "./textSearch2.vue";
 const user1 = ref("");
 const user = ref("");
 const _headers = () => {
@@ -64,3 +70,9 @@ const optTemp = (item: any) => {
   );
 };
 </script>
+<style>
+/* 你可以将这个样式放到你的全局样式文件或者当前组件的<style>标签中 */
+.non-interactive-label .el-form-item__label {
+  pointer-events: none; /* 禁用鼠标事件 */
+}
+</style>

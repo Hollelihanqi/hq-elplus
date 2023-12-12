@@ -202,6 +202,10 @@ export default defineComponent({
       copyOptions.value = [];
     };
 
+    const disLabelEvent = () => {
+      const label = RemoteSearchSelectInstance.value.$el.parentElement.parentElement;
+      label && label.classList.add("el-form-label-dis");
+    };
     onMounted(() => {
       if (props.getInstance && typeof props.getInstance === "function") {
         props.getInstance(getCurrentInstance());
@@ -209,29 +213,38 @@ export default defineComponent({
       if (props.getExposed && typeof props.getExposed === "function") {
         props.getExposed(getCurrentInstance()?.exposed);
       }
+      disLabelEvent();
     });
 
+    const RemoteSearchSelectInstance = ref();
     expose({ getOptions, clearOptions });
 
     return () => {
       return h(
         ElSelect,
         {
+          class: "remote-search-select",
+          ref: RemoteSearchSelectInstance,
           loading: loading.value,
           "value-key": props.valueKey,
           remote: false,
           clearable: true,
           filterable: true,
           reserveKeyword: true,
+          collapseTags: true,
+          collapseTagsTooltip: true,
           placeholder: props.isRemoteSearch ? "请输入" : "请选择",
           style: {
             width: props.w,
           },
           ...attrs,
           remoteMethod: remoteMethod,
-          onVisibleChange: (value: Boolean) => {
+          onVisibleChange: async (value: Boolean) => {
+            await nextTick();
             if (value) {
-              options.value = copyOptions.value;
+              options.value = [...copyOptions.value];
+            } else {
+              options.value = [];
             }
           },
         },
@@ -257,10 +270,5 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.cus-temp {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
+@import "./index.scss";
 </style>
