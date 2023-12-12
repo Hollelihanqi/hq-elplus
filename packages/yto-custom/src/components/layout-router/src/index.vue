@@ -8,6 +8,7 @@
           <NavTabs
             v-if="showTab"
             class="h-[40px] w-full"
+            v-bind="$attrs"
             :tabs-menu-list="listRoute"
             :key-label="tabsKeyLabel"
             :format-tab="formatTab"

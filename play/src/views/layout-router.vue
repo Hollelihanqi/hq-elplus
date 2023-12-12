@@ -1,6 +1,6 @@
 <template>
   <div id="layout">
-    <yto-c-layout-router class="frame" :cacheable="true">
+    <yto-c-layout-router class="frame" :cacheable="true" @tab-change="handleTabClick">
       <template #header>
         <yto-c-layout-header
           title="圆通党建"
@@ -117,6 +117,9 @@ tabPaneAdd(`/layout-child-3?iFrameUrl=http://action-analysis-tst.ytokj.com/user-
 });
 const handleMenuClick = (info: any) => {
   console.log("handleMenuClick-----");
+};
+const handleTabClick = (info: any) => {
+  console.log("handleTabClick-----", info);
 };
 onMounted(() => {
   // router.push({ name: "layoutChild3" });
