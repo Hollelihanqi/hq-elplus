@@ -13,6 +13,8 @@
       <router-link class="mr-[10px]" to="/layoutFrom">layoutFrom</router-link>
       <router-link class="mr-[10px]" to="/layoutFrame">layoutFrame</router-link>
       <router-link class="mr-[10px]" to="/theme">them</router-link>
+      <router-link class="mr-[10px]" to="/customFieldContainer">customFieldContainer</router-link>
+      <router-link class="mr-[10px]" to="/customFieldConfig">CustomFieldDemo</router-link>
     </div>
 
     <router-view v-slot="{ Component }" class="flex-1">

@@ -1,3 +1,15 @@
+/*
+ * @Description: 模块名称
+ * @Author: ym
+ * @Date: 2023-12-11 14:08:36
+ * @LastEditTime: 2023-12-12 10:48:50
+ */
+/*
+ * @Description: 模块名称
+ * @Author: ym
+ * @Date: 2023-12-05 09:29:05
+ * @LastEditTime: 2023-12-07 16:06:43
+ */
 import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   { path: "/chart", component: () => import("@/views/chart.vue") },
@@ -22,6 +34,8 @@ const routes = [
     component: () => import("@/views/layout-router-child-3.vue"),
   },
   { path: "/theme", component: () => import("@/views/theme/index.vue") },
+  { path: "/customFieldContainer", component: () => import("@/views/CustomFieldContainer.vue") },
+  { path: "/customFieldConfig", component: () => import("@/views/customFieldDemo.vue") },
 ];
 
 export const router = createRouter({

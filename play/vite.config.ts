@@ -1,12 +1,23 @@
+/*
+ * @Description: 模块名称
+ * @Author: ym
+ * @Date: 2023-12-05 16:57:03
+ * @LastEditTime: 2023-12-11 14:11:32
+ */
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import path, { resolve } from "path";
 import AutoImport from "unplugin-auto-import/vite";
 import WindiCSS from "vite-plugin-windicss";
+import vueJsx from "@vitejs/plugin-vue-jsx";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
+    vueJsx({
+      transformOn: true,
+      mergeProps: true,
+    }),
     WindiCSS(),
     AutoImport({
       imports: ["vue"],

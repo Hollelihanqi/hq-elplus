@@ -1,3 +1,10 @@
+<!--
+ * @Description: 模块名称optionWidth
+ * @Author: ym
+ * @Date: 2023-12-07 16:01:04
+ * @LastEditTime: 2023-12-13 15:33:13
+-->
+
 # CustomFieldConfig
 
 用于实现自定义字段的配置。
@@ -17,54 +24,46 @@
 
 ## 基本使用
 
+基本用法
+<demo src="./basic.vue"></demo>
+
+插槽
+<demo src="./basic2.vue"></demo>
+
+表单验证
+<demo src="./basic3.vue"></demo>
+
 ### CustomFieldConfig 属性
 
-| 属性名             | 说明         | 类型     | 可选值 | 默认值 | 备注     |
-| ------------------ | ------------ | -------- | ------ | ------ | -------- |
-| `v-model:field`    | 字段值       | string   | -      | -      |          |
-| `fieldConfig`      | field 配置   | object   | -      | -      |          |
-| `v-model:operator` | 操作符       | string   | -      | ''     |          |
-| `operatorConfig`   | field 配置   | object   | -      | -      |          |
-| `v-model:value`    | 字段值       | string   | -      | -      | 支持多选 |
-| `valueConfig`      | field 配置   | object   | -      | -      |          |
-| `disabled`         | 是否禁用     | boolean  | -      | false  |          |
-| `rules`            | 表单校验规则 | function | -      | -      |          |
-| `cacheable`        | 是否临时缓存 | boolean  | -      | false  |          |
+| 属性名           | 说明            | 类型         | 可选值 | 默认值 | 备注 |
+| ---------------- | --------------- | ------------ | ------ | ------ | ---- |
+| `v-model`        | 字段值          | Object       | 必传   | -      |      |
+| `fieldConfig`    | 左侧 field 配置 | IFieldConfig | -      | -      |      |
+| `operatorConfig` | 中间 field 配置 | IFieldConfig | -      | -      |      |
+| `valueConfig`    | 右侧 field 配置 | IFieldConfig | -      | -      |      |
+| `disabled`       | 是否禁用        | boolean      | -      | false  |      |
+| `rules`          | 表单校验规则    | function     | -      | -      |      |
+| `ruleProp`       | 表单校验字段    | String       | -      | -      |      |
+| `optionWidth`    | 中间区域宽度    | string       | -      | 100px  |      |
 
 ```js
-interface FieldConfig {
-  type: string;
-  options: Array;
-}
-interface operatorConfig {
-  options: Array;
-  disabled: boolean;
-}
-interface valueConfig {
-  type: string;
-  options: Array;
-  disabled: boolean;
+interface IFieldConfig  {
+  elType?: 'input' | 'select-v2' // 内置element 元素类型
+  props: string // v-model 绑定值对应属性值
+  [key: string]: any //  支持 input select-v2 属性透传
 }
 ```
 
 ### CustomFieldConfig 插槽
 
-| 属性名     | 说明              |
-| ---------- | ----------------- |
-| `filed`    | field 区域插槽    |
-| `operator` | operator 区域插槽 |
-| `value`    | value 区域插槽    |
+| 属性名     | 说明          |
+| ---------- | ------------- |
+| `filed`    | 左侧 区域插槽 |
+| `operator` | 中间 区域插槽 |
+| `value`    | 右侧 区域插槽 |
 
 ### CustomFieldConfig 事件
 
-| 属性名           | 说明           |
-| ---------------- | -------------- |
-| `filedChange`    | field 发生改变 |
-| `operatorChange` | 操作符发生改变 |
-| `valueChange`    | value 发生改变 |
-
-### CustomFieldConfig 样式变量
-
-| 属性名                 | 说明 |
-| ---------------------- | ---- |
-| `--custom-field-width` | 宽度 |
+| 属性名     | 说明                               |
+| ---------- | ---------------------------------- |
+| `cbChange` | （props: string, val: any）=> void |

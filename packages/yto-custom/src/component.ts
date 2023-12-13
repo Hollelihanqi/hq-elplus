@@ -39,3 +39,9 @@ export * from "./components/search-form";
 
 export { StickyContainer } from "./components/sticky-container";
 export * from "./components/sticky-container";
+
+export { YtoCustomFieldConfig } from "./components/custom-field-config";
+export * from "./components/custom-field-config";
+
+export { YtoCustomFieldContainer } from "./components/custom-field-container";
+export * from "./components/custom-field-container";
