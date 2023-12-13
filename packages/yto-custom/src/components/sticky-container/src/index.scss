@@ -6,4 +6,7 @@
   .el-scrollbar__view {
     flex: 1;
   }
+  .el-scrollbar__bar.is-horizontal {
+    height: 0;
+  }
 }

@@ -9,6 +9,7 @@
       class="my-el-table w-[100%]"
       :class="{ 'header-bg-hide': !headerbgHide, 'pagination-hide-table': paginationHide, 'flex-1': !isDataEmpty }"
       :data="requestApi ? _tableData : tableData"
+      :default-sort="_defaultSort"
       v-bind="$attrs"
       @sort-change="handleSortChange"
     >
@@ -160,6 +161,14 @@ const props = defineProps({
     type: Function,
     default: null,
   },
+  defaultSort: {
+    type: [Function, Object],
+    default: null,
+  },
+  sortFormat: {
+    type: Function,
+    default: null,
+  },
   dataUpdateAfter: {
     type: Function,
     default: () => ({}),
@@ -189,6 +198,25 @@ const paginationParams = reactive({
   pageSize: props.pageSize,
 });
 
+let _sortItem: any = null;
+const _sortFormat = (item?: any) => {
+  if (item && item.order) {
+    return {
+      sortField: item.prop,
+      sortBy: item.order === "descending" ? "desc" : "asc",
+    };
+  }
+  return {};
+};
+
+const _defaultSort = computed(() => {
+  return props.defaultSort && typeof props.defaultSort === "function"
+    ? props.defaultSort()
+    : props.defaultSort
+    ? props.defaultSort
+    : null;
+});
+
 const isDataEmpty = computed(() => {
   return props.requestApi ? _tableData.value.length : props.tableData.length;
 });
@@ -199,6 +227,15 @@ const cpaginationHide = computed(() => {
   return paginationHide || isDataEmpty || (paginationHideAuto && isLessThanPageSize);
 });
 
+const _sortFun = props.sortFormat || _sortFormat;
+const _sortFieldFormat = (sort?: any) => {
+  const curSort = sort || _sortItem || _defaultSort.value;
+  if (curSort) {
+    return _sortFun(curSort);
+  }
+  return {};
+};
+
 const getTableData = async (params = {}) => {
   if (!props.requestApi || typeof props.requestApi !== "function") return;
   _loading.value = true;
@@ -207,6 +244,7 @@ const getTableData = async (params = {}) => {
     _requestParams = props.requestParams();
   }
   const _params: any = {
+    ..._sortFieldFormat(),
     ..._requestParams,
     ...params,
   };
@@ -272,8 +310,18 @@ const handlePageChange = (num: number) => {
 
 // 用于表格排序
 const handleSortChange = (item: { prop: string; order: string; column: any }) => {
+  _sortItem = item && item.order ? item : null;
   paginationParams.currentPage = 1;
   emits("on-table", "sort", item);
+
+  // 为了兼容以前旧的 api
+  if (props.tableChange && typeof props.tableChange === "function") {
+    props.tableChange("sort", item);
+  }
+  // 如果设置为调用API，则获取表格数据
+  if (props.tableActionIsCallApi && !props.tableChange) {
+    getTableData(_sortFieldFormat(item));
+  }
 };
 
 const updateTableData = (params = {}) => {
