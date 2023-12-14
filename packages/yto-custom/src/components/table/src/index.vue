@@ -214,7 +214,10 @@ const _defaultSort = computed(() => {
     ? props.defaultSort()
     : props.defaultSort
     ? props.defaultSort
-    : null;
+    : {
+        prop: "",
+        order: "",
+      };
 });
 
 const isDataEmpty = computed(() => {
