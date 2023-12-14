@@ -1,6 +1,6 @@
 <template>
   <div id="layout">
-    <yto-c-layout-router :cacheable="true" @tab-change="handleTabChange">
+    <yto-c-layout-router :cacheable="true" type="vertical" @tab-change="handleTabChange">
       <template #header>
         <yto-c-layout-header
           title="圆通党建"
