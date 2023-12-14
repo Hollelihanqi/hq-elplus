@@ -1,7 +1,7 @@
 <template>
   <div class="layout-header flex items-center px-4 h-12 leading-12">
     <div class="flex">
-      <slot name="left">
+      <slot v-if="title || logo" name="left">
         <div class="left-header flex items-center" :class="collapse ? 'disappear' : 'appear'">
           <img v-if="logo" class="w-[30px] h-[30px] mr-[10px]" :src="logo" alt="logo" />
           <span class="title overflow-hidden whitespace-nowrap">{{ title }}</span>

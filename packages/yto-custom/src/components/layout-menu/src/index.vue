@@ -1,6 +1,10 @@
 <template>
   <div class="layout-menu flex flex-col justify-between bg-slate-100 overflow-hidden">
     <el-menu v-bind="$attrs" class="layout-menu-v flex-1 overflow-auto" :collapse="collapse" :default-active="activate">
+      <div v-if="title || logo" class="menu-logo-title flex items-center px-[16px] py-[10px]">
+        <img v-if="logo" class="w-[32px] h-[32px] mr-[10px]" :src="logo" alt="logo" />
+        <span class="title overflow-hidden whitespace-nowrap text-[20px]">{{ title }}</span>
+      </div>
       <div v-if="!collapse && searchable" class="layout-menu-search w-full bg-[#fff] p-[12px] box-border">
         <el-input v-model="searchVal" placeholder="菜单查询" />
       </div>
@@ -17,7 +21,7 @@
             <el-sub-menu v-if="isArray(itemSub.children)" :index="getLabel(itemSub)">
               <template #title>
                 <slot name="label" v-bind="itemSub">
-                  <inner-node-menu :data="itemSub" :show-icon="!!item.icon"></inner-node-menu>
+                  <inner-node-menu :data="itemSub" :show-icon="!!itemSub.icon"></inner-node-menu>
                 </slot>
               </template>
               <template
@@ -68,6 +72,8 @@ const props = defineProps({
     default: true,
   },
   width: { type: String, default: "210px" },
+  title: String,
+  logo: String,
 });
 const router = useRouter();
 const emit = defineEmits(["menuClick", "update:collapse"]);
@@ -108,23 +114,32 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
 </style>
 <style lang="scss" scoped>
 .layout-menu {
-  --layout-menu-background: rgb(255, 255, 255);
-  --layout-menu-color: rgb(84, 91, 231);
-  --layout-menu-active-background: rgba(44, 60, 216, 0.1);
-  --layout-menu-active-color: #2c3cd8;
+  --layout-menu-background: rgb(255, 255, 255); // 整体背景色
+  --layout-menu-active-background: rgba(44, 60, 216, 0.1); // 激活状态背景颜色
+  --layout-menu-active-color: #2c3cd8; // 激活状态字体颜色
   --layout-sub-menu-box-shadow: inset 0px -1px 0px 0px rgba(0, 0, 0, 0.1);
-  --layout-menu-hover-color: #e6e6e6;
+  --layout-menu-hover-color: #e6e6e6; // hover效果的颜色
+  --layout-menu-text-color: #000; // 字体颜色
+  --layout-menu-search-background: #f0f1f5; // 搜索框背景色
+  --layout-menu-border-color: #e5e7eb; // 边框默认颜色
+  --layout-menu-active-border-color: #e5e7eb; // 激活状态下右侧边框颜色
+
+  @apply bg-[var(--layout-menu-background)];
+  .menu-logo-title {
+    @apply text-[var(--layout-menu-text-color)];
+  }
   .layout-menu-search {
+    @apply bg-[var(--layout-menu-background)];
     :deep(.el-input) {
       .el-input__wrapper {
         box-shadow: none;
-        background: #f0f1f5;
+        background: var(--layout-menu-search-background);
         &:is-focus {
           box-shadow: none;
         }
         .el-input__inner {
-          color: #151719;
-          background: #f0f1f5;
+          color: var(--layout-menu-text-color);
+          background: var(--layout-menu-search-background);
         }
       }
     }
@@ -141,12 +156,12 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
       &.is-active {
         @apply bg-[var(--layout-menu-background)];
         .el-sub-menu__title {
-          @apply border-color-[#e5e7eb];
+          @apply border-color-[var(--layout-menu-border-color)];
         }
       }
 
       .el-sub-menu__title {
-        @apply text-[#000] opacity-80 border-b;
+        @apply text-[var(--layout-menu-text-color)] opacity-80 border-b border-color-[var(--layout-menu-border-color)];
         &:hover {
           @apply bg-[var(--layout-menu-hover-color)];
         }
@@ -157,7 +172,7 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
     }
 
     .el-menu-item {
-      @apply h-[40px] bg-[var(--layout-menu-background)] leading-[40px] text-white opacity-80 text-[#000] border-b;
+      @apply h-[40px] bg-[var(--layout-menu-background)] leading-[40px] text-white opacity-80 text-[var(--layout-menu-text-color)] border-b border-color-[var(--layout-menu-border-color)];
       .el-icon {
         @apply mr-[8px] ml-[-8px];
       }
@@ -167,7 +182,7 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
       &.is-active {
         color: var(--layout-menu-active-color);
         background: var(--layout-menu-active-background);
-        border-right: 3px solid;
+        border-right: 3px solid var(--layout-menu-active-border-color);
       }
       &.is-active:hover {
         color: var(--layout-menu-active-color);

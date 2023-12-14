@@ -2,7 +2,7 @@
  * @Author: weichunpei
  * @Date: 2023-10-20 09:30:23
  * @LastEditors: weichunpei
- * @LastEditTime: 2023-12-07 17:34:42
+ * @LastEditTime: 2023-12-14 13:46:53
  * @Description: layoutHeader 组件
 -->
 
@@ -28,16 +28,21 @@
 | `menus`      | 菜单数据   | IOptionTabPane[] | -      | []      |      |
 | `width`      | 菜单宽度   | string           | —      | "210px" |      |
 | `searchable` | 是否可搜索 | boolean          | —      | true    |      |
+| `title`      | 系统名称   | string           | -      | ""      |      |
+| `logo`       | 系统 logo  | Img              | —      | -       |      |
 
 ### LayoutMenu 样式变量
 
-| 属性名                            | 说明            |
-| --------------------------------- | --------------- |
-| `--layout-menu-background`        | 背景色          |
-| `--layout-menu-color`             | 文字颜色        |
-| `--layout-menu-active-background` | 激活背景色      |
-| `--layout-menu-active-color`      | 激活文字颜色    |
-| `--layout-menu-hover-color`       | 鼠标 hover 颜色 |
+| 属性名                              | 说明                   |
+| ----------------------------------- | ---------------------- |
+| `--layout-menu-background`          | 背景色                 |
+| `--layout-menu-text-color`          | 文字颜色               |
+| `--layout-menu-active-background`   | 激活背景色             |
+| `--layout-menu-active-color`        | 激活文字颜色           |
+| `--layout-menu-hover-color`         | 鼠标 hover 颜色        |
+| `--layout-menu-search-background`   | 搜索框背景色           |
+| `--layout-menu-border-color`        | 边框默认颜色           |
+| `--layout-menu-active-border-color` | 激活状态下右侧边框颜色 |
 
 ### Interface
 

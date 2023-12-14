@@ -1,8 +1,11 @@
 <template>
-  <div class="layout-router flex flex-col flex-1 overflow-hidden">
-    <slot name="header"></slot>
-    <div class="flex flex-1 overflow-hidden w-full">
-      <slot></slot>
+  <div class="layout-router flex flex-1 overflow-hidden" :class="{ 'flex-col': isVertical }">
+    <slot v-if="isVertical" name="header"></slot>
+    <slot v-else></slot>
+    <div class="flex flex-1 overflow-hidden w-full" :class="{ 'flex-col': !isVertical }">
+      <slot v-if="isVertical"></slot>
+      <slot v-else name="header"></slot>
+
       <div class="layout-content flex flex-col flex-1 bg-[#F0F1F5] overflow-auto">
         <slot v-if="showTab" name="tab" :tab-data="listRoute">
           <NavTabs
@@ -48,6 +51,10 @@ const props = defineProps({
   max: Number,
   tabsKeyLabel: String,
   formatTab: Function,
+  type: {
+    type: String,
+    default: "vertical",
+  },
   showTab: {
     type: Boolean,
     default: true,
@@ -59,6 +66,8 @@ const { listRoute, activate } = useFrame({
   sso: props.sso as boolean,
   max: props.max as number,
 });
+// 是否为垂直布局
+const isVertical = computed(() => props.type === "vertical");
 const emit = defineEmits(["tab-change"]);
 const handleTabChange = (tab: any) => emit("tab-change", tab);
 provide(EnumSessionKey.TabsActivate, activate);
