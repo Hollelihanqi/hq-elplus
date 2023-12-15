@@ -2,16 +2,12 @@
   <div id="layout">
     <yto-c-layout-router :cacheable="true" type="vertical" @tab-change="handleTabChange">
       <template #header>
-        <yto-c-layout-header
-          title="圆通党建"
-          :collapse="collapse"
-          :logo="logo"
-          :user-info="userInfo"
-          @collapse="collapse = !collapse"
-        >
+        <yto-c-layout-header :collapse="collapse" :user-info="userInfo" @collapse="collapse = !collapse">
         </yto-c-layout-header>
       </template>
       <yto-c-layout-menu
+        title="圆通党建"
+        :logo="logo"
         :collapse="collapse"
         :unique-opened="true"
         :menus="listNavigation"
@@ -35,7 +31,7 @@ const userInfo = {
   userCode: "02348618",
   userName: "魏春霈",
 };
-
+// 	vertical/horizontal
 const listNavigation: any[] = [
   {
     label: "首页",
@@ -67,7 +63,6 @@ const listNavigation: any[] = [
         // code: "/layout-child-2",
         // mode: "router",
 
-        showIcon: false,
         children: [
           {
             label: "资讯详情",
@@ -137,8 +132,14 @@ onMounted(() => {
     --layout-header-left-width: 220px;
   }
   .layout-menu {
-    --layout-menu-active-color: #ef1017;
-    --layout-menu-active-background: rgba(239, 16, 23, 0.1);
+    --layout-menu-text-color: #fff;
+    --layout-menu-background: #56297e;
+    --layout-menu-active-color: #fff;
+    --layout-menu-search-background: #4d2571;
+    --layout-menu-active-background: #8942c9;
+    --layout-menu-hover-color: #8942c9;
+    --layout-menu-border-color: rgba(0, 0, 0, 0.1);
+    --layout-menu-active-border-color: #8942c9;
   }
 }
 </style>

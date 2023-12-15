@@ -1,8 +1,8 @@
 <!--
  * @Author: weichunpei
  * @Date: 2023-10-20 13:07:20
- * @LastEditors: weichunpei
- * @LastEditTime: 2023-11-29 11:06:57
+ * @LastEditors: error: git config user.name & please set dead value or install git
+ * @LastEditTime: 2023-12-14 13:44:10
  * @Description:
 -->
 
@@ -94,14 +94,15 @@ tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
 
 ### LayoutRouter 属性
 
-| 属性名         | 说明                | 类型     | 可选值 | 默认值   | 备注 |
-| -------------- | ------------------- | -------- | ------ | -------- | ---- |
-| `footer`       | 显示底部区域        | boolean  | -      | false    |      |
-| `max`          | 最大页签数          | number   | -      | undefind |      |
-| `cacheable`    | 是否开启缓存        | boolean  | -      | false    |      |
-| `tabsKeyLabel` | tabslabel 对应 key  | string   | -      | 'title'  |      |
-| `formatTab`    | tabsItem 格式化方法 | function | -      | -        |      |
-| `showTab`      | 是否显示 tab 页签   | boolean  | -      | true     |      |
+| 属性名         | 说明                | 类型     | 可选值              | 默认值   | 备注                                     |
+| -------------- | ------------------- | -------- | ------------------- | -------- | ---------------------------------------- |
+| `footer`       | 显示底部区域        | boolean  | -                   | false    |                                          |
+| `max`          | 最大页签数          | number   | -                   | undefind |                                          |
+| `cacheable`    | 是否开启缓存        | boolean  | -                   | false    |                                          |
+| `tabsKeyLabel` | tabslabel 对应 key  | string   | -                   | 'title'  |                                          |
+| `formatTab`    | tabsItem 格式化方法 | function | -                   | -        |                                          |
+| `showTab`      | 是否显示 tab 页签   | boolean  | -                   | true     |                                          |
+| `type`         | 布局方式            | string   | vertical/horizontal | vertical | vertical：上下布局；horizontal：左右布局 |
 
 ### LayoutRouter 插槽
 
