@@ -132,6 +132,7 @@ onMounted(() => {
   .layout-header {
     --layout-header-background: #900808;
     --layout-header-left-width: 220px;
+    // --layout-header-text-color: #000;
   }
   .layout-menu {
     --layout-menu-text-color: #fff;
