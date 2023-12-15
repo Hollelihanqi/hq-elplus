@@ -70,7 +70,9 @@ const { listRoute, activate } = useFrame({
 const isVertical = computed(() => props.type === "vertical");
 const emit = defineEmits(["tab-change"]);
 const handleTabChange = (tab: any) => emit("tab-change", tab);
+const getTabsList = () => listRoute;
 provide(EnumSessionKey.TabsActivate, activate);
+defineExpose({ getTabsList });
 </script>
 
 <style scoped lang="scss">

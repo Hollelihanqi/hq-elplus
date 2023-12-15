@@ -113,6 +113,12 @@ tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
 | `footer`  | 底部区域插槽     |
 | `tab`     | tab 页签插槽     |
 
+### LayoutRouter 方法
+
+| 属性名        | 说明                 |
+| ------------- | -------------------- |
+| `getTabsList` | 获打开 tabs 列表方法 |
+
 ### layoutHeader 样式变量
 
 | 属性名                  | 说明                 |

@@ -66,7 +66,6 @@ const getUrl = (path: string) => {
   buildUrl(Object.assign({}, route.params, route.query));
   return href;
 };
-
 const getTabsItem = (path: string): any => {
   const routers = router.getRoutes();
   const curRoute: any = routers.find((item) => item.path === path);
@@ -77,15 +76,16 @@ const getTabsItem = (path: string): any => {
     href,
     label: curRoute.meta ? curRoute.meta[props.keyLabel] : curRoute.name,
     mode: "router",
-    closable: curRoute.meta ? curRoute.meta.closable !== false : true,
+    closable: curRoute.meta && isBoolean(curRoute.meta.closable) ? curRoute.meta.closable : undefined,
   };
   return props.formatTab ? props.formatTab(tabItem) : tabItem;
 };
 watch(
-  () => route.path,
+  () => route.fullPath,
   (newVal) => {
     if (!newVal) return;
-    const url = getUrl(newVal);
+    const path = route.path;
+    const url = getUrl(path);
     const tabItem: any =
       unref(props.tabsMenuList).find((tab) => {
         const urlObj = toURL(tab.href as string);
@@ -96,7 +96,7 @@ watch(
       tabPaneAdd(href as string, { ...tabItem });
       return;
     }
-    const tmpItem = getTabsItem(newVal);
+    const tmpItem = getTabsItem(path);
     tmpItem && tabPaneAdd(tmpItem.href as string, { ...tmpItem });
   },
   {
