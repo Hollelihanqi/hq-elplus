@@ -1,6 +1,6 @@
 <template>
   <div id="layout">
-    <yto-c-layout-router :cacheable="true" type="vertical" @tab-change="handleTabChange">
+    <yto-c-layout-router ref="routerRef" :cacheable="true" type="horizontal" @tab-change="handleTabChange">
       <template #header>
         <yto-c-layout-header :collapse="collapse" :user-info="userInfo" @collapse="collapse = !collapse">
         </yto-c-layout-header>
@@ -27,6 +27,7 @@ import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
 const route = useRoute();
 const collapse = ref(false);
+const routerRef = ref();
 const userInfo = {
   userCode: "02348618",
   userName: "魏春霈",
@@ -115,7 +116,8 @@ const handleMenuClick = (info: any) => {
   console.log("handleMenuClick-----");
 };
 const handleTabChange = (info: any) => {
-  console.log("handleTabChange-----", info);
+  const list = unref(routerRef).getTabsList();
+  console.log("handleTabChange-----", list);
 };
 onMounted(() => {
   // router.push({ name: "layoutChild3" });
