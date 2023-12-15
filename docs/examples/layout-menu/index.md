@@ -33,16 +33,18 @@
 
 ### LayoutMenu 样式变量
 
-| 属性名                              | 说明                   |
-| ----------------------------------- | ---------------------- |
-| `--layout-menu-background`          | 背景色                 |
-| `--layout-menu-text-color`          | 文字颜色               |
-| `--layout-menu-active-background`   | 激活背景色             |
-| `--layout-menu-active-color`        | 激活文字颜色           |
-| `--layout-menu-hover-color`         | 鼠标 hover 颜色        |
-| `--layout-menu-search-background`   | 搜索框背景色           |
-| `--layout-menu-border-color`        | 边框默认颜色           |
-| `--layout-menu-active-border-color` | 激活状态下右侧边框颜色 |
+| 属性名                              | 说明                    |
+| ----------------------------------- | ----------------------- |
+| `--layout-menu-background`          | 背景色                  |
+| `--layout-menu-text-color`          | 文字颜色                |
+| `--layout-menu-active-background`   | 激活背景色              |
+| `--layout-menu-active-color`        | 激活文字颜色            |
+| `--layout-menu-hover-color`         | 鼠标 hover 颜色         |
+| `--layout-menu-search-background`   | 搜索框背景色            |
+| `--layout-menu-border-color`        | 边框默认颜色            |
+| `--layout-menu-active-border-color` | 激活状态下右侧边框颜色  |
+| `--layout-menu-title-bg`            | 顶部 title 区域背景颜色 |
+| `--layout-menu-title-color`         | 顶部 title 区域文字颜色 |
 
 ### Interface
 
