@@ -1,7 +1,7 @@
 <template>
   <div class="layout-menu flex flex-col justify-between bg-slate-100 overflow-hidden">
     <el-menu v-bind="$attrs" class="layout-menu-v flex-1 overflow-auto" :collapse="collapse" :default-active="activate">
-      <div v-if="title || logo" class="menu-logo-title flex items-center px-[16px] py-[10px]">
+      <div v-if="title || logo" class="menu-logo-title flex items-center px-[16px] h-12 leading-12">
         <img v-if="logo" class="w-[32px] h-[32px] mr-[10px]" :src="logo" alt="logo" />
         <span class="title overflow-hidden whitespace-nowrap text-[20px]">{{ title }}</span>
       </div>
@@ -123,10 +123,11 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
   --layout-menu-search-background: #f0f1f5; // 搜索框背景色
   --layout-menu-border-color: #e5e7eb; // 边框默认颜色
   --layout-menu-active-border-color: #e5e7eb; // 激活状态下右侧边框颜色
-
+  --layout-menu-title-bg: transparent;
+  --layout-menu-title-color: #000;
   @apply bg-[var(--layout-menu-background)];
   .menu-logo-title {
-    @apply text-[var(--layout-menu-text-color)];
+    @apply text-[var(--layout-menu-title-color)] bg-[var(--layout-menu-title-bg)];
   }
   .layout-menu-search {
     @apply bg-[var(--layout-menu-background)];

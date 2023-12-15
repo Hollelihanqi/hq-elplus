@@ -10,7 +10,7 @@
     </div>
     <div class="flex flex-1">
       <slot>
-        <div class="flex items-center">
+        <div class="collapse-icon flex items-center">
           <i
             class="icon iconfont cursor-pointer"
             :class="collapse ? 'layout-icon_daohangzhankai' : 'layout-icon_daohangshouqi'"
@@ -20,7 +20,7 @@
       </slot>
     </div>
     <slot v-if="user" name="right">
-      <div class="flex items-center text-[14px]">
+      <div class="right-header flex items-center text-[14px]">
         <div class="mr-[5px]">{{ user.userName }}</div>
         <div class="mr-[10px]">（{{ user.userCode }}）</div>
         <i
