@@ -210,12 +210,12 @@ const _sortFormat = (item?: any) => {
 };
 
 const _total = computed(() => {
-  return props.requestApi ? _tableDataTotal.value : props.total
-})
+  return props.requestApi ? _tableDataTotal.value : props.total;
+});
 
 const _tdata = computed(() => {
-  return props.requestApi ? _tableData.value : props.tableData
-})
+  return props.requestApi ? _tableData.value : props.tableData;
+});
 
 const _defaultSort = computed(() => {
   return props.defaultSort && typeof props.defaultSort === "function"
@@ -304,7 +304,7 @@ const handlePaginationChange = (type: "size" | "page" | "sort", num: number): vo
   }
 
   // 如果设置为调用API，则获取表格数据
-  if (props.tableActionIsCallApi && _total.value!==_tdata.value.length) {
+  if (props.tableActionIsCallApi && _total.value !== _tdata.value.length) {
     getTableData();
   }
 };
@@ -339,10 +339,10 @@ const updateTableData = (params = {}) => {
   getTableData(params);
 };
 
-const resetTableData = () => {
+const resetTableData = (params = {}) => {
   paginationParams.currentPage = 1;
   paginationParams.pageSize = props.pageSize;
-  getTableData();
+  getTableData(params);
 };
 
 const resetPage = () => {
