@@ -10,7 +10,7 @@
     </div>
     <div class="flex flex-1">
       <slot>
-        <div class="flex items-center">
+        <div class="collapse-icon flex items-center">
           <i
             class="icon iconfont cursor-pointer"
             :class="collapse ? 'layout-icon_daohangzhankai' : 'layout-icon_daohangshouqi'"
@@ -20,17 +20,17 @@
       </slot>
     </div>
     <slot v-if="user" name="right">
-      <div class="flex items-center text-[14px] text-[#fff]">
+      <div class="right-header flex items-center text-[14px]">
         <div class="mr-[5px]">{{ user.userName }}</div>
         <div class="mr-[10px]">（{{ user.userCode }}）</div>
         <i
           v-if="isfullscreen"
-          class="icon iconfont cursor-pointer mx-[25px] !text-[14px] text-[#fff]"
+          class="icon iconfont cursor-pointer mx-[25px] !text-[14px]"
           :class="fullscreen ? 'layout-icon_guanbiquanju' : 'layout-icon_kaiqiquanju'"
           @click="onFullScreen"
         ></i>
         <slot name="logout">
-          <div class="flex items-center cursor-pointer text-[#fff]" @click="onLogout">
+          <div class="flex items-center cursor-pointer" @click="onLogout">
             <span class="mr-[5px]">退出</span> <el-icon size="16"><SwitchButton /></el-icon>
           </div>
         </slot>

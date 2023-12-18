@@ -38,6 +38,7 @@ const listNavigation: any[] = [
     label: "首页",
     href: "/layout-child-3",
     code: "/layout-child-3",
+    icon: "icon iconfont party-web-icon-caidan3",
     // closable: false,
     mode: "router",
   },
@@ -132,16 +133,19 @@ onMounted(() => {
   .layout-header {
     --layout-header-background: #900808;
     --layout-header-left-width: 220px;
+    // --layout-header-text-color: #000;
   }
   .layout-menu {
-    --layout-menu-text-color: #fff;
-    --layout-menu-background: #56297e;
-    --layout-menu-active-color: #fff;
-    --layout-menu-search-background: #4d2571;
-    --layout-menu-active-background: #8942c9;
-    --layout-menu-hover-color: #8942c9;
-    --layout-menu-border-color: rgba(0, 0, 0, 0.1);
-    --layout-menu-active-border-color: #8942c9;
+    --layout-menu-title-bg: #900808;
+    --layout-menu-title-color: #fff;
+    // --layout-menu-text-color: #fff;
+    // --layout-menu-background: #56297e;
+    // --layout-menu-active-color: #fff;
+    // --layout-menu-search-background: #4d2571;
+    // --layout-menu-active-background: #8942c9;
+    // --layout-menu-hover-color: #8942c9;
+    // --layout-menu-border-color: rgba(0, 0, 0, 0.1);
+    // --layout-menu-active-border-color: #8942c9;
   }
 }
 </style>
