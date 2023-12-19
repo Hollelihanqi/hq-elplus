@@ -2,7 +2,7 @@
  * @Author: DESKTOP-7338OS6\LHQ LHQ
  * @Date: 2023-03-24 17:52:24
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-12-13 11:05:04
+ * @LastEditTime: 2023-12-19 15:53:48
  * @FilePath: \yto-engine\docs\docs\.vitepress\config.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AErts
  */
@@ -98,10 +98,10 @@ export default defineConfig({
               text: "CustomFieldContainer",
               link: "/examples/custom-field-container/index.md",
             },
-            // {
-            //   text: "CustomFieldRelation",
-            //   link: "/examples/custom-field-relation/index.md",
-            // },
+            {
+              text: "SearchContainer",
+              link: "/examples/search-container/index.md",
+            },
           ],
           collapsed: false,
         },
