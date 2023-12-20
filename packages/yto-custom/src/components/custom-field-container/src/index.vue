@@ -15,8 +15,8 @@
         <div>
           <slot v-if="$slots.btn" name="btn" :item="item" :index="index"></slot>
           <template v-else>
-            <el-button class="ml-2" link :icon="Plus" @click="onClick('add', index)"></el-button>
-            <el-button v-show="modelValue.length > 1" class="mr-2" link :icon="Delete" @click="onClick('delete', index)"></el-button>
+            <el-button class="ml-2" link :icon="Plus" @click="onClick('add', index, item)"></el-button>
+            <el-button v-show="modelValue.length > 1" class="mr-2" link :icon="Delete" @click="onClick('delete', index, item)"></el-button>
             <slot name="btnAppend" :item="item" :index="index"></slot>
           </template>
         </div>
@@ -39,11 +39,11 @@ const props = withDefaults(defineProps<IProps>(), {
   width: '100%'
 })
 const emits = defineEmits(['add', 'delete'])
-const onClick = (flag: 'add' | 'delete', index: number) => {
+const onClick = (flag: 'add' | 'delete', index: number, item: IAnyObject) => {
   if (flag === 'add') {
-    emits('add', index)
+    emits('add', index, item)
   } else {
-    emits('delete', index)
+    emits('delete', index, item)
   }
 }
 </script>

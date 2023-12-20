@@ -1,8 +1,14 @@
+<!--
+ * @Description: 模块名称
+ * @Author: ym
+ * @Date: 2023-12-14 16:59:25
+ * @LastEditTime: 2023-12-19 15:00:49
+-->
 <script setup lang="ts"></script>
 
 <template>
   <div class="app flex flex-col">
-    <!-- <div class="router-box">
+     <div class="router-box">
       <router-link class="mr-[10px]" to="/form">form</router-link>
       <router-link class="mr-[10px]" to="/chart">chart</router-link>
       <router-link class="mr-[10px]" to="/table">table</router-link>
@@ -15,16 +21,17 @@
       <router-link class="mr-[10px]" to="/theme">them</router-link>
       <router-link class="mr-[10px]" to="/customFieldContainer">customFieldContainer</router-link>
       <router-link class="mr-[10px]" to="/customFieldConfig">CustomFieldDemo</router-link>
+      <router-link class="mr-[10px]" to="/searchContainer">SearchContainer</router-link>
     </div>
 
     <router-view v-slot="{ Component }" class="flex-1">
       <KeepAlive>
         <component :is="Component" :key="$route.fullPath"></component>
       </KeepAlive>
-    </router-view> -->
+    </router-view>
 
-    <LayoutRouter class="h-full"></LayoutRouter>
-    <!-- <LayoutFrame class="h-full"></LayoutFrame> -->
+    <!-- <LayoutRouter class="h-full"></LayoutRouter>
+    <LayoutFrame class="h-full"></LayoutFrame> -->
   </div>
 </template>
 <script lang="ts" setup>

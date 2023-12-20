@@ -36,6 +36,7 @@ const routes = [
   { path: "/theme", component: () => import("@/views/theme/index.vue") },
   { path: "/customFieldContainer", component: () => import("@/views/CustomFieldContainer.vue") },
   { path: "/customFieldConfig", component: () => import("@/views/customFieldDemo.vue") },
+  { path: "/searchContainer", component: () => import("@/views/FormContainer.vue") },
 ];
 
 export const router = createRouter({
