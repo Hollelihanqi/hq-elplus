@@ -6,8 +6,9 @@
         <span class="title overflow-hidden whitespace-nowrap text-[20px]">{{ title }}</span>
       </div>
       <div
+        v-if="searchable"
         class="layout-menu-search w-full bg-[#fff] p-[12px] box-border"
-        :class="searchable && !collapse ? 'appear' : 'disappear'"
+        :class="!collapse ? 'appear' : 'disappear'"
       >
         <el-input v-model="searchVal" placeholder="菜单查询" />
       </div>
@@ -137,7 +138,7 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
       @apply h-0 p-0;
     }
     &.appear {
-      animation: addWidth 0.4s;
+      animation: addWidth 0.2s;
       @apply h-[56px] p-[12px];
     }
   }
