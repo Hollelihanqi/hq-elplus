@@ -1,3 +1,9 @@
+<!--
+ * @Description: 模块名称
+ * @Author: ym
+ * @Date: 2023-12-14 16:59:25
+ * @LastEditTime: 2023-12-20 10:32:36
+-->
 <script setup lang="ts"></script>
 
 <template>
@@ -15,6 +21,7 @@
       <router-link class="mr-[10px]" to="/theme">them</router-link>
       <router-link class="mr-[10px]" to="/customFieldContainer">customFieldContainer</router-link>
       <router-link class="mr-[10px]" to="/customFieldConfig">CustomFieldDemo</router-link>
+      <router-link class="mr-[10px]" to="/searchContainer">SearchContainer</router-link>
     </div>
 
     <router-view v-slot="{ Component }" class="flex-1">

@@ -1,3 +1,9 @@
+/*
+ * @Description: 模块名称
+ * @Author: ym
+ * @Date: 2023-12-13 15:34:28
+ * @LastEditTime: 2023-12-19 17:34:06
+ */
 export { YtoDialog } from "./components/dialog";
 export * from "./components/dialog";
 
@@ -45,3 +51,6 @@ export * from "./components/custom-field-config";
 
 export { YtoCustomFieldContainer } from "./components/custom-field-container";
 export * from "./components/custom-field-container";
+
+export { YtoSearchContainer } from "./components/search-container";
+export * from "./components/search-container";
