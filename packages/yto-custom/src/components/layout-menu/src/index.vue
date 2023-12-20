@@ -5,7 +5,10 @@
         <img v-if="logo" class="w-[32px] h-[32px] mr-[10px]" :src="logo" alt="logo" />
         <span class="title overflow-hidden whitespace-nowrap text-[20px]">{{ title }}</span>
       </div>
-      <div v-if="!collapse && searchable" class="layout-menu-search w-full bg-[#fff] p-[12px] box-border">
+      <div
+        class="layout-menu-search w-full bg-[#fff] p-[12px] box-border"
+        :class="searchable && !collapse ? 'appear' : 'disappear'"
+      >
         <el-input v-model="searchVal" placeholder="菜单查询" />
       </div>
       <!-- 二级菜单 -->
@@ -125,7 +128,40 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
   --layout-menu-active-border-color: #e5e7eb; // 激活状态下右侧边框颜色
   --layout-menu-title-bg: transparent;
   --layout-menu-title-color: #000;
+
   @apply bg-[var(--layout-menu-background)];
+  .layout-menu-search {
+    @apply overflow-hidden;
+    &.disappear {
+      animation: cutWidth 0.2s;
+      @apply h-0 p-0;
+    }
+    &.appear {
+      animation: addWidth 0.4s;
+      @apply h-[56px] p-[12px];
+    }
+  }
+  @keyframes cutWidth {
+    0% {
+      height: 56px;
+      padding: 12px;
+    }
+    100% {
+      height: 0px;
+      padding: 0;
+    }
+  }
+  @keyframes addWidth {
+    0% {
+      height: 0px;
+      padding: 0;
+    }
+
+    100% {
+      height: 56px;
+      padding: 12px;
+    }
+  }
   .menu-logo-title {
     @apply text-[var(--layout-menu-title-color)] bg-[var(--layout-menu-title-bg)];
   }
