@@ -8,7 +8,7 @@
       v-loading="requestApi ? _loading : loading"
       class="my-el-table w-[100%]"
       :class="{ 'header-bg-hide': !headerbgHide, 'pagination-hide-table': paginationHide, 'flex-1': !isDataEmpty }"
-      :data="requestApi ? _tableData : tableData"
+      :data="_tdata"
       :default-sort="_defaultSort"
       v-bind="$attrs"
       @sort-change="handleSortChange"
@@ -56,7 +56,7 @@
       v-model:current-page="paginationParams.currentPage"
       class="my-el-pagination"
       :layout="layout"
-      :total="requestApi ? _tableDataTotal : total"
+      :total="_total"
       :page-sizes="pageSizes"
       v-bind="paginationOptions"
       @update:page-size="handleSizeChange"
@@ -209,12 +209,23 @@ const _sortFormat = (item?: any) => {
   return {};
 };
 
+const _total = computed(() => {
+  return props.requestApi ? _tableDataTotal.value : props.total;
+});
+
+const _tdata = computed(() => {
+  return props.requestApi ? _tableData.value : props.tableData;
+});
+
 const _defaultSort = computed(() => {
   return props.defaultSort && typeof props.defaultSort === "function"
     ? props.defaultSort()
     : props.defaultSort
     ? props.defaultSort
-    : null;
+    : {
+        prop: "",
+        order: "",
+      };
 });
 
 const isDataEmpty = computed(() => {
@@ -293,7 +304,7 @@ const handlePaginationChange = (type: "size" | "page" | "sort", num: number): vo
   }
 
   // 如果设置为调用API，则获取表格数据
-  if (props.tableActionIsCallApi) {
+  if (props.tableActionIsCallApi && _total.value !== _tdata.value.length) {
     getTableData();
   }
 };
@@ -328,10 +339,10 @@ const updateTableData = (params = {}) => {
   getTableData(params);
 };
 
-const resetTableData = () => {
+const resetTableData = (params = {}) => {
   paginationParams.currentPage = 1;
   paginationParams.pageSize = props.pageSize;
-  getTableData();
+  getTableData(params);
 };
 
 const resetPage = () => {
@@ -422,9 +433,5 @@ defineExpose({
     bottom: 0;
     z-index: 88;
   }
-  /* .el-table__footer-wrapper {
-    position: sticky;
-    bottom: 0;
-  } */
 }
 </style>

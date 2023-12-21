@@ -45,7 +45,8 @@
 | `total`                | 总条目数                                                                                         | Number          | —          | 0                                         |
 | `pageSize`             | 分页大小                                                                                         | Number          | —          | 10                                        |
 | `pageSizes`            | 每页显示个数选择器的选项设置                                                                     | Array           | —          | [10, 30, 50, 100]                         |
-| `currentPage`          | 当前页数                                                                                         | Array           | —          | 1                                         |
+| `currentPage`          | 当前页数                                                                                         | Number          | —          | 1                                         |
+| `pageLimit`            | 分页开始游标值                                                                                   | Number          | —          | 1                                         |
 | `currentPageKey`       | 传给 API 的默认字段名，paginationHide 为 true 时，不携带此参数                                   | String          | —          | page                                      |
 | `pageSizeKey`          | 传给 API 的默认字段名，paginationHide 为 true 时，不携带此参数                                   | String          | —          | size                                      |
 | `tableChange`          | 触发分页、排序 调用此方法，接收 actionType 和 value 两个参数，actionType: page、size、sort       | Function        | —          |                                           |
@@ -75,8 +76,8 @@
 
 | 属性名            | 说明                                                                                               | 备注 |
 | ----------------- | -------------------------------------------------------------------------------------------------- | ---- |
-| `updateTableData` | 更新表格数据,调用此方法会执行 requestAPI。此方法可接收一个传参对象 `{...}`                         |
-| `resetTableData`  | 重置表格数据 ,调用此方法会执行 requestAPI                                                          |      |
+| `updateTableData` | 更新表格数据,调用此方法会执行 requestAPI。此方法可接收一个对象传参 `{...}`                         |
+| `resetTableData`  | 重置表格数据 ,调用此方法重置分页并调用 requestAPI。此方法可接收一个对象传参 `{...}`                |      |
 | `resetPage`       | 重置表格分页参数                                                                                   |      |
 | `updatePage`      | 手动更新分页大小(pageSize)和当前页码(currentPage) `{ currentPage = 1, pageSize = props.pageSize }` |      |
 | `getData`         | 获取当前页列表数据                                                                                 |      |
