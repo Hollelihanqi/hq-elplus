@@ -112,7 +112,7 @@ export default defineComponent({
 
     return () => {
       return props?.formControls?.length ? (
-        <div class="search-form-w bg-white px-[16px] pt-[16px] border-[#e4e7ed] rounded-[4px] border-1">
+        <div class="search-form-w bg-white px-[16px] pt-[16px] rounded-[4px]">
           <el-form model={_searchModel.value} class="search-form" label-width="auto">
             <Grid ref="GridInstance" collapsed={collapsed.value} gap={[16, 0]} cols={props.colConfig}>
               {props.formControls.map((control, index) => {

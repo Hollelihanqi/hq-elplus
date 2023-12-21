@@ -433,9 +433,5 @@ defineExpose({
     bottom: 0;
     z-index: 88;
   }
-  /* .el-table__footer-wrapper {
-    position: sticky;
-    bottom: 0;
-  } */
 }
 </style>
