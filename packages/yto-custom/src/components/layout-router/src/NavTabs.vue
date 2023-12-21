@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs-box">
+  <div class="nav-tabs-w tabs-box">
     <el-tabs
       v-model="tabsMenuValue"
       v-bind="$attrs"

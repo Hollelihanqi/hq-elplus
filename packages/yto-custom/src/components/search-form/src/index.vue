@@ -24,6 +24,10 @@ export default defineComponent({
       type: Object,
       default: null,
     },
+    okpos: {
+      type: String,
+      default: "right",
+    },
   },
   emits: ["update:searchModel", "on-search", "on-reset"],
   setup(props, { emit, expose, slots }) {
@@ -132,10 +136,21 @@ export default defineComponent({
               })}
               <GridItem suffix>
                 <div class="search-action-box flex items-center justify-end mb-[16px]">
-                  <el-button onClick={handleReset}>重置</el-button>
-                  <el-button type="primary" onClick={handleQuery}>
-                    查询
-                  </el-button>
+                  {props.okpos === "right" ? (
+                    <>
+                      <el-button onClick={handleReset}>重置</el-button>
+                      <el-button type="primary" onClick={handleQuery}>
+                        查询
+                      </el-button>
+                    </>
+                  ) : (
+                    <>
+                      <el-button type="primary" onClick={handleQuery}>
+                        查询
+                      </el-button>
+                      <el-button onClick={handleReset}>重置</el-button>
+                    </>
+                  )}
                   <el-button type="primary" link onClick={() => (collapsed.value = !collapsed.value)}>
                     {collapsed.value ? "展开" : "收起"}
                     <el-icon>{collapsed.value ? <ArrowDown /> : <ArrowUp />}</el-icon>
