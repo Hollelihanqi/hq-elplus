@@ -57,20 +57,20 @@ watch(
     immediate: true,
   }
 );
-const getUrl = (path: string, toRoute: RouteLocationNormalized) => {
+const getUrl = (path: string) => {
   let href = path;
   const buildUrl = (obj: any) =>
     Object.keys(obj).forEach((key) => {
       href += href.includes("?") ? `&${key}=${obj[key]}` : `?${key}=${obj[key]}`;
     });
-  buildUrl(Object.assign({}, toRoute.params, toRoute.query));
+  buildUrl(Object.assign({}, route.params, route.query));
   return href;
 };
-const getTabsItem = (path: string, toRoute: RouteLocationNormalized): any => {
+const getTabsItem = (path: string): any => {
   const routers = router.getRoutes();
   const curRoute: any = routers.find((item) => item.path === path);
   if (!curRoute) return;
-  const href = getUrl(path, toRoute);
+  const href = getUrl(path);
   const tabItem = {
     code: path,
     href,
@@ -80,32 +80,10 @@ const getTabsItem = (path: string, toRoute: RouteLocationNormalized): any => {
   };
   return props.formatTab ? props.formatTab(tabItem) : tabItem;
 };
-router.afterEach((to, from) => {
-  try {
-    const path = to.path;
-    const url = getUrl(path, to);
-    const tabItem: any =
-      unref(props.tabsMenuList).find((tab) => {
-        const urlObj = toURL(tab.href as string);
-        return urlObj.pathname + urlObj.search === url;
-      }) || {};
-    const { href } = tabItem;
-    if (tabItem && href) {
-      tabPaneAdd(href as string, { ...tabItem });
-      return;
-    }
-    const tmpItem = getTabsItem(path, to);
-    tmpItem && tabPaneAdd(tmpItem.href as string, { ...tmpItem });
-  } catch (error) {
-    console.log("layout-router-afterEach-error", error);
-  }
-});
-// watch(
-//   () => route.fullPath,
-//   (newVal) => {
-//     if (!newVal) return;
-//     const path = route.path;
-//     const url = getUrl(path);
+// router.afterEach((to, from) => {
+//   try {
+//     const path = to.path;
+//     const url = getUrl(path, to);
 //     const tabItem: any =
 //       unref(props.tabsMenuList).find((tab) => {
 //         const urlObj = toURL(tab.href as string);
@@ -116,13 +94,35 @@ router.afterEach((to, from) => {
 //       tabPaneAdd(href as string, { ...tabItem });
 //       return;
 //     }
-//     const tmpItem = getTabsItem(path);
+//     const tmpItem = getTabsItem(path, to);
 //     tmpItem && tabPaneAdd(tmpItem.href as string, { ...tmpItem });
-//   },
-//   {
-//     immediate: true,
+//   } catch (error) {
+//     console.log("layout-router-afterEach-error", error);
 //   }
-// );
+// });
+watch(
+  () => route.fullPath,
+  (newVal) => {
+    if (!newVal) return;
+    const path = route.path;
+    const url = getUrl(path);
+    const tabItem: any =
+      unref(props.tabsMenuList).find((tab) => {
+        const urlObj = toURL(tab.href as string);
+        return urlObj.pathname + urlObj.search === url;
+      }) || {};
+    const { href } = tabItem;
+    if (tabItem && href) {
+      tabPaneAdd(href as string, { ...tabItem });
+      return;
+    }
+    const tmpItem = getTabsItem(path);
+    tmpItem && tabPaneAdd(tmpItem.href as string, { ...tmpItem });
+  },
+  {
+    immediate: true,
+  }
+);
 
 provide(EnumSessionKey.TabsActivate, tabsMenuValue);
 </script>
