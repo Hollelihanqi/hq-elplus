@@ -146,7 +146,7 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
   }
   :deep(.el-tabs__item) {
     margin: 0 !important;
-    border: none;
+    border: none !important;
     background: #fff;
     padding: 0 !important;
     color: #151719;
