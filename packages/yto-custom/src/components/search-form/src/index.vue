@@ -28,10 +28,23 @@ export default defineComponent({
       type: String,
       default: "right",
     },
+    collapse: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ["update:searchModel", "on-search", "on-reset"],
   setup(props, { emit, expose, slots }) {
     const collapsed = ref(false);
+    watch(
+      () => props.collapse,
+      (newValue) => {
+        collapsed.value = newValue;
+      },
+      {
+        immediate: true,
+      }
+    );
     const _searchModel = computed({
       get() {
         return props.searchModel;
