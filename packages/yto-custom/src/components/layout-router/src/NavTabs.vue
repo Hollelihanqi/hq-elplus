@@ -1,19 +1,19 @@
 <template>
-  <div class="nav-tabs-w tabs-box">
-    <el-tabs
-      v-model="tabsMenuValue"
-      v-bind="$attrs"
-      class="bg-[#E2E6E8] overflow-hidden"
-      type="border-card"
-      @tab-remove="handleTabRemove"
-    >
-      <template v-for="{ href, code, label, closable } in tabsMenuList" :key="href">
+  <div class="nav-tabs-w tabs-box h-[40px] w-full pt-[8px]">
+    <el-tabs v-model="tabsMenuValue" class="h-full" v-bind="$attrs" type="border-card" @tab-remove="handleTabRemove">
+      <template v-for="(item, index) in tabsMenuList" :key="item.href">
         <el-tab-pane
-          class="flex-1 bg-[#f0f1f5] px-[10px] pb-[10px] overflow-hidden"
-          :closable="isBoolean(closable) ? closable : tabsMenuList.length === 1 ? false : true"
-          :label="label"
-          :name="code"
-        />
+          class="overflow-hidden"
+          :closable="isBoolean(item.closable) ? item.closable : tabsMenuList.length === 1 ? false : true"
+          :name="item.code"
+        >
+          <template #label>
+            <div :class="`flex ${activePreidx === index ? 'active-pre-tab' : ''}`">
+              <span class="h-full flex items-center label">{{ item.label }}</span>
+              <span v-if="!isBoolean(item.closable)" class="w-[20px] h-full"></span>
+            </div>
+          </template>
+        </el-tab-pane>
       </template>
     </el-tabs>
   </div>
@@ -43,6 +43,12 @@ const handleTabRemove = (code: any) => {
   tabPaneClose(code);
   // router.go(-1);
 };
+
+const activePreidx = computed(() => {
+  console.log("props.tabsMenuList", props.tabsMenuList);
+  const idx = props.tabsMenuList.findIndex((e: IOptionTabPane) => e.code === tabsMenuValue.value);
+  return idx > 0 ? idx - 1 : -1;
+});
 watch(
   () => tabsMenuValue.value,
   (value) => {
@@ -127,41 +133,77 @@ watch(
 provide(EnumSessionKey.TabsActivate, tabsMenuValue);
 </script>
 <style lang="scss" scoped>
-.tabs-box {
+.nav-tabs-w {
+  background: #f0f1f5;
   :deep(.el-tabs) {
-    --el-tabs-header-height: 31px;
-    @apply border-none;
-    .el-tabs__header {
-      @apply px-[10px] pt-[10px];
-
-      background-color: var(--nav-tabs-bg);
-      .el-tabs__item {
-        @apply rounded-t-[4px]  border-none text-[#151719];
-        &.is-active {
-          color: var(--nav-tabs-text-color);
-          .is-icon-close {
-            color: #151719;
-            &:hover {
-              color: white;
-            }
-          }
-        }
-
-        &.is-active {
-          background-color: var(nav-tabs-active-bg);
-        }
-        &:nth-child(2):not(.is-active).is-closable:hover {
-          @apply pl-[20px];
-        }
-      }
-      .el-tabs__nav-prev,
-      .el-tabs__nav-next {
-        height: var(--el-tabs-header-height);
-        line-height: var(--el-tabs-header-height);
+    background: transparent;
+    border: none;
+    --el-tabs-header-height: 32px;
+  }
+  :deep(.el-tabs__header) {
+    background: transparent;
+    border: none;
+  }
+  :deep(.el-tabs__item) {
+    margin: 0 !important;
+    border: none;
+    background: #fff;
+    padding: 0 !important;
+    color: #151719;
+    & > div {
+      height: 100%;
+      background: #f0f1f5;
+      padding-left: 20px;
+      padding-right: 20px;
+      & > span {
+        background: #f0f1f5;
       }
     }
-
-    .el-tabs__content {
+    .active-pre-tab {
+      border-bottom-right-radius: 4px;
+    }
+    .el-icon {
+      position: absolute;
+      right: 20px;
+    }
+    & > div::before {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      display: block;
+      content: "";
+      width: 1px;
+      height: 20px;
+      background: #b4b9bf;
+    }
+  }
+  :deep(.el-tabs__item:first-child) {
+    & > div::before {
+      display: none;
+    }
+  }
+  :deep(.el-tabs__item.is-active) {
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    color: var(--el-color-primary);
+    & > div::before {
+      display: none;
+    }
+    & > div {
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      background: #fff;
+      & > span {
+        background: #fff;
+      }
+    }
+  }
+  :deep(.el-tabs__item.is-active + .el-tabs__item) {
+    & > div {
+      border-bottom-left-radius: 4px;
+    }
+    & > div::before {
       display: none;
     }
   }

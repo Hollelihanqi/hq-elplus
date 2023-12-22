@@ -43,6 +43,46 @@ const listNavigation: any[] = [
     mode: "router",
   },
   {
+    label: "测试123",
+    href: "/layout-child-6",
+    code: "/layout-child-6",
+    icon: "icon iconfont party-web-icon-caidan3",
+    // closable: false,
+    mode: "router",
+  },
+  {
+    label: "测试12378",
+    href: "/layout-child-7",
+    code: "/layout-child-7",
+    icon: "icon iconfont party-web-icon-caidan3",
+    // closable: false,
+    mode: "router",
+  },
+  {
+    label: "测试看看看看",
+    href: "/layout-child-8",
+    code: "/layout-child-8",
+    icon: "icon iconfont party-web-icon-caidan3",
+    // closable: false,
+    mode: "router",
+  },
+  {
+    label: "测试uu看看",
+    href: "/layout-child-9",
+    code: "/layout-child-9",
+    icon: "icon iconfont party-web-icon-caidan3",
+    // closable: false,
+    mode: "router",
+  },
+  {
+    label: "测试看rty看",
+    href: "/layout-child-10",
+    code: "/layout-child-10",
+    icon: "icon iconfont party-web-icon-caidan3",
+    // closable: false,
+    mode: "router",
+  },
+  {
     label: "公告管理公告管理公告管理",
     icon: "icon iconfont party-web-icon-caidan3",
     children: [
@@ -147,5 +187,8 @@ onMounted(() => {
     // --layout-menu-border-color: rgba(0, 0, 0, 0.1);
     // --layout-menu-active-border-color: #8942c9;
   }
+}
+:deep(.router-view-containe) {
+  background: #fff;
 }
 </style>

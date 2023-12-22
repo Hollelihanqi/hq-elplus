@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper p-[16px]">
+  <div class="wrapper p-[16px] bg-white h-full">
     <span>这是第二个测试页面 </span>
     <div class="cursor-pointer" @click="handleClick">跳转到第三个</div>
   </div>

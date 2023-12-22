@@ -10,14 +10,13 @@
         <slot v-if="showTab" name="tab" :tab-data="listRoute">
           <NavTabs
             v-if="showTab"
-            class="h-[40px] w-full"
             :tabs-menu-list="listRoute"
             :key-label="tabsKeyLabel"
             :format-tab="formatTab"
             @tab-change="handleTabChange"
           ></NavTabs>
         </slot>
-        <div class="router-view flex-1 px-[10px] pb-[10px] overflow-auto w-full">
+        <div class="router-view-container flex-1 px-[10px] pb-[10px] overflow-auto w-full">
           <router-view v-slot="{ Component, route }">
             <keep-alive>
               <component
