@@ -2,7 +2,7 @@
  * @Description: 自定义容器
  * @Author: ym
  * @Date: 2023-12-07 16:20:35
- * @LastEditTime: 2023-12-13 15:37:54
+ * @LastEditTime: 2023-12-25 14:29:23
 -->
 <template>
   <div :class="`flex w-full ${direction === 'vertical' ?'flex-wrap' : 'flex-col'}`">
@@ -15,12 +15,15 @@
         <div>
           <slot v-if="$slots.btn" name="btn" :item="item" :index="index"></slot>
           <template v-else>
-            <el-button class="ml-2" link :icon="Plus" @click="onClick('add', index, item)"></el-button>
-            <el-button v-show="modelValue.length > 1" class="mr-2" link :icon="Delete" @click="onClick('delete', index, item)"></el-button>
+            <el-button class="mx-2" link :icon="Plus" @click="onClick('add', index, item)"></el-button>
+            <span class="mr-2 w-[20px] inline-block">
+              <el-button v-show="modelValue.length > 1"  link :icon="Delete" @click="onClick('delete', index, item)"></el-button>
+            </span>
             <slot name="btnAppend" :item="item" :index="index"></slot>
           </template>
         </div>
       </div>
+      <slot name="append"></slot>
     </div>
   </div>
 </template>

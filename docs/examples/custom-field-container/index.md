@@ -2,7 +2,7 @@
  * @Description: 模块名称
  * @Author: ym
  * @Date: 2023-12-07 16:01:04
- * @LastEditTime: 2023-12-13 14:35:16
+ * @LastEditTime: 2023-12-25 14:30:37
 -->
 
 # CustomFieldContainer
@@ -52,3 +52,4 @@
 | `content`   | 左侧内容区域，作用域参数 item, index   |
 | `btn`       | 右侧操作按钮作用域参数 item, index     |
 | `btnAppend` | 右侧操作追加按钮作用域参数 item, index |
+| `append`    | 后置插槽                               |

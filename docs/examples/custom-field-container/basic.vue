@@ -2,7 +2,7 @@
  * @Description: 模块名称
  * @Author: ym
  * @Date: 2023-12-07 17:50:54
- * @LastEditTime: 2023-12-13 14:25:59
+ * @LastEditTime: 2023-12-25 14:31:29
 -->
 <template>
   <div class="p-4">
@@ -10,6 +10,12 @@
       <template #prepend>{{ '前置插槽' }}</template>
       <template #content="{index}">
         <yto-c-custom-field-config v-model="dataList[index]"  :fieldConfig="fieldConfig" :operatorConfig="operatorConfig" :valueConfig="valueConfig"></yto-c-custom-field-config>
+      </template>
+      <template #append>
+        <div class="flex-1 w-0 flex items-center justify-end min-w-[180px]">
+          <el-button size="mini">重置</el-button>
+          <el-button size="mini" type="primary">搜索</el-button>
+        </div>
       </template>
     </yto-c-custom-field-container>
   </div>
