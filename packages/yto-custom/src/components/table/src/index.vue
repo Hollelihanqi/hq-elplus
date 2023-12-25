@@ -189,7 +189,7 @@ const props = defineProps({
 
 const ElTableInstance = ref();
 const emits = defineEmits(["on-table"]);
-const { total, pageSizes } = toRefs(props) as any;
+// const { total, pageSizes } = toRefs(props) as any;
 const _loading = ref(false);
 const _tableData = ref<any>([]);
 const _tableDataTotal = ref(0);
@@ -372,6 +372,7 @@ defineExpose({
   resetPage,
   updatePage,
   getData,
+  tableData: _tdata,
 });
 </script>
 <style lang="scss" scoped>
