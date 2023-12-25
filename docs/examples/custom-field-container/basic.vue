@@ -53,3 +53,8 @@ const onDelete = (index: number) => {
 
 
 </script>
+<style lang="scss" scoped>
+.custom-field-container{
+  --field-row-m-y: 8px !important;
+}
+</style>

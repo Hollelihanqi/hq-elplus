@@ -2,13 +2,13 @@
  * @Description: 自定义容器
  * @Author: ym
  * @Date: 2023-12-07 16:20:35
- * @LastEditTime: 2023-12-25 14:29:23
+ * @LastEditTime: 2023-12-25 16:26:26
 -->
 <template>
-  <div :class="`flex w-full ${direction === 'vertical' ?'flex-wrap' : 'flex-col'}`">
+  <div :class="`custom-field-container flex w-full ${direction === 'vertical' ?'flex-wrap' : 'flex-col'}`">
     <slot name="prepend"></slot>
     <div :class="`flex ${direction === 'vertical' ? 'flex-col flex-1 w-0' : 'flex-wrap w-full'}`">
-      <div v-for="(item, index) in modelValue" :key="index + '_row'" class="flex items-center my-2" :style="`width: ${width}`">
+      <div v-for="(item, index) in modelValue" :key="index + '_row'" class="flex items-center item-row" :style="`width: ${width}`">
         <div class="flex-1 w-0">
           <slot name="content" :item="item" :index="index"></slot>
         </div>
@@ -50,3 +50,11 @@ const onClick = (flag: 'add' | 'delete', index: number, item: IAnyObject) => {
   }
 }
 </script>
+<style lang="scss" scoped>
+.custom-field-container{
+  --field-row-m-y: 8px;
+  .item-row{
+    margin: var(--field-row-m-y) 0;
+  }
+}
+</style>

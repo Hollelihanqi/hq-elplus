@@ -53,3 +53,9 @@
 | `btn`       | 右侧操作按钮作用域参数 item, index     |
 | `btnAppend` | 右侧操作追加按钮作用域参数 item, index |
 | `append`    | 后置插槽                               |
+
+### CustomFieldContainer 样式变量
+
+| 属性名            | 说明       |
+| ----------------- | ---------- |
+| `--field-row-m-y` | 行纵向间距 |
