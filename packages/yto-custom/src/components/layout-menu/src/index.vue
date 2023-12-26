@@ -1,69 +1,78 @@
 <template>
-  <div class="layout-menu flex flex-col justify-between bg-slate-100 overflow-hidden">
-    <el-menu v-bind="$attrs" class="layout-menu-v flex-1 overflow-auto" :collapse="collapse" :default-active="activate">
-      <div v-if="title || logo" class="menu-logo-title flex items-center px-[16px] h-12 leading-12">
-        <img v-if="logo" class="w-[32px] h-[32px] mr-[10px]" :src="logo" alt="logo" />
-        <span class="title overflow-hidden whitespace-nowrap text-[20px]">{{ title }}</span>
-      </div>
-      <div
-        v-if="searchable"
-        class="layout-menu-search w-full bg-[#fff] p-[12px] box-border"
-        :class="!collapse ? 'appear' : 'disappear'"
+  <div class="layout-menu flex flex-col justify-between bg-slate-100">
+    <StickyContainer>
+      <template #header>
+        <div v-if="title || logo" class="menu-logo-title flex items-center px-[16px] h-12 leading-12">
+          <img v-if="logo" class="w-[32px] h-[32px] mr-[10px]" :src="logo" alt="logo" />
+          <span class="title overflow-hidden whitespace-nowrap text-[20px]">{{ title }}</span>
+        </div>
+      </template>
+      <el-menu
+        v-bind="$attrs"
+        class="layout-menu-v flex-1 overflow-auto"
+        :collapse="collapse"
+        :default-active="activate"
       >
-        <el-input v-model="searchVal" placeholder="菜单查询" />
-      </div>
-      <!-- 二级菜单 -->
-      <template v-for="(item, index) in menuData" :key="index">
-        <el-sub-menu v-if="isArray(item.children)" :index="getLabel(item)">
-          <template #title>
+        <div
+          v-if="searchable"
+          class="layout-menu-search w-full bg-[#fff] p-[12px] box-border"
+          :class="!collapse ? 'appear' : 'disappear'"
+        >
+          <el-input v-model="searchVal" placeholder="菜单查询" />
+        </div>
+        <!-- 二级菜单 -->
+        <template v-for="(item, index) in menuData" :key="index">
+          <el-sub-menu v-if="isArray(item.children)" :index="getLabel(item)">
+            <template #title>
+              <slot name="label" v-bind="item">
+                <inner-node-menu :data="item" :show-icon="!!item.icon"></inner-node-menu>
+              </slot>
+            </template>
+            <!-- 三级菜单 -->
+            <template v-for="(itemSub, indexSub) in item.children" :key="`${index}-${indexSub}`">
+              <el-sub-menu v-if="isArray(itemSub.children)" :index="getLabel(itemSub)">
+                <template #title>
+                  <slot name="label" v-bind="itemSub">
+                    <inner-node-menu :data="itemSub" :show-icon="!!itemSub.icon"></inner-node-menu>
+                  </slot>
+                </template>
+                <template
+                  v-for="(itemSecond, indexSecond) in itemSub.children"
+                  :key="`${index}-${indexSub}-${indexSecond}`"
+                >
+                  <el-menu-item :index="itemSecond.code" @click="menuClick(itemSecond)">
+                    <slot name="label" v-bind="itemSecond">
+                      <inner-node-menu :data="itemSecond" :show-icon="false"></inner-node-menu>
+                    </slot>
+                  </el-menu-item>
+                </template>
+              </el-sub-menu>
+              <el-menu-item v-else :index="itemSub.code" @click="menuClick(itemSub)">
+                <slot name="label" v-bind="itemSub">
+                  <inner-node-menu :data="itemSub" :show-icon="false"></inner-node-menu>
+                </slot>
+              </el-menu-item>
+            </template>
+          </el-sub-menu>
+          <!-- 一级菜单 -->
+          <el-menu-item v-else :index="item.code" @click="menuClick(item)">
             <slot name="label" v-bind="item">
               <inner-node-menu :data="item" :show-icon="!!item.icon"></inner-node-menu>
             </slot>
-          </template>
-          <!-- 三级菜单 -->
-          <template v-for="(itemSub, indexSub) in item.children" :key="`${index}-${indexSub}`">
-            <el-sub-menu v-if="isArray(itemSub.children)" :index="getLabel(itemSub)">
-              <template #title>
-                <slot name="label" v-bind="itemSub">
-                  <inner-node-menu :data="itemSub" :show-icon="!!itemSub.icon"></inner-node-menu>
-                </slot>
-              </template>
-              <template
-                v-for="(itemSecond, indexSecond) in itemSub.children"
-                :key="`${index}-${indexSub}-${indexSecond}`"
-              >
-                <el-menu-item :index="itemSecond.code" @click="menuClick(itemSecond)">
-                  <slot name="label" v-bind="itemSecond">
-                    <inner-node-menu :data="itemSecond" :show-icon="false"></inner-node-menu>
-                  </slot>
-                </el-menu-item>
-              </template>
-            </el-sub-menu>
-            <el-menu-item v-else :index="itemSub.code" @click="menuClick(itemSub)">
-              <slot name="label" v-bind="itemSub">
-                <inner-node-menu :data="itemSub" :show-icon="false"></inner-node-menu>
-              </slot>
-            </el-menu-item>
-          </template>
-        </el-sub-menu>
-        <!-- 一级菜单 -->
-        <el-menu-item v-else :index="item.code" @click="menuClick(item)">
-          <slot name="label" v-bind="item">
-            <inner-node-menu :data="item" :show-icon="!!item.icon"></inner-node-menu>
-          </slot>
-        </el-menu-item>
-      </template>
-    </el-menu>
+          </el-menu-item>
+        </template>
+      </el-menu>
+    </StickyContainer>
   </div>
 </template>
 <script lang="ts" setup name="LayoutMenu">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { useMenu } from "@/composable/menu";
+import { useMenu } from "../../../composable/menu";
 import { isArray, isBoolean, toURL } from "gold-core";
 import InnerNodeMenu from "./NodeMenu.vue";
 import "@/icon-font/iconfont.css";
-
+import StickyContainer from "../../sticky-container";
 const props = defineProps({
   keyLabel: String,
   keyIcon: String,
