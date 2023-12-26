@@ -19,7 +19,7 @@ const formatEnum = (column: any, row: any) => {
     const target = column.enum.find((e: any) => e.value === row[column.prop]);
     return target?.label || "--";
   } else {
-    return column.enum[row[column.prop]] || '--';
+    return column.enum[row[column.prop]] || "--";
   }
 };
 // 复制
@@ -52,7 +52,7 @@ const renderColumn = (column: any) => {
   return (
     <>
       {!column.hide && (
-        <el-table-column show-overflow-tooltip {...column}>
+        <el-table-column showOverflowTooltip={column.showOverflowTooltip ?? column.prop !== "action"} {...column}>
           {{
             default: (scope: any) => {
               if (column._children) return column._children.map((child: any) => renderColumn(child));
