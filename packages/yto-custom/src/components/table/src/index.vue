@@ -7,7 +7,7 @@
       ref="ElTableInstance"
       v-loading="requestApi ? _loading : loading"
       class="my-el-table w-[100%]"
-      :class="{ 'header-bg-hide': !headerbgHide, 'pagination-hide-table': paginationHide, 'flex-1': !isDataEmpty }"
+      :class="{ 'pagination-hide-table': paginationHide, 'flex-1': !isDataEmpty }"
       :data="_tdata"
       :default-sort="_defaultSort"
       v-bind="$attrs"
@@ -22,6 +22,7 @@
       <template #empty>
         <slot name="empty"></slot>
       </template>
+
       <template v-for="item in columns" :key="item">
         <!-- selection || index -->
         <el-table-column
@@ -375,64 +376,6 @@ defineExpose({
   tableData: _tdata,
 });
 </script>
-<style lang="scss" scoped>
-.table-w {
-  background: #fff;
-  border-radius: 4px;
-}
-.table-header {
-  margin-bottom: 15px;
-}
-:deep(.pagination-hide-table > div::before) {
-  display: none;
-}
-:deep(.my-el-pagination) {
-  display: flex;
-  justify-content: flex-end;
-  padding: 16px 16px 0 0;
-  .btn-prev,
-  .btn-next {
-    border: 1px solid #dcdee0;
-  }
-  .el-pager {
-    display: flex;
-    align-items: "center";
-    gap: 8px;
-    padding: 0 8px;
-    .number {
-      border: 1px solid #dcdee0;
-      &:hover {
-        border: 1px solid var(--el-color-primary);
-      }
-    }
-    .is-active {
-      border: 1px solid var(--el-color-primary);
-    }
-  }
-}
-:deep(.header-bg-hide) {
-  .el-table__header th {
-    height: 45px;
-    font-weight: bold;
-    color: #252525;
-    background: #fafafa;
-  }
-  .el-table__row {
-    height: 45px;
-  }
-}
-:deep(.my-el-table) {
-  // 解决表格数据为空时样式不居中问题(仅在element-plus中)
-  .el-scrollbar__view {
-    height: 100%;
-  }
-  .el-scrollbar__wrap {
-    position: relative;
-  }
-  .el-table__append-wrapper {
-    position: sticky;
-    bottom: 0;
-    z-index: 88;
-  }
-}
+<style lang="scss">
+@import "./index.scss";
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col overflow-hidden">
-    <yto-c-table :columns="columns" :request-api="getList" show-summary>
+  <div class="flex flex-col overflow-hidden p-[16px]">
+    <yto-c-table :columns="columns" :request-api="getList">
       <!-- <template #callStatus="scope">
       <span>{{ scope.row.status }}</span>
     </template> -->
