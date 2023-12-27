@@ -166,9 +166,12 @@ onMounted(() => {
 </script>
 <style lang="scss">
 #layout {
-  .layout-router {
-    --nav-tabs-text-color: #ef1017;
-    @apply h-full;
+  .nav-tabs-w{
+    --nav-tabs-bg: red;
+    --nav-tab-item-divider-color: #b4b9bf;
+    --nav-tab-item-bg: yellow;
+    --nav-tab-item-font-color: #151719;
+    --nav-tab-active-bg: green;
   }
   .layout-header {
     --layout-header-background: #900808;

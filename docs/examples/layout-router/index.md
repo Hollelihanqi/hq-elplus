@@ -121,9 +121,11 @@ tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
 
 ### layoutHeader 样式变量
 
-| 属性名                  | 说明                 |
-| ----------------------- | -------------------- |
-| `--layout-router-bg`    | 背景颜色             |
-| `--nav-tabs-bg`         | 导航页签背景颜色     |
-| `--nav-tabs-active-bg`  | 导航页签激活背景颜色 |
-| `--nav-tabs-text-color` | 导航页签激活文字颜色 |
+| 属性名                         | 说明                                       |
+| ------------------------------ | ------------------------------------------ |
+| `--layout-router-bg`           | 背景颜色                                   |
+| `--nav-tabs-bg`                | 导航页签背景颜色                           |
+| `--nav-tab-item-divider-color` | 分割线颜色                                 |
+| `--nav-tab-item-bg`            | 标签未激活背景色                           |
+| `--nav-tab-item-font-color`    | 标签未激活字体色,默认取 --el-color-primary |
+| `--nav-tab-active-bg`          | 标签激活背景色                             |

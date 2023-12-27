@@ -134,7 +134,12 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
 </script>
 <style lang="scss" scoped>
 .nav-tabs-w {
-  background: #f0f1f5;
+  --nav-tabs-bg: #f0f1f5;
+  --nav-tab-item-divider-color: #b4b9bf;
+  --nav-tab-item-bg: #fff;
+  --nav-tab-item-font-color: #151719;
+  --nav-tab-active-bg: #fff;
+  background: var(--nav-tabs-bg);
   :deep(.el-tabs) {
     background: transparent;
     border: none;
@@ -147,16 +152,16 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
   :deep(.el-tabs__item) {
     margin: 0 !important;
     border: none !important;
-    background: #fff;
+    background: var(--nav-tab-item-bg);
     padding: 0 !important;
-    color: #151719;
+    color: var(--nav-tab-item-font-color);
     & > div {
       height: 100%;
-      background: #f0f1f5;
+      background: var(--nav-tabs-bg);
       padding-left: 20px;
       padding-right: 20px;
       & > span {
-        background: #f0f1f5;
+        background: var(--nav-tabs-bg);
       }
     }
     .active-pre-tab {
@@ -175,7 +180,7 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
       content: "";
       width: 1px;
       height: 20px;
-      background: #b4b9bf;
+      background: var(--nav-tab-item-divider-color);
     }
   }
   :deep(.el-tabs__item:first-child) {
@@ -193,9 +198,9 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
     & > div {
       border-top-left-radius: 4px;
       border-top-right-radius: 4px;
-      background: #fff;
+      background: var(--nav-tab-active-bg);
       & > span {
-        background: #fff;
+        background: var(--nav-tab-active-bg);
       }
     }
   }
