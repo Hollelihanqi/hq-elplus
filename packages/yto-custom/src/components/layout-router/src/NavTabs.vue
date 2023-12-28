@@ -10,7 +10,10 @@
           <template #label>
             <div :class="`flex ${activePreidx === index ? 'active-pre-tab' : ''}`">
               <span class="h-full flex items-center label">{{ item.label }}</span>
-              <span v-if="!isBoolean(item.closable)" class="w-[20px] h-full"></span>
+              <span
+                v-if="isBoolean(item.closable) ? item.closable : tabsMenuList.length === 1 ? false : true"
+                class="w-[20px] h-full"
+              ></span>
             </div>
           </template>
         </el-tab-pane>
