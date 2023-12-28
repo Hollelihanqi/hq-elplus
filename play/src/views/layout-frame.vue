@@ -1,20 +1,20 @@
 <template>
   <div id="layout" class="layout h-full">
-    <yto-c-layout-frame class="frame" :cacheable="true">
+    <yto-c-layout-frame class="frame" :cacheable="true" type="horizontal">
       <template #header>
-        <yto-c-layout-header
-          title="圆通党建"
-          :collapse="collapse"
-          :logo="logo"
-          :user-info="userInfo"
-          @collapse="collapse = !collapse"
-        >
+        <yto-c-layout-header :collapse="collapse" :user-info="userInfo" @collapse="collapse = !collapse">
           <template #logout>
             <span>退出登录</span>
           </template>
         </yto-c-layout-header>
       </template>
-      <yto-c-layout-menu :unique-opened="true" :collapse="collapse" :menus="listNavigation"></yto-c-layout-menu>
+      <yto-c-layout-menu
+        title="圆通党建"
+        :logo="logo"
+        :unique-opened="true"
+        :collapse="collapse"
+        :menus="listNavigation"
+      ></yto-c-layout-menu>
     </yto-c-layout-frame>
   </div>
 </template>
