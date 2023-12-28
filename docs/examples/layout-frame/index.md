@@ -2,7 +2,7 @@
  * @Author: weichunpei
  * @Date: 2023-10-20 13:07:20
  * @LastEditors: weichunpei
- * @LastEditTime: 2023-11-29 11:06:06
+ * @LastEditTime: 2023-12-28 14:32:25
  * @Description:
 -->
 
@@ -89,11 +89,12 @@ tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
 
 ### LayoutFrame 属性
 
-| 属性名      | 说明         | 类型    | 可选值 | 默认值   | 备注 |
-| ----------- | ------------ | ------- | ------ | -------- | ---- |
-| `footer`    | 显示底部区域 | boolean | -      | false    |      |
-| `max`       | 最大页签数   | number  | -      | undefind |      |
-| `cacheable` | 是否开启缓存 | boolean | -      | false    |      |
+| 属性名      | 说明         | 类型    | 可选值                | 默认值     | 备注                                     |
+| ----------- | ------------ | ------- | --------------------- | ---------- | ---------------------------------------- |
+| `footer`    | 显示底部区域 | boolean | -                     | `false`    |                                          |
+| `max`       | 最大页签数   | number  | -                     | `undefind` |                                          |
+| `cacheable` | 是否开启缓存 | boolean | -                     | `false`    |                                          |
+| `type`      | 布局方式     | string  | `vertical/horizontal` | `vertical` | vertical：上下布局；horizontal：左右布局 |
 
 ### LayoutFrame 插槽
 

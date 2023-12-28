@@ -1,8 +1,10 @@
 <template>
-  <div class="layout-frame flex flex-col flex-1 overflow-hidden">
-    <slot name="header"></slot>
-    <div class="flex flex-1 overflow-hidden">
-      <slot></slot>
+  <div class="layout-frame flex flex-1 overflow-hidden" :class="{ 'flex-col': isVertical }">
+    <slot v-if="isVertical" name="header"></slot>
+    <slot v-else></slot>
+    <div class="flex flex-1 overflow-hidden w-full" :class="{ 'flex-col': !isVertical }">
+      <slot v-if="isVertical"></slot>
+      <slot v-else name="header"></slot>
       <el-tabs
         v-model="activate"
         class="flex flex-col flex-1 bg-white overflow-hidden"
@@ -42,8 +44,13 @@ const props = defineProps({
   cacheable: Boolean,
   sso: Boolean,
   max: Number,
+  type: {
+    type: String,
+    default: "vertical",
+  },
 });
-
+// 是否为垂直布局
+const isVertical = computed(() => props.type === "vertical");
 const { listRoute, activate } = useFrame({
   cacheable: props.cacheable as boolean,
   sso: props.sso as boolean,

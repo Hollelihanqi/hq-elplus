@@ -166,7 +166,7 @@ onMounted(() => {
 </script>
 <style lang="scss">
 #layout {
-  .nav-tabs-w{
+  .nav-tabs-w {
     --nav-tabs-bg: red;
     --nav-tab-item-divider-color: #b4b9bf;
     --nav-tab-item-bg: yellow;

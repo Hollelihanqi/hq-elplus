@@ -2,7 +2,7 @@
  * @Description: 模块名称
  * @Author: ym
  * @Date: 2023-12-14 16:59:25
- * @LastEditTime: 2023-12-20 10:32:36
+ * @LastEditTime: 2023-12-28 14:07:07
 -->
 <script setup lang="ts"></script>
 
@@ -30,8 +30,8 @@
       </KeepAlive>
     </router-view> -->
 
-    <LayoutRouter class="h-full"></LayoutRouter>
-    <!-- <LayoutFrame class="h-full"></LayoutFrame> -->
+    <!-- <LayoutRouter class="h-full"></LayoutRouter> -->
+    <LayoutFrame class="h-full"></LayoutFrame>
   </div>
 </template>
 <script lang="ts" setup>
