@@ -54,12 +54,11 @@ const activePreidx = computed(() => {
 watch(
   () => tabsMenuValue.value,
   (value) => {
-    console.log("tabsMenuValue.value,_______________________________");
     if (!value) return;
     const { mode, href } = unref(props.tabsMenuList).find((tab) => tab.code === value) || {};
     if (mode === "router") {
-      console.log("tabsMenuValue.value,______________执行路由跳转_________________");
       const url = toURL(href as string);
+      console.log(url.pathname);
       router.push(url.pathname + url.search);
     }
   },

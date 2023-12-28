@@ -32,6 +32,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    isResetParams: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ["update:searchModel", "on-search", "on-reset"],
   setup(props, { emit, expose, slots }) {
@@ -63,8 +67,6 @@ export default defineComponent({
     const getFormatValues = () => {
       return props.formControls.reduce((acc: any, item: SearchFormControlProps) => {
         const { field, formatValue } = item as any;
-        // const value = acc[field];
-        // acc[field] = formatValue && typeof formatValue === "function" ? formatValue(value) : value;
         // 只处理那些有 formatValue 函数的属性
         if (typeof formatValue === "function") {
           const value = _searchModel.value[field];
@@ -114,7 +116,11 @@ export default defineComponent({
     };
 
     const handleReset = () => {
-      handleDefaultValue();
+      if (!props.isResetParams) {
+        handleDefaultValue();
+      } else {
+        _searchModel.value = {};
+      }
       emit("on-reset");
     };
     const handleQuery = () => {
