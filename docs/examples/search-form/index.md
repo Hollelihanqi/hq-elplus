@@ -20,12 +20,16 @@
 
 ## SearchForm 属性
 
-| 属性名                | 说明                                                            | 类型             | 可选值 | 默认值                                  |
-| --------------------- | --------------------------------------------------------------- | ---------------- | ------ | --------------------------------------- |
-| `v-model:searchModel` | 数据绑定                                                        | Object           | —      | --                                      |
-| `colConfig`           | 全局配置不同屏幕下一行所显示的控件个数, 参考 `FormControlsItem` | [Number, Object] | —      | `{ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }` |
-| `formControls`        | 搜索项配置项，参考 `ColConfigItem`                              | Array            | —      | []                                      |
-| `modelDefault`        | 默认值,可以同时支持多个表单项的默认值配置                       | Object           | —      | null                                    |
+| 属性名                | 说明                                                            | 类型             | 可选值     | 默认值                                  |
+| --------------------- | --------------------------------------------------------------- | ---------------- | ---------- | --------------------------------------- |
+| `v-model:searchModel` | 数据绑定                                                        | Object           | —          | --                                      |
+| `colConfig`           | 全局配置不同屏幕下一行所显示的控件个数, 参考 `FormControlsItem` | [Number, Object] | —          | `{ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }` |
+| `formControls`        | 搜索项配置项，参考 `ColConfigItem`                              | Array            | —          | []                                      |
+| `modelDefault`        | 默认值,可以同时支持多个表单项的默认值配置                       | Object           | —          | null                                    |
+| `modelDefault`        | 默认值,可以同时支持多个表单项的默认值配置                       | Object           | —          | null                                    |
+| `okpos`               | 确认按钮位置                                                    | String           | right/left | right                                   |
+| `collapse`            | 展开收起,默认展开                                               | Boolean          | true/false | false                                   |
+| `isResetParams`       | 点击重置按钮时，是否重置查询默认参数为空                        | Boolean          | true/false | false                                   |
 
 ### ColConfigItem 属性
 
