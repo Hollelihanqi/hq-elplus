@@ -1,18 +1,11 @@
 <template>
   <div class="layout-menu flex flex-col justify-between bg-slate-100">
     <StickyContainer>
-      <template v-if="!collapse" #header>
-        <div v-if="title || logo" class="menu-logo-title flex items-center px-[16px] h-12 leading-12">
-          <img v-if="logo" class="w-[32px] h-[32px] mr-[10px]" :src="logo" alt="logo" />
-          <span class="title overflow-hidden whitespace-nowrap text-[20px]">{{ title }}</span>
-        </div>
-      </template>
-      <el-menu
-        v-bind="$attrs"
-        class="layout-menu-v flex-1 overflow-auto"
-        :collapse="collapse"
-        :default-active="activate"
-      >
+      <!-- <template v-if="!collapse" #header>
+        <Logo :title="title" :logo="logo" />
+      </template> -->
+      <el-menu v-bind="$attrs" class="layout-menu-v flex-1 h-full" :collapse="collapse" :default-active="activate">
+        <Logo :title="title" :logo="logo" />
         <div
           v-if="searchable"
           class="layout-menu-search w-full bg-[#fff] p-[12px] box-border"
@@ -73,6 +66,7 @@ import { isArray, isBoolean, toURL } from "gold-core";
 import InnerNodeMenu from "./NodeMenu.vue";
 import "@/icon-font/iconfont.css";
 import StickyContainer from "../../sticky-container";
+import Logo from "./Logo.vue";
 const props = defineProps({
   keyLabel: String,
   keyIcon: String,
@@ -87,8 +81,10 @@ const props = defineProps({
   width: { type: String, default: "210px" },
   title: String,
   logo: String,
+  linkType: { type: String, default: "router" },
+  menuClick: { type: Function, default: () => {} },
 });
-const router = useRouter();
+
 const emit = defineEmits(["menuClick", "update:collapse"]);
 // 菜单过滤
 const searchVal = ref("");
@@ -106,10 +102,12 @@ const fileNavMenu = (arr: any) => {
 };
 
 const menuClick = (item: any) => {
-  const { href, code } = item;
   emit("menuClick", item);
-  paneAdd(item);
-  // activate.value = code;
+  if (props.linkType === "router") {
+    paneAdd(item);
+  } else {
+    props.menuClick(item, () => paneAdd(item));
+  }
 };
 const menuData = computed(() => {
   const tmpData = JSON.parse(JSON.stringify(data));
