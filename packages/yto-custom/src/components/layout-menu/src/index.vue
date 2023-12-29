@@ -82,7 +82,6 @@ const props = defineProps({
   title: String,
   logo: String,
   linkType: { type: String, default: "router" },
-  menuClick: { type: Function, default: () => {} },
 });
 
 const emit = defineEmits(["menuClick", "update:collapse"]);
@@ -105,8 +104,6 @@ const menuClick = (item: any) => {
   emit("menuClick", item);
   if (props.linkType === "router") {
     paneAdd(item);
-  } else {
-    props.menuClick(item, () => paneAdd(item));
   }
 };
 const menuData = computed(() => {
