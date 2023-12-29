@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-tabs-w tabs-box h-[40px] w-full pt-[8px] px-[10px]">
+  <div class="nav-tabs-w tabs-box h-[2.5rem] w-full pt-[.5rem] px-[.625rem]">
     <el-tabs v-model="tabsMenuValue" class="h-full" v-bind="$attrs" type="border-card" @tab-remove="handleTabRemove">
       <template v-for="(item, index) in tabsMenuList" :key="item.href">
         <el-tab-pane
@@ -12,7 +12,7 @@
               <span class="h-full flex items-center label">{{ item.label }}</span>
               <span
                 v-if="isBoolean(item.closable) ? item.closable : tabsMenuList.length === 1 ? false : true"
-                class="w-[20px] h-full"
+                class="w-[1.25rem] h-full"
               ></span>
             </div>
           </template>
@@ -48,7 +48,6 @@ const handleTabRemove = (code: any) => {
 };
 
 const activePreidx = computed(() => {
-  console.log("props.tabsMenuList", props.tabsMenuList);
   const idx = props.tabsMenuList.findIndex((e: IOptionTabPane) => e.code === tabsMenuValue.value);
   return idx > 0 ? idx - 1 : -1;
 });
@@ -59,6 +58,7 @@ watch(
     const { mode, href } = unref(props.tabsMenuList).find((tab) => tab.code === value) || {};
     if (mode === "router") {
       const url = toURL(href as string);
+      console.log(url.pathname);
       router.push(url.pathname + url.search);
     }
   },
@@ -146,7 +146,7 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
   :deep(.el-tabs) {
     background: transparent;
     border: none;
-    --el-tabs-header-height: 32px;
+    --el-tabs-header-height: 2rem;
   }
   :deep(.el-tabs__header) {
     background: transparent;
@@ -161,18 +161,18 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
     & > div {
       height: 100%;
       background: var(--nav-tabs-bg);
-      padding-left: 20px;
-      padding-right: 20px;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
       & > span {
         background: var(--nav-tabs-bg);
       }
     }
     .active-pre-tab {
-      border-bottom-right-radius: 4px;
+      border-bottom-right-radius: 0.25rem;
     }
     .el-icon {
       position: absolute;
-      right: 20px;
+      right: 1.25rem;
     }
     & > div::before {
       position: absolute;
@@ -181,8 +181,8 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
       transform: translateY(-50%);
       display: block;
       content: "";
-      width: 1px;
-      height: 20px;
+      width: 0.0625rem;
+      height: 1.25rem;
       background: var(--nav-tab-item-divider-color);
     }
   }
@@ -192,15 +192,15 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
     }
   }
   :deep(.el-tabs__item.is-active) {
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
+    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
     color: var(--el-color-primary);
     & > div::before {
       display: none;
     }
     & > div {
-      border-top-left-radius: 4px;
-      border-top-right-radius: 4px;
+      border-top-left-radius: 0.25rem;
+      border-top-right-radius: 0.25rem;
       background: var(--nav-tab-active-bg);
       & > span {
         background: var(--nav-tab-active-bg);
@@ -209,7 +209,7 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
   }
   :deep(.el-tabs__item.is-active + .el-tabs__item) {
     & > div {
-      border-bottom-left-radius: 4px;
+      border-bottom-left-radius: 0.25rem;
     }
     & > div::before {
       display: none;
