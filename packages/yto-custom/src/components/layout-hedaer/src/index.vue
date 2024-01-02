@@ -23,6 +23,7 @@
       <div class="right-header flex items-center text-[14px]">
         <div class="mr-[5px]">{{ user.userName }}</div>
         <div class="mr-[10px]">（{{ user.userCode }}）</div>
+        <slot name="extend"></slot>
         <i
           v-if="isfullscreen"
           class="icon iconfont cursor-pointer mx-[25px] !text-[14px]"
