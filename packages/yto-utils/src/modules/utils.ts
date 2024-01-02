@@ -56,3 +56,18 @@ export const guid = () => {
   }
   return S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4();
 };
+
+/**
+ * @description: 字符串复制方法
+ * @param {string} str 需要复制的字符串
+ * @return {*}
+ */
+export const copyStr = (str: string) => {
+  if (!str) return;
+  const inputEle: any = document.createElement("input");
+  document.body.appendChild(inputEle);
+  inputEle.value = str;
+  inputEle.select();
+  document.execCommand("Copy");
+  inputEle.remove();
+};
