@@ -4,7 +4,7 @@
       <!-- <template v-if="!collapse" #header>
         <Logo :title="title" :logo="logo" />
       </template> -->
-      <el-menu v-bind="$attrs" class="layout-menu-v flex-1 h-full" :collapse="collapse" :default-active="activate">
+      <el-menu v-bind="$attrs" class="layout-menu-v h-[100%]" :collapse="collapse" :default-active="activate">
         <Logo :title="title" :logo="logo" />
         <div
           v-if="searchable"
