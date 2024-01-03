@@ -285,6 +285,7 @@ const getTableData = async (params = {}) => {
     _loading.value = false;
     console.error("表格请求数据发生错误...");
     console.error(error);
+    return Promise.reject(error);
   }
 };
 
