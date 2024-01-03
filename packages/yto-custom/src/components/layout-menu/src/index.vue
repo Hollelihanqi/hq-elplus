@@ -5,7 +5,7 @@
         <Logo :title="title" :logo="logo" />
       </template> -->
       <el-menu v-bind="$attrs" class="layout-menu-v h-[100%]" :collapse="collapse" :default-active="activate">
-        <Logo :title="title" :logo="logo" />
+        <Logo :title="title" :logo="logo" :collapse="collapse" />
         <div
           v-if="searchable"
           class="layout-menu-search w-full bg-[#fff] p-[12px] box-border"

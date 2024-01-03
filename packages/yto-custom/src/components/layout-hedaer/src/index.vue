@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-header flex items-center px-4 h-12 leading-12">
+  <div class="layout-header flex items-center px-4 h-[48px] leading-[48px]">
     <div class="flex">
       <slot v-if="title || logo" name="left">
         <div class="left-header flex items-center" :class="collapse ? 'disappear' : 'appear'">

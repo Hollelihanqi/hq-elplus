@@ -2,7 +2,7 @@
   <div class="layout-router flex flex-1 overflow-hidden" :class="{ 'flex-col': isVertical }">
     <slot v-if="isVertical" name="header"></slot>
     <slot v-else></slot>
-    <div class="flex flex-1 overflow-hidden w-full" :class="{ 'flex-col': !isVertical }">
+    <div class="flex flex-1 overflow-hidden" :class="isVertical ? 'w-full' : 'flex-col'">
       <slot v-if="isVertical"></slot>
       <slot v-else name="header"></slot>
 

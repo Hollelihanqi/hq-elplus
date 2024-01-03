@@ -1,6 +1,12 @@
 <template>
   <div id="layout">
-    <yto-c-layout-router ref="routerRef" :cacheable="true" type="horizontal" @tab-change="handleTabChange">
+    <yto-c-layout-router
+      ref="routerRef"
+      class="h-full"
+      :cacheable="true"
+      type="horizontal"
+      @tab-change="handleTabChange"
+    >
       <template #header>
         <yto-c-layout-header :collapse="collapse" :user-info="userInfo" @collapse="collapse = !collapse">
           <template #extend>123</template>

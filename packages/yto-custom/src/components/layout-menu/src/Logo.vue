@@ -1,7 +1,7 @@
 <template>
-  <div v-if="title || logo" class="menu-logo-title flex items-center px-[16px] h-12 leading-12">
+  <div v-if="title || logo" class="menu-logo-title flex items-center px-[16px] h-[48px] leading-[48px]">
     <img v-if="logo" class="w-[32px] h-[32px] mr-[10px]" :src="logo" alt="logo" />
-    <span class="title overflow-hidden whitespace-nowrap text-[20px]">{{ title }}</span>
+    <span v-show="!collapse" class="title overflow-hidden whitespace-nowrap text-[20px]">{{ title }}</span>
   </div>
 </template>
 <script lang="ts" setup>
@@ -13,6 +13,10 @@ defineProps({
   logo: {
     type: String,
     default: "",
+  },
+  collapse: {
+    type: Boolean,
+    default: false,
   },
 });
 </script>
