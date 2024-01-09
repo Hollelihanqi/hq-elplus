@@ -186,6 +186,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  daynamicPaginationHide: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const ElTableInstance = ref();
