@@ -52,7 +52,7 @@
     </el-table>
     <div v-if="isDataEmpty" class="flex-1 opacity-0 h-0"></div>
     <el-pagination
-      v-if="!cpaginationHide"
+      v-if="cpaginationHide"
       v-model:page-size="paginationParams.pageSize"
       v-model:current-page="paginationParams.currentPage"
       class="my-el-pagination"
@@ -233,10 +233,12 @@ const isDataEmpty = computed(() => {
   return props.requestApi ? _tableData.value.length : props.tableData.length;
 });
 const cpaginationHide = computed(() => {
-  const { paginationHide, requestApi, total, pageSize, paginationHideAuto } = props;
-  const isDataEmpty = requestApi ? _tableDataTotal.value === 0 : total === 0;
-  const isLessThanPageSize = (total || _tableDataTotal.value) < pageSize;
-  return paginationHide || isDataEmpty || (paginationHideAuto && isLessThanPageSize);
+  if (props.paginationHide) {
+    return false;
+  } else if (props.pageSize >= _total.value) {
+    return false;
+  }
+  return true;
 });
 
 const _sortFun = props.sortFormat || _sortFormat;

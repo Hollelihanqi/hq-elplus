@@ -1,6 +1,6 @@
 {
   "name": "@yto/custom",
-  "version": "1.0.84",
+  "version": "1.0.86",
   "type": "module",
   "main": "es/index.js",
   "module": "es/index.js",
