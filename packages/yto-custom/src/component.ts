@@ -16,8 +16,8 @@ export * from "./components/echart";
 export { YtoTable } from "./components/table";
 export * from "./components/table";
 
-export { YtoForm } from "./components/formItem";
-export * from "./components/formItem";
+export { YtoForm } from "./components/form";
+export * from "./components/form";
 
 export { YtoRemoteSearch } from "./components/remote-search";
 export * from "./components/remote-search";

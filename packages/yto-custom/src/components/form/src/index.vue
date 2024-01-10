@@ -98,6 +98,7 @@ import itemInputNumber from "./block/itemInputNumber.vue";
 import itemRate from "./block/itemRate.vue";
 import itemTimePicker from "./block/itemTimePicker.vue";
 import itemTimeSelect from "./block/itemTimeSelect.vue";
+import {ElInput} from "element-plus";
 import { PropType } from "vue";
 interface Obj {
   [key: string]: any;
