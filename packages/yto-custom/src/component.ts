@@ -19,6 +19,10 @@ export * from "./components/table";
 export { YtoForm } from "./components/form";
 export * from "./components/form";
 
+export { YtoFormItems } from "./components/form-items";
+// @ts-ignore
+export * from "./components/form-items";
+
 export { YtoRemoteSearch } from "./components/remote-search";
 export * from "./components/remote-search";
 

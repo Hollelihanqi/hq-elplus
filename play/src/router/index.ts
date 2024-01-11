@@ -13,7 +13,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   { path: "/chart", component: () => import("@/views/chart.vue") },
-  { path: "/form", component: () => import("@/views/formItem/index.vue") },
+  { path: "/form", component: () => import("@/views/form/index.vue") },
   { path: "/table", component: () => import("@/views/table.vue") },
   { path: "/staffSearch", component: () => import("@/views/staffSearch.vue") },
   { path: "/userSearch", component: () => import("@/views/TestSearch.vue") },

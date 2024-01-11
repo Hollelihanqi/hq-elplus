@@ -1,6 +1,4 @@
 <template>
-  <el-form v-bind="$attrs" ref="myForm" :model="form">
-    <div v-if="layoutAuto" class="dis-flex flex-wrap">
       <el-form-item
         v-for="item in formConfig"
         v-bind="item?.formItemBinds"
@@ -8,7 +6,7 @@
         :label="item?.label"
         :prop="item?.prop"
         :label-width="item.labelWidth"
-        class="mx-[10px]"
+        :style="`width:${item.formItemWidth || itemConfig.formItemWidth || '25%'}`"
       >
         <div :class="item.contentClass">
           <component
@@ -29,61 +27,9 @@
           <slot v-if="$slots[item.prop]" :name="item?.prop" />
         </div>
       </el-form-item>
-      <div
-        v-if="$slots.default"
-        class="flex-1 dis-flex flex-align-item-center flex-justify-end"
-        style="padding-right: 20px"
-      >
-        <slot />
-      </div>
-    </div>
-
-    <el-row v-if="!layoutAuto" class="dis-flex pad-tb-5">
-      <el-col
-        v-for="(item, index) in formConfig"
-        :key="index"
-        class="pad-tb-5"
-        :span="item.span || span"
-        style="padding: 0 10px"
-      >
-        <el-form-item
-          :label="item?.label"
-          :prop="item?.prop"
-          :label-width="item.labelWidth"
-          v-bind="item?.formItemBinds"
-        >
-          <div :class="item.contentClass">
-            <component
-              v-bind="item"
-              :is="getComponent(item.itemType)"
-              v-if="!$slots[item.prop]"
-              :prop="item?.prop"
-              :form="form"
-              :options="item?.options || itemConfig.options"
-              :multiple="item?.multiple || false"
-              :active-color="item?.activeColor || itemConfig.activeColor"
-              :inactive-color="item?.inactiveColor || itemConfig.inactiveColor"
-              :active-value="item?.activeValue || itemConfig.activeValue"
-              :inactive-value="item?.inactiveValue || itemConfig.inactiveValue"
-              :disabled="item?.disabled || itemConfig.disabled"
-              :clearable="item?.clearable || itemConfig.clearable"
-            />
-            <slot v-if="$slots[item.prop]" :name="item?.prop" />
-          </div>
-        </el-form-item>
-      </el-col>
-      <div
-        v-if="$slots.default"
-        class="flex-1 dis-flex flex-align-item-center flex-justify-end"
-        style="padding-right: 20px"
-      >
-        <slot />
-      </div>
-    </el-row>
-  </el-form>
 </template>
 
-<script lang="ts" setup name="Form">
+<script lang="ts" setup name="FormItems">
 // @ts-nocheck
 
 import itemInput from "../../../basis-components/form-items/itemInput.vue";
@@ -146,6 +92,7 @@ const props = defineProps({
     default: () => {
       return {
         options: [],
+        formItemWidth:'25%',
         contentClass: "",
         disabled: false,
         clearable: true,

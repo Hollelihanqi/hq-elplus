@@ -42,7 +42,11 @@ export default defineConfig({
             },
             {
               text: "Form 表单",
-              link: "/examples/fromItem/index.md",
+              link: "/examples/from/index.md",
+            },
+            {
+              text: "formItems 表单",
+              link: "/examples/fromItems/index.md",
             },
             {
               text: "Dialog 弹框",
@@ -111,6 +115,14 @@ export default defineConfig({
             {
               text: "分享",
               link: "/examples/utils/share.md",
+            },
+            {
+              text: "文件下载",
+              link: "/examples/utils/download.md",
+            },
+            {
+              text: "其他方法",
+              link: "/examples/utils/other.md",
             },
           ],
           collapsed: false,
