@@ -91,6 +91,7 @@ export type BaseSelectProps = Partial<ExtractPropTypes<typeof props>>;
 export default defineComponent({
   name: "RemoteSearch",
   props,
+  emits: ["after-remote"],
   setup(props: BaseSelectProps, { attrs, expose, emit }) {
     const options: any = ref([]);
     const copyOptions: any = ref([]);
@@ -138,6 +139,7 @@ export default defineComponent({
               options.value = props.resultKey && res[props.resultKey];
               copyOptions.value = props.resultKey && [...res[props.resultKey]];
             }
+            emit("after-remote", res);
           });
       } catch (error) {
         console.error("获取数据失败", error);
