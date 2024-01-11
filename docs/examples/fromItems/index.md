@@ -5,7 +5,7 @@
 | 属性名          | 说明 | 类型      | 可选值     | 默认值   | 备注  |
 |--------------|--|---------| ---------- |-------|-----|
 | `formItemWidth` | 每项formItem宽度 | string   | -       |   20% | _   |
-| `formItemBinds` | 每项formItem宽度 | object   | -       |   自动v-bing到 formItem 上| _   |
+| `formItemBinds` | 自动v-bing到 formItem 上 | object   | -       | - | _   |
 
 其他属性详见 from 属性
 ### fromConfig属性
