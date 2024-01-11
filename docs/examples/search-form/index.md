@@ -30,6 +30,8 @@
 | `okpos`               | 确认按钮位置                                                    | String           | right/left | right                                   |
 | `collapse`            | 展开收起,默认展开                                               | Boolean          | true/false | false                                   |
 | `isResetParams`       | 点击重置按钮时，是否重置查询默认参数为空                        | Boolean          | true/false | false                                   |
+| `afterSearchFun`      | 查询按钮点击后，触发的回调                                      | Function         | —          | —                                       |
+| `afterResetFun`       | 重置按钮点击后，触发的回调                                      | Function         | —          | —                                       |
 
 ### ColConfigItem 属性
 
@@ -61,10 +63,11 @@
 
 ## SearchForm 事件
 
-| 名称        | 说明                 |
-| ----------- | -------------------- |
-| `on-search` | 点击搜索按钮回调函数 |
-| `on-reset`  | 点击重置回调函数     |
+| 名称           | 说明                 |
+| -------------- | -------------------- |
+| `on-search`    | 点击搜索按钮回调函数 |
+| `on-reset`     | 点击重置回调函数     |
+| `after-remote` | 远程搜索之后回调     |
 
 ## SearchForm 方法
 

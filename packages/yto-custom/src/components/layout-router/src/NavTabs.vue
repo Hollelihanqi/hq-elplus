@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-tabs-w tabs-box h-[2.5rem] w-full pt-[.5rem] px-[.625rem]">
+  <div class="nav-tabs-w tabs-box h-[40px] w-full pt-[8px]">
     <el-tabs v-model="tabsMenuValue" class="h-full" v-bind="$attrs" type="border-card" @tab-remove="handleTabRemove">
       <template v-for="(item, index) in tabsMenuList" :key="item.href">
         <el-tab-pane
@@ -12,7 +12,7 @@
               <span class="h-full flex items-center label">{{ item.label }}</span>
               <span
                 v-if="isBoolean(item.closable) ? item.closable : tabsMenuList.length === 1 ? false : true"
-                class="w-[1.25rem] h-full"
+                class="w-[20px] h-full"
               ></span>
             </div>
           </template>
@@ -146,7 +146,7 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
   :deep(.el-tabs) {
     background: transparent;
     border: none;
-    --el-tabs-header-height: 2rem;
+    --el-tabs-header-height: 32px;
   }
   :deep(.el-tabs__header) {
     background: transparent;
@@ -161,18 +161,18 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
     & > div {
       height: 100%;
       background: var(--nav-tabs-bg);
-      padding-left: 1.25rem;
-      padding-right: 1.25rem;
+      padding-left: 20px;
+      padding-right: 20px;
       & > span {
         background: var(--nav-tabs-bg);
       }
     }
     .active-pre-tab {
-      border-bottom-right-radius: 0.25rem;
+      border-bottom-right-radius: 4px;
     }
     .el-icon {
       position: absolute;
-      right: 1.25rem;
+      right: 20px;
     }
     & > div::before {
       position: absolute;
@@ -181,8 +181,8 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
       transform: translateY(-50%);
       display: block;
       content: "";
-      width: 0.0625rem;
-      height: 1.25rem;
+      width: 1px;
+      height: 20px;
       background: var(--nav-tab-item-divider-color);
     }
   }
@@ -192,15 +192,15 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
     }
   }
   :deep(.el-tabs__item.is-active) {
-    border-top-right-radius: 0.25rem;
-    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
     color: var(--el-color-primary);
     & > div::before {
       display: none;
     }
     & > div {
-      border-top-left-radius: 0.25rem;
-      border-top-right-radius: 0.25rem;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
       background: var(--nav-tab-active-bg);
       & > span {
         background: var(--nav-tab-active-bg);
@@ -209,7 +209,7 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
   }
   :deep(.el-tabs__item.is-active + .el-tabs__item) {
     & > div {
-      border-bottom-left-radius: 0.25rem;
+      border-bottom-left-radius: 4px;
     }
     & > div::before {
       display: none;

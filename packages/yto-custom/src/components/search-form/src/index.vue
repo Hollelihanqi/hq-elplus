@@ -36,6 +36,14 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    afterSearchFun: {
+      type: Function,
+      default: () => ({}),
+    },
+    afterResetFun: {
+      type: Function,
+      default: () => ({}),
+    },
   },
   emits: ["update:searchModel", "on-search", "on-reset"],
   setup(props, { emit, expose, slots }) {
@@ -122,9 +130,11 @@ export default defineComponent({
         _searchModel.value = {};
       }
       emit("on-reset");
+      props.afterResetFun();
     };
     const handleQuery = () => {
       emit("on-search", { ..._searchModel.value });
+      props.afterSearchFun({ ..._searchModel.value });
     };
 
     expose({ resetField, getFormatValues, handleDefaultValue });
