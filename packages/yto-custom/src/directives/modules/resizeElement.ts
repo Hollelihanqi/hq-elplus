@@ -15,7 +15,7 @@ const ob = new ResizeObserver((entries) => {
     const handle = map.get(entry.target);
     if (handle) {
       const box = entry.borderBoxSize[0];
-      if (box.inlineSize === 0 && box.blockSize === 0) return
+      if (box.inlineSize === 0 && box.blockSize === 0) return;
       handle({
         width: box.inlineSize,
         height: box.blockSize,

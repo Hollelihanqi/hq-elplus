@@ -110,6 +110,16 @@ export default defineConfig({
           collapsed: false,
         },
         {
+          text: "指令",
+          items: [
+            {
+              text: "指令",
+              link: "/examples/directives/index.md",
+            },
+          ],
+          collapsed: false,
+        },
+        {
           text: "工具类",
           items: [
             {
@@ -127,6 +137,7 @@ export default defineConfig({
           ],
           collapsed: false,
         },
+
       ],
     },
     docFooter: {

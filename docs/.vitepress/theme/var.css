@@ -1,7 +1,7 @@
 :root {
   /* --vp-c-bg-alt:#fff */
   --wi-color-primary: 52, 52, 206;
-  --el-color-primary: #3434ce;
+  --el-color-primary: #4396fc;
   --el-color-primary-light-9: #3434ce;
   --el-color-primary-light-8: #4646cc;
   --el-color-primary-light-7: #4a4ace;
@@ -42,4 +42,26 @@
 .vp-doc li > ul {
   margin: 0;
   padding: 0;
+}
+
+
+::-webkit-scrollbar-track-piece {
+  background: #fff;
+}
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar {
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 6px rgba(158, 158, 158, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(158, 158, 158, 0.3);
+  background-color: #ccc;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(158, 158, 158, 0.3);
+  border-radius: 10px;
+  background-color: #f5f5f5;
 }

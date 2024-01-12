@@ -15,11 +15,10 @@ import "element-plus/dist/index.css";
 // 开发阶段引入
 
 import "@yto/custom/styles";
-import YtoCustom from "@yto/custom";
+import YtoCustom ,{directives} from "@yto/custom";
 import "./style.css";
-
 const app = createApp(App);
 app.use(ElementPlus);
 app.use(router);
-app.use(YtoCustom);
+app.use(YtoCustom).use(directives);
 app.mount("#app");

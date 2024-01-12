@@ -2521,7 +2521,7 @@ var _hoisted_386 = [
 function _sfc_render87(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("svg", _hoisted_187, _hoisted_386);
 }
-var document_copy_default = export_helper_default(document_copy_vue_vue_type_script_lang_default, [["render", _sfc_render87], ["__file", "document-copy.vue"]]);
+var document_copy_default = export_helper_default(document_copy_vue_vue_type_script_lang_default, [["render", _sfc_render87], ["__file", "document-Copy.vue"]]);
 var document_delete_vue_vue_type_script_lang_default = {
   name: "DocumentDelete"
 };
