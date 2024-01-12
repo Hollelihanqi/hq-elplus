@@ -9,20 +9,20 @@
 <template>
   <div class="app flex flex-col">
     <div class="router-box">
-      <router-link class="mr-[10px]" to="/form">form</router-link>
-      <router-link class="mr-[10px]" to="/chart">chart</router-link>
-      <router-link class="mr-[10px]" to="/table">table</router-link>
+      <router-link class="mr-[10px]" to="/form">Form</router-link>
+      <router-link class="mr-[10px]" to="/chart">Chart</router-link>
+      <router-link class="mr-[10px]" to="/table">Table</router-link>
       <router-link class="mr-[10px]" to="/staffSearch">StaffSearch</router-link>
-      <router-link class="mr-[10px]" to="/dialog">dialog</router-link>
-      <router-link class="mr-[10px]" to="/userSearch">userSearch</router-link>
+      <router-link class="mr-[10px]" to="/dialog">Dialog</router-link>
+      <router-link class="mr-[10px]" to="/userSearch">UserSearch</router-link>
       <router-link class="mr-[10px]" to="/uploaderf">Uploader</router-link>
-      <router-link class="mr-[10px]" to="/layoutFrom">layoutFrom</router-link>
-      <router-link class="mr-[10px]" to="/layoutFrame">layoutFrame</router-link>
-      <router-link class="mr-[10px]" to="/theme">them</router-link>
-      <router-link class="mr-[10px]" to="/customFieldContainer">customFieldContainer</router-link>
+      <router-link class="mr-[10px]" to="/layoutFrom">LayoutFrom</router-link>
+      <router-link class="mr-[10px]" to="/layoutFrame">LayoutFrame</router-link>
+      <router-link class="mr-[10px]" to="/theme">Them</router-link>
+      <router-link class="mr-[10px]" to="/customFieldContainer">CustomFieldContainer</router-link>
       <router-link class="mr-[10px]" to="/customFieldConfig">CustomFieldDemo</router-link>
       <router-link class="mr-[10px]" to="/searchContainer">SearchContainer</router-link>
-      <router-link class="mr-[10px]" to="/adaptionContainer">adaptionContainer</router-link>
+      <router-link class="mr-[10px]" to="/adaptionContainer">AdaptionContainer</router-link>
     </div>
 
     <router-view v-slot="{ Component }" class="flex-1">
