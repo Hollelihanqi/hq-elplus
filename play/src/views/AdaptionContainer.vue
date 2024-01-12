@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <yto-c-adaption-container :list="list">
+    <yto-c-adaption-container :list="list" :minNum="3">
       <template #default="{ info }">
         <div class="card">{{ info }}</div>
       </template>

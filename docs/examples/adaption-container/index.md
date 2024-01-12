@@ -20,12 +20,13 @@
 
 ### CustomFieldConfig 属性
 
-| 属性名     | 说明             | 类型   | 可选值 | 默认值 | 备注 |
-| ---------- | ---------------- | ------ | ------ | ------ | ---- |
-| `list`     | 列表数据         | Array  | 必传   | -      |      |
-| `minWidth` | Card 最小宽度    | Number | -      | -      |      |
-| `gap`      | Card 间距        | Number | -      | -      |      |
-| `minNum`   | 单行最小显示个数 | Number | -      | -      |      |
+| 属性名              | 说明             | 类型   | 可选值 | 默认值 | 备注 |
+| ------------------- | ---------------- | ------ | ------ | ------ | ---- |
+| `list`              | 列表数据         | Array  | 必传   | -      |      |
+| `minWidth`          | Card 最小宽度    | Number | -      | 200    |      |
+| `gap`               | Card 间距        | Number | -      | 10     |      |
+| `minNum`            | 单行最小显示个数 | Number | -      | 1      |      |
+| `containerMinWidth` | 容器的最小宽度   | Number | -      | 0      |      |
 
 ### CustomFieldConfig 插槽
 
