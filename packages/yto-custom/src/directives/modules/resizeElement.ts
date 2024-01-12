@@ -1,3 +1,12 @@
+/*
+ * @Author: weichunpei
+ * @Date: 2023-12-08 13:58:41
+ * @LastEditors: weichunpei
+ * @LastEditTime: 2024-01-12 10:28:23
+ * @Description: 元素大小变化监听指令 handle:Function
+ * @use <div v-resize-element="handle"> </div></div>
+ */
+
 import { Directive } from "vue";
 const map = new WeakMap();
 const ob = new ResizeObserver((entries) => {
