@@ -8,37 +8,38 @@
 
 <template>
   <div class="app flex flex-col">
-<!--     <div class="router-box">-->
-<!--      <router-link class="mr-[10px]" to="/form">form</router-link>-->
-<!--      <router-link class="mr-[10px]" to="/chart">chart</router-link>-->
-<!--      <router-link class="mr-[10px]" to="/table">table</router-link>-->
-<!--      <router-link class="mr-[10px]" to="/staffSearch">StaffSearch</router-link>-->
-<!--      <router-link class="mr-[10px]" to="/dialog">dialog</router-link>-->
-<!--      <router-link class="mr-[10px]" to="/userSearch">userSearch</router-link>-->
-<!--      <router-link class="mr-[10px]" to="/uploaderf">Uploader</router-link>-->
-<!--      <router-link class="mr-[10px]" to="/layoutFrom">layoutFrom</router-link>-->
-<!--      <router-link class="mr-[10px]" to="/layoutFrame">layoutFrame</router-link>-->
-<!--      <router-link class="mr-[10px]" to="/theme">them</router-link>-->
-<!--      <router-link class="mr-[10px]" to="/customFieldContainer">customFieldContainer</router-link>-->
-<!--      <router-link class="mr-[10px]" to="/customFieldConfig">CustomFieldDemo</router-link>-->
-<!--      <router-link class="mr-[10px]" to="/searchContainer">SearchContainer</router-link>-->
-<!--    </div>-->
+    <div class="router-box">
+      <router-link class="mr-[10px]" to="/form">form</router-link>
+      <router-link class="mr-[10px]" to="/chart">chart</router-link>
+      <router-link class="mr-[10px]" to="/table">table</router-link>
+      <router-link class="mr-[10px]" to="/staffSearch">StaffSearch</router-link>
+      <router-link class="mr-[10px]" to="/dialog">dialog</router-link>
+      <router-link class="mr-[10px]" to="/userSearch">userSearch</router-link>
+      <router-link class="mr-[10px]" to="/uploaderf">Uploader</router-link>
+      <router-link class="mr-[10px]" to="/layoutFrom">layoutFrom</router-link>
+      <router-link class="mr-[10px]" to="/layoutFrame">layoutFrame</router-link>
+      <router-link class="mr-[10px]" to="/theme">them</router-link>
+      <router-link class="mr-[10px]" to="/customFieldContainer">customFieldContainer</router-link>
+      <router-link class="mr-[10px]" to="/customFieldConfig">CustomFieldDemo</router-link>
+      <router-link class="mr-[10px]" to="/searchContainer">SearchContainer</router-link>
+      <router-link class="mr-[10px]" to="/adaptionContainer">adaptionContainer</router-link>
+    </div>
 
-<!--    <router-view v-slot="{ Component }" class="flex-1">-->
-<!--      <KeepAlive>-->
-<!--        <component :is="Component" :key="$route.fullPath"></component>-->
-<!--      </KeepAlive>-->
-<!--    </router-view>-->
+    <router-view v-slot="{ Component }" class="flex-1">
+      <KeepAlive>
+        <component :is="Component" :key="$route.fullPath"></component>
+      </KeepAlive>
+    </router-view>
 
-<!--    <LayoutRouter class="h-full"></LayoutRouter>-->
-<!--     <LayoutFrame class="h-full"></LayoutFrame> -->
-    <formItems></formItems>
+    <!--    <LayoutRouter class="h-full"></LayoutRouter>-->
+    <!--     <LayoutFrame class="h-full"></LayoutFrame> -->
+    <!-- <formItems></formItems> -->
   </div>
 </template>
 <script lang="ts" setup>
 import LayoutRouter from "@/views/layout-router.vue";
 import LayoutFrame from "@/views/layout-frame.vue";
-import formItems from "@/views/formItems/index.vue"
+import formItems from "@/views/formItems/index.vue";
 </script>
 <style lang="scss">
 .app {

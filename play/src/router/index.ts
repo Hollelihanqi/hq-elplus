@@ -2,7 +2,7 @@
  * @Description: 模块名称
  * @Author: ym
  * @Date: 2023-12-11 14:08:36
- * @LastEditTime: 2023-12-12 10:48:50
+ * @LastEditTime: 2024-01-12 11:06:24
  */
 /*
  * @Description: 模块名称
@@ -37,6 +37,7 @@ const routes = [
   { path: "/customFieldContainer", component: () => import("@/views/CustomFieldContainer.vue") },
   { path: "/customFieldConfig", component: () => import("@/views/customFieldDemo.vue") },
   { path: "/searchContainer", component: () => import("@/views/FormContainer.vue") },
+  { path: "/adaptionContainer", component: () => import("@/views/AdaptionContainer.vue") },
 ];
 
 export const router = createRouter({
