@@ -44,6 +44,10 @@ export default defineComponent({
       type: Function,
       default: () => ({}),
     },
+    beforeResetFun: {
+      type: Function,
+      default: () => ({}),
+    },
   },
   emits: ["update:searchModel", "on-search", "on-reset"],
   setup(props, { emit, expose, slots }) {
@@ -124,6 +128,7 @@ export default defineComponent({
     };
 
     const handleReset = () => {
+      props.beforeResetFun()
       if (!props.isResetParams) {
         handleDefaultValue();
       } else {

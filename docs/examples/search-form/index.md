@@ -32,6 +32,7 @@
 | `isResetParams`       | 点击重置按钮时，是否重置查询默认参数为空                        | Boolean          | true/false | false                                   |
 | `afterSearchFun`      | 查询按钮点击后，触发的回调                                      | Function         | —          | —                                       |
 | `afterResetFun`       | 重置按钮点击后，触发的回调                                      | Function         | —          | —                                       |
+| `beforeResetFun`       | 重置按钮点击之前，触发的回调                                      | Function         | —          | —                                       |
 
 ### ColConfigItem 属性
 
