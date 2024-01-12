@@ -15,7 +15,7 @@ export const directivesList: any = {
   longpress,
   resizeElement,
 };
-const directives = {
+export const directives = {
   install: function (app: App<Element>) {
     Object.keys(directivesList).forEach((key) => {
       // 注册所有自定义指令
@@ -23,5 +23,3 @@ const directives = {
     });
   },
 };
-
-export default directives;

@@ -15,7 +15,7 @@ import "./style.css";
 import "@yto/custom/styles";
 import "./var.css";
 import "virtual:windi.css";
-
+import {directives} from "@yto/custom"
 export default {
   ...DefaultTheme,
   enhanceApp: async ({ app }) => {
@@ -25,6 +25,6 @@ export default {
     // @ts-ignore
     if (import.meta.env.SSR) return;
     const YtoCustom = await import("@yto/custom").then((m) => m.default);
-    app.use(YtoCustom);
+    app.use(YtoCustom).use(directives);
   },
 };
