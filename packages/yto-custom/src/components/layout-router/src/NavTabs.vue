@@ -143,6 +143,7 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
   --nav-tab-item-font-color: #151719;
   --nav-tab-active-bg: #fff;
   background: var(--nav-tabs-bg);
+  @apply px-[10px];
   :deep(.el-tabs) {
     background: transparent;
     border: none;
@@ -157,7 +158,7 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
     border: none !important;
     background: var(--nav-tab-item-bg);
     padding: 0 !important;
-    color: var(--nav-tab-item-font-color);
+
     & > div {
       height: 100%;
       background: var(--nav-tabs-bg);
@@ -165,6 +166,7 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
       padding-right: 20px;
       & > span {
         background: var(--nav-tabs-bg);
+        color: var(--nav-tab-item-font-color);
       }
     }
     .active-pre-tab {

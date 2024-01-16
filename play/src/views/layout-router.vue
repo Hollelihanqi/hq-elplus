@@ -19,7 +19,7 @@
         :unique-opened="true"
         :menus="listNavigation"
         width="220px"
-        @menuClick="handleMenuClick"
+        @menu-click="handleMenuClick"
       ></yto-c-layout-menu>
     </yto-c-layout-router>
   </div>
@@ -174,7 +174,6 @@ onMounted(() => {
 <style lang="scss">
 #layout {
   .nav-tabs-w {
-    --nav-tabs-bg: red;
     --nav-tab-item-divider-color: #b4b9bf;
     --nav-tab-item-bg: yellow;
     --nav-tab-item-font-color: #151719;
