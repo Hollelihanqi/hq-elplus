@@ -54,7 +54,7 @@ export default defineComponent({
     const collapsed = ref(false);
     watch(
       () => props.collapse,
-      (newValue) => {
+      (newValue:any) => {
         collapsed.value = newValue;
       },
       {
@@ -65,7 +65,7 @@ export default defineComponent({
       get() {
         return props.searchModel;
       },
-      set(model) {
+      set(model:any) {
         emit("update:searchModel", model);
       },
     });
@@ -153,7 +153,7 @@ export default defineComponent({
         <div class="search-form-w bg-white px-[16px] pt-[16px] rounded-[4px]">
           <el-form model={_searchModel.value} class="search-form" label-width="auto">
             <Grid ref="GridInstance" collapsed={collapsed.value} gap={[16, 0]} cols={props.colConfig}>
-              {props.formControls.map((control, index) => {
+              {props.formControls.map((control:SearchFormControlProps, index:number) => {
                 return (
                   <GridItem key={control.field} {...getResponsive(control, index)}>
                     <el-form-item label={control.label}>
