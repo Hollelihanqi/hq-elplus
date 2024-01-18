@@ -2,7 +2,7 @@
  * @Description: 模块名称
  * @Author: ym
  * @Date: 2023-12-13 15:34:28
- * @LastEditTime: 2024-01-12 10:54:28
+ * @LastEditTime: 2024-01-18 14:39:05
  */
 export { YtoDialog } from "./components/dialog";
 export * from "./components/dialog";
@@ -61,3 +61,7 @@ export * from "./components/search-container";
 
 export { YtoAdaptionContainer } from "./components/adaption-container";
 export * from "./components/adaption-container";
+
+export { YtoEllipsisTag } from "./components/ellipsis-tag";
+export * from "./components/ellipsis-tag";
+

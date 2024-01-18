@@ -2,7 +2,7 @@
  * @Description: 模块名称
  * @Author: ym
  * @Date: 2023-12-14 16:59:25
- * @LastEditTime: 2023-12-29 14:36:29
+ * @LastEditTime: 2024-01-18 14:34:39
 -->
 <script setup lang="ts"></script>
 
@@ -23,6 +23,7 @@
       <router-link class="mr-[10px]" to="/customFieldConfig">CustomFieldDemo</router-link>
       <router-link class="mr-[10px]" to="/searchContainer">SearchContainer</router-link>
       <router-link class="mr-[10px]" to="/adaptionContainer">AdaptionContainer</router-link>
+      <router-link class="mr-[10px]" to="/ellipsisTag">EllipsisTag</router-link>
     </div>
 
     <router-view v-slot="{ Component }" class="flex-1">
@@ -31,7 +32,7 @@
       </KeepAlive>
     </router-view>
 
-    <!--    <LayoutRouter class="h-full"></LayoutRouter>-->
+    <!-- <LayoutRouter class="h-full"></LayoutRouter> -->
     <!--     <LayoutFrame class="h-full"></LayoutFrame> -->
     <!-- <formItems></formItems> -->
   </div>
