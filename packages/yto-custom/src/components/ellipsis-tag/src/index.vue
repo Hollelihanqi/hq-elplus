@@ -2,7 +2,7 @@
   <div ref="ellipsisTagRef" v-resize-element="handleResize" class="ellipsis-tag flex w-full">
     <div class="flex-1 overflow-hidden">
       <div class="tag-box">
-        <template v-for="tag in tags" :key="tag.value">
+        <template v-for="(tag, index) in tags" :key="tag[valueKey] || index">
           <slot :info="tag">
             <p class="tag" :style="tag.style">
               {{ tag.label }}
@@ -14,7 +14,7 @@
     <el-popover popper-class="ellipsis-tag-popover" placement="top-end" :width="360" trigger="hover" v-bind="$attrs">
       <template #default>
         <ul class="tag-box">
-          <template v-for="tag in tags" :key="tag[valueKey]">
+          <template v-for="(tag, index) in tags" :key="tag[valueKey] || index">
             <slot :info="tag">
               <p class="tag" :style="tag.style">
                 {{ tag[labelKey] }}

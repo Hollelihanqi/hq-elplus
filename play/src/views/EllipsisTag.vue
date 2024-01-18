@@ -1,10 +1,15 @@
 <template>
   <div class="wrapper w-[300px]">
-    <yto-c-ellipsis-tag :tags="tags"></yto-c-ellipsis-tag>
+    <yto-c-ellipsis-tag :tags="tags">
+      <!-- <template #default="scope">
+        <div class="h-[22px] bg-red-300">{{ scope.info }}</div>
+      </template> -->
+    </yto-c-ellipsis-tag>
   </div>
 </template>
 
 <script lang="ts" setup>
+const list = ["sdfwe", "fwewegwgw", "rtyrtyrtyrt", "h4h4h4h"];
 const tags = [
   {
     value: 1,
