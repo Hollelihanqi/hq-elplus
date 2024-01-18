@@ -14,8 +14,9 @@ import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 // 开发阶段引入
 
+import YtoCustom, { directives } from "@yto/custom";
 import "@yto/custom/styles";
-import YtoCustom ,{directives} from "@yto/custom";
+
 import "./style.css";
 const app = createApp(App);
 app.use(ElementPlus);
