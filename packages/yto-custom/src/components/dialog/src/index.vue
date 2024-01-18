@@ -36,7 +36,6 @@ type MyParital<T> = {
 };
 
 type MyButtonProps = MyParital<ButtonProps> & {
-  // 在这里添加自己的属性
   txt?: string;
   hidden?: boolean | undefined;
 };
@@ -50,7 +49,6 @@ interface ICancelOption {
 
 interface IProps {
   visible: boolean;
-  headerBgColor?: string; // 头部颜色
   offset?: Array<string>;
   hiddenFooter?: boolean | undefined;
   hiddenConfirm?: boolean | undefined;
@@ -67,7 +65,6 @@ const props = withDefaults(defineProps<IProps>(), {
 const $emit = defineEmits(["update:visible", "cancel", "confirm"]);
 
 // -------------------------------- footer btn start--------------------------
-
 const _confirmOption = computed(() => {
   let option: MyButtonProps = {
     type: "primary",
@@ -140,11 +137,3 @@ const handleConfirm = () => {
 };
 // -------------------------------- footer btn end--------------------------
 </script>
-
-<style lang="scss" scoped>
-.my-dialog {
-  :deep(.el-dialog__header) {
-    margin-right: 0;
-  }
-}
-</style>
