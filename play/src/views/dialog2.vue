@@ -69,6 +69,28 @@ export default defineComponent({
       );
     };
 
+    // ["aaaa", "bbb"].forEach((str) => {
+    //   YtoDialog.$creator({
+    //     closeOnClickModal: false,
+    //     modelValue: true,
+    //     confirmOption: {
+    //       txt: "确认按钮",
+    //       confirmCallback: () => {
+    //         console.log("确认按钮的 confirmCallback 回调");
+    //         return Promise.resolve(true);
+    //       },
+    //     },
+    //     cancelOption: {
+    //       txt: "关闭",
+    //       cancelCallback: () => {
+    //         console.log("取消按钮的 cancelCallback 回调");
+    //         return Promise.resolve(true);
+    //       },
+    //     },
+    //     title: `${str}`,
+    //   });
+    // });
+
     return {
       show,
       show2,
