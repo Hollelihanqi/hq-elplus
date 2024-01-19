@@ -1,61 +1,70 @@
+<template>
+  <el-dialog
+    class="dialog-cst"
+    ref="dialogRef"
+    v-bind="$attrs"
+    :style="{ marginLeft: offset[0], marginTop: offset[1] }"
+  >
+    <template #header>
+      <slot name="header"></slot>
+    </template>
+
+    <slot />
+
+    <template #footer>
+      <slot v-if="!_hiddenFooter" name="footer">
+        <el-button v-if="_showCancel" v-bind="_cancelOption" @click="handleClose">{{
+          _cancelOption.txt ? _cancelOption.txt : "取消"
+        }}</el-button>
+        <el-button v-if="_showConfirm" v-bind="_confirmOption" @click="handleConfirm">{{
+          _confirmOption.txt ? _confirmOption.txt : "确认"
+        }}</el-button>
+      </slot>
+    </template>
+  </el-dialog>
+</template>
+
 <script lang="ts" setup name="Dialog">
-import { ButtonProps } from "element-plus";
-import { ZoomIn, ZoomOut } from "@element-plus/icons-vue";
+import { ButtonProps, ElButton, ElDialog } from "element-plus";
 import type { Component } from "vue";
+import { ref } from "vue";
+
+const dialogRef = ref();
 
 type MyParital<T> = {
   [P in keyof T]?: T[P];
 };
 
 type MyButtonProps = MyParital<ButtonProps> & {
-  // 在这里添加自己的属性
   txt?: string;
   hidden?: boolean | undefined;
 };
 
+interface IConfirmOption {
+  confirmCallback?: () => Promise<boolean>;
+}
+interface ICancelOption {
+  cancelCallback?: () => Promise<boolean>;
+}
+
 interface IProps {
   visible: boolean;
-  headerBgColor?: string; // 头部颜色
   offset?: Array<string>;
-  mimIcon?: Component; //最小化最大化按钮
-  maxmin?: boolean; // 最小化最大化按钮显示隐藏
-
   hiddenFooter?: boolean | undefined;
   hiddenConfirm?: boolean | undefined;
   hiddenCancel?: boolean | undefined;
-  confirmOption?: MyButtonProps | undefined;
-  cancelOption?: MyButtonProps | undefined;
+  confirmOption?: (MyButtonProps & IConfirmOption) | undefined;
+  cancelOption?: (MyButtonProps & ICancelOption) | undefined;
 }
 const props = withDefaults(defineProps<IProps>(), {
   visible: false,
   offset: () => {
     return ["auto", "20vh"];
   },
-  mimIcon: ZoomIn,
-  maxmin: false,
 });
-const $emit = defineEmits(["update:visible", "cancel", "confirm", "maxminFun", "reductionFun"]);
-
-// -------------------------------- header start--------------------------
-// const maxminFun = () => {
-//   nextTick(() => {
-//     let dialogBody: HTMLElement = document.querySelector("." + "dialog-cst" + " .el-dialog__body") as HTMLElement;
-
-//     if (props.mimIcon == ZoomIn) {
-//       dialogBody!.style.display = "none";
-//       props.mimIcon = ZoomOut;
-//       $emit("maxminFun");
-//     } else {
-//       dialogBody!.style.display = "block";
-//       props.mimIcon = ZoomIn;
-//       $emit("reductionFun");
-//     }
-//   });
-// };
-// -------------------------------- header end--------------------------
+const $emit = defineEmits(["update:visible", "cancel", "confirm"]);
 
 // -------------------------------- footer btn start--------------------------
-
 const _confirmOption = computed(() => {
   let option: MyButtonProps = {
     type: "primary",
@@ -90,8 +99,6 @@ const _hiddenCancel = computed(() => {
   return Reflect.has(props, "hiddenCancel");
 });
 
-console.log("props", props);
-
 const _showConfirm = computed(() => {
   if (_hiddenConfirm.value) return false;
   const { confirmOption } = props;
@@ -109,41 +116,24 @@ const _showCancel = computed(() => {
 });
 
 const handleClose = () => {
+  props.cancelOption?.cancelCallback &&
+    props.cancelOption?.cancelCallback().then((val: boolean) => {
+      console.log("handleClose", val);
+    });
+  dialogRef.value.visible = false;
   $emit("update:visible", false);
   $emit("cancel", "cancel");
 };
 const handleConfirm = () => {
+  props.confirmOption?.confirmCallback &&
+    props.confirmOption?.confirmCallback().then((val: boolean) => {
+      console.log("handleConfirm", val);
+      if (val) {
+        dialogRef.value.visible = false;
+      }
+    });
   $emit("update:visible", false);
   $emit("confirm", "confirm");
 };
 // -------------------------------- footer btn end--------------------------
 </script>
-
-<template>
-  <el-dialog class="dialog-cst" v-bind="$attrs" :style="{ marginLeft: offset[0], marginTop: offset[1] }">
-    <template #header>
-      <slot name="header"></slot>
-    </template>
-
-    <slot />
-
-    <template #footer>
-      <slot v-if="!_hiddenFooter" name="footer">
-        <el-button v-if="_showCancel" v-bind="_cancelOption" @click="handleClose">{{
-          _cancelOption.txt ? _cancelOption.txt : "取消"
-        }}</el-button>
-        <el-button v-if="_showConfirm" v-bind="_confirmOption" @click="handleConfirm">{{
-          _confirmOption.txt ? _confirmOption.txt : "确认"
-        }}</el-button>
-      </slot>
-    </template>
-  </el-dialog>
-</template>
-
-<style lang="scss" scoped>
-.my-dialog {
-  :deep(.el-dialog__header) {
-    margin-right: 0;
-  }
-}
-</style>

@@ -14,6 +14,7 @@
       <router-link class="mr-[10px]" to="/table">Table</router-link>
       <router-link class="mr-[10px]" to="/staffSearch">StaffSearch</router-link>
       <router-link class="mr-[10px]" to="/dialog">Dialog</router-link>
+      <router-link class="mr-[10px]" to="/dialog2">Dialog2</router-link>
       <router-link class="mr-[10px]" to="/userSearch">UserSearch</router-link>
       <router-link class="mr-[10px]" to="/uploaderf">Uploader</router-link>
       <router-link class="mr-[10px]" to="/layoutFrom">LayoutFrom</router-link>
