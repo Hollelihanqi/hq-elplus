@@ -24,7 +24,7 @@ const props = withDefaults(defineProps<Props>(), {
     return {};
   },
 });
-
+const emits = defineEmits(["chart-click"]);
 let myChart: any | null;
 
 const containerId = computed(() => {
@@ -54,6 +54,9 @@ const showLoading = () => {
 const initChart = () => {
   const container: any = document.querySelector(`#${containerId.value}`);
   myChart = echarts.init(container);
+  myChart.on("click", (params: any) => {
+    emits("chart-click", params);
+  });
   showLoading();
   setChartOption();
   //窗口大小改变，重新绘图
