@@ -113,7 +113,7 @@ export default defineConfig({
               link: "/examples/ellipsis-tag/index.md",
             },
             {
-              text: "TareaTag 文件校验",
+              text: "TareaTag 文本校验",
               link: "/examples/tarea-tag/index.md",
             },
 
