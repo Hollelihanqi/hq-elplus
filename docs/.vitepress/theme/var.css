@@ -2,12 +2,12 @@
   /* --vp-c-bg-alt:#fff */
   --wi-color-primary: 52, 52, 206;
   --el-color-primary: #4396fc;
-  --el-color-primary-light-9: #3434ce;
-  --el-color-primary-light-8: #4646cc;
-  --el-color-primary-light-7: #4a4ace;
-  --el-color-primary-light-5: #5252bb;
-  --el-color-primary-light-3: #575792;
-  --el-button-active-color: #3434ce;
+  --el-color-primary-light-9: #ecf4ff;
+  --el-color-primary-light-8: #82b8f9;
+  --el-color-primary-light-7: #74b2fd;
+  --el-color-primary-light-5: #91c1fc;
+  --el-color-primary-light-3: #bdd7f7;
+  --el-button-active-color: #4396fc;
   --vp-c-bg: #fff;
   --vp-c-text-1: #000;
   --vp-sidebar-bg-color: #f6f6f7;
@@ -43,7 +43,6 @@
   margin: 0;
   padding: 0;
 }
-
 
 ::-webkit-scrollbar-track-piece {
   background: #fff;

@@ -65,3 +65,6 @@ export * from "./components/adaption-container";
 export { YtoEllipsisTag } from "./components/ellipsis-tag";
 export * from "./components/ellipsis-tag";
 
+export { YtoTareaTag } from "./components/tarea-tag";
+export * from "./components/tarea-tag";
+

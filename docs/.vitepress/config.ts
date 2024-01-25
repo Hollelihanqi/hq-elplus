@@ -55,12 +55,10 @@ export default defineConfig({
             {
               text: "RemoteSearch 远程搜索",
               link: "/examples/remote-search/index.md",
-              items: [
-                {
-                  text: "UserSearch 用户搜索",
-                  link: "/examples/user-search/index.md",
-                },
-              ],
+            },
+            {
+              text: "SearchForm 用户搜索",
+              link: "/examples/user-search/index.md",
             },
             {
               text: "SearchForm 表格搜索",
@@ -113,6 +111,10 @@ export default defineConfig({
             {
               text: "EllipsisTag",
               link: "/examples/ellipsis-tag/index.md",
+            },
+            {
+              text: "TareaTag 文件校验",
+              link: "/examples/tarea-tag/index.md",
             },
 
           ],
