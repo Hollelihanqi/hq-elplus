@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <yto-c-adaption-container :list="list" :minNum="3">
+    <yto-c-adaption-container :list="list" :minNum="3" minWidth="220">
       <template #default="{ info }">
         <div class="card">{{ info }}</div>
       </template>
@@ -9,7 +9,18 @@
 </template>
 
 <script lang="ts" setup>
+import { addWaterMarker, removeWatermark } from "@yto/utils";
 const list = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
+
+onMounted(() => {
+  addWaterMarker({ text: "魏春霈 2024-1-25" });
+  setTimeout(() => {
+    addWaterMarker({ text: "魏春霈 2024-1-26 " });
+  }, 2000);
+  setTimeout(() => {
+    // removeWatermark();
+  }, 4000);
+});
 </script>
 <style lang="scss" scoped>
 .wrapper {

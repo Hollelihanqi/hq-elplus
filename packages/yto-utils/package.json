@@ -14,7 +14,8 @@
   },
   "scripts": {
     "build": "vite build",
-    "release": "release-it"
+    "release": "release-it",
+    "watch": "vite build --watch"
   },
   "keywords": [],
   "author": "",

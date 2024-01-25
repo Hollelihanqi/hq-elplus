@@ -2,7 +2,7 @@
  * @Author: DESKTOP-7338OS6\LHQ LHQ
  * @Date: 2023-03-24 17:52:24
  * @LastEditors: weichunpei
- * @LastEditTime: 2024-01-24 10:49:47
+ * @LastEditTime: 2024-01-25 16:31:10
  * @FilePath: \yto-engine\docs\docs\.vitepress\config.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AErts
  */
@@ -138,6 +138,10 @@ export default defineConfig({
             {
               text: "文件下载",
               link: "/examples/utils/download.md",
+            },
+            {
+              text: "水印",
+              link: "/examples/utils/waterMarker.md",
             },
             {
               text: "其他方法",
