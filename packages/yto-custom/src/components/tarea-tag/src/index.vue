@@ -103,9 +103,7 @@ const handleWFocus = () => {
 };
 
 const formatInputText = () => {
-  return inputText.value
-    .replace(/[\n\r\s"，&nbsp;]/g, ",") // 组合所有替换操作为一个正则表达式
-    .replace(/,,/g, ","); // 处理连续的逗号
+  return inputText.value.replace(/[\n\r\s,，]+/g, ",");
 };
 
 const checkText = () => {
