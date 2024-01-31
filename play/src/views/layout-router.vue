@@ -174,27 +174,31 @@ onMounted(() => {
 <style lang="scss">
 #layout {
   .nav-tabs-w {
-    --nav-tab-item-divider-color: #b4b9bf;
-    --nav-tab-item-bg: yellow;
-    --nav-tab-item-font-color: #151719;
-    --nav-tab-active-bg: green;
+    // --nav-tab-item-divider-color: #b4b9bf;
+    // --nav-tab-item-bg: yellow;
+    // --nav-tab-item-font-color: #151719;
+    // --nav-tab-active-bg: green;
   }
   .layout-header {
-    --layout-header-background: #900808;
-    --layout-header-left-width: 220px;
-    // --layout-header-text-color: #000;
+    --layout-header-background: #fff;
+    // --layout-header-left-width: 220px;
+    --layout-header-text-color: #000;
   }
   .layout-menu {
-    --layout-menu-title-bg: #900808;
+    // --layout-menu-title-bg: #900808;
+    // --layout-menu-title-color: #fff;
+
     --layout-menu-title-color: #fff;
-    // --layout-menu-text-color: #fff;
-    // --layout-menu-background: #56297e;
-    // --layout-menu-active-color: #fff;
-    // --layout-menu-search-background: #4d2571;
-    // --layout-menu-active-background: #8942c9;
-    // --layout-menu-hover-color: #8942c9;
-    // --layout-menu-border-color: rgba(0, 0, 0, 0.1);
-    // --layout-menu-active-border-color: #8942c9;
+    --layout-menu-text-color: #fff;
+    --layout-menu-background: #56297e;
+    --layout-menu-active-color: #fff;
+    --layout-menu-search-background: #4d2571;
+    --layout-menu-active-background: #8942c9;
+    --layout-menu-hover-color: #8942c9;
+    --layout-menu-border-color: rgba(0, 0, 0, 0.1);
+    --layout-menu-active-border-color: #8942c9;
+    --layout-menu-active-parent-background: #6d31a3;
+    --layout-menu-inline-bg-color: #40195f;
   }
 }
 :deep(.router-view-containe) {
