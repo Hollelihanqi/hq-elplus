@@ -13,6 +13,7 @@
             :tabs-menu-list="listRoute"
             :key-label="tabsKeyLabel"
             :format-tab="formatTab"
+            :router-goback="routerGoback"
             @tab-change="handleTabChange"
           ></NavTabs>
         </slot>
@@ -50,6 +51,7 @@ const props = defineProps({
   max: Number,
   tabsKeyLabel: String,
   formatTab: Function,
+  routerGoback: Boolean,
   type: {
     type: String,
     default: "vertical",

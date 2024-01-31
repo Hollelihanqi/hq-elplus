@@ -4,6 +4,7 @@
       ref="routerRef"
       class="h-full"
       :cacheable="true"
+      :router-goback="true"
       type="horizontal"
       @tab-change="handleTabChange"
     >
