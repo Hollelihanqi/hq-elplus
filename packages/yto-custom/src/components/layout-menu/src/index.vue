@@ -193,6 +193,13 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
     &:not(.el-menu--collapse) {
       width: v-bind("props.width");
     }
+    /**************处理菜单折叠后图标对不齐的问题*****************/
+    &.el-menu--collapse {
+      .el-sub-menu .el-sub-menu__title .el-icon,
+      .el-menu-item .el-icon {
+        @apply ml-0;
+      }
+    }
     .el-sub-menu {
       @apply bg-[var(--layout-menu-background)];
       box-shadow: var(--layout-sub-menu-box-shadow);
