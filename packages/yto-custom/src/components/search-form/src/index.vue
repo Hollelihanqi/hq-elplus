@@ -142,6 +142,7 @@ export default defineComponent({
       props.afterSearchFun({ ..._searchModel.value });
     };
 
+    const targetDom = document.getElementById("_searchFormW");
     expose({ resetField, getFormatValues, handleDefaultValue });
 
     onBeforeMount(() => {
@@ -150,9 +151,15 @@ export default defineComponent({
 
     return () => {
       return props?.formControls?.length ? (
-        <div class="search-form-w bg-white px-[16px] pt-[16px] rounded-[4px]">
+        <div class="search-form-w bg-white px-[16px] pt-[16px] rounded-[4px]" id="_searchFormW">
           <el-form model={_searchModel.value} class="search-form" label-width="auto">
-            <Grid ref="GridInstance" collapsed={collapsed.value} gap={[16, 0]} cols={props.colConfig}>
+            <Grid
+              ref="GridInstance"
+              targetDom={targetDom}
+              collapsed={collapsed.value}
+              gap={[16, 0]}
+              cols={props.colConfig}
+            >
               {props.formControls.map((control: SearchFormControlProps, index: number) => {
                 return (
                   <GridItem key={control.field} {...getResponsive(control, index)}>

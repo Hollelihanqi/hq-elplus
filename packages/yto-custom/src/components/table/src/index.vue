@@ -52,7 +52,7 @@
     </el-table>
     <div v-if="isDataEmpty" class="flex-1 opacity-0 h-0"></div>
     <el-pagination
-      v-if="cpaginationHide"
+      v-if="cpaginationShow"
       v-model:page-size="paginationParams.pageSize"
       v-model:current-page="paginationParams.currentPage"
       class="my-el-pagination"
@@ -120,7 +120,7 @@ const props = defineProps({
   },
   paginationHideAuto: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   paginationOptions: {
     type: Object as PropType<CanWrite<PaginationProps>>,
@@ -186,10 +186,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  daynamicPaginationHide: {
-    type: Boolean,
-    default: true,
-  },
 });
 
 const ElTableInstance = ref();
@@ -236,13 +232,18 @@ const _defaultSort = computed(() => {
 const isDataEmpty = computed(() => {
   return props.requestApi ? _tableData.value.length : props.tableData.length;
 });
-const cpaginationHide = computed(() => {
-  if (props.paginationHide) {
-    return false;
-  } else if (props.pageSize >= _total.value) {
-    return false;
-  }
-  return true;
+// const cpaginationShow = computed(() => {
+//   if (props.paginationHide) {
+//     return false;
+//   }
+//   if (props.paginationHideAuto && props.pageSize >= _total.value) {
+//     return false;
+//   }
+//   return true;
+// });
+const cpaginationShow = computed(() => {
+  // 返回一个布尔值，当不隐藏分页，或者自动隐藏且页面尺寸小于总数时显示
+  return !(props.paginationHide || (props.paginationHideAuto && props.pageSize >= _total.value));
 });
 
 const _sortFun = props.sortFormat || _sortFormat;

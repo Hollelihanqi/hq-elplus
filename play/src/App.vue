@@ -25,6 +25,7 @@
       <router-link class="mr-[10px]" to="/searchContainer">SearchContainer</router-link>
       <router-link class="mr-[10px]" to="/adaptionContainer">AdaptionContainer</router-link>
       <router-link class="mr-[10px]" to="/ellipsisTag">EllipsisTag</router-link>
+      <router-link class="mr-[10px]" to="/tableSearch">TableSearch</router-link>
     </div>
 
     <router-view v-slot="{ Component }" class="flex-1">

@@ -26,6 +26,7 @@ type Props = {
   collapsed?: boolean; // 是否折叠
   collapsedRows?: number; // 折叠时显示的行数
   gap?: [number, number] | number; // 网格项之间的间距
+  targetDom?: any;
 };
 
 const props = withDefaults(defineProps<Props>(), {
@@ -33,13 +34,14 @@ const props = withDefaults(defineProps<Props>(), {
   collapsed: false, // 默认不折叠
   collapsedRows: 1, // 默认折叠时显示一行
   gap: 0, // 默认间距为0
+  targetDom: window,
 });
 
 // 在组件挂载前执行，如果需要折叠，则寻找需要折叠的字段 index
 onBeforeMount(() => props.collapsed && findIndex());
 // 组件挂载后执行，监听窗口大小变化
 onMounted(() => {
-  resize({ target: { innerWidth: window.innerWidth } } as any);
+  resize({ target: { innerWidth: props.targetDom?.innerWidth || props.targetDom?.offsetWidth } } as any);
   window.addEventListener("resize", resize);
 });
 // 组件激活后执行，同样监听窗口大小变化
