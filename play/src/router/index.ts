@@ -2,7 +2,7 @@
  * @Description: 模块名称
  * @Author: ym
  * @Date: 2023-12-11 14:08:36
- * @LastEditTime: 2024-02-01 15:23:57
+ * @LastEditTime: 2024-01-18 14:33:52
  */
 /*
  * @Description: 模块名称
@@ -36,11 +36,11 @@ const routes = [
   },
   { path: "/theme", component: () => import("@/views/theme/index.vue") },
   { path: "/customFieldContainer", component: () => import("@/views/CustomFieldContainer.vue") },
-  { path: "/customFieldConfig", component: () => import("@/views/CustomFieldDemo.vue") },
+  { path: "/customFieldConfig", component: () => import("@/views/customFieldDemo.vue") },
   { path: "/searchContainer", component: () => import("@/views/FormContainer.vue") },
   { path: "/adaptionContainer", component: () => import("@/views/AdaptionContainer.vue") },
   { path: "/ellipsisTag", component: () => import("@/views/EllipsisTag.vue") },
-  { path: "/searchFormItemContainer", component: () => import("@/views/SearchFormItemContainer.vue") },
+  { path: "/tableSearch", component: () => import("@/views/TableSearch.vue") },
 ];
 
 export const router = createRouter({
