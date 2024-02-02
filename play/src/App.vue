@@ -2,13 +2,13 @@
  * @Description: 模块名称
  * @Author: ym
  * @Date: 2023-12-14 16:59:25
- * @LastEditTime: 2024-01-29 09:46:29
+ * @LastEditTime: 2024-02-01 15:30:03
 -->
 <script setup lang="ts"></script>
 
 <template>
   <div class="app flex flex-col">
-    <!-- <div class="router-box">
+    <div class="router-box">
       <router-link class="mr-[10px]" to="/form">Form</router-link>
       <router-link class="mr-[10px]" to="/chart">Chart</router-link>
       <router-link class="mr-[10px]" to="/table">Table</router-link>
@@ -25,15 +25,16 @@
       <router-link class="mr-[10px]" to="/searchContainer">SearchContainer</router-link>
       <router-link class="mr-[10px]" to="/adaptionContainer">AdaptionContainer</router-link>
       <router-link class="mr-[10px]" to="/ellipsisTag">EllipsisTag</router-link>
+      <router-link class="mr-[10px]" to="/searchFormItemContainer">SearchFormItemContainer</router-link>
     </div>
 
     <router-view v-slot="{ Component }" class="flex-1">
       <KeepAlive>
         <component :is="Component" :key="$route.fullPath"></component>
       </KeepAlive>
-    </router-view> -->
+    </router-view>
 
-    <LayoutRouter class="h-full"></LayoutRouter>
+    <!-- <LayoutRouter class="h-full"></LayoutRouter> -->
     <!--     <LayoutFrame class="h-full"></LayoutFrame> -->
     <!-- <formItems></formItems> -->
   </div>

@@ -1,8 +1,17 @@
 <template>
   <div class="wrapper">
-    <yto-c-adaption-container :list="list" :minNum="3" minWidth="220">
+    <p>测试数据1</p>
+    <yto-c-adaption-container :list="list" :min-num="3" min-width="220">
       <template #default="{ info }">
         <div class="card">{{ info }}</div>
+      </template>
+    </yto-c-adaption-container>
+    <p>基于form的测试数据</p>
+    <yto-c-adaption-container :list="list" :min-num="3" min-width="330">
+      <template #default>
+        <el-form-item class="" label="Activity name">
+          <el-input placeholder="请输入啊啊啊" />
+        </el-form-item>
       </template>
     </yto-c-adaption-container>
   </div>
@@ -11,7 +20,16 @@
 <script lang="ts" setup>
 import { addWaterMarker, removeWatermark } from "@yto/utils";
 const list = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
-
+const formList = [
+  {
+    label: "活动名称",
+    value: "1",
+  },
+  {
+    label: "活动名称",
+    value: "2",
+  },
+];
 onMounted(() => {
   addWaterMarker({ text: "魏春霈 2024-1-25" });
   setTimeout(() => {
