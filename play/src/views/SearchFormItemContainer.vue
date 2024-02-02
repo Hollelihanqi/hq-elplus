@@ -1,6 +1,7 @@
 <template>
-  <div class="p-[16px] p-[16px]">
+  <div class="p-[16px]">
     <yto-c-search-container
+      custom-class="p-[16px] bg-[#eeeffc]"
       :item-min-width="350"
       :model="form"
       label-width="100px"
