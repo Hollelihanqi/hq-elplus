@@ -1,13 +1,15 @@
 <script lang="tsx">
 import { PropType, defineComponent, ref, computed } from "vue";
 import { SearchFormControlProps } from "./interface";
-import { ArrowDown, ArrowUp } from "@element-plus/icons-vue";
+import { ArrowDown, ArrowUp, DArrowRight } from "@element-plus/icons-vue";
 import Grid from "./components/Grid/index.vue";
 import GridItem from "./components/Grid/components/GridItem.vue";
 import SearchFormItem from "./components/SearchFormItem.vue";
-
+import { resizeElement } from "@/directives";
+import { BreakPoint } from "./components/Grid/interface/index";
 export default defineComponent({
   name: "SearchForm",
+  directives: { resizeElement },
   props: {
     searchModel: {
       type: Object,
@@ -15,6 +17,11 @@ export default defineComponent({
     },
     colConfig: {
       type: [Number, Object],
+      default: () => ({ xs: 1, sm: 2, md: 3, lg: 4, xl: 6 }),
+    },
+    collapsedRows: {
+      type: Number,
+      default: 1,
     },
     formControls: {
       type: Array as PropType<SearchFormControlProps[]>,
@@ -52,6 +59,9 @@ export default defineComponent({
   emits: ["update:searchModel", "on-search", "on-reset"],
   setup(props, { emit, expose, slots }) {
     const collapsed = ref(false);
+    const GridInstance = ref();
+    const breakPoint = computed<BreakPoint>(() => GridInstance.value?.breakPoint);
+
     watch(
       () => props.collapse,
       (newValue: any) => {
@@ -142,7 +152,73 @@ export default defineComponent({
       props.afterSearchFun({ ..._searchModel.value });
     };
 
-    const targetDom = document.getElementById("_searchFormW");
+    const handleResize = (e: any) => {
+      GridInstance.value?.resize(e.width);
+    };
+
+    // 判断是否显示 展开/合并 按钮
+    // const showCollapse = computed(() => {
+    //   let show = false;
+
+    //   props.formControls.reduce((prev, current: SearchFormControlProps) => {
+    //     prev +=
+    //       (current[breakPoint.value]?.span ?? current?.span ?? 1) +
+    //       (current[breakPoint.value]?.offset ?? current?.offset ?? 0);
+    //     if (typeof props.colConfig !== "number") {
+    //       console.log("props.colConfig", props.colConfig);
+    //       console.log("breakPoint.value", breakPoint.value);
+    //       console.log("breakPoint.value", props.colConfig[breakPoint.value]);
+    //       console.log("breakPoint.value", prev);
+    //       if (props.colConfig && prev >= props.colConfig[breakPoint.value]) show = true;
+    //     } else {
+    //       if (prev > props.colConfig) show = true;
+    //     }
+    //     return prev;
+    //   }, 0);
+    //   return show;
+    // });
+    // 判断是否显示 展开/合并 按钮
+    const showCollapse = computed(() => {
+      let totalSpan = 0;
+      let show = false;
+
+      const isColConfigNumber = typeof props.colConfig === "number";
+      const breakpointValue = breakPoint.value;
+
+      const totalCol = props.formControls.reduce((prev, control: SearchFormControlProps) => {
+        prev +=
+          (control[breakpointValue]?.span || control.span || 1) +
+          (control[breakpointValue]?.offset || control.offset || 0);
+        return prev;
+      }, 0);
+
+      for (const control of props.formControls) {
+        totalSpan +=
+          (control[breakpointValue]?.span || control.span || 1) +
+          (control[breakpointValue]?.offset || control.offset || 0);
+
+        if (isColConfigNumber) {
+          if (totalSpan > props.colConfig) {
+            show = true;
+            break;
+          }
+        } else if (props.colConfig && totalSpan >= props.colConfig[breakpointValue]) {
+          show = true;
+          break;
+        }
+      }
+      if (props.colConfig) {
+        const _colConfig: any = props.colConfig;
+        const rows = Math.ceil((totalCol + 1) / _colConfig[breakpointValue]);
+        if (rows > props.collapsedRows) {
+          show = true;
+        } else {
+          show = false;
+        }
+      }
+      return show;
+    });
+
     expose({ resetField, getFormatValues, handleDefaultValue });
 
     onBeforeMount(() => {
@@ -151,19 +227,19 @@ export default defineComponent({
 
     return () => {
       return props?.formControls?.length ? (
-        <div class="search-form-w bg-white px-[16px] pt-[16px] rounded-[4px]" id="_searchFormW">
+        <div v-resizeElement={handleResize} class="relative search-form-w bg-white px-[16px] pt-[20px] rounded-[4px]">
           <el-form model={_searchModel.value} class="search-form" label-width="auto">
             <Grid
-              ref="GridInstance"
-              targetDom={targetDom}
+              ref={GridInstance}
               collapsed={collapsed.value}
               gap={[16, 0]}
               cols={props.colConfig}
+              collapsedRows={props.collapsedRows}
             >
               {props.formControls.map((control: SearchFormControlProps, index: number) => {
                 return (
                   <GridItem key={control.field} {...getResponsive(control, index)}>
-                    <el-form-item label={control.label}>
+                    <el-form-item label={control.label} class="!mb-[20px]">
                       {control.field ? (
                         <SearchFormItem
                           v-model={_searchModel.value[control.field]}
@@ -176,7 +252,7 @@ export default defineComponent({
                 );
               })}
               <GridItem suffix>
-                <div class="search-action-box flex items-center justify-end mb-[16px]">
+                <div class="search-action-box flex items-center justify-end mb-[20px]">
                   {props.okpos === "right" ? (
                     <>
                       <el-button onClick={handleReset}>重置</el-button>
@@ -192,17 +268,43 @@ export default defineComponent({
                       <el-button onClick={handleReset}>重置</el-button>
                     </>
                   )}
-                  <el-button type="primary" link onClick={() => (collapsed.value = !collapsed.value)}>
+                  {/* <el-button type="primary" link onClick={() => (collapsed.value = !collapsed.value)}>
                     {collapsed.value ? "展开" : "收起"}
                     <el-icon>{collapsed.value ? <ArrowDown /> : <ArrowUp />}</el-icon>
-                  </el-button>
+                  </el-button> */}
                 </div>
               </GridItem>
             </Grid>
           </el-form>
+          {showCollapse.value && (
+            <div class={`absolute bottom-0 left-0 w-full flex justify-center ${collapsed.value ? "hbottom-20" : ""}`}>
+              <div
+                class={`w-[60px] h-[20px] cursor-pointer ${collapsed.value ? "downi" : "upi"}`}
+                onClick={() => (collapsed.value = !collapsed.value)}
+              >
+                {/* <el-icon>{collapsed.value ? <ArrowDown /> : <ArrowUp />}</el-icon> */}
+                {/* <el-icon color="#CCCFD5" class={`origin-center ${collapsed.value ? "hrotate-90" : "hrotate-90-1"}`}>
+                <DArrowRight />
+              </el-icon> */}
+              </div>
+            </div>
+          )}
         </div>
       ) : null;
     };
   },
 });
 </script>
+<style scoped>
+.upi {
+  background: url(./icon/icon_ArrowUp@2x.png);
+  background-size: 100% 100%;
+}
+.downi {
+  background: url(./icon/icon_ArrowDown@2x.png);
+  background-size: 100% 100%;
+}
+.hbottom-20 {
+  bottom: 0;
+}
+</style>

@@ -43,3 +43,6 @@
 .on-focus-border {
   border: 1px solid var(--el-color-danger);
 }
+.event-none {
+  pointer-events: none;
+}

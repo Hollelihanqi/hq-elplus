@@ -1,14 +1,14 @@
-# Table 表格
+# SearchForm 表格搜索
 
 基于 element-plus：el-form 二次封装，支持 element-plus 的所有属性
 
 ### 功能
 
-- JSON 数据渲染 el-form 控件
+- 数据配置搜索项
 - 支持 v-model 数据绑定
-- 自适应布局
-- 支持收缩/收起
-- 支持 slot 插槽 和 render 函数
+- 支持默认值/支持自定义列内容/支持 render 函数
+- 自动收起展开
+- 支持配置默认展示行数
 
 ## 基本使用
 
@@ -25,6 +25,7 @@
 | `v-model:searchModel` | 数据绑定                                                        | Object           | —          | --                                      |
 | `colConfig`           | 全局配置不同屏幕下一行所显示的控件个数, 参考 `FormControlsItem` | [Number, Object] | —          | `{ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }` |
 | `formControls`        | 搜索项配置项，参考 `ColConfigItem`                              | Array            | —          | []                                      |
+| `collapsedRows`       | 默认收起行数                                                    | Number           | —          | 1                                       |
 | `modelDefault`        | 默认值,可以同时支持多个表单项的默认值配置                       | Object           | —          | null                                    |
 | `modelDefault`        | 默认值,可以同时支持多个表单项的默认值配置                       | Object           | —          | null                                    |
 | `okpos`               | 确认按钮位置                                                    | String           | right/left | right                                   |
@@ -32,7 +33,7 @@
 | `isResetParams`       | 点击重置按钮时，是否重置查询默认参数为空                        | Boolean          | true/false | false                                   |
 | `afterSearchFun`      | 查询按钮点击后，触发的回调                                      | Function         | —          | —                                       |
 | `afterResetFun`       | 重置按钮点击后，触发的回调                                      | Function         | —          | —                                       |
-| `beforeResetFun`       | 重置按钮点击之前，触发的回调                                      | Function         | —          | —                                       |
+| `beforeResetFun`      | 重置按钮点击之前，触发的回调                                    | Function         | —          | —                                       |
 
 ### ColConfigItem 属性
 

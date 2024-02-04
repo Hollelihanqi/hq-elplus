@@ -1,6 +1,11 @@
 <template>
   <div class="h-full w-full">
-    <yto-c-search-form v-model:search-model="filterData" :form-controls="list" @on-search="handleSearch">
+    <yto-c-search-form
+      v-model:search-model="filterData"
+      :form-controls="list"
+      :collapsedRows="3"
+      @on-search="handleSearch"
+    >
     </yto-c-search-form>
   </div>
 </template>
