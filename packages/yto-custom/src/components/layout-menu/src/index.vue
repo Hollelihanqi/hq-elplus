@@ -190,6 +190,12 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
     @apply bg-[var(--layout-menu-background)] border-none;
     &:not(.el-menu--collapse) {
       width: v-bind("props.width");
+      .el-sub-menu__title,
+      .el-menu-item {
+        .el-icon {
+          @apply mr-[8px] ml-[-8px];
+        }
+      }
     }
     .el-sub-menu {
       @apply bg-[var(--layout-menu-background)];
@@ -207,17 +213,11 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
         &:hover {
           @apply bg-[var(--layout-menu-hover-color)];
         }
-        .el-icon {
-          @apply mr-[8px] ml-[-8px];
-        }
       }
     }
 
     .el-menu-item {
       @apply h-[40px] bg-[var(--layout-menu-background)] leading-[40px] text-white opacity-80 text-[var(--layout-menu-text-color)] border-b border-color-[var(--layout-menu-border-color)];
-      .el-icon {
-        @apply mr-[8px] ml-[-8px];
-      }
       &:hover {
         @apply bg-[var(--layout-menu-hover-color)];
       }
