@@ -1,7 +1,6 @@
 <script lang="tsx">
 import { PropType, defineComponent, ref, computed } from "vue";
 import { SearchFormControlProps } from "./interface";
-import { ArrowDown, ArrowUp, DArrowRight } from "@element-plus/icons-vue";
 import Grid from "./components/Grid/index.vue";
 import GridItem from "./components/Grid/components/GridItem.vue";
 import SearchFormItem from "./components/SearchFormItem.vue";
@@ -157,27 +156,6 @@ export default defineComponent({
     };
 
     // 判断是否显示 展开/合并 按钮
-    // const showCollapse = computed(() => {
-    //   let show = false;
-
-    //   props.formControls.reduce((prev, current: SearchFormControlProps) => {
-    //     prev +=
-    //       (current[breakPoint.value]?.span ?? current?.span ?? 1) +
-    //       (current[breakPoint.value]?.offset ?? current?.offset ?? 0);
-    //     if (typeof props.colConfig !== "number") {
-    //       console.log("props.colConfig", props.colConfig);
-    //       console.log("breakPoint.value", breakPoint.value);
-    //       console.log("breakPoint.value", props.colConfig[breakPoint.value]);
-    //       console.log("breakPoint.value", prev);
-    //       if (props.colConfig && prev >= props.colConfig[breakPoint.value]) show = true;
-    //     } else {
-    //       if (prev > props.colConfig) show = true;
-    //     }
-    //     return prev;
-    //   }, 0);
-    //   return show;
-    // });
-    // 判断是否显示 展开/合并 按钮
     const showCollapse = computed(() => {
       let totalSpan = 0;
       let show = false;
@@ -227,7 +205,7 @@ export default defineComponent({
 
     return () => {
       return props?.formControls?.length ? (
-        <div v-resizeElement={handleResize} class="relative search-form-w bg-white px-[16px] pt-[20px] rounded-[4px]">
+        <div v-resizeElement={handleResize} class="relative search-form-w bg-white px-[16px] pt-[20px]">
           <el-form model={_searchModel.value} class="search-form" label-width="auto">
             <Grid
               ref={GridInstance}
