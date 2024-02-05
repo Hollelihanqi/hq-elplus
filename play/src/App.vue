@@ -8,7 +8,7 @@
 
 <template>
   <div class="app flex flex-col">
-    <div class="router-box">
+    <div class="router-box flex flex-wrap">
       <router-link class="mr-[10px]" to="/form">Form</router-link>
       <router-link class="mr-[10px]" to="/chart">Chart</router-link>
       <router-link class="mr-[10px]" to="/table">Table</router-link>
@@ -25,6 +25,8 @@
       <router-link class="mr-[10px]" to="/searchContainer">SearchContainer</router-link>
       <router-link class="mr-[10px]" to="/adaptionContainer">AdaptionContainer</router-link>
       <router-link class="mr-[10px]" to="/ellipsisTag">EllipsisTag</router-link>
+      <router-link class="mr-[10px]" to="/tableSearch">TableSearch</router-link>
+      <router-link class="mr-[10px]" to="/tareaTag">TareaTag</router-link>
     </div>
 
     <router-view v-slot="{ Component }" class="flex-1">

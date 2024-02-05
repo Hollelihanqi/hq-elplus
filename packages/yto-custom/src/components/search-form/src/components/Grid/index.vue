@@ -38,27 +38,26 @@ const props = withDefaults(defineProps<Props>(), {
 // 在组件挂载前执行，如果需要折叠，则寻找需要折叠的字段 index
 onBeforeMount(() => props.collapsed && findIndex());
 // 组件挂载后执行，监听窗口大小变化
-onMounted(() => {
-  resize({ target: { innerWidth: window.innerWidth } } as any);
-  window.addEventListener("resize", resize);
-});
+// onMounted(() => {
+//   resize({ target: { innerWidth: props.targetDom?.innerWidth || props.targetDom?.offsetWidth } } as any);
+//   window.addEventListener("resize", resize);
+// });
 // 组件激活后执行，同样监听窗口大小变化
-onActivated(() => {
-  resize({ target: { innerWidth: window.innerWidth } } as any);
-  window.addEventListener("resize", resize);
-});
+// onActivated(() => {
+//   resize({ target: { innerWidth: window.innerWidth } } as any);
+//   window.addEventListener("resize", resize);
+// });
 // 组件移除前执行，移除窗口大小变化的监听器
-onUnmounted(() => {
-  window.removeEventListener("resize", resize);
-});
+// onUnmounted(() => {
+//   window.removeEventListener("resize", resize);
+// });
 // 组件失活前执行，同样移除窗口大小变化的监听器
-onDeactivated(() => {
-  window.removeEventListener("resize", resize);
-});
+// onDeactivated(() => {
+//   window.removeEventListener("resize", resize);
+// });
 
 // 监听窗口大小变化的回调函数
-const resize = (e: UIEvent) => {
-  let width = (e.target as Window).innerWidth;
+const resize = (width: number) => {
   switch (!!width) {
     case width < 768:
       breakPoint.value = "xs";
@@ -100,11 +99,13 @@ let slots: any = useSlots();
 if (slots.default && typeof slots.default === "function") {
   slots = slots.default();
 }
-
+const defaultSlotContent = useSlots().default;
+console.log(defaultSlotContent);
 // 寻找需要开始折叠的字段 index，实现折叠功能
 const findIndex = () => {
   let fields: VNodeArrayChildren = [];
   let suffix: any = null;
+  console.log(slots);
   slots.forEach((slot: any) => {
     if (typeof slot.type === "object") {
       if (slot.type.name === "GridItem" && slot.props?.suffix !== undefined) {
@@ -127,6 +128,9 @@ const findIndex = () => {
       (suffix.props[breakPoint.value]?.span ?? suffix.props?.span ?? 1) +
       (suffix.props[breakPoint.value]?.offset ?? suffix.props?.offset ?? 0);
   }
+  console.log(breakPoint.value);
+  console.log(suffix);
+  console.log(fields);
   // 遍历所有表单项，计算它们所占用的列数，并判断是否需要折叠
   try {
     let find = false;
@@ -159,6 +163,7 @@ watch(
 watch(
   () => props.collapsed,
   (value) => {
+    console.log(value);
     if (value) return findIndex();
     hiddenIndex.value = -1;
   }
@@ -180,5 +185,5 @@ const style = computed(() => {
   };
 });
 
-defineExpose({ breakPoint });
+defineExpose({ breakPoint, resize });
 </script>

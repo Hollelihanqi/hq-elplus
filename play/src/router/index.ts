@@ -40,6 +40,8 @@ const routes = [
   { path: "/searchContainer", component: () => import("@/views/FormContainer.vue") },
   { path: "/adaptionContainer", component: () => import("@/views/AdaptionContainer.vue") },
   { path: "/ellipsisTag", component: () => import("@/views/EllipsisTag.vue") },
+  { path: "/tableSearch", component: () => import("@/views/TableSearch.vue") },
+  { path: "/tareaTag", component: () => import("@/views/TareaTag.vue") },
 ];
 
 export const router = createRouter({
