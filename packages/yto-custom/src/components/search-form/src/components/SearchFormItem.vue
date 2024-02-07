@@ -2,7 +2,7 @@
 import { PropType, defineComponent, defineAsyncComponent, computed } from "vue";
 import { SearchFormControlProps, SelectOptionsProps } from "../interface";
 import "./style.scss";
-import { YtoRemoteSearch } from "@/component";
+import { YtoRemoteSearch } from "../../../remote-search/index";
 
 interface ObjectAny {
   [propsName: string]: any;

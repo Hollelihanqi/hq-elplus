@@ -4,7 +4,7 @@
  */
 
 import { render, h, VNode } from 'vue'
-
+import type { Component } from 'vue'
 let mountDom: Element | null = null;
 let appendToContainer: Element = document.body;
 

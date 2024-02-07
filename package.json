@@ -55,7 +55,7 @@
     "unplugin-element-plus": "^0.8.0",
     "unplugin-vue-components": "^0.25.2",
     "vite": "^4.4.11",
-    "vite-plugin-dts": "^2.3.0",
+    "vite-plugin-dts": "^3.7.2",
     "vite-plugin-vue-setup-extend": "^0.4.0",
     "vite-plugin-windicss": "^1.9.1",
     "vue-eslint-parser": "^9.3.2",

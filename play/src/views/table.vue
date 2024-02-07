@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col overflow-hidden p-[16px]">
-    <yto-c-table :columns="columns" :request-api="getList">
+    <yto-c-table :columns="columns" :request-api="getList" tool-bar :show-hide-fields="ShowHiddenFieldKeys2">
       <!-- <template #callStatus="scope">
       <span>{{ scope.row.status }}</span>
     </template> -->
@@ -11,7 +11,14 @@
   </div>
 </template>
 <script lang="tsx" setup>
+import { TableProps } from "@yto/custom";
 import request from "../request";
+const ShowHiddenFieldKeys = ["id", "title", "level", "status"];
+const ShowHiddenFieldKeys2 = {
+  fields: ["id", "title", "level", "status"],
+  showFields: ["id", "title", "level"],
+};
+
 const columns = [
   {
     label: "事件编号",
@@ -33,8 +40,9 @@ const columns = [
   {
     label: "事件等级",
     prop: "level",
-    align: "center",
-    width: 100,
+    sortable: "custom",
+    align: "right",
+    width: 120,
   },
   {
     label: "状态",
@@ -52,7 +60,7 @@ const columns = [
     label: "逾期统计",
     width: 180,
   },
-  { label: "操作", prop: "action", width: 100, fixed: "right", align: "center" },
+  { label: "操作", prop: "action", fixed: "right", align: "center" },
 ];
 
 const tableData = [
@@ -81,6 +89,7 @@ const getList = (params = {}) => {
     url: "/v2/incident",
     params,
   });
+  // return Promise.resolve({ items: [], total: 0 });
 };
 const getList2 = (params = {}) => {
   const _params = {};
@@ -99,8 +108,7 @@ const getList2 = (params = {}) => {
 const dataCallback = (data: any) => {
   console.log(data);
   return {
-    items: data.data.data,
-    total: 0,
+    items: tableData,
   };
 };
 </script>

@@ -1,63 +1,21 @@
 <script lang="tsx">
-import { PropType, defineComponent, ref, computed } from "vue";
+import { defineComponent, ref, computed } from "vue";
+import { Props } from "./props";
 import { SearchFormControlProps } from "./interface";
 import Grid from "./components/Grid/index.vue";
 import GridItem from "./components/Grid/components/GridItem.vue";
 import SearchFormItem from "./components/SearchFormItem.vue";
 import { resizeElement } from "@/directives";
 import { BreakPoint } from "./components/Grid/interface/index";
+
 export default defineComponent({
   name: "SearchForm",
   directives: { resizeElement },
-  props: {
-    searchModel: {
-      type: Object,
-      default: () => ({}),
-    },
-    colConfig: {
-      type: [Number, Object],
-      default: () => ({ xs: 1, sm: 2, md: 3, lg: 4, xl: 6 }),
-    },
-    collapsedRows: {
-      type: Number,
-      default: 1,
-    },
-    formControls: {
-      type: Array as PropType<SearchFormControlProps[]>,
-      default: () => [],
-    },
-    modelDefault: {
-      type: Object,
-      default: null,
-    },
-    okpos: {
-      type: String,
-      default: "right",
-    },
-    collapse: {
-      type: Boolean,
-      default: false,
-    },
-    isResetParams: {
-      type: Boolean,
-      default: false,
-    },
-    afterSearchFun: {
-      type: Function,
-      default: () => ({}),
-    },
-    afterResetFun: {
-      type: Function,
-      default: () => ({}),
-    },
-    beforeResetFun: {
-      type: Function,
-      default: () => ({}),
-    },
-  },
+  props: Props,
   emits: ["update:searchModel", "on-search", "on-reset"],
   setup(props, { emit, expose, slots }) {
     const collapsed = ref(false);
+    const searchFormInstance = ref();
     const GridInstance = ref();
     const breakPoint = computed<BreakPoint>(() => GridInstance.value?.breakPoint);
 
@@ -199,13 +157,22 @@ export default defineComponent({
 
     expose({ resetField, getFormatValues, handleDefaultValue });
 
+    onActivated(() => {
+      const rect = searchFormInstance.value.getBoundingClientRect();
+      handleResize(rect);
+    });
+
     onBeforeMount(() => {
       isDefaultValue() && handleDefaultValue();
     });
 
     return () => {
       return props?.formControls?.length ? (
-        <div v-resizeElement={handleResize} class="relative search-form-w bg-white px-[16px] pt-[20px]">
+        <div
+          ref={searchFormInstance}
+          v-resizeElement={handleResize}
+          class="relative search-form-w bg-white px-[16px] pt-[20px]"
+        >
           <el-form model={_searchModel.value} class="search-form" label-width="auto">
             <Grid
               ref={GridInstance}

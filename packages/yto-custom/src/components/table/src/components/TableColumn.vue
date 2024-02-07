@@ -4,7 +4,7 @@
 
 <script lang="tsx" setup>
 import { useSlots } from "vue";
-import { ElMessage } from "element-plus";
+import { ElMessage, ElTableColumn } from "element-plus";
 import { CopyDocument } from "@element-plus/icons-vue";
 
 const props = defineProps({
@@ -51,8 +51,12 @@ const renderCellData = (item: any, scope: any) => {
 const renderColumn = (column: any) => {
   return (
     <>
-      {!column.hide && (
-        <el-table-column showOverflowTooltip={column.showOverflowTooltip ?? column.prop !== "action"} {...column}>
+      {column.show !== false && (
+        <ElTableColumn
+          className={column.sortable && column.align === "right" ? "sort-cell-td" : ""}
+          showOverflowTooltip={column.showOverflowTooltip ?? column.prop !== "action"}
+          {...column}
+        >
           {{
             default: (scope: any) => {
               if (column._children) return column._children.map((child: any) => renderColumn(child));
@@ -81,7 +85,7 @@ const renderColumn = (column: any) => {
               return column.label;
             },
           }}
-        </el-table-column>
+        </ElTableColumn>
       )}
     </>
   );

@@ -1,7 +1,12 @@
 <template>
   <div class="table-w h-[100%] flex flex-col">
-    <div v-if="$slots.tableHeader" class="table-header flex items-center">
-      <slot name="tableHeader"></slot>
+    <div v-if="$slots.tableHeader || toolBar" class="table-header flex items-center">
+      <div class="flex-1 flex items-center">
+        <slot name="tableHeader"></slot>
+        <div v-if="toolBar" class="flex-1 flex justify-end px-[8px]">
+          <el-button :icon="Setting" circle @click="handleSetting" />
+        </div>
+      </div>
     </div>
     <el-table
       ref="ElTableInstance"
@@ -64,129 +69,22 @@
       @update:current-page="handlePageChange"
     ></el-pagination>
   </div>
+  <SettingV ref="SettingInstance" :tprops="props" @on-save="HandleSetSave" />
 </template>
 
 <script lang="tsx" setup name="Table">
-import { PropType, ref, onMounted, defineEmits } from "vue";
-import { PaginationProps } from "element-plus";
+import { Props } from "./props";
+import { ref, onMounted, defineEmits } from "vue";
 import TableColumn from "./components/TableColumn.vue";
-
+import SettingV from "./components/Setting.vue";
+import { Setting } from "@element-plus/icons-vue";
+import useController from "./use-controller";
 export interface ColumnsItemProps {
   [propsName: string]: any;
 }
 
-type CanWrite<T> = {
-  -readonly [K in keyof T]?: T[K];
-};
-
-const props = defineProps({
-  tableData: {
-    type: Array,
-    default: () => [],
-  },
-  columns: {
-    type: Array as PropType<ColumnsItemProps[]>,
-    default: () => [],
-    required: true,
-  },
-  requestApi: {
-    type: Function,
-    default: null,
-  },
-  requestAuto: {
-    type: Boolean,
-    default: true,
-  },
-  tableActionIsCallApi: {
-    type: Boolean,
-    default: true,
-  },
-  dataKey: {
-    type: String,
-    default: "items",
-  },
-  dataCallback: {
-    type: Function,
-    default: null,
-  },
-  requestParams: {
-    type: [Object, Function],
-    default: () => ({}),
-  },
-  paginationHide: {
-    // 是否隐藏分页组件
-    type: Boolean,
-    default: false,
-  },
-  paginationHideAuto: {
-    type: Boolean,
-    default: true,
-  },
-  paginationOptions: {
-    type: Object as PropType<CanWrite<PaginationProps>>,
-    default: () => ({}),
-  },
-  total: {
-    type: Number,
-    default: 0,
-  },
-  pageSizes: {
-    type: Array as PropType<number[]>,
-    default: () => [10, 30, 50, 100],
-  },
-  layout: {
-    type: String,
-    default: "total, sizes, prev, pager, next, jumper",
-  },
-  pageSize: {
-    type: Number,
-    default: 10,
-  },
-  currentPage: {
-    type: Number,
-    default: 1,
-  },
-  pageLimit: {
-    type: Number,
-    default: 1,
-  },
-  currentPageKey: {
-    type: String,
-    default: "page",
-  },
-  pageSizeKey: {
-    type: String,
-    default: "size",
-  },
-  tableChange: {
-    type: Function,
-    default: null,
-  },
-  defaultSort: {
-    type: [Function, Object],
-    default: null,
-  },
-  sortFormat: {
-    type: Function,
-    default: null,
-  },
-  dataUpdateAfter: {
-    type: Function,
-    default: () => ({}),
-  },
-  cellEmptyText: {
-    type: String,
-    default: "--",
-  },
-  headerbgHide: {
-    type: Boolean,
-    default: false,
-  },
-  loading: {
-    type: Boolean,
-    default: false,
-  },
-});
+const props = defineProps(Props);
+const { _columns, SettingInstance, handleSetting, HandleSetSave } = useController(props);
 
 const ElTableInstance = ref();
 const emits = defineEmits(["on-table"]);
@@ -313,7 +211,10 @@ const handlePaginationChange = (type: "size" | "page" | "sort", num: number): vo
   }
 
   // 如果设置为调用API，则获取表格数据
-  if (props.tableActionIsCallApi && _total.value !== _tdata.value.length) {
+  // if (props.tableActionIsCallApi &&  _total.value !== _tdata.value.length) {
+  //   getTableData();
+  // }
+  if (props.tableActionIsCallApi) {
     getTableData();
   }
 };
@@ -387,3 +288,4 @@ defineExpose({
 <style lang="scss">
 @import "./index.scss";
 </style>
+./use-table

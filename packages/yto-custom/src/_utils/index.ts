@@ -1,4 +1,5 @@
 export * from "./install";
+export * from "./props";
 import request from "./request";
 
 /**
@@ -18,6 +19,7 @@ export const debounce = (fn: (...args: any[]) => any, delay: number = 300) => {
         }, delay);
     };
 };
+
 
 export {
     request

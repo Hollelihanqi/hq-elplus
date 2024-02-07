@@ -9,8 +9,10 @@ import type * as components from "./components";
 declare module "@vue/runtime-core" {
   export interface GlobalComponents {
     YtoTable: typeof components.YtoTable;
-    YtoMenu: typeof components.YtoMenu;
-    YtoEchart: typeof components.YtoEchart;
+    // YtoMenu: typeof components.YtoMenu;
+    // YtoEchart: typeof components.YtoEchart;
+    // YtoSearchForm: typeof components.YtoSearchForm;
+    // YtoTareatag: typeof components.YtoTareaTag
   }
 }
 

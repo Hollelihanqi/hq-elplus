@@ -6,41 +6,44 @@
 -->
 <script lang="ts">
 import { defineComponent, PropType, h } from "vue";
-import { MenuItemProps, SubMenuProps, ElMenu, ElMenuItem, ElSubMenu, ElMenuItemGroup } from "element-plus";
-interface IMenuData {
-  name: string;
-  path?: string;
-  icon?: String;
-  type?: "group";
-  children: IMenuData[];
-}
-type CanWrite<T> = {
-  -readonly [K in keyof T]?: T[K];
-};
+import { Props, IMenuData } from "./props";
+import { ElMenu, ElMenuItem, ElSubMenu, ElMenuItemGroup } from "element-plus";
+
+// export interface IMenuData {
+//   name: string;
+//   path?: string;
+//   icon?: String;
+//   type?: "group";
+//   children: IMenuData[];
+// }
+// type CanWrite<T> = {
+//   -readonly [K in keyof T]?: T[K];
+// };
 export default defineComponent({
   name: "Menu",
-  props: {
-    menuData: {
-      type: Array as PropType<IMenuData[]>,
-      default: () => [],
-    },
-    menuItemConfig: {
-      type: Object as PropType<CanWrite<MenuItemProps>>,
-      required: false,
-      default: () => {
-        return {};
-      },
-    },
-    subMenuConfig: {
-      type: Object as PropType<CanWrite<SubMenuProps>>,
-      required: false,
-      default: () => ({}),
-    },
-    showCollapse: {
-      type: Boolean,
-      default: false,
-    },
-  },
+  props: Props,
+  // props: {
+  //   menuData: {
+  //     type: Array as PropType<IMenuData[]>,
+  //     default: () => [],
+  //   },
+  //   menuItemConfig: {
+  //     type: Object as PropType<CanWrite<MenuItemProps>>,
+  //     required: false,
+  //     default: () => {
+  //       return {};
+  //     },
+  //   },
+  //   subMenuConfig: {
+  //     type: Object as PropType<CanWrite<SubMenuProps>>,
+  //     required: false,
+  //     default: () => ({}),
+  //   },
+  //   showCollapse: {
+  //     type: Boolean,
+  //     default: false,
+  //   },
+  // },
   // emit: {
   //   open(index: string, indexPath: string) {},
   //   close(index: string, indexPath: string) {},
