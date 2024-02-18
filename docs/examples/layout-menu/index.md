@@ -46,7 +46,8 @@
 | `--layout-menu-title-bg`            | 顶部 title 区域背景颜色        |
 | `--layout-menu-title-color`         | 顶部 title 区域文字颜色        |
 | `--layout-menu-active-border-color` | 激活状态下二级菜单左侧边框颜色 |
-| `--layout-menu-inline-bg-colorr`    | 子菜单默认背景颜色             |
+| `--layout-menu-inline-bg-color`     | 子菜单默认背景颜色             |
+| `--layout-menu-triangle-color`      | 折叠/展开三角颜色              |
 
 ### Interface
 

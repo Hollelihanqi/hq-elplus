@@ -133,8 +133,9 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
   --layout-menu-border-color: #e5e7eb; // 边框默认颜色
   --layout-menu-active-border-color: #2c3cd8; // 激活状态下二级菜单左侧边框颜色
   --layout-menu-inline-bg-colorr: #f0f1f5; // 子菜单默认背景颜色
-  --layout-menu-title-bg: transparent;
-  --layout-menu-title-color: #000;
+  --layout-menu-title-bg: transparent; //顶部 title 区域背景颜色
+  --layout-menu-title-color: #000; //顶部 title 区域文字颜色
+  --layout-menu-triangle-color: #b2b2b2; // 折叠/展开三角颜色
 
   @apply bg-[var(--layout-menu-background)];
   .layout-menu-search {
@@ -246,12 +247,11 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
         }
         &::after {
           content: "";
-          width: 0;
-          height: 0;
-          border-style: solid;
+          @apply w-0 h-0 border-solid;
+
           border-color: transparent;
           border-width: 5px 0 5px 5px;
-          border-left-color: #a985c9;
+          border-left-color: var(--layout-menu-triangle-color);
         }
       }
       &.is-opened:not(.second-sub-menu) {
