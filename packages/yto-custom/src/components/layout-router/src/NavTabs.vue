@@ -57,7 +57,7 @@ watch(
   () => tabsMenuValue.value,
   (value) => {
     if (!value) return;
-    const { mode, href } = unref(props.tabsMenuList).find((tab) => tab.code === value) || {};
+    const { mode, href } = unref(props.tabsMenuList).find((tab: any) => tab.code === value) || {};
     if (mode === "router") {
       const url = toURL(href as string);
       console.log(url.pathname);
@@ -118,7 +118,7 @@ watch(
     const path = route.path;
     const url = getUrl(path);
     const tabItem: any =
-      unref(props.tabsMenuList).find((tab) => {
+      unref(props.tabsMenuList).find((tab: any) => {
         const urlObj = toURL(tab.href as string);
         return urlObj.pathname + urlObj.search === url;
       }) || {};
@@ -160,6 +160,9 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
   :deep(.el-tabs__header) {
     background: transparent;
     border: none;
+  }
+  :deep(.el-tabs__content) {
+    display: none;
   }
   :deep(.el-tabs__item) {
     margin: 0 !important;

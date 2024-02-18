@@ -29,7 +29,7 @@
 </template>
 <script setup lang="ts" name="CustomFieldContainer">
 import {Plus, Delete} from '@element-plus/icons-vue'
-interface IAnyObject {
+export interface IAnyObject {
   [key: string]: any
 }
 interface IProps {

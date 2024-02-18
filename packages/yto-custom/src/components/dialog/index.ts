@@ -4,7 +4,6 @@ import { install } from '../../_utils'
 
 import { creator } from '../../_utils/create-api/creator'
 creator(Dialog, {})
-console.log("Dialog", Dialog);
 
 
 export const YtoDialog = install(Dialog)

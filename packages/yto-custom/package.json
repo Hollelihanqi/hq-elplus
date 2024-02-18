@@ -1,9 +1,10 @@
 {
   "name": "@yto/custom",
-  "version": "1.6.9",
+  "version": "1.6.23",
   "type": "module",
   "main": "es/index.js",
   "module": "es/index.js",
+  "types": "es/index.d.ts",
   "exports": {
     ".": {
       "import": "./es/index.js",

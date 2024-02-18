@@ -1,16 +1,23 @@
 <template>
   <div class="h-full w-full">
-    <yto-c-search-form v-model:search-model="filterData" :form-controls="list" @on-search="handleSearch">
+    <yto-c-search-form
+      v-model:search-model="filterData"
+      :form-controls="list"
+      :collapsed-rows="3"
+      @on-search="handleSearch"
+    >
     </yto-c-search-form>
   </div>
 </template>
 <script lang="tsx" setup>
+import { SearchFormControlProps } from "@yto/custom";
 const filterData = ref<any>({});
 
 const handleSearch = () => {
   console.log(filterData.value);
 };
-const list = [
+
+const list: SearchFormControlProps[] = [
   {
     el: "input",
     label: "搜索组件",
@@ -61,6 +68,11 @@ const list = [
     el: "input",
     label: "搜索组件",
     field: "input7",
+  },
+  {
+    el: "input",
+    label: "搜索组件10",
+    field: "input10",
   },
 ];
 </script>

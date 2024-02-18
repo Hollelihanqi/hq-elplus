@@ -26,7 +26,6 @@
 
 <script lang="ts" setup name="Dialog">
 import { ButtonProps, ElButton, ElDialog } from "element-plus";
-import type { Component } from "vue";
 import { ref } from "vue";
 
 const dialogRef = ref();
@@ -40,10 +39,10 @@ type MyButtonProps = MyParital<ButtonProps> & {
   hidden?: boolean | undefined;
 };
 
-interface IConfirmOption {
+export interface IConfirmOption {
   confirmCallback?: () => Promise<boolean>;
 }
-interface ICancelOption {
+export interface ICancelOption {
   cancelCallback?: () => Promise<boolean>;
 }
 
