@@ -31,9 +31,11 @@ interface Props {
   tabsMenuList: IOptionTabPane[];
   keyLabel: string;
   formatTab?: Function;
+  routerGoback: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   keyLabel: "title",
+  routerGoback: false,
   tabsMenuList: () => {
     return [];
   },
@@ -44,7 +46,7 @@ const router = useRouter();
 const route = useRoute();
 const handleTabRemove = (code: any) => {
   tabPaneClose(code);
-  // router.go(-1);
+  props.routerGoback && router.go(-1);
 };
 
 const activePreidx = computed(() => {
@@ -148,6 +150,12 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
     background: transparent;
     border: none;
     --el-tabs-header-height: 32px;
+    .el-tabs__nav-wrap {
+      .el-tabs__nav-prev,
+      .el-tabs__nav-next {
+        @apply leading-[var(--el-tabs-header-height)];
+      }
+    }
   }
   :deep(.el-tabs__header) {
     background: transparent;
