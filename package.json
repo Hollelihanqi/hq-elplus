@@ -19,6 +19,7 @@
     "lint": "eslint packages/yto-custom packages/yto-utils --ext .vue,.js,.ts,.jsx,.tsx,.json --max-warnings 0 --cache",
     "lint:fix": "pnpm run lint --fix",
     "format": "prettier --write .",
+    "new": "pnpm run -C packages/yto-add-component new",
     "prepare": "husky install",
     "commit": "git add -A && git-cz && git push",
     "release:ui": "pnpm run -C packages/yto-custom release",

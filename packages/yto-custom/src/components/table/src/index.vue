@@ -155,7 +155,7 @@ const _sortFieldFormat = (sort?: any) => {
 
 const getTableData = async (params = {}) => {
   if (!props.requestApi || typeof props.requestApi !== "function") return;
-  _loading.value = true;
+  _loading.value = props.requestLoadingHide ? false : true;
   let _requestParams = props.requestParams;
   if (typeof props.requestParams === "function") {
     _requestParams = props.requestParams();

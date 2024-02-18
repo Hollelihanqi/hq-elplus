@@ -52,6 +52,7 @@
 | `tableChange`          | 触发分页、排序 调用此方法，接收 actionType 和 value 两个参数，actionType: page、size、sort       | Function        | —          |                                           |
 | `requestApi`           | 表格数据自动获取方法，返回一个 Promise                                                           | Function        | —          |                                           |
 | `requestAuto`          | 是否立即触发 requestApi ,如果不需要可设置为 false，手动调用 updateTableData 方法更新列表数据     | Boolean         | true/false | true                                      |
+| `requestLoadingHide`   | 请求接口时，是否隐藏 Loading                                                                     | Boolean         | true/false | false                                     |
 | `tableActionIsCallApi` | 点击分页、排序在有 requestApi 的情况下是否自动调用 requestApi                                    | Boolean         | true/false | true                                      |
 | `dataKey`              | 自动调用 requestApi 返回结果后，读取列表数据的 key                                               | String          | —          | items                                     |
 | `dataCallback`         | 自动调用 requestApi 返回结果后，可通过此方法对数据进行处理，并返回一个对象。'{total:0,items:[]}' | Function        | —          | —                                         |

@@ -19,6 +19,10 @@ export const Props = {
         type: Boolean,
         default: true,
     },
+    requestLoadingHide: {
+        type: Boolean,
+        default: false,
+    },
     tableActionIsCallApi: {
         type: Boolean,
         default: true,
