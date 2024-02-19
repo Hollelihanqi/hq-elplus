@@ -5,6 +5,10 @@ export const Props = {
         type: Object,
         default: () => ({}),
     },
+    isSlice: {
+        type: Boolean,
+        default: true,
+    },
     autoUpload: {
         type: Boolean,
         default: true,

@@ -7,6 +7,9 @@
       @file-removed="handleFileRemoved"
     >
       <template #uploaderBtn> <el-button plain :icon="Plus">文件上传</el-button></template>
+      <template #fileListItem="{ file }">
+        <div>lihanqi{{ file.name }}</div>
+      </template>
     </yto-c-uploader>
   </div>
 </template>
@@ -29,7 +32,9 @@ const getInstance = (uploader: any) => {
 };
 // 附件上传结果回调
 const handleUploadSuccess = async (rootFile: any, file: any, message: any, chunk: any) => {
+  console.log(file);
   let msg = JSON.parse(message);
+  console.log(msg);
   try {
     msg = JSON.parse(message);
   } catch (e) {

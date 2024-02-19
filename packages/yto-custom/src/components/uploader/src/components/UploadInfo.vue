@@ -1,29 +1,31 @@
 <template>
   <div class="upload-info" :status="status">
-    <div
-      class="uploader-file-progress"
-      :class="file.error ? 'error-uploader-file-progress' : progressingClass"
-      :style="progressStyle"
-    ></div>
-    <div class="uploader-file-info">
-      <div class="name">
-        <span> {{ file.name }}</span>
-      </div>
-      <div class="size">{{ fileSize }}</div>
-      <div class="status">
-        <span v-show="status !== 'uploading'">{{ file.error ? statusText.error : statusText[status] }}</span>
-        <div v-show="status === 'uploading'" class="flex items-center gap-2">
-          <span>{{ progressStyle.progress }}</span>
-          <span>{{ uploadAverageSpeed }}</span>
+    <slot>
+      <div
+        class="uploader-file-progress"
+        :class="file.error ? 'error-uploader-file-progress' : progressingClass"
+        :style="progressStyle"
+      ></div>
+      <div class="uploader-file-info">
+        <div class="name">
+          <span> {{ file.name }}</span>
+        </div>
+        <div class="size">{{ fileSize }}</div>
+        <div class="status">
+          <span v-show="status !== 'uploading'">{{ file.error ? statusText.error : statusText[status] }}</span>
+          <div v-show="status === 'uploading'" class="flex items-center gap-2">
+            <span>{{ progressStyle.progress }}</span>
+            <span>{{ uploadAverageSpeed }}</span>
+          </div>
+        </div>
+        <div class="uploader-file-actions">
+          <span v-if="isUploading" class="uploader-file-pause" @click="pause"></span>
+          <span v-if="paused" class="uploader-file-resume" @click="resume">️</span>
+          <span v-if="error || file.error" class="uploader-file-retry" @click="retry"></span>
+          <span class="uploader-file-remove" @click="remove"></span>
         </div>
       </div>
-      <div class="uploader-file-actions">
-        <span v-if="isUploading" class="uploader-file-pause" @click="pause"></span>
-        <span v-if="paused" class="uploader-file-resume" @click="resume">️</span>
-        <span v-if="error || file.error" class="uploader-file-retry" @click="retry"></span>
-        <span class="uploader-file-remove" @click="remove"></span>
-      </div>
-    </div>
+    </slot>
   </div>
 </template>
 <script lang="ts" setup>
@@ -254,7 +256,7 @@ onMounted(() => {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  overflow: hidden; 
+  overflow: hidden;
   .name {
     width: 36%;
     overflow: hidden;

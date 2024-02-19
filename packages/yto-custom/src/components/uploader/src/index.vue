@@ -5,7 +5,22 @@
         <el-button>上传文件</el-button>
       </slot>
     </label>
-    <UploadList v-if="!listHide" :cmd5="cmd5"></UploadList>
+    <!-- <UploadList v-if="!listHide" :cmd5="cmd5">
+      <template #fileListItem>
+        <slot name="fileListItem"></slot>
+      </template>
+    </UploadList> -->
+    <div>1{{ UPLOADER?.fileList?.length }}</div>
+    <div>2{{ listHide }}</div>
+    <div v-if="UPLOADER?.fileList?.length && !listHide" class="uploader-list">
+      <div v-for="file in UPLOADER.fileList" :key="file.id" class="file-item">
+        <UploadInfo :file="file" :list="true">
+          <template #default>
+            <slot name="fileListItem" :file="file" />
+          </template>
+        </UploadInfo>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -15,7 +30,7 @@ import { Props } from "./props";
 import SimpleUploader from "simple-uploader.js";
 import SparkMD5 from "spark-md5";
 import UploadList from "./components/UploadList.vue";
-
+import UploadInfo from "./components/UploadInfo.vue";
 const FILE_ADDED_EVENT = "fileAdded";
 // const FILES_ADDED_EVENT = "filesAdded";
 const UPLOAD_START_EVENT = "uploadStart";
@@ -24,12 +39,12 @@ const props = defineProps(Props);
 const emits = defineEmits(["on-type-error", "on-exceed-limit"]);
 const _options = {
   target: "/api/v2/upload", // 目标上传 URL
-  chunkSize: 1024 * 1024 * 4, // 分块大小 4M
+  chunkSize: props.isSlice ? 1024 * 1024 * 1 : Number.MAX_SAFE_INTEGER, // 分块大小 4M
   connectionCount: 3, //同时上传的连接数
   fileParameterName: "file", // 上传文件时文件的参数名，默认file
   maxChunkRetries: 3, // 最大自动失败重试上传次数
   simultaneousUploads: 3, // 并发上传数 默认为 3
-  testChunks: true, // 是否开启服务器分片校验
+  testChunks: props.isSlice ? true : false, // 是否开启服务器分片校验
   // 服务器分片校验函数，秒传及断点续传基础
   checkChunkUploadedByResponse: function (chunk: any, message: any) {
     const _message = JSON.parse(message);
@@ -174,7 +189,7 @@ const startUpload = (file: any) => {
   const time = new Date().getTime();
   const blobSlice = File.prototype.slice;
   let currentChunk = 0; // 初始化切片 id
-  const chunkSize = 10 * 1024 * 1000;
+  const chunkSize = props.options.chunkSize || _options.chunkSize;
   const chunks = Math.ceil(file.size / chunkSize); // 计算切片数量
   const spark: any = new SparkMD5.ArrayBuffer();
 
@@ -249,5 +264,13 @@ onMounted(() => {
 .uploader-w {
   position: relative;
   width: 100%;
+}
+.uploader-list {
+  padding-top: 8px;
+}
+.file-item:last-child {
+  .upload-info {
+    border: none;
+  }
 }
 </style>
