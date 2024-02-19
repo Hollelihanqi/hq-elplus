@@ -20,7 +20,7 @@
       <el-form-item
         v-for="(item, idx) in formConfig"
         :key="idx"
-        :style="`width:${item.formItemWidth ? item.formItemWidth : formItemWidth + 'px'};`"
+        :data-cols="item.cols ? item.cols : 1"
         :label="item.label"
       >
         <el-input v-model="item.value" />
@@ -42,12 +42,12 @@ for (let index = 0; index < 10; index++) {
     value: "",
     label: "测试数据" + (index + 1),
     contentClass: "w-full",
+    cols: index == 1 ? 2 : 1,
   });
 }
 const handleResize = (itemWidth: number) => {
   console.log("handleResize", itemWidth);
-  formItemWidth.value = itemWidth;
-  formConfig[1].formItemWidth = itemWidth * 2 + "px";
+  // formItemWidth.value = itemWidth;
   // cardStyle.value = `width: ${(info.width - num * props.gap) / num}px; min-width:${props.minWidth}px`;
 };
 </script>
