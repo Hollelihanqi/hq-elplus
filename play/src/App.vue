@@ -2,13 +2,13 @@
  * @Description: 模块名称
  * @Author: ym
  * @Date: 2023-12-14 16:59:25
- * @LastEditTime: 2024-02-02 09:30:02
+ * @LastEditTime: 2024-02-18 18:00:41
 -->
 <script setup lang="ts"></script>
 
 <template>
   <div class="app flex flex-col">
-    <!-- <div class="router-box flex flex-wrap">
+    <div class="router-box flex flex-wrap">
       <router-link class="mr-[10px]" to="/form">Form</router-link>
       <router-link class="mr-[10px]" to="/chart">Chart</router-link>
       <router-link class="mr-[10px]" to="/table">Table</router-link>
@@ -34,9 +34,9 @@
       <KeepAlive>
         <component :is="Component" :key="$route.fullPath"></component>
       </KeepAlive>
-    </router-view> -->
+    </router-view>
 
-    <LayoutRouter class="h-full"></LayoutRouter>
+    <!-- <LayoutRouter class="h-full"></LayoutRouter> -->
     <!--     <LayoutFrame class="h-full"></LayoutFrame> -->
     <!-- <formItems></formItems> -->
   </div>

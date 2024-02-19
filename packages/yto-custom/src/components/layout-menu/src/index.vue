@@ -224,7 +224,7 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
         @apply h-[34px] leading-[34px];
       }
       .el-sub-menu__title {
-        @apply text-[var(--layout-menu-text-color)] opacity-80 border-b border-color-[var(--layout-menu-border-color)];
+        @apply text-[var(--layout-menu-text-color)] text-opacity-80  border-b border-color-[var(--layout-menu-border-color)];
         &:hover {
           @apply bg-[var(--layout-menu-hover-color)];
         }
