@@ -11,6 +11,7 @@
 
 <script lang="ts" setup name="Uploader">
 import { ref, onMounted, provide, defineEmits } from "vue";
+import { Props } from "./props";
 import SimpleUploader from "simple-uploader.js";
 import SparkMD5 from "spark-md5";
 import UploadList from "./components/UploadList.vue";
@@ -18,77 +19,7 @@ import UploadList from "./components/UploadList.vue";
 const FILE_ADDED_EVENT = "fileAdded";
 // const FILES_ADDED_EVENT = "filesAdded";
 const UPLOAD_START_EVENT = "uploadStart";
-const props = defineProps({
-  options: {
-    type: Object,
-    default: () => ({}),
-  },
-  autoUpload: {
-    type: Boolean,
-    default: true,
-  },
-  multiple: {
-    type: Boolean,
-    default: true,
-  },
-  limit: {
-    type: Number,
-    default: 0,
-  },
-  listHide: {
-    type: Boolean,
-    default: false,
-  },
-  accept: {
-    type: String,
-    default: "",
-  },
-  isCheckFileType: {
-    type: Boolean,
-    default: true,
-  },
-  statusText: {
-    type: [Object, Function],
-    default: () => {
-      return {
-        success: "成功",
-        error: "错误",
-        uploading: "正在上传...",
-        paused: "暂停",
-        md5: "计算MD5...",
-        waiting: "等待中...",
-      };
-    },
-  },
-  headers: {
-    type: [Object, Function],
-    default: () => ({}),
-  },
-  requestParams: {
-    type: Object,
-    default: () => ({}),
-  },
-  onFileAdded: {
-    type: Function,
-    default: null,
-  },
-  onFileSuccess: {
-    type: Function,
-    default: null,
-  },
-  onFileComplete: {
-    type: Function,
-    default: null,
-  },
-  onFileRemoved: {
-    type: Function,
-    default: null,
-  },
-  getInstance: {
-    type: Function,
-    default: () => ({}),
-  },
-});
+const props = defineProps(Props);
 
 const emits = defineEmits(["on-type-error", "on-exceed-limit"]);
 const _options = {

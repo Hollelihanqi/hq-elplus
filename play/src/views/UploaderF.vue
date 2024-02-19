@@ -6,7 +6,7 @@
       @file-success="handleUploadSuccess"
       @file-removed="handleFileRemoved"
     >
-      <template #uploaderBtn> <el-button type="primary" plain :icon="Plus">文件上传</el-button></template>
+      <template #uploaderBtn> <el-button plain :icon="Plus">文件上传</el-button></template>
     </yto-c-uploader>
   </div>
 </template>

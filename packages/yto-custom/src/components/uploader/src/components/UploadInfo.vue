@@ -254,7 +254,7 @@ onMounted(() => {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  overflow: hidden;
+  overflow: hidden; 
   .name {
     width: 36%;
     overflow: hidden;
