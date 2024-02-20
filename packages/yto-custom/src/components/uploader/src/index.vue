@@ -10,8 +10,6 @@
         <slot name="fileListItem"></slot>
       </template>
     </UploadList> -->
-    <div>1{{ UPLOADER?.fileList?.length }}</div>
-    <div>2{{ listHide }}</div>
     <div v-if="UPLOADER?.fileList?.length && !listHide" class="uploader-list">
       <div v-for="file in UPLOADER.fileList" :key="file.id" class="file-item">
         <UploadInfo :file="file" :list="true">
