@@ -233,11 +233,11 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
         }
       }
       /**************处理激活状态叶子节点左侧的小圆点*****************/
-      .leaf-menu.is-active span {
-        @apply relative pl-[8px];
+      .leaf-menu.is-active div {
+        @apply relative;
         &::before {
           content: "";
-          @apply absolute w-[4px] h-[4px] rounded-[4px] absolute left-0 top-[15px] bg-[var(--layout-menu-active-color)];
+          @apply absolute w-[4px] h-[4px] rounded-[4px] absolute left-[-8px] top-[15px] bg-[var(--layout-menu-active-color)];
         }
       }
       /**************开始：处理展开折叠三角形*****************/

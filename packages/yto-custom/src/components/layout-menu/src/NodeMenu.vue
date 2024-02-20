@@ -4,7 +4,10 @@
     <i v-if="!isBlank(getIcon(data))" :class="getIcon(data)"></i>
     <template v-else>{{ labelFirst(data) }}</template>
   </el-icon>
-  <span class="truncate ...">{{ getLable(data) }}</span>
+  <div :class="showIcon ? 'w-[calc(100%-18px)]' : 'w-full'">
+    <p class="truncate w-full">{{ getLable(data) }}</p>
+  </div>
+  <!-- <span class="truncate ">{{ getLable(data) }}</span> -->
 </template>
 <script lang="ts" setup>
 import { inject } from "vue";
