@@ -1,5 +1,5 @@
 <template>
-  <div id="searchContainer" class="search-container" :class="customClass">
+  <div :id="containerId" class="search-container" :class="customClass">
     <el-form v-if="isUseForm" v-resize-element="handleResize" v-bind="$attrs" class="flex flex-wrap container-content">
       <slot></slot>
 
@@ -14,6 +14,8 @@
 </template>
 <script lang="ts" setup name="SearchContainer">
 import { resizeElement as vResizeElement } from "@/directives";
+import { guid } from "@yto/utils";
+
 interface Props {
   isUseForm?: boolean;
   itemMinWidth: number;
@@ -26,9 +28,12 @@ const props = withDefaults(defineProps<Props>(), {
   itemMinWidth: 300,
   autoLayout: true,
 });
+const containerId = computed(() => {
+  return `searchContainer_${guid()}`;
+});
 const emit = defineEmits(["resize"]);
 const handleResize = (info: any) => {
-  if (!props.itemMinWidth) return;
+  if (!props.itemMinWidth || !info.width) return;
   let num = Math.floor(info.width / props.itemMinWidth);
   const tmpItemWidth = info.width / num;
   if (tmpItemWidth < props.itemMinWidth) {
@@ -40,12 +45,10 @@ const handleResize = (info: any) => {
     itemWidth = props.itemMaxWidth;
   }
   emit("resize", itemWidth);
-  nextTick(() => {
-    props.autoLayout && setChildWidth(itemWidth); // 设置子元素宽度
-  });
+  props.autoLayout && setChildWidth(itemWidth); // 设置子元素宽度
 };
 const setChildWidth = (itemWidth: number) => {
-  const tmpChildren = document.querySelector("#searchContainer .container-content")?.children;
+  const tmpChildren = document.querySelector(`#${containerId.value} .container-content`)?.children;
   if (!tmpChildren || !tmpChildren.length) return;
   const children = Array.from(tmpChildren).filter((item: any) => {
     return !item.className.includes("container-operation");
@@ -55,6 +58,11 @@ const setChildWidth = (itemWidth: number) => {
     item.style.width = itemWidth * cols + "px";
   });
 };
+onMounted(() => {
+  const tmpEl: any = document.querySelector(`#${containerId.value} .container-content`);
+  // console.log("search-container-onMounted", tmpEl.offsetWidth);
+  tmpEl && handleResize({ width: tmpEl.offsetWidth });
+});
 </script>
 <style lang="scss" scoped>
 .search-container {
