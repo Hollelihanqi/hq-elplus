@@ -200,10 +200,15 @@ const handlePaginationChange = (type: "size" | "page" | "sort", num: number): vo
     paginationParams.pageSize = num;
   }
 
-  emits("on-table", type, {
-    currentPage: paginationParams.currentPage,
-    pageSize: type === "size" ? num : paginationParams.pageSize,
-  });
+  emits(
+    "on-table",
+    type,
+    {
+      currentPage: paginationParams.currentPage,
+      pageSize: type === "size" ? num : paginationParams.pageSize,
+    },
+    _sortItem
+  );
 
   // 如果不需要通过API请求数据，则直接调用tableChange
   if (props.tableChange && typeof props.tableChange === "function") {
@@ -288,4 +293,3 @@ defineExpose({
 <style lang="scss">
 @import "./index.scss";
 </style>
-./use-table
