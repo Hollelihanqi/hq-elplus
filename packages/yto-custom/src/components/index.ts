@@ -2,7 +2,7 @@
  * @Description: 模块名称
  * @Author: ym
  * @Date: 2023-12-13 15:34:28
- * @LastEditTime: 2024-01-18 14:39:05
+ * @LastEditTime: 2024-02-21 13:44:49
  */
 export { YtoDialog } from "./dialog";
 export * from "./dialog";
@@ -66,4 +66,6 @@ export * from "./ellipsis-tag";
 
 export { YtoTareaTag } from "./tarea-tag";
 export * from "./tarea-tag";
+export { YtoRadio } from "./radio";
+export * from "./radio";
 
