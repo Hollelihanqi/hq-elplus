@@ -2,7 +2,7 @@
  * @Author: weichunpei
  * @Date: 2023-10-20 09:30:23
  * @LastEditors: weichunpei
- * @LastEditTime: 2024-01-30 18:04:32
+ * @LastEditTime: 2024-02-20 19:55:53
  * @Description: layoutHeader 组件
 -->
 
@@ -63,4 +63,38 @@ interface IOptionTabPane {
   children?: IOptionTabPane[];
   showIcon?: boolean;
 }
+```
+
+### 紫色配色方案
+
+```json
+    --layout-menu-title-color: #fff;
+    --layout-menu-text-color: #fff;
+    --layout-menu-background: #56297e;
+    --layout-menu-active-color: #fff;
+    --layout-menu-search-background: #33154b;
+    --layout-menu-active-background: #8942c9;
+    --layout-menu-hover-color: #8942c9;
+    --layout-menu-border-color: rgba(0, 0, 0, 0.1);
+    --layout-menu-active-border-color: #8942c9;
+    --layout-menu-active-parent-background: #6d31a3;
+    --layout-menu-inline-bg-color: #40195f;
+    --layout-menu-triangle-color: #a985c9;
+```
+
+### 蓝色系配色方案
+
+```json
+     --layout-menu-title-color: #fff;
+     --layout-menu-text-color: #fff;
+     --layout-menu-background: #333f5f;
+     --layout-menu-active-color: #fff;
+     --layout-menu-search-background: #2a3249;
+     --layout-menu-active-background: #4272dd;
+     --layout-menu-hover-color: #4272dd;
+     --layout-menu-border-color: rgba(0, 0, 0, 0.1);
+     --layout-menu-active-border-color: #4272dd;
+     --layout-menu-active-parent-background: #334c84;
+     --layout-menu-inline-bg-color: #2a3249;
+     --layout-menu-triangle-color: #969ca2;
 ```
