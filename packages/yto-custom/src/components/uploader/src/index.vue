@@ -13,8 +13,8 @@
     <div v-if="UPLOADER?.fileList?.length && !listHide" class="uploader-list">
       <div v-for="file in UPLOADER.fileList" :key="file.id" class="file-item">
         <UploadInfo :file="file" :list="true">
-          <template #default>
-            <slot name="fileListItem" :file="file" />
+          <template #default="{ progress }">
+            <slot name="fileListItem" :file="file" :progress="progress" />
           </template>
         </UploadInfo>
       </div>

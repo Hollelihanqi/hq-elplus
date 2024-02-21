@@ -1,6 +1,6 @@
 <template>
   <div class="upload-info" :status="status">
-    <slot>
+    <slot :progress="progress">
       <div
         class="uploader-file-progress"
         :class="file.error ? 'error-uploader-file-progress' : progressingClass"
