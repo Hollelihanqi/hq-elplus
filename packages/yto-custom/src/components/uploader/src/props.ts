@@ -62,6 +62,10 @@ export const Props = {
         type: Function,
         default: null,
     },
+    onFileError: {
+        type: Function,
+        default: null,
+    },
     onFileComplete: {
         type: Function,
         default: null,

@@ -3,12 +3,16 @@
     <yto-c-uploader
       :get-instance="getInstance"
       :options="options"
+      :auto-upload="false"
       @file-success="handleUploadSuccess"
       @file-removed="handleFileRemoved"
     >
       <template #uploaderBtn> <el-button plain :icon="Plus">文件上传</el-button></template>
-      <template #fileListItem="{ file }">
-        <div>lihanqi{{ file.name }}</div>
+      <!-- <template #fileListItem="{ file }">
+        <div>{{ file.name }}</div>
+      </template> -->
+      <template #tip>
+        <el-button @click="handleUp">手动上传</el-button>
       </template>
     </yto-c-uploader>
   </div>
@@ -29,6 +33,10 @@ const mergeFile = (params = {}) => {
 // 获取 Uploader 实例
 const getInstance = (uploader: any) => {
   UploaderInstance.value = uploader.value;
+};
+
+const handleUp = () => {
+  UploaderInstance.value.upload();
 };
 // 附件上传结果回调
 const handleUploadSuccess = async (rootFile: any, file: any, message: any, chunk: any) => {

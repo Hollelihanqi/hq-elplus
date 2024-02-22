@@ -28,6 +28,7 @@
 | requestParams   | 额外的自定义请求参数                                                                                                                                                                                                                                        | Object          | —          | {}     |
 | onFileAdded     | 文件添加到上传队列之前调用,可用于文件校验，返回 false 禁止文件上传,并且从列表中移除当前文件。`(file)=>{}`                                                                                                                                                   | Function        | —          | null   |
 | onFileSuccess   | 单个文件上传成功后触发。`(rootFile, file, message, chunk)=>{}`                                                                                                                                                                                              | Function        | —          | null   |
+| onFileError     | 文件上传错误。`(rootFile, file, message, chunk)=>{}`                                                                                                                                                                                                        | Function        | —          | null   |
 | onFileComplete  | 所有文件上传完成后触发。`(rootFile)=>{}`                                                                                                                                                                                                                    | Function        | —          | null   |
 | onFileRemoved   | 特定文件已从上传队列中移除后触发,返回当前删除文件。`(file)=>{}`                                                                                                                                                                                             | Function        | —          | null   |
 | getInstance     | 返回 Uploader 实例`(UPLOADER) => ({})`                                                                                                                                                                                                                      | Function        | —          | null   |
@@ -67,6 +68,12 @@ query: (file: any, chunk: any) => {
 
 ```
 
+### Uploader 方法
+
+| 名称     | 说明         | 备注           |
+| -------- | ------------ | -------------- |
+| `upload` | 恢复文件上传 | 可用于手动上传 |
+
 ### File 方法
 
 | 名称             | 说明                             | 备注                                                              |
@@ -99,10 +106,11 @@ query: (file: any, chunk: any) => {
 
 ### 事件
 
-| 名称              | 说明                       |
-| ----------------- | -------------------------- |
-| `on-type-error`   | 文件校验错误后触发         |
-| `on-exceed-limit` | 文件超出最大上传数量后触发 |
+| 名称                 | 说明                                                 |
+| -------------------- | ---------------------------------------------------- |
+| `on-type-error`      | 文件校验错误后触发                                   |
+| `on-exceed-limit`    | 文件超出最大上传数量后触发                           |
+| `on-files-submitted` | 文件添加到上传队列之后，可用于开始上传当前添加的文件 |
 
 ### 插槽
 
@@ -110,3 +118,4 @@ query: (file: any, chunk: any) => {
 | -------------- | -------------- |
 | `uploaderBtn`  | 触发上传按钮   |
 | `fileListItem` | 上传文件列表项 |
+| `tip`          | 文本说明       |

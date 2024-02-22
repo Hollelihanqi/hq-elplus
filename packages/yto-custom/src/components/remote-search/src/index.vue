@@ -274,7 +274,7 @@ export default defineComponent({
     const renderSelectV2 = () => {
       const _props = {
         label: props.labelKey,
-        value: props.valueKey,
+        value: props.modelItem ? "value" : props.valueKey,
       };
       return (
         <ElSelectV2

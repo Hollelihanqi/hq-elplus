@@ -45,6 +45,15 @@ export default defineComponent({
         requestHeaders: _headers,
         requestParams: _params.value,
         ...context.attrs,
+        dataCallback: (data) => {
+          console.log(data);
+          return data.items.map((item) => {
+            return {
+              ...item,
+              value: item,
+            };
+          });
+        },
       });
     };
   },
