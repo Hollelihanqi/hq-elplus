@@ -42,7 +42,7 @@ for (let index = 0; index < 10; index++) {
     value: "",
     label: "测试数据" + (index + 1),
     contentClass: "w-full",
-    cols: index == 1 ? 2 : 1,
+    cols: !index ? 2 : 1,
   });
 }
 const handleResize = (itemWidth: number) => {
