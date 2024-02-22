@@ -1,7 +1,7 @@
 <template>
   <el-dialog
-    class="dialog-cst"
     ref="dialogRef"
+    class="dialog-cst"
     v-bind="$attrs"
     :style="{ marginLeft: offset[0], marginTop: offset[1] }"
   >
@@ -46,7 +46,7 @@ export interface ICancelOption {
   cancelCallback?: () => Promise<boolean>;
 }
 
-interface IProps {
+export interface IProps {
   visible: boolean;
   offset?: Array<string>;
   hiddenFooter?: boolean | undefined;
