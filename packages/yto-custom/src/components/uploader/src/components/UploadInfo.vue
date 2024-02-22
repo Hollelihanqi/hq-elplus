@@ -195,6 +195,8 @@ onMounted(() => {
   currentSpeed.value = props.file.currentSpeed;
   error.value = props.file.error;
   props.file.setErrorStatus = _setErrorStatus;
+  props.file.status = status.value;
+  props.file.progress = progress.value;
   props.file.uploader.on("fileProgress", _fileProgress);
   props.file.uploader.on("fileSuccess", _fileSuccess);
   props.file.uploader.on("fileComplete", _fileComplete);

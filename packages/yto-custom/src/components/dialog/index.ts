@@ -5,9 +5,9 @@ import { install } from '../../_utils'
 import { creator } from '../../_utils/create-api/creator'
 creator(Dialog, {})
 
-
 export const YtoDialog = install(Dialog)
 
-export type { DialogInstance } from './src/instance'
+export * from './src/instance'
 
 export default YtoDialog
+

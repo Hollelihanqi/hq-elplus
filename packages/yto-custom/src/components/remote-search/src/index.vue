@@ -1,6 +1,6 @@
-<script lang="ts">
+<script lang="tsx">
 import { defineComponent, h, ref, getCurrentInstance } from "vue";
-import { ElSelect, ElOption } from "element-plus";
+import { ElSelect, ElOption, ElSelectV2 } from "element-plus";
 import { request, debounce } from "@/_utils";
 import type { ExtractPropTypes } from "vue";
 
@@ -77,6 +77,10 @@ const props = {
   getExposed: {
     type: Function,
     default: null,
+  },
+  stag: {
+    type: String,
+    default: "select",
   },
   // modelValue: {
   //   // 此属性是 vue3.0 默认的 v-model 双向数据绑定 prop，请在子组件上通过 v-model 进行传递
@@ -205,7 +209,7 @@ export default defineComponent({
     };
 
     const disLabelEvent = () => {
-      const label = RemoteSearchSelectInstance.value.$el.parentElement.parentElement;
+      const label = RemoteSearchSelectInstance.value?.$el.parentElement.parentElement;
       label && label.classList.add("el-form-label-dis");
     };
     onMounted(() => {
@@ -221,7 +225,7 @@ export default defineComponent({
     const RemoteSearchSelectInstance = ref();
     expose({ getOptions, clearOptions });
 
-    return () => {
+    const renderSelect = () => {
       return h(
         ElSelect,
         {
@@ -266,6 +270,27 @@ export default defineComponent({
           }),
         ]
       );
+    };
+    const renderSelectV2 = () => {
+      const _props = {
+        label: props.labelKey,
+        value: props.valueKey,
+      };
+      return (
+        <ElSelectV2
+          class="remote-search-select"
+          options={options.value}
+          value-key={props.valueKey}
+          props={_props}
+          clearable
+          filterable
+          loading={loading.value}
+          {...attrs}
+        ></ElSelectV2>
+      );
+    };
+    return () => {
+      return props.stag === "select" ? renderSelect() : renderSelectV2();
     };
   },
 });

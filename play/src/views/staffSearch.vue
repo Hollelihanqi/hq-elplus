@@ -4,11 +4,11 @@
     <CustomLeakagewaySelect key="1" v-model="user2" multiple ref="testInstance" /> -->
     <!-- <yto-c-user-search v-model="user2" url="" :requestApi="getList"></yto-c-user-search> -->
     <!-- <TestSearch /> -->
-    <el-button @click="testInstance.testFun()">test</el-button>
+    <!-- <el-button @click="testInstance.testFun()">test</el-button> -->
   </div>
   <el-form ref="FormInstanceRef" :model="formModel" :rules="rules" label-width="80px" label-position="right">
     <el-form-item label="标准字段" prop="columns">
-      <CustomRuleCategoryName v-model="formModel.columns" multiple />
+      <CustomCountrySelect v-model="formModel.columns" label-key="name" stag="selevtv2" @change="handleChange" />
     </el-form-item>
   </el-form>
   <el-button @click="handleSubmit">Submit</el-button>
@@ -17,6 +17,7 @@
 import { ref } from "vue";
 import CustomLeakagewaySelect from "./CustomLeakagewaySelect.vue";
 import CustomRuleCategoryName from "../components/CustomRuleCategoryName.vue";
+import CustomCountrySelect from "./CustomCountrySelect.vue";
 import TestSearch from "./TestSearch.vue";
 import { request } from "@/utils";
 
@@ -33,6 +34,10 @@ const validatePass = (rule: any, value: any, callback: any) => {
 
 const rules = {
   columns: [{ required: true, validator: validatePass, trigger: ["change", "blur"] }],
+};
+
+const handleChange = (value: any) => {
+  console.log(value);
 };
 
 const handleSubmit = (): void => {
