@@ -1,3 +1,4 @@
+90
 <template>
   <div :id="containerId" class="search-container relative" :class="customClass">
     <el-form v-if="isUseForm" v-resize-element="handleResize" v-bind="$attrs" class="flex flex-wrap container-content">
@@ -15,13 +16,15 @@
       class="cursor-pointer container-collapse text-center text-[12px] absolute bottom-[4px] left-[50%] ml-[-12px]"
       @click="handleCollapse"
     >
-      {{ collapse ? `展开` : "折叠" }}
+      <el-icon :style="`transform: rotate(${collapse ? 90 : -90}deg)`"><DArrowRight /></el-icon>
+      <!-- {{ collapse ? `展开` : "折叠" }} -->
     </div>
   </div>
 </template>
 <script lang="ts" setup name="SearchContainer">
 import { resizeElement as vResizeElement } from "@/directives";
 import { guid } from "@yto/utils";
+import { DArrowRight } from "@element-plus/icons-vue";
 
 interface Props {
   isUseForm?: boolean;
