@@ -147,17 +147,18 @@ const _actionCheck = () => {
 };
 const _fileSuccess = (rootFile?: any, file?: any, message?: any) => {
   if (rootFile) {
-    processResponse(message);
+    processResponse(message, file);
   }
   _fileProgress();
   error.value = false;
   isComplete.value = true;
   isUploading.value = false;
 };
-const processResponse = (message: any) => {
+const processResponse = (message: any, file: any) => {
   let res = message;
   try {
     res = JSON.parse(message);
+    file._response = res;
   } catch (e) {
     console.error("processResponse", e);
   }
@@ -174,7 +175,7 @@ const _errorStatus = () => {
 };
 const _fileError = (rootFile: any, file: any, message: any) => {
   _fileProgress();
-  processResponse(message);
+  processResponse(message, file);
   _errorStatus();
 };
 

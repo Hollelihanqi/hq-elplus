@@ -33,12 +33,13 @@ import SimpleUploader from "simple-uploader.js";
 import SparkMD5 from "spark-md5";
 import UploadList from "./components/UploadList.vue";
 import UploadInfo from "./components/UploadInfo.vue";
+
 const FILE_ADDED_EVENT = "fileAdded";
 // const FILES_ADDED_EVENT = "filesAdded";
 const UPLOAD_START_EVENT = "uploadStart";
 const props = defineProps(Props);
 
-const emits = defineEmits(["on-type-error", "on-exceed-limit", "on-files-submitted"]);
+const emits = defineEmits(["on-type-error", "on-exceed-limit", "on-files-submitted", "on-complete"]);
 const _options = {
   target: "/api/v2/upload", // 目标上传 URL
   chunkSize: props.isSlice ? 1024 * 1024 * 1 : Number.MAX_SAFE_INTEGER, // 分块大小 4M
@@ -91,6 +92,7 @@ const initUploaderEvent = () => {
   UPLOADER.value.on("fileComplete", fileComplete);
   UPLOADER.value.on("fileSuccess", fileSuccess);
   UPLOADER.value.on("fileError", fileError);
+  UPLOADER.value.on("complete", complete);
 };
 // function kebabCase(s) {
 //   return s.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
@@ -191,6 +193,11 @@ const fileError = (rootFile: any, file: any, message: any, chunk: any) => {
   if (props.onFileError) {
     props.onFileError(rootFile, file, message, chunk);
   }
+};
+
+// 上传完成
+const complete = () => {
+  emits("on-complete", UPLOADER.value.fileList);
 };
 
 //开始上传

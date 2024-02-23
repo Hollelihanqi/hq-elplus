@@ -94,6 +94,8 @@ query: (file: any, chunk: any) => {
 | `averageSpeed`     | 平均上传速度，每秒字节数。     |
 | `currentSpeed`     | 当前上传速度 ，每秒字节数。    |
 | `uniqueIdentifier` | 分配给该文件对象的唯一标识符。 |
+| `status`           | 文件上传状态。                 |
+| `_response`        | 接口返回结果。                 |
 
 ### UploaderInstance 方法
 
@@ -111,6 +113,7 @@ query: (file: any, chunk: any) => {
 | `on-type-error`      | 文件校验错误后触发                                   |
 | `on-exceed-limit`    | 文件超出最大上传数量后触发                           |
 | `on-files-submitted` | 文件添加到上传队列之后，可用于开始上传当前添加的文件 |
+| `on-complete`        | 文件上传完成                                         |
 
 ### 插槽
 
