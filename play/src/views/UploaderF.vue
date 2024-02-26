@@ -3,6 +3,7 @@
     <yto-c-uploader
       :get-instance="getInstance"
       :options="options"
+      :is-slice="false"
       :auto-upload="false"
       @file-success="handleUploadSuccess"
       @file-removed="handleFileRemoved"
@@ -74,15 +75,15 @@ const options = ref({
   fileParameterName: "file", // 上传文件时文件的参数名，默认file
   maxChunkRetries: 3, // 最大自动失败重试上传次数
   simultaneousUploads: 12, // 并发上传数 默认为 3
-  testChunks: true, // 是否开启服务器分片校验
-  // 服务器分片校验函数，秒传及断点续传基础
-  checkChunkUploadedByResponse: function (chunk: any, message: any) {
-    const _message = JSON.parse(message);
-    if (_message.data.ifExist) {
-      return true;
-    }
-    return (_message.data.chunks || []).indexOf(chunk.offset + 1) >= 0;
-  },
+  // testChunks: true, // 是否开启服务器分片校验
+  // // 服务器分片校验函数，秒传及断点续传基础
+  // checkChunkUploadedByResponse: function (chunk: any, message: any) {
+  //   const _message = JSON.parse(message);
+  //   if (_message.data.ifExist) {
+  //     return true;
+  //   }
+  //   return (_message.data.chunks || []).indexOf(chunk.offset + 1) >= 0;
+  // },
   headers: {},
   // 额外的自定义查询参数
   query: (file: any, chunk: any) => {

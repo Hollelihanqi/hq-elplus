@@ -46,7 +46,6 @@ export default defineComponent({
         requestParams: _params.value,
         ...context.attrs,
         dataCallback: (data) => {
-          console.log(data);
           return data.items.map((item) => {
             return {
               ...item,

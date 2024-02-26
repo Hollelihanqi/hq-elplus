@@ -47,15 +47,17 @@ const _options = {
   fileParameterName: "file", // 上传文件时文件的参数名，默认file
   maxChunkRetries: 3, // 最大自动失败重试上传次数
   simultaneousUploads: 3, // 并发上传数 默认为 3
-  testChunks: props.isSlice ? true : false, // 是否开启服务器分片校验
+  testChunks: props.isSlice, // 是否开启服务器分片校验
   // 服务器分片校验函数，秒传及断点续传基础
-  checkChunkUploadedByResponse: function (chunk: any, message: any) {
-    const _message = JSON.parse(message);
-    if (_message.data.ifExist) {
-      return true;
-    }
-    return (_message.data.chunks || []).indexOf(chunk.offset + 1) >= 0;
-  },
+  checkChunkUploadedByResponse: props.isSlice
+    ? function (chunk: any, message: any) {
+        const _message = JSON.parse(message);
+        if (_message.data.ifExist) {
+          return true;
+        }
+        return (_message.data.chunks || []).indexOf(chunk.offset + 1) >= 0;
+      }
+    : null,
   headers: typeof props.headers === "function" ? props.headers() : props.headers,
   // 额外的自定义查询参数
   query: (file: any, chunk: any) => {
@@ -66,6 +68,14 @@ const _options = {
       ...props.requestParams,
     };
   },
+};
+
+const checkChunkUploaded = (chunk: any, message: any) => {
+  const _message = JSON.parse(message);
+  if (_message.data.ifExist) {
+    return true;
+  }
+  return (_message.data.chunks || []).indexOf(chunk.offset + 1) >= 0;
 };
 const uploadBtn = ref();
 const cmd5 = ref(false);

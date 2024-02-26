@@ -119,7 +119,7 @@ const uploadAverageSpeed = computed(() => {
 const pause = () => {
   props.file.pause();
   _actionCheck();
-  _fileProgress();
+  // _fileProgress();
 };
 const resume = () => {
   props.file.resume();
@@ -136,6 +136,7 @@ const _fileProgress = () => {
   progress.value = props.file.progress();
   averageSpeed.value = props.file.averageSpeed;
   currentSpeed.value = props.file.currentSpeed;
+  isUploading.value = props.file.isUploading();
   timeRemaining.value = props.file.timeRemaining();
   uploadedSize.value = props.file.sizeUploaded();
   _actionCheck();
@@ -149,7 +150,8 @@ const _fileSuccess = (rootFile?: any, file?: any, message?: any) => {
   if (rootFile) {
     processResponse(message, file);
   }
-  _fileProgress();
+  console.log("上传成功");
+  // _fileProgress();
   error.value = false;
   isComplete.value = true;
   isUploading.value = false;
@@ -165,7 +167,7 @@ const processResponse = (message: any, file: any) => {
   response.value = res;
 };
 const _fileComplete = () => {
-  _fileSuccess();
+  // _fileSuccess();
 };
 
 const _errorStatus = () => {
@@ -174,7 +176,6 @@ const _errorStatus = () => {
   isUploading.value = false;
 };
 const _fileError = (rootFile: any, file: any, message: any) => {
-  _fileProgress();
   processResponse(message, file);
   _errorStatus();
 };

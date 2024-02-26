@@ -4,6 +4,7 @@ import { install } from "../../_utils";
 
 export const YtoRemoteSearch = install(RemoteSearch);
 
-export type { RemoteSearchInstance } from "./src/instance";
+export * from './src/interface'
+export type RemoteSearchInstance = InstanceType<typeof RemoteSearch>;
 
 export default YtoRemoteSearch;
