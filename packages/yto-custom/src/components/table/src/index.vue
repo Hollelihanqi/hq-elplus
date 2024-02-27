@@ -73,8 +73,8 @@
 </template>
 
 <script lang="tsx" setup name="Table">
-import { Props } from "./props";
 import { ref, onMounted, defineEmits } from "vue";
+import { Props } from "./props";
 import TableColumn from "./components/TableColumn.vue";
 import SettingV from "./components/Setting.vue";
 import { Setting } from "@element-plus/icons-vue";

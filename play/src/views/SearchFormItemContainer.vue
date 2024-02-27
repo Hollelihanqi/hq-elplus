@@ -1,6 +1,7 @@
 <template>
   <div class="p-[16px]">
     <yto-c-search-container
+      ref="searchContainerRef"
       custom-class="p-[16px] bg-[#eeeffc]"
       :item-min-width="350"
       :model="form"
@@ -36,6 +37,7 @@
 const form = {};
 const formItemWidth = ref(350);
 const formConfig: Array<any> = reactive([]);
+const searchContainerRef = ref();
 for (let index = 0; index < 10; index++) {
   formConfig.push({
     itemType: "input",
@@ -47,6 +49,7 @@ for (let index = 0; index < 10; index++) {
 }
 const handleResize = (itemWidth: number) => {
   console.log("handleResize", itemWidth);
+  console.log("searchContainerRef", unref(searchContainerRef));
   // formItemWidth.value = itemWidth;
   // cardStyle.value = `width: ${(info.width - num * props.gap) / num}px; min-width:${props.minWidth}px`;
 };

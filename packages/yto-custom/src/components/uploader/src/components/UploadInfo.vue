@@ -119,7 +119,7 @@ const uploadAverageSpeed = computed(() => {
 const pause = () => {
   props.file.pause();
   _actionCheck();
-  _fileProgress();
+  // _fileProgress();
 };
 const resume = () => {
   props.file.resume();
@@ -136,6 +136,7 @@ const _fileProgress = () => {
   progress.value = props.file.progress();
   averageSpeed.value = props.file.averageSpeed;
   currentSpeed.value = props.file.currentSpeed;
+  isUploading.value = props.file.isUploading();
   timeRemaining.value = props.file.timeRemaining();
   uploadedSize.value = props.file.sizeUploaded();
   _actionCheck();
@@ -147,24 +148,26 @@ const _actionCheck = () => {
 };
 const _fileSuccess = (rootFile?: any, file?: any, message?: any) => {
   if (rootFile) {
-    processResponse(message);
+    processResponse(message, file);
   }
-  _fileProgress();
+  console.log("上传成功");
+  // _fileProgress();
   error.value = false;
   isComplete.value = true;
   isUploading.value = false;
 };
-const processResponse = (message: any) => {
+const processResponse = (message: any, file: any) => {
   let res = message;
   try {
     res = JSON.parse(message);
+    file._response = res;
   } catch (e) {
     console.error("processResponse", e);
   }
   response.value = res;
 };
 const _fileComplete = () => {
-  _fileSuccess();
+  // _fileSuccess();
 };
 
 const _errorStatus = () => {
@@ -173,8 +176,7 @@ const _errorStatus = () => {
   isUploading.value = false;
 };
 const _fileError = (rootFile: any, file: any, message: any) => {
-  _fileProgress();
-  processResponse(message);
+  processResponse(message, file);
   _errorStatus();
 };
 
@@ -195,8 +197,7 @@ onMounted(() => {
   currentSpeed.value = props.file.currentSpeed;
   error.value = props.file.error;
   props.file.setErrorStatus = _setErrorStatus;
-  props.file.status = status.value;
-  props.file.progress = progress.value;
+  props.file.status = status;
   props.file.uploader.on("fileProgress", _fileProgress);
   props.file.uploader.on("fileSuccess", _fileSuccess);
   props.file.uploader.on("fileComplete", _fileComplete);

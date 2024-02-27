@@ -1,102 +1,14 @@
 <script lang="tsx">
 import { defineComponent, h, ref, getCurrentInstance } from "vue";
+import { Props, RemoteSearchProps } from "./props";
 import { ElSelect, ElOption, ElSelectV2 } from "element-plus";
 import { request, debounce } from "@/_utils";
-import type { ExtractPropTypes } from "vue";
-
-const props = {
-  url: {
-    type: String,
-    default: "",
-  },
-  method: {
-    type: String,
-    default: "GET",
-  },
-  isRemoteSearch: {
-    type: Boolean,
-    default: true,
-  },
-  requestApi: {
-    type: Function,
-    default: null,
-  },
-  requestAuto: {
-    type: Boolean,
-    default: true,
-  },
-  searchField: {
-    type: String,
-    default: "",
-  },
-  requestParams: {
-    type: Object,
-    default: () => ({}),
-  },
-  defaultParams: {
-    type: Object,
-    default: () => ({}),
-  },
-  requestHeaders: {
-    type: [Object, Function],
-    default: () => ({}),
-  },
-  resultKey: {
-    type: String,
-    default: "items",
-  },
-  dataCallback: {
-    type: [Function],
-    required: false,
-    default: null,
-  },
-  valueKey: {
-    type: String,
-    default: "id",
-  },
-  labelKey: {
-    type: String,
-    default: "label",
-  },
-  modelItem: {
-    type: Boolean,
-    default: false,
-  },
-  optTemp: {
-    type: [Function, Object],
-    default: null,
-  },
-  w: {
-    type: String,
-    default: "100%",
-  },
-  getInstance: {
-    type: Function,
-    default: null,
-  },
-  getExposed: {
-    type: Function,
-    default: null,
-  },
-  stag: {
-    type: String,
-    default: "select",
-  },
-  // modelValue: {
-  //   // 此属性是 vue3.0 默认的 v-model 双向数据绑定 prop，请在子组件上通过 v-model 进行传递
-  //   // 因为组件内部时通过 watch 监听 v-model 的值的变化来更新组件的内部 _value；
-  //   // 所以清除表单时一定要手动对 v-model 的值进行手动置空，否则组件下次不会更新 _value
-  //   type: [String, Array],
-  //   default: "",
-  // },
-};
-export type BaseSelectProps = Partial<ExtractPropTypes<typeof props>>;
 
 export default defineComponent({
   name: "RemoteSearch",
-  props,
+  props: Props,
   emits: ["after-remote"],
-  setup(props: BaseSelectProps, { attrs, expose, emit }) {
+  setup(props: RemoteSearchProps, { attrs, expose, emit }) {
     const options: any = ref([]);
     const copyOptions: any = ref([]);
     const loading = ref(false);
@@ -109,7 +21,7 @@ export default defineComponent({
     const updateData = (params = {}) => {
       source.cancel();
       source.token = request.CancelToken.source().token;
-      let _headers = { ...props.requestHeaders };
+      let _headers: any = { ...props.requestHeaders };
       if (typeof props.requestHeaders === "function") {
         _headers = props.requestHeaders();
       }
@@ -274,7 +186,7 @@ export default defineComponent({
     const renderSelectV2 = () => {
       const _props = {
         label: props.labelKey,
-        value: props.valueKey,
+        value: props.modelItem ? "value" : props.valueKey,
       };
       return (
         <ElSelectV2
