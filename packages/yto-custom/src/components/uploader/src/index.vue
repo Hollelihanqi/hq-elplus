@@ -204,6 +204,9 @@ const processResponse = (message: any, file: any) => {
 
 // 单个文件上传成功后触发
 const fileSuccess = (rootFile: any, file: any, message: any, chunk: any) => {
+  setTimeout(() => {
+    rootFile.setStatus("success");
+  }, 500);
   processResponse(message, file);
   if (props.onFileSuccess) {
     props.onFileSuccess(rootFile, file, message, chunk);

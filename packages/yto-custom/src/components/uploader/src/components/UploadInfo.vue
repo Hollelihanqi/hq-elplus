@@ -212,26 +212,26 @@ const _fileSuccess = (rootFile?: any, file?: any, message?: any) => {
 //   }
 // };
 
-const _errorStatus = () => {
-  error.value = true;
-  isComplete.value = false;
-  isUploading.value = false;
-};
+// const _errorStatus = () => {
+//   error.value = true;
+//   isComplete.value = false;
+//   isUploading.value = false;
+// };
 // const _fileError = (rootFile: any, file: any, message: any) => {
 //   processResponse(message, file);
 //   _errorStatus();
 // };
 
-const _setErrorStatus = () => {
-  props.file.error = true;
-};
+// const _setErrorStatus = () => {
+//   props.file.error = true;
+// };
 
-const resetStatus = () => {
-  paused.value = false;
-  error.value = false;
-  isComplete.value = false;
-  isUploading.value = false;
-};
+// const resetStatus = () => {
+//   paused.value = false;
+//   error.value = false;
+//   isComplete.value = false;
+//   isUploading.value = false;
+// };
 
 const setStatus = (value: string) => {
   status2.value = value;
@@ -268,8 +268,7 @@ onBeforeMount(() => {
   isUploading.value = props.file.isUploading();
   timeRemaining.value = props.file.timeRemaining();
   currentSpeed.value = props.file.currentSpeed;
-  props.file.resetStatus = resetStatus;
-  props.file.setErrorStatus = _setErrorStatus;
+  // props.file.setErrorStatus = _setErrorStatus;
   props.file.setStatus = setStatus;
   props.file.status = status2;
   props.file.uploader.on("fileProgress", _fileProgress);
