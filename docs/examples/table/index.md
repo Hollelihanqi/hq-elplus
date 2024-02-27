@@ -60,6 +60,15 @@
 | `requestParams`        | 表格数据获取时，其它参数                                                                         | Object/Function | ()=>{}     | —                                         |
 | `headerbgHide`         | 表格 Header 部分是否增加背景                                                                     | Boolean         | —          | —                                         |
 | `loading`              | 数据渲染前是否显示 loading,如果传入 `requestApi`,不需要绑定此属性                                | Boolean         | true/false | false                                     |
+| `toolBar`              | 表格设置                                                                                         | Boolean         | true/false | false                                     |
+| `showHideFields`       | 列显示字段配置,Array?['列字段名']:Object?`showHideFieldsOptions`:null,                           | Object/Array    | --         | null                                      |
+
+### showHideFieldsOptions 属性
+
+| 属性名       | 说明                                     | 类型  | 备注                               |
+| ------------ | ---------------------------------------- | ----- | ---------------------------------- |
+| `fields`     | 可配置列字段名                           | Array | ["id", "title", "level", "status"] |
+| `showFields` | 默认显示列字段名，必须包含在 `fields` 中 | Array | ["id", "title", "level"]           |
 
 ### Column 属性
 
