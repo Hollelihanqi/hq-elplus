@@ -1,5 +1,5 @@
 <template>
-  <div :id="containerId" class="search-container" :class="customClass">
+  <div :id="containerId" class="search-container relative" :class="customClass">
     <el-form
       v-if="isUseForm"
       ref="formInstance"
@@ -99,7 +99,7 @@ const dealCollapse = (lineNum: number, itemWidth: number) => {
   });
   //如果是展开状态 则不隐藏按钮
   !collapse.value && (showCollapse.value = row > props.collapseLine);
-  // console.log("内部元素共显示了大致", row, "行（不包含最后一行可能未满的情况）");
+  // console.log("内部元素共显示了大致", row, "行（不包含最后一行可能未满的情况）", showCollapse.value);
 };
 const handleCollapse = () => {
   const tmpChildren = document.querySelector(`#${containerId.value} .container-content`)?.children;
