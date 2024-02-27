@@ -1,6 +1,6 @@
 <template>
-  <div class="upload-info" :status="status">
-    <slot :progress="progress" :status="status">
+  <div class="upload-info" :status="status2">
+    <slot :progress="progress" :status="status2">
       <div
         class="uploader-file-progress"
         :class="file.error ? 'error-uploader-file-progress' : progressingClass"
@@ -12,16 +12,20 @@
         </div>
         <div class="size">{{ fileSize }}</div>
         <div class="status">
-          <span v-show="status !== 'uploading'">{{ file.error ? statusText.error : statusText[status] }}</span>
-          <div v-show="status === 'uploading'" class="flex items-center gap-2">
+          <!-- <span v-show="status !== 'uploading'">{{ file.error ? statusText.error : statusText[status] }}</span> -->
+          <span v-show="status2 !== 'uploading'">{{ statusText[status2] }}</span>
+          <div v-show="status2 === 'uploading'" class="flex items-center gap-2">
             <span>{{ progressStyle.progress }}</span>
             <span>{{ uploadAverageSpeed }}</span>
           </div>
         </div>
         <div class="uploader-file-actions">
-          <span v-if="isUploading" class="uploader-file-pause" @click="pause"></span>
+          <!-- <span v-if="isUploading" class="uploader-file-pause" @click="pause"></span>
           <span v-if="paused" class="uploader-file-resume" @click="resume">️</span>
-          <span v-if="error || file.error" class="uploader-file-retry" @click="retry"></span>
+          <span v-if="error || file.error" class="uploader-file-retry" @click="retry"></span> -->
+          <span v-if="status2 === 'uploading'" class="uploader-file-pause" @click="pause"></span>
+          <span v-if="status2 === 'paused'" class="uploader-file-resume" @click="resume">️</span>
+          <span v-if="status2 === 'error' || file.error" class="uploader-file-retry" @click="retry"></span>
           <span class="uploader-file-remove" @click="remove"></span>
         </div>
       </div>
@@ -37,9 +41,13 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  cmd5: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const cmd5 = inject("cmd5") as any;
+// const cmd5 = inject("cmd5") as any;
 const paused = ref(false);
 const error = ref(false);
 const isComplete = ref(false); // 文件是否已上传完成，并收到服务器响应
@@ -63,26 +71,44 @@ const statusText = {
   cmd5: "计算MD5...",
   waiting: "等待中...",
 } as any;
-const status = computed(() => {
-  let s = "";
-  if (isComplete.value) {
-    s = "success";
-  } else if (error.value) {
-    s = "error";
-  } else if (isUploading.value) {
-    s = "uploading";
-  } else if (cmd5.value) {
-    s = "cmd5";
-  } else if (paused.value) {
-    s = "paused";
-  } else {
-    s = "waiting";
-  }
-  return s;
-});
+
+// const status = computed(() => {
+//   let s = "";
+//   if (isComplete.value) {
+//     s = "success";
+//   } else if (error.value) {
+//     s = "error";
+//   } else if (isUploading.value) {
+//     s = "uploading";
+//   } else if (cmd5.value) {
+//     s = "cmd5";
+//   } else if (paused.value) {
+//     s = "paused";
+//   } else {
+//     s = "waiting";
+//   }
+//   return s;
+// });
+
+const status2 = ref("waiting");
+
+// watch(
+//   () => status.value,
+//   (newStatus, oldStatus) => {
+//     let timer: any = null;
+//     if (oldStatus && newStatus === "uploading" && oldStatus !== "uploading") {
+//       timer = setTimeout(() => {
+//         progressingClass.value = "uploader-file-progressing";
+//       }, 300);
+//     } else {
+//       clearTimeout(timer);
+//       progressingClass.value = "";
+//     }
+//   }
+// );
 
 watch(
-  () => status.value,
+  () => status2.value,
   (newStatus, oldStatus) => {
     let timer: any = null;
     if (oldStatus && newStatus === "uploading" && oldStatus !== "uploading") {
@@ -118,8 +144,9 @@ const uploadAverageSpeed = computed(() => {
 
 const pause = () => {
   props.file.pause();
-  _actionCheck();
+  // _actionCheck();
   // _fileProgress();
+  status2.value = "paused";
 };
 const resume = () => {
   props.file.resume();
@@ -130,60 +157,106 @@ const remove = () => {
 };
 const retry = () => {
   props.file.retry();
-  _actionCheck();
+  // _actionCheck();
 };
+
 const _fileProgress = () => {
-  progress.value = props.file.progress();
+  const _isUploading = props.file.isUploading();
+  const _progress = props.file.progress();
+  progress.value = _progress;
   averageSpeed.value = props.file.averageSpeed;
   currentSpeed.value = props.file.currentSpeed;
   isUploading.value = props.file.isUploading();
   timeRemaining.value = props.file.timeRemaining();
   uploadedSize.value = props.file.sizeUploaded();
-  _actionCheck();
+  if (_isUploading) {
+    status2.value = "uploading";
+  }
 };
+
 const _actionCheck = () => {
   paused.value = props.file.paused;
   error.value = props.file.error;
   isUploading.value = props.file.isUploading();
 };
 const _fileSuccess = (rootFile?: any, file?: any, message?: any) => {
-  if (rootFile) {
-    processResponse(message, file);
-  }
-  console.log("上传成功");
+  // if (rootFile && file.error) {
+  //   _errorStatus();
+  // } else if (rootFile && !file.error) {
+  //   error.value = false;
+  //   isComplete.value = true;
+  //   isUploading.value = false;
+  // }
+  // processResponse(message, file);
   // _fileProgress();
-  error.value = false;
-  isComplete.value = true;
-  isUploading.value = false;
+  // error.value = false;
+  // isComplete.value = true;
+  // isUploading.value = false;
 };
-const processResponse = (message: any, file: any) => {
-  let res = message;
-  try {
-    res = JSON.parse(message);
-    file._response = res;
-  } catch (e) {
-    console.error("processResponse", e);
-  }
-  response.value = res;
-};
-const _fileComplete = () => {
-  // _fileSuccess();
-};
+// const processResponse = (message: any, file: any) => {
+//   let res = message;
+//   try {
+//     res = JSON.parse(message);
+//     file._response = res;
+//   } catch (e) {
+//     console.error("processResponse", e);
+//   }
+//   response.value = res;
+// };
+// const _fileComplete = (rootFile: any) => {
+//   console.log("_fileComplete");
+//   console.log(rootFile);
+//   // error.value = props.file.error;
+//   if (props.file.error) {
+//     _errorStatus();
+//   }
+// };
 
 const _errorStatus = () => {
   error.value = true;
   isComplete.value = false;
   isUploading.value = false;
 };
-const _fileError = (rootFile: any, file: any, message: any) => {
-  processResponse(message, file);
-  _errorStatus();
-};
+// const _fileError = (rootFile: any, file: any, message: any) => {
+//   processResponse(message, file);
+//   _errorStatus();
+// };
 
 const _setErrorStatus = () => {
   props.file.error = true;
 };
-onMounted(() => {
+
+const resetStatus = () => {
+  paused.value = false;
+  error.value = false;
+  isComplete.value = false;
+  isUploading.value = false;
+};
+
+const setStatus = (value: string) => {
+  status2.value = value;
+};
+
+watch(
+  () => props.file.error,
+  (newValue) => {
+    if (newValue) {
+      setStatus("error");
+    }
+  }
+);
+
+watch(
+  () => props.cmd5,
+  (newValue) => {
+    console.log("cmd5");
+    if (newValue) {
+      setStatus("cmd5");
+    }
+  }
+);
+
+onBeforeMount(() => {
   averageSpeed.value = props.file.averageSpeed;
   uploadedSize.value = props.file.sizeUploaded();
   uploadFileSize.value = props.file.getSize();
@@ -195,14 +268,35 @@ onMounted(() => {
   isUploading.value = props.file.isUploading();
   timeRemaining.value = props.file.timeRemaining();
   currentSpeed.value = props.file.currentSpeed;
-  error.value = props.file.error;
+  props.file.resetStatus = resetStatus;
   props.file.setErrorStatus = _setErrorStatus;
-  props.file.status = status;
+  props.file.setStatus = setStatus;
+  props.file.status = status2;
   props.file.uploader.on("fileProgress", _fileProgress);
-  props.file.uploader.on("fileSuccess", _fileSuccess);
-  props.file.uploader.on("fileComplete", _fileComplete);
-  props.file.uploader.on("fileError", _fileError);
 });
+onMounted(() => {
+  // averageSpeed.value = props.file.averageSpeed;
+  // uploadedSize.value = props.file.sizeUploaded();
+  // uploadFileSize.value = props.file.getSize();
+  // extension.value = props.file.getExtension();
+  // fileType.value = props.file.getType();
+  // paused.value = props.file.paused;
+  // progress.value = props.file.progress();
+  // isComplete.value = props.file.isComplete();
+  // isUploading.value = props.file.isUploading();
+  // timeRemaining.value = props.file.timeRemaining();
+  // currentSpeed.value = props.file.currentSpeed;
+  // props.file.resetStatus = resetStatus;
+  // props.file.setErrorStatus = _setErrorStatus;
+  // props.file.setStatus = setStatus;
+  // props.file.status = status2;
+  // props.file.uploader.on("fileProgress", _fileProgress);
+  // props.file.uploader.on("fileSuccess", _fileSuccess);
+  // props.file.uploader.on("fileComplete", _fileComplete);
+  // props.file.uploader.on("fileError", _fileError);
+});
+
+defineExpose({ setStatus });
 </script>
 
 <style lang="scss" scoped>
@@ -211,6 +305,7 @@ onMounted(() => {
   height: 40px;
   border-bottom: 1px solid #ddd;
   overflow: hidden;
+  background-color: rgba(240, 240, 240);
 }
 .upload-info[status="waiting"] .uploader-file-pause,
 .upload-info[status="uploading"] .uploader-file-pause {
