@@ -1,6 +1,12 @@
 <template>
   <div :id="containerId" class="search-container" :class="customClass">
-    <el-form v-if="isUseForm" v-resize-element="handleResize" v-bind="$attrs" class="flex flex-wrap container-content">
+    <el-form
+      v-if="isUseForm"
+      ref="formInstance"
+      v-resize-element="handleResize"
+      v-bind="$attrs"
+      class="flex flex-wrap container-content"
+    >
       <slot></slot>
 
       <div class="flex-1 text-right container-operation"><slot name="operation"></slot></div>
@@ -28,6 +34,7 @@ const props = withDefaults(defineProps<Props>(), {
   itemMinWidth: 300,
   autoLayout: true,
 });
+const formInstance = ref();
 const containerId = computed(() => {
   return `searchContainer_${guid()}`;
 });
@@ -62,6 +69,9 @@ onMounted(() => {
   const tmpEl: any = document.querySelector(`#${containerId.value} .container-content`);
   // console.log("search-container-onMounted", tmpEl.offsetWidth);
   tmpEl && handleResize({ width: tmpEl.offsetWidth });
+});
+defineExpose({
+  formInstance,
 });
 </script>
 <style lang="scss" scoped>
