@@ -16,7 +16,7 @@
     </UploadList> -->
     <div v-show="UPLOADER?.fileList?.length && !listHide" class="uploader-list">
       <div v-for="file in UPLOADER.fileList" :key="file.id" class="file-item">
-        <UploadInfo :file="file" :list="true">
+        <UploadInfo :file="file" :list="true" :cmd5="cmd5">
           <template #default="{ progress, status }">
             <slot name="fileListItem" :file="file" :progress="progress" :status="status" />
           </template>
@@ -79,7 +79,7 @@ const checkChunkUploaded = (chunk: any, message: any) => {
 };
 const uploadBtn = ref();
 const cmd5 = ref(false);
-provide("cmd5", cmd5);
+
 const started = ref(false);
 const files = ref<any>([]);
 const fileList = ref<any>([]);
@@ -103,6 +103,7 @@ const initUploaderEvent = () => {
   UPLOADER.value.on("fileSuccess", fileSuccess);
   UPLOADER.value.on("fileError", fileError);
   UPLOADER.value.on("complete", complete);
+  UPLOADER.value.on("uploadStart", uploadStart);
 };
 // function kebabCase(s) {
 //   return s.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
@@ -184,15 +185,29 @@ const filesSubmitted = (files: any, _fileList: any) => {
   }
 };
 
-// 所有文件上传完成后触发
+// 文件上传完成后触发
 const fileComplete = (rootFile: any) => {
   if (props.onFileComplete) {
     props.onFileComplete(rootFile);
   }
 };
 
+const processResponse = (message: any, file: any) => {
+  let res = message;
+  try {
+    res = JSON.parse(message);
+    file._response = res;
+  } catch (e) {
+    console.error("processResponse", e);
+  }
+};
+
 // 单个文件上传成功后触发
 const fileSuccess = (rootFile: any, file: any, message: any, chunk: any) => {
+  setTimeout(() => {
+    rootFile.setStatus("success");
+  }, 500);
+  processResponse(message, file);
   if (props.onFileSuccess) {
     props.onFileSuccess(rootFile, file, message, chunk);
   }
@@ -208,6 +223,11 @@ const fileError = (rootFile: any, file: any, message: any, chunk: any) => {
 // 上传完成
 const complete = () => {
   emits("on-complete", UPLOADER.value.fileList);
+};
+
+// 文件开始上传
+const uploadStart = () => {
+  console.log("文件开始上传");
 };
 
 //开始上传

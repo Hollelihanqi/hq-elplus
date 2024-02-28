@@ -3,7 +3,7 @@
     <div v-if="$slots.tableHeader || toolBar" class="table-header flex items-center">
       <div class="flex-1 flex items-center">
         <slot name="tableHeader"></slot>
-        <div v-if="toolBar" class="flex-1 flex justify-end px-[8px]">
+        <div v-if="toolBar" :class="`flex justify-end px-[8px] ${$slots.tableHeader ? '' : 'flex-1'}`">
           <el-button :icon="Setting" circle @click="handleSetting" />
         </div>
       </div>
@@ -28,7 +28,7 @@
         <slot name="empty"></slot>
       </template>
 
-      <template v-for="item in columns" :key="item">
+      <template v-for="item in _columns" :key="item">
         <!-- selection || index -->
         <el-table-column
           v-if="item.type === 'selection' || item.type === 'index'"
@@ -69,7 +69,7 @@
       @update:current-page="handlePageChange"
     ></el-pagination>
   </div>
-  <SettingV ref="SettingInstance" :tprops="props" @on-save="HandleSetSave" />
+  <SettingV ref="SettingInstance" :columns="setColumns" @on-save="HandleSetSave" />
 </template>
 
 <script lang="tsx" setup name="Table">
@@ -84,7 +84,7 @@ export interface ColumnsItemProps {
 }
 
 const props = defineProps(Props);
-const { _columns, SettingInstance, handleSetting, HandleSetSave } = useController(props);
+const { _columns, setColumns, SettingInstance, handleSetting, HandleSetSave } = useController(props);
 
 const ElTableInstance = ref();
 const emits = defineEmits(["on-table"]);
@@ -287,6 +287,7 @@ defineExpose({
   resetPage,
   updatePage,
   getData,
+  setting: handleSetting,
   tableData: _tdata,
 });
 </script>

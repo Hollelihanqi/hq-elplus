@@ -39,7 +39,7 @@ export const Props = {
             return {
                 success: "成功",
                 error: "错误",
-                uploading: "正在上传...",
+                uploading: "上传中...",
                 paused: "暂停",
                 md5: "计算MD5...",
                 waiting: "等待中...",

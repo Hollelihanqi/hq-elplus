@@ -1,27 +1,104 @@
 import type { TableProps, ColumnsItemProps, setColumnsProps } from "./interface";
-const _columns = ref<any>([])
 
-const useController = (props?: TableProps) => {
-    _columns.value = props?.columns
+const useController = (props: TableProps) => {
+    const _columns = ref<any>([])
+    let _cacheSaveColumns:any = null
+    _columns.value = _ideepClone(props?.columns)
+    const setColumns: any = ref([])
     const SettingInstance = ref()
     const handleSetting = () => {
+        getShowHideColumns()
         SettingInstance.value.actionDialog()
     }
-    const HandleSetSave = (value: setColumnsProps[]) => {
-        console.log(value)
-        const newColumns = _ideepClone(_columns.value)
-        value.forEach((item) => {
-            newColumns.forEach((column: ColumnsItemProps) => {
+    const HandleSetSave = () => {
+        const newColumns = _ideepClone(props.columns)
+        setColumns.value.forEach((item: any) => {
+            newColumns?.forEach((column: ColumnsItemProps) => {
                 if (item.prop === column.prop) {
                     column.show = item.checked
                 }
             })
         })
-        console.log(newColumns)
         _columns.value = newColumns
+        if (props.tableKey) {
+            window.localStorage.setItem(props.tableKey, JSON.stringify(setColumns.value));
+        } else {
+            _cacheSaveColumns = _ideepClone(setColumns.value)
+        }
     }
+
+    const getShowHideColumns = () => {
+        const _cacheSetColumns = getCacheColumns()
+        if (_cacheSetColumns) {
+            setColumns.value = _cacheSetColumns;
+            return
+        } else if (_cacheSaveColumns) {
+            setColumns.value = _ideepClone(_cacheSaveColumns);
+            return
+        }
+        const isChecked = (prop: string) => {
+            const { showHideFields } = props as any;
+            if (Array.isArray(showHideFields) && showHideFields.includes(prop)) {
+                return {
+                    checked: showHideFields.includes(prop),
+                    prop,
+                };
+            }
+            if (showHideFields?.fields && showHideFields?.showFields && showHideFields.fields.includes(prop)) {
+                return {
+                    checked: showHideFields.fields.includes(prop) && showHideFields.showFields.includes(prop),
+                    prop,
+                };
+            }
+            return true;
+        };
+        const _columns = props?.columns.map((item: ColumnsItemProps) => {
+            const isColumnChecked = isChecked(item.prop as string);
+            const checkedValue = typeof isColumnChecked === "boolean" ? isColumnChecked : isColumnChecked.checked;
+            return {
+                label: item.label,
+                prop: item.prop,
+                checked: checkedValue,
+                disabled: isColumnChecked === true ? true : false,
+            };
+        });
+        setColumns.value = _columns;
+    };
+
+    const getCacheColumns = () => {
+        let cacheSetColumns = window.localStorage.getItem(props.tableKey) as any;
+        if (!cacheSetColumns) return "";
+        try {
+            cacheSetColumns = JSON.parse(cacheSetColumns);
+            // _columns.value = columns;
+        } catch (error) {
+            console.error("getCacheColumns 解析失败--", error);
+        }
+        return cacheSetColumns
+    };
+
+    watch(
+        () => props.columns,
+        () => {
+            if (props.showHideFields) {
+                getShowHideColumns()
+                HandleSetSave()
+            } else {
+                _columns.value = _ideepClone(props.columns)
+            }
+        },
+    )
+
+    onBeforeMount(() => {
+        if (props.showHideFields) {
+            getShowHideColumns()
+            HandleSetSave()
+        }
+    })
+
     return {
         _columns,
+        setColumns,
         SettingInstance,
         handleSetting,
         HandleSetSave
@@ -34,12 +111,12 @@ function _ideepClone<T>(obj: T): T {
     }
 
     if (Array.isArray(obj)) {
-        let copy = obj.map((item) => _ideepClone(item));
+        const copy = obj.map((item) => _ideepClone(item));
         return copy as T;
     }
 
     if (obj instanceof Object) {
-        let copy = Object.create(Object.getPrototypeOf(obj));
+        const copy = Object.create(Object.getPrototypeOf(obj));
         Object.keys(obj).forEach((key) => {
             (copy as any)[key] = _ideepClone((obj as any)[key]);
         });
@@ -48,31 +125,5 @@ function _ideepClone<T>(obj: T): T {
 
     throw new Error("Unable to copy obj! Its type isn't supported.");
 }
-
-// const _ideepClone = (obj: any) => {
-//     if (obj === null || typeof obj !== 'object') {
-//         return obj;
-//     }
-
-//     if (obj instanceof Array) {
-//         let copy = [];
-//         for (let i = 0, len = obj.length; i < len; i++) {
-//             copy[i] = _ideepClone(obj[i]);
-//         }
-//         return copy;
-//     }
-
-//     if (obj instanceof Object) {
-//         let copy: any = {};
-//         for (let key in obj) {
-//             if (obj.hasOwnProperty(key)) {
-//                 copy[key] = _ideepClone(obj[key]);
-//             }
-//         }
-//         return copy;
-//     }
-
-//     throw new Error("Unable to copy obj! Its type isn't supported.");
-// }
 
 export default useController
