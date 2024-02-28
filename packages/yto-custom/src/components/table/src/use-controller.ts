@@ -2,6 +2,7 @@ import type { TableProps, ColumnsItemProps, setColumnsProps } from "./interface"
 
 const useController = (props: TableProps) => {
     const _columns = ref<any>([])
+    let _cacheSaveColumns:any = null
     _columns.value = _ideepClone(props?.columns)
     const setColumns: any = ref([])
     const SettingInstance = ref()
@@ -19,13 +20,20 @@ const useController = (props: TableProps) => {
             })
         })
         _columns.value = newColumns
-        props.tableKey && window.localStorage.setItem(props.tableKey, JSON.stringify(setColumns.value));
+        if (props.tableKey) {
+            window.localStorage.setItem(props.tableKey, JSON.stringify(setColumns.value));
+        } else {
+            _cacheSaveColumns = _ideepClone(setColumns.value)
+        }
     }
 
     const getShowHideColumns = () => {
         const _cacheSetColumns = getCacheColumns()
         if (_cacheSetColumns) {
             setColumns.value = _cacheSetColumns;
+            return
+        } else if (_cacheSaveColumns) {
+            setColumns.value = _ideepClone(_cacheSaveColumns);
             return
         }
         const isChecked = (prop: string) => {

@@ -91,6 +91,7 @@
 | `resetPage`       | 重置表格分页参数                                                                                   |      |
 | `updatePage`      | 手动更新分页大小(pageSize)和当前页码(currentPage) `{ currentPage = 1, pageSize = props.pageSize }` |      |
 | `getData`         | 获取当前页列表数据                                                                                 |      |
+| `setting`         | 调起列选择窗口                                                                                     |      |
 
 ### ElTable 实例调用
 

@@ -60,6 +60,7 @@ const handleSCancel = () => {
 };
 const handleSSave = () => {
   emits("on-save");
+  dialogVisible.value = false;
 };
 const handleSReture = () => {
   emits("on-return");

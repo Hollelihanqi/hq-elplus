@@ -3,7 +3,7 @@
     <div v-if="$slots.tableHeader || toolBar" class="table-header flex items-center">
       <div class="flex-1 flex items-center">
         <slot name="tableHeader"></slot>
-        <div v-if="toolBar" class="flex-1 flex justify-end px-[8px]">
+        <div v-if="toolBar" :class="`flex justify-end px-[8px] ${$slots.tableHeader ? '' : 'flex-1'}`">
           <el-button :icon="Setting" circle @click="handleSetting" />
         </div>
       </div>
@@ -287,6 +287,7 @@ defineExpose({
   resetPage,
   updatePage,
   getData,
+  setting: handleSetting,
   tableData: _tdata,
 });
 </script>

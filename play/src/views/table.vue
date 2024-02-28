@@ -1,12 +1,23 @@
 <template>
   <div class="flex flex-col overflow-hidden p-[16px]">
-    <yto-c-table :columns="columns" :request-api="getList" tool-bar :show-hide-fields="ShowHiddenFieldKeys2">
+    <yto-c-table
+      ref="YtoTableInstance"
+      :columns="columns"
+      :request-api="getList"
+      tool-bar
+      :show-hide-fields="ShowHiddenFieldKeys2"
+    >
       <!-- <template #callStatus="scope">
       <span>{{ scope.row.status }}</span>
     </template> -->
       <!-- <template #append>
         <div class="bg-yellow-500 h-[50px]">total</div>
       </template> -->
+      <template #tableHeader>
+        <div>
+          <el-button @click="settting">设置</el-button>
+        </div>
+      </template>
     </yto-c-table>
   </div>
 </template>
@@ -19,6 +30,10 @@ const ShowHiddenFieldKeys2 = {
   showFields: ["id", "title", "level"],
 };
 
+const YtoTableInstance = ref();
+const settting = () => {
+  YtoTableInstance.value.setting();
+};
 const columns = [
   {
     label: "事件编号",
