@@ -4,7 +4,8 @@
       ref="YtoTableInstance"
       :columns="columns"
       :request-api="getList"
-      tool-bar
+      show-summary
+      :tool-bar="false"
       :show-hide-fields="ShowHiddenFieldKeys2"
     >
       <!-- <template #callStatus="scope">
