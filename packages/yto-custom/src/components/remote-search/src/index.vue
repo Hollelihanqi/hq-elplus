@@ -34,6 +34,7 @@ export default defineComponent({
         ...params,
       };
       try {
+        loading.value = true;
         request
           .request({
             url: props.url,
@@ -56,6 +57,9 @@ export default defineComponent({
               copyOptions.value = props.resultKey && [...res[props.resultKey]];
             }
             emit("after-remote", res);
+          })
+          .finally(() => {
+            loading.value = false;
           });
       } catch (error) {
         console.error("获取数据失败", error);
@@ -65,6 +69,7 @@ export default defineComponent({
     const callRequestApi = async (keywords?: string) => {
       if (props.requestApi) {
         try {
+          loading.value = true;
           const list = await props.requestApi(keywords);
           setData(list);
         } catch (error) {
@@ -83,14 +88,12 @@ export default defineComponent({
     }
     const remoteMethod = debounce((query: string) => {
       if (query) {
-        loading.value = true;
         if (!props.url && props.requestApi) {
           callRequestApi(query);
         } else {
           let params = {};
           props.searchField && (params = { [props.searchField]: query });
           updateData(params);
-          loading.value = false;
         }
       } else {
         options.value = [];
@@ -101,7 +104,6 @@ export default defineComponent({
         return props.optTemp(item);
       }
       return h("div", { class: "cus-temp" }, [
-        // h("span", { style: { color: "#000" } }, props.valueKey && item[props.valueKey]),
         h("span", {}, props.labelKey && item[props.labelKey]),
       ]);
     };
@@ -121,6 +123,7 @@ export default defineComponent({
     };
 
     const disLabelEvent = () => {
+      console.log('RemoteSearchSelectInstance.value',RemoteSearchSelectInstance.value)
       const label = RemoteSearchSelectInstance.value?.$el.parentElement.parentElement;
       label && label.classList.add("el-form-label-dis");
     };
@@ -136,7 +139,10 @@ export default defineComponent({
 
     const RemoteSearchSelectInstance = ref();
     expose({ getOptions, clearOptions });
-
+    // setTimeout(() => {
+    //   console.log("清除列表");
+    //   clearOptions();
+    // }, 10000);
     const renderSelect = () => {
       return h(
         ElSelect,
@@ -160,7 +166,9 @@ export default defineComponent({
           onVisibleChange: async (value: Boolean) => {
             await nextTick();
             if (value) {
-              options.value = [...copyOptions.value];
+              if (!props.isRemoteSearch) {
+                options.value = [...copyOptions.value];
+              }
             } else {
               options.value = [];
             }
