@@ -8,8 +8,6 @@
  */
 /// <reference types="vite/client" />
 
-declare module "@yto/custom";
-
 declare module "@yto/utils";
 declare module "@yto/utils/dist";
 declare module "gold-core";

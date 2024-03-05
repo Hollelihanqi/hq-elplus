@@ -8,7 +8,7 @@ import {
   ElDatePicker,
 } from "element-plus";
 import { TimeSelectProps } from "element-plus/es/components/time-select/src/time-select";
-import { YtoRemoteSearch } from "@/component";
+import { YtoRemoteSearch } from "../../remote-search";
 
 export type RemoteSelectProps = Partial<typeof YtoRemoteSearch.__defaults>;
 type ElDatePickerProps = typeof ElDatePicker.props;
@@ -61,4 +61,7 @@ interface SearchProps<T extends keyof FormEl> {
 }
 
 type El = keyof FormEl;
+
 export type SearchFormControlProps = SearchProps<El>;
+
+export type { SearchFormProps } from './props'

@@ -116,7 +116,10 @@ export default defineConfig({
               text: "TareaTag 文本校验",
               link: "/examples/tarea-tag/index.md",
             },
-
+            {
+              text: "Radio 单选框",
+              link: "/examples/radio/index.md",
+            }
           ],
           collapsed: false,
         },

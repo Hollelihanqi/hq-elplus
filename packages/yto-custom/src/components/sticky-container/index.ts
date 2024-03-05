@@ -1,9 +1,10 @@
-import _StickyContainer from "./src/index.vue";
+import StickyContainer from "./src/index";
 
 import { install } from "../../_utils";
 
-export const StickyContainer = install(_StickyContainer);
+export const YtoStickyContainer = install(StickyContainer);
+export default YtoStickyContainer;
 
-export type { StickyContainerInstance } from "./src/instance";
+export type StickyContainerInstance = InstanceType<typeof StickyContainer>;
 
-export default StickyContainer;
+

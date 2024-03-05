@@ -1,13 +1,18 @@
 <template>
   <div class="table-w h-[100%] flex flex-col">
-    <div v-if="$slots.tableHeader" class="table-header flex items-center">
-      <slot name="tableHeader"></slot>
+    <div v-if="$slots.tableHeader || toolBar" class="table-header flex items-center">
+      <div class="flex-1 flex items-center">
+        <slot name="tableHeader"></slot>
+        <div v-if="toolBar" :class="`flex justify-end px-[8px] ${$slots.tableHeader ? '' : 'flex-1'}`">
+          <el-button :icon="Setting" circle @click="handleSetting" />
+        </div>
+      </div>
     </div>
     <el-table
       ref="ElTableInstance"
       v-loading="requestApi ? _loading : loading"
       class="my-el-table w-[100%]"
-      :class="{ 'pagination-hide-table': paginationHide, 'flex-1': !isDataEmpty }"
+      :class="{ 'pagination-hide-table': !cpaginationShow, 'flex-1': !isDataEmpty || !_showSummary }"
       :data="_tdata"
       :default-sort="_defaultSort"
       v-bind="$attrs"
@@ -23,7 +28,7 @@
         <slot name="empty"></slot>
       </template>
 
-      <template v-for="item in columns" :key="item">
+      <template v-for="item in _columns" :key="item">
         <!-- selection || index -->
         <el-table-column
           v-if="item.type === 'selection' || item.type === 'index'"
@@ -50,7 +55,7 @@
         </TableColumn>
       </template>
     </el-table>
-    <div v-if="isDataEmpty" class="flex-1 opacity-0 h-0"></div>
+    <div v-if="_showSummary" class="flex-1 opacity-0 h-0 phd"></div>
     <el-pagination
       v-if="cpaginationShow"
       v-model:page-size="paginationParams.pageSize"
@@ -64,129 +69,22 @@
       @update:current-page="handlePageChange"
     ></el-pagination>
   </div>
+  <SettingV ref="SettingInstance" :columns="setColumns" @on-save="HandleSetSave" />
 </template>
 
 <script lang="tsx" setup name="Table">
-import { PropType, ref, onMounted, defineEmits } from "vue";
-import { PaginationProps } from "element-plus";
+import { ref, onMounted, defineEmits } from "vue";
+import { Props } from "./props";
 import TableColumn from "./components/TableColumn.vue";
-
+import SettingV from "./components/Setting.vue";
+import { Setting } from "@element-plus/icons-vue";
+import useController from "./use-controller";
 export interface ColumnsItemProps {
   [propsName: string]: any;
 }
 
-type CanWrite<T> = {
-  -readonly [K in keyof T]?: T[K];
-};
-
-const props = defineProps({
-  tableData: {
-    type: Array,
-    default: () => [],
-  },
-  columns: {
-    type: Array as PropType<ColumnsItemProps[]>,
-    default: () => [],
-    required: true,
-  },
-  requestApi: {
-    type: Function,
-    default: null,
-  },
-  requestAuto: {
-    type: Boolean,
-    default: true,
-  },
-  tableActionIsCallApi: {
-    type: Boolean,
-    default: true,
-  },
-  dataKey: {
-    type: String,
-    default: "items",
-  },
-  dataCallback: {
-    type: Function,
-    default: null,
-  },
-  requestParams: {
-    type: [Object, Function],
-    default: () => ({}),
-  },
-  paginationHide: {
-    // 是否隐藏分页组件
-    type: Boolean,
-    default: false,
-  },
-  paginationHideAuto: {
-    type: Boolean,
-    default: true,
-  },
-  paginationOptions: {
-    type: Object as PropType<CanWrite<PaginationProps>>,
-    default: () => ({}),
-  },
-  total: {
-    type: Number,
-    default: 0,
-  },
-  pageSizes: {
-    type: Array as PropType<number[]>,
-    default: () => [10, 30, 50, 100],
-  },
-  layout: {
-    type: String,
-    default: "total, sizes, prev, pager, next, jumper",
-  },
-  pageSize: {
-    type: Number,
-    default: 10,
-  },
-  currentPage: {
-    type: Number,
-    default: 1,
-  },
-  pageLimit: {
-    type: Number,
-    default: 1,
-  },
-  currentPageKey: {
-    type: String,
-    default: "page",
-  },
-  pageSizeKey: {
-    type: String,
-    default: "size",
-  },
-  tableChange: {
-    type: Function,
-    default: null,
-  },
-  defaultSort: {
-    type: [Function, Object],
-    default: null,
-  },
-  sortFormat: {
-    type: Function,
-    default: null,
-  },
-  dataUpdateAfter: {
-    type: Function,
-    default: () => ({}),
-  },
-  cellEmptyText: {
-    type: String,
-    default: "--",
-  },
-  headerbgHide: {
-    type: Boolean,
-    default: false,
-  },
-  loading: {
-    type: Boolean,
-    default: false,
-  },
-});
+const props = defineProps(Props);
+const { _columns, setColumns, SettingInstance, handleSetting, HandleSetSave } = useController(props);
 
 const ElTableInstance = ref();
 const emits = defineEmits(["on-table"]);
@@ -194,6 +92,7 @@ const emits = defineEmits(["on-table"]);
 const _loading = ref(false);
 const _tableData = ref<any>([]);
 const _tableDataTotal = ref(0);
+const _showSummary = ref(false);
 const paginationParams = reactive({
   currentPage: props.currentPage,
   pageSize: props.pageSize,
@@ -257,7 +156,7 @@ const _sortFieldFormat = (sort?: any) => {
 
 const getTableData = async (params = {}) => {
   if (!props.requestApi || typeof props.requestApi !== "function") return;
-  _loading.value = true;
+  _loading.value = props.requestLoadingHide ? false : true;
   let _requestParams = props.requestParams;
   if (typeof props.requestParams === "function") {
     _requestParams = props.requestParams();
@@ -302,10 +201,15 @@ const handlePaginationChange = (type: "size" | "page" | "sort", num: number): vo
     paginationParams.pageSize = num;
   }
 
-  emits("on-table", type, {
-    currentPage: paginationParams.currentPage,
-    pageSize: type === "size" ? num : paginationParams.pageSize,
-  });
+  emits(
+    "on-table",
+    type,
+    {
+      currentPage: paginationParams.currentPage,
+      pageSize: type === "size" ? num : paginationParams.pageSize,
+    },
+    _sortItem
+  );
 
   // 如果不需要通过API请求数据，则直接调用tableChange
   if (props.tableChange && typeof props.tableChange === "function") {
@@ -313,7 +217,10 @@ const handlePaginationChange = (type: "size" | "page" | "sort", num: number): vo
   }
 
   // 如果设置为调用API，则获取表格数据
-  if (props.tableActionIsCallApi && _total.value !== _tdata.value.length) {
+  // if (props.tableActionIsCallApi &&  _total.value !== _tdata.value.length) {
+  //   getTableData();
+  // }
+  if (props.tableActionIsCallApi) {
     getTableData();
   }
 };
@@ -369,6 +276,7 @@ const getData = () => {
 };
 
 onMounted(() => {
+  _showSummary.value = ElTableInstance.value?.showSummary;
   if (props.requestAuto) {
     getTableData();
   }
@@ -381,6 +289,7 @@ defineExpose({
   resetPage,
   updatePage,
   getData,
+  setting: handleSetting,
   tableData: _tdata,
 });
 </script>

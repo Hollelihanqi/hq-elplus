@@ -11,7 +11,6 @@ import { Directive } from "vue";
 const map = new WeakMap();
 const ob = new ResizeObserver((entries) => {
   for (const entry of entries) {
-    // console.log("resize-Observer", entry);
     const handle = map.get(entry.target);
     if (handle) {
       const box = entry.borderBoxSize[0];

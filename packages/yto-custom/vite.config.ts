@@ -72,12 +72,15 @@ export default defineConfig({
         globalsPropValue: true,
       },
     }),
+
     vueSetupExtend(),
-    // dts({
-    //   outputDir: 'dist/es',
-    //   staticImport: true,
-    //   insertTypesEntry: true,
-    // }),
+
+    dts({
+      tsconfigPath: './tsconfig.json',
+      outDir: ['./dist/es'], // 可以指定一个数组来输出到多个目录中
+      cleanVueFileName: true,
+      exclude: ['./src/components/**/src/components/*.vue', './src/_utils/*', './src/icon-font/*']
+    }),
     MoveFile(() => {
       move();
     }),
@@ -150,6 +153,7 @@ const move = (): void => {
     const files = [
       { input: "./README.md", outDir: "dist/README.md" },
       { input: "./LICENSE", outDir: "dist/LICENSE" },
+      // { input: "./src/index.d.ts", outDir: "dist/es/index.d.ts" },
     ] as const;
 
     files.forEach((item): void => {

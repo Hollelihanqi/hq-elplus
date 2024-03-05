@@ -67,4 +67,9 @@ $page-number-font-color: #151719;
       z-index: 88;
     }
   }
+  td.sort-cell-td {
+    .cell {
+      padding-right: 36px;
+    }
+  }
 }

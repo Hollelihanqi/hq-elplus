@@ -52,6 +52,7 @@
 | `tableChange`          | 触发分页、排序 调用此方法，接收 actionType 和 value 两个参数，actionType: page、size、sort       | Function        | —          |                                           |
 | `requestApi`           | 表格数据自动获取方法，返回一个 Promise                                                           | Function        | —          |                                           |
 | `requestAuto`          | 是否立即触发 requestApi ,如果不需要可设置为 false，手动调用 updateTableData 方法更新列表数据     | Boolean         | true/false | true                                      |
+| `requestLoadingHide`   | 请求接口时，是否隐藏 Loading                                                                     | Boolean         | true/false | false                                     |
 | `tableActionIsCallApi` | 点击分页、排序在有 requestApi 的情况下是否自动调用 requestApi                                    | Boolean         | true/false | true                                      |
 | `dataKey`              | 自动调用 requestApi 返回结果后，读取列表数据的 key                                               | String          | —          | items                                     |
 | `dataCallback`         | 自动调用 requestApi 返回结果后，可通过此方法对数据进行处理，并返回一个对象。'{total:0,items:[]}' | Function        | —          | —                                         |
@@ -59,6 +60,15 @@
 | `requestParams`        | 表格数据获取时，其它参数                                                                         | Object/Function | ()=>{}     | —                                         |
 | `headerbgHide`         | 表格 Header 部分是否增加背景                                                                     | Boolean         | —          | —                                         |
 | `loading`              | 数据渲染前是否显示 loading,如果传入 `requestApi`,不需要绑定此属性                                | Boolean         | true/false | false                                     |
+| `toolBar`              | 表格设置                                                                                         | Boolean         | true/false | false                                     |
+| `showHideFields`       | 列显示字段配置,Array?['列字段名']:Object?`showHideFieldsOptions`:null,                           | Object/Array    | --         | null                                      |
+
+### showHideFieldsOptions 属性
+
+| 属性名       | 说明                                     | 类型  | 备注                               |
+| ------------ | ---------------------------------------- | ----- | ---------------------------------- |
+| `fields`     | 可配置列字段名                           | Array | ["id", "title", "level", "status"] |
+| `showFields` | 默认显示列字段名，必须包含在 `fields` 中 | Array | ["id", "title", "level"]           |
 
 ### Column 属性
 
@@ -81,6 +91,7 @@
 | `resetPage`       | 重置表格分页参数                                                                                   |      |
 | `updatePage`      | 手动更新分页大小(pageSize)和当前页码(currentPage) `{ currentPage = 1, pageSize = props.pageSize }` |      |
 | `getData`         | 获取当前页列表数据                                                                                 |      |
+| `setting`         | 调起列选择窗口                                                                                     |      |
 
 ### ElTable 实例调用
 

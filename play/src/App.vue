@@ -2,7 +2,7 @@
  * @Description: 模块名称
  * @Author: ym
  * @Date: 2023-12-14 16:59:25
- * @LastEditTime: 2024-01-18 14:34:39
+ * @LastEditTime: 2024-02-18 18:00:41
 -->
 <script setup lang="ts"></script>
 
@@ -25,8 +25,10 @@
       <router-link class="mr-[10px]" to="/searchContainer">SearchContainer</router-link>
       <router-link class="mr-[10px]" to="/adaptionContainer">AdaptionContainer</router-link>
       <router-link class="mr-[10px]" to="/ellipsisTag">EllipsisTag</router-link>
+      <router-link class="mr-[10px]" to="/searchFormItemContainer">SearchFormItemContainer</router-link>
       <router-link class="mr-[10px]" to="/tableSearch">TableSearch</router-link>
       <router-link class="mr-[10px]" to="/tareaTag">TareaTag</router-link>
+      <router-link class="mr-[10px]" to="/cusRadio">CusRadio</router-link>
     </div>
 
     <router-view v-slot="{ Component }" class="flex-1">

@@ -1,6 +1,6 @@
 {
   "name": "yto",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "type": "module",
   "workspaces": [
     "packages/yto-custom",
@@ -19,6 +19,7 @@
     "lint": "eslint packages/yto-custom packages/yto-utils --ext .vue,.js,.ts,.jsx,.tsx,.json --max-warnings 0 --cache",
     "lint:fix": "pnpm run lint --fix",
     "format": "prettier --write .",
+    "new": "pnpm run -C packages/yto-add-component new",
     "prepare": "husky install",
     "commit": "git add -A && git-cz && git push",
     "release:ui": "pnpm run -C packages/yto-custom release",
@@ -39,7 +40,7 @@
     "@typescript-eslint/parser": "^5.62.0",
     "@vitejs/plugin-vue": "^4.4.0",
     "cz-git": "^1.7.1",
-    "element-plus": "^2.4.0",
+    "element-plus": "^2.5.6",
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^8.10.0",
     "eslint-define-config": "^1.24.1",
@@ -55,7 +56,7 @@
     "unplugin-element-plus": "^0.8.0",
     "unplugin-vue-components": "^0.25.2",
     "vite": "^4.4.11",
-    "vite-plugin-dts": "^2.3.0",
+    "vite-plugin-dts": "^3.7.2",
     "vite-plugin-vue-setup-extend": "^0.4.0",
     "vite-plugin-windicss": "^1.9.1",
     "vue-eslint-parser": "^9.3.2",

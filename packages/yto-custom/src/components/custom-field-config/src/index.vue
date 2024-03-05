@@ -2,30 +2,30 @@
  * @Description: 自定义输入框
  * @Author: ym
  * @Date: 2023-12-07 16:20:35
- * @LastEditTime: 2023-12-13 15:29:10
+ * @LastEditTime: 2024-02-21 13:10:54
 -->
 <script lang="tsx">
 import { defineComponent, PropType, resolveComponent, h } from "vue";
-import {ElInput, ElSelectV2} from 'element-plus'
+import { ElInput, ElSelectV2 } from "element-plus";
 interface IAnyObject {
-  [key: string]: any
+  [key: string]: any;
 }
 export interface FieldConfig extends IAnyObject {
-  elType?: string
-  props: string
-  options?: IAnyObject[]
-  disabled?: boolean
+  elType?: string;
+  props: string;
+  options?: IAnyObject[];
+  disabled?: boolean;
 }
 export default defineComponent({
   name: "CustomFieldConfig",
-  components:{
+  components: {
     ElInput,
     ElSelectV2,
-	},
+  },
   props: {
     modelValue: {
       type: Object,
-      required: true
+      required: true,
     },
     fieldConfig: {
       type: Object as PropType<FieldConfig>,
@@ -41,56 +41,64 @@ export default defineComponent({
     },
     disabled: {
       type: Boolean,
-      required: false
+      required: false,
     },
     ruleProp: {
       type: String,
-      required: false
+      required: false,
     },
     rules: {
       type: Function,
-      required: false
+      required: false,
     },
     optionWidth: {
       type: String,
-      required: false
-    }
+      required: false,
+    },
   },
-  emits: ['cbChange', 'update:modelValue'],
+  emits: ["cbChange", "update:modelValue"],
   setup(props, { slots, emit }) {
-    const nameConfig: IAnyObject = {fieldConfig: 'field', operatorConfig: 'operator', valueConfig: 'value'}
+    const nameConfig: IAnyObject = { fieldConfig: "field", operatorConfig: "operator", valueConfig: "value" };
     const itemRender = (key: string) => {
       // @ts-ignore:
-      const _itemConfig = props[key]
-      const slotsFun = nameConfig[key] ? slots[nameConfig[key]] : null
+      const _itemConfig = props[key];
+      const slotsFun = nameConfig[key] ? slots[nameConfig[key]] : null;
       if (slotsFun) {
-        return slotsFun()
-      }else if (_itemConfig.elType) {
-        return (h(resolveComponent('el-' + _itemConfig.elType),
-          {
-            modelValue: props.modelValue[_itemConfig.props],
-            'onUpdate:modelValue': (val: any) => {
-              props.modelValue[_itemConfig.props] = val
-              emit('cbChange', _itemConfig.props, val)
-            },
-            class: `${key === 'operatorConfig' ? '' : 'flex-1'} ${nameConfig[key]}-view`, 
-            style: `width:${key === 'operatorConfig' ? props.optionWidth || '100px' : 'auto'}`,
-            disabled: props.disabled || _itemConfig.disabled || false,
-            ..._itemConfig
-          })) 
+        return slotsFun();
+      } else if (_itemConfig.elType) {
+        return h(resolveComponent("el-" + _itemConfig.elType), {
+          modelValue: props.modelValue[_itemConfig.props],
+          "onUpdate:modelValue": (val: any) => {
+            props.modelValue[_itemConfig.props] = val;
+            emit("cbChange", _itemConfig.props, val);
+          },
+          class: `${key === "operatorConfig" ? "" : "flex-1"} ${nameConfig[key]}-view`,
+          // style: `width:${key === 'operatorConfig' ? props.optionWidth || '100px' : 'auto'}`,
+          style: "width:" + (key === "operatorConfig" ? props.optionWidth || "100px" : "auto"),
+          disabled: props.disabled || _itemConfig.disabled || false,
+          ..._itemConfig,
+        });
       }
-    }
+    };
     const rowRender = () => {
-      const _domConfigs = ['fieldConfig', 'operatorConfig', 'valueConfig']
+      const _domConfigs = ["fieldConfig", "operatorConfig", "valueConfig"];
       return (
         <div class="custom-field-config-row w-full flex items-center border">
-          { _domConfigs.map(e => itemRender(e))}
+          {_domConfigs.map((e) => itemRender(e))}
         </div>
-      )
-    }
-    return () => <div>
-      {props.rules ? <el-form-item prop={ props.ruleProp || ''} rules={props.rules(props.modelValue)}>{ rowRender()}</el-form-item> : rowRender() }
-    </div>
+      );
+    };
+    return () => (
+      <div>
+        {props.rules ? (
+          <el-form-item prop={props.ruleProp || ""} rules={props.rules(props.modelValue)}>
+            {rowRender()}
+          </el-form-item>
+        ) : (
+          rowRender()
+        )}
+      </div>
+    );
   },
 });
 </script>
@@ -114,7 +122,7 @@ export default defineComponent({
   margin-bottom: 0px !important;
 }
 :deep(.is-error) {
-  .custom-field-config-row{
+  .custom-field-config-row {
     border: 1px solid #f00;
   }
 }

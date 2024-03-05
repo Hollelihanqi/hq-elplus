@@ -1,5 +1,5 @@
-<script lang="tsx">
 import { defineComponent } from "vue";
+import "./index.scss";
 
 export default defineComponent({
   name: "StickyContainer",
@@ -17,8 +17,9 @@ export default defineComponent({
     );
   },
 });
-</script>
 
-<style lang="scss">
+{
+  /* <style lang="scss">
 @import "./index.scss";
-</style>
+</style> */
+}

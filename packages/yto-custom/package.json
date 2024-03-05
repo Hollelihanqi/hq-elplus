@@ -1,9 +1,10 @@
 {
   "name": "@yto/custom",
-  "version": "1.6.19",
+  "version": "1.7.18",
   "type": "module",
   "main": "es/index.js",
   "module": "es/index.js",
+  "types": "es/index.d.ts",
   "exports": {
     ".": {
       "import": "./es/index.js",
@@ -38,7 +39,7 @@
   "peerDependencies": {
     "axios": "^1.3.5",
     "echarts": "^5.4.2",
-    "element-plus": "^2.4.0",
+    "element-plus": "*",
     "gold-core": "0.1.17",
     "immutable": "^4.3.4",
     "simple-uploader.js": "^0.6.0",

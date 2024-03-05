@@ -31,9 +31,11 @@ interface Props {
   tabsMenuList: IOptionTabPane[];
   keyLabel: string;
   formatTab?: Function;
+  routerGoback: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   keyLabel: "title",
+  routerGoback: false,
   tabsMenuList: () => {
     return [];
   },
@@ -44,7 +46,7 @@ const router = useRouter();
 const route = useRoute();
 const handleTabRemove = (code: any) => {
   tabPaneClose(code);
-  // router.go(-1);
+  props.routerGoback && router.go(-1);
 };
 
 const activePreidx = computed(() => {
@@ -55,7 +57,7 @@ watch(
   () => tabsMenuValue.value,
   (value) => {
     if (!value) return;
-    const { mode, href } = unref(props.tabsMenuList).find((tab) => tab.code === value) || {};
+    const { mode, href } = unref(props.tabsMenuList).find((tab: any) => tab.code === value) || {};
     if (mode === "router") {
       const url = toURL(href as string);
       console.log(url.pathname);
@@ -116,7 +118,7 @@ watch(
     const path = route.path;
     const url = getUrl(path);
     const tabItem: any =
-      unref(props.tabsMenuList).find((tab) => {
+      unref(props.tabsMenuList).find((tab: any) => {
         const urlObj = toURL(tab.href as string);
         return urlObj.pathname + urlObj.search === url;
       }) || {};
@@ -148,10 +150,19 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
     background: transparent;
     border: none;
     --el-tabs-header-height: 32px;
+    .el-tabs__nav-wrap {
+      .el-tabs__nav-prev,
+      .el-tabs__nav-next {
+        @apply leading-[var(--el-tabs-header-height)];
+      }
+    }
   }
   :deep(.el-tabs__header) {
     background: transparent;
     border: none;
+  }
+  :deep(.el-tabs__content) {
+    display: none;
   }
   :deep(.el-tabs__item) {
     margin: 0 !important;

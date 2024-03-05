@@ -1,7 +1,9 @@
 <template>
   <div v-if="fileList.length" class="uploader-list">
     <div v-for="file in fileList" :key="file.id" class="file-item">
-      <UploadInfo :file="file" :list="true" />
+      <slot name="fileListItem" :file="file">
+        <UploadInfo :file="file" :list="true" />
+      </slot>
     </div>
   </div>
 </template>

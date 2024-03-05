@@ -1,112 +1,63 @@
 <template>
   <div class="uploader-w" :style="{ width: listHide ? 'auto' : '100%' }">
-    <label ref="uploadBtn">
-      <slot name="uploaderBtn">
-        <el-button>上传文件</el-button>
-      </slot>
-    </label>
-    <UploadList v-if="!listHide" :cmd5="cmd5"></UploadList>
+    <div>
+      <label ref="uploadBtn" style="margin-right: 8px">
+        <slot name="uploaderBtn">
+          <el-button>上传文件</el-button>
+        </slot>
+      </label>
+      <slot name="tip"></slot>
+    </div>
+
+    <!-- <UploadList v-if="!listHide" :cmd5="cmd5">
+      <template #fileListItem>
+        <slot name="fileListItem"></slot>
+      </template>
+    </UploadList> -->
+    <div v-show="UPLOADER?.fileList?.length && !listHide" class="uploader-list">
+      <div v-for="file in UPLOADER.fileList" :key="file.id" class="file-item">
+        <UploadInfo :file="file" :list="true" :cmd5="cmd5">
+          <template #default="{ progress, status }">
+            <slot name="fileListItem" :file="file" :progress="progress" :status="status" />
+          </template>
+        </UploadInfo>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup name="Uploader">
 import { ref, onMounted, provide, defineEmits } from "vue";
+import { Props } from "./props";
 import SimpleUploader from "simple-uploader.js";
 import SparkMD5 from "spark-md5";
 import UploadList from "./components/UploadList.vue";
+import UploadInfo from "./components/UploadInfo.vue";
 
 const FILE_ADDED_EVENT = "fileAdded";
 // const FILES_ADDED_EVENT = "filesAdded";
 const UPLOAD_START_EVENT = "uploadStart";
-const props = defineProps({
-  options: {
-    type: Object,
-    default: () => ({}),
-  },
-  autoUpload: {
-    type: Boolean,
-    default: true,
-  },
-  multiple: {
-    type: Boolean,
-    default: true,
-  },
-  limit: {
-    type: Number,
-    default: 0,
-  },
-  listHide: {
-    type: Boolean,
-    default: false,
-  },
-  accept: {
-    type: String,
-    default: "",
-  },
-  isCheckFileType: {
-    type: Boolean,
-    default: true,
-  },
-  statusText: {
-    type: [Object, Function],
-    default: () => {
-      return {
-        success: "成功",
-        error: "错误",
-        uploading: "正在上传...",
-        paused: "暂停",
-        md5: "计算MD5...",
-        waiting: "等待中...",
-      };
-    },
-  },
-  headers: {
-    type: [Object, Function],
-    default: () => ({}),
-  },
-  requestParams: {
-    type: Object,
-    default: () => ({}),
-  },
-  onFileAdded: {
-    type: Function,
-    default: null,
-  },
-  onFileSuccess: {
-    type: Function,
-    default: null,
-  },
-  onFileComplete: {
-    type: Function,
-    default: null,
-  },
-  onFileRemoved: {
-    type: Function,
-    default: null,
-  },
-  getInstance: {
-    type: Function,
-    default: () => ({}),
-  },
-});
+const props = defineProps(Props);
 
-const emits = defineEmits(["on-type-error", "on-exceed-limit"]);
+const emits = defineEmits(["on-type-error", "on-exceed-limit", "on-files-submitted", "on-complete"]);
 const _options = {
   target: "/api/v2/upload", // 目标上传 URL
-  chunkSize: 1024 * 1024 * 4, // 分块大小 4M
+  chunkSize: props.isSlice ? 1024 * 1024 * 1 : Number.MAX_SAFE_INTEGER, // 分块大小 4M
   connectionCount: 3, //同时上传的连接数
   fileParameterName: "file", // 上传文件时文件的参数名，默认file
   maxChunkRetries: 3, // 最大自动失败重试上传次数
   simultaneousUploads: 3, // 并发上传数 默认为 3
-  testChunks: true, // 是否开启服务器分片校验
+  testChunks: props.isSlice, // 是否开启服务器分片校验
   // 服务器分片校验函数，秒传及断点续传基础
-  checkChunkUploadedByResponse: function (chunk: any, message: any) {
-    const _message = JSON.parse(message);
-    if (_message.data.ifExist) {
-      return true;
-    }
-    return (_message.data.chunks || []).indexOf(chunk.offset + 1) >= 0;
-  },
+  checkChunkUploadedByResponse: props.isSlice
+    ? function (chunk: any, message: any) {
+        const _message = JSON.parse(message);
+        if (_message.data.ifExist) {
+          return true;
+        }
+        return (_message.data.chunks || []).indexOf(chunk.offset + 1) >= 0;
+      }
+    : null,
   headers: typeof props.headers === "function" ? props.headers() : props.headers,
   // 额外的自定义查询参数
   query: (file: any, chunk: any) => {
@@ -118,9 +69,17 @@ const _options = {
     };
   },
 };
+
+const checkChunkUploaded = (chunk: any, message: any) => {
+  const _message = JSON.parse(message);
+  if (_message.data.ifExist) {
+    return true;
+  }
+  return (_message.data.chunks || []).indexOf(chunk.offset + 1) >= 0;
+};
 const uploadBtn = ref();
 const cmd5 = ref(false);
-provide("cmd5", cmd5);
+
 const started = ref(false);
 const files = ref<any>([]);
 const fileList = ref<any>([]);
@@ -142,6 +101,9 @@ const initUploaderEvent = () => {
   UPLOADER.value.on("filesSubmitted", filesSubmitted);
   UPLOADER.value.on("fileComplete", fileComplete);
   UPLOADER.value.on("fileSuccess", fileSuccess);
+  UPLOADER.value.on("fileError", fileError);
+  UPLOADER.value.on("complete", complete);
+  UPLOADER.value.on("uploadStart", uploadStart);
 };
 // function kebabCase(s) {
 //   return s.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
@@ -214,26 +176,58 @@ const fileRemoved = (file: any) => {
 };
 
 //文件添加到上传队列之后，可用于开始上传当前添加的文件
-const filesSubmitted = (files: any, fileList: any) => {
+const filesSubmitted = (files: any, _fileList: any) => {
   files.value = UPLOADER.value.files;
   fileList.value = UPLOADER.value.fileList;
+  emits("on-files-submitted", UPLOADER.value.getFileList());
   if (props.autoUpload) {
     files.forEach((file: any) => startUpload(file));
   }
 };
 
-// 所有文件上传完成后触发
+// 文件上传完成后触发
 const fileComplete = (rootFile: any) => {
   if (props.onFileComplete) {
     props.onFileComplete(rootFile);
   }
 };
 
+const processResponse = (message: any, file: any) => {
+  let res = message;
+  try {
+    res = JSON.parse(message);
+    file._response = res;
+  } catch (e) {
+    console.error("processResponse", e);
+  }
+};
+
 // 单个文件上传成功后触发
 const fileSuccess = (rootFile: any, file: any, message: any, chunk: any) => {
+  setTimeout(() => {
+    rootFile.setStatus("success");
+  }, 500);
+  processResponse(message, file);
   if (props.onFileSuccess) {
     props.onFileSuccess(rootFile, file, message, chunk);
   }
+};
+
+// 文件上传错误
+const fileError = (rootFile: any, file: any, message: any, chunk: any) => {
+  if (props.onFileError) {
+    props.onFileError(rootFile, file, message, chunk);
+  }
+};
+
+// 上传完成
+const complete = () => {
+  emits("on-complete", UPLOADER.value.fileList);
+};
+
+// 文件开始上传
+const uploadStart = () => {
+  console.log("文件开始上传");
 };
 
 //开始上传
@@ -243,7 +237,7 @@ const startUpload = (file: any) => {
   const time = new Date().getTime();
   const blobSlice = File.prototype.slice;
   let currentChunk = 0; // 初始化切片 id
-  const chunkSize = 10 * 1024 * 1000;
+  const chunkSize = props.options.chunkSize || _options.chunkSize;
   const chunks = Math.ceil(file.size / chunkSize); // 计算切片数量
   const spark: any = new SparkMD5.ArrayBuffer();
 
@@ -318,5 +312,13 @@ onMounted(() => {
 .uploader-w {
   position: relative;
   width: 100%;
+}
+.uploader-list {
+  padding-top: 8px;
+}
+.file-item:last-child {
+  .upload-info {
+    border: none;
+  }
 }
 </style>

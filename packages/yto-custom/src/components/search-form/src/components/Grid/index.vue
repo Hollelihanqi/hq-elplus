@@ -99,8 +99,8 @@ let slots: any = useSlots();
 if (slots.default && typeof slots.default === "function") {
   slots = slots.default();
 }
-const defaultSlotContent = useSlots().default;
-console.log(defaultSlotContent);
+
+
 // 寻找需要开始折叠的字段 index，实现折叠功能
 const findIndex = () => {
   let fields: VNodeArrayChildren = [];
@@ -128,9 +128,6 @@ const findIndex = () => {
       (suffix.props[breakPoint.value]?.span ?? suffix.props?.span ?? 1) +
       (suffix.props[breakPoint.value]?.offset ?? suffix.props?.offset ?? 0);
   }
-  console.log(breakPoint.value);
-  console.log(suffix);
-  console.log(fields);
   // 遍历所有表单项，计算它们所占用的列数，并判断是否需要折叠
   try {
     let find = false;
@@ -163,7 +160,6 @@ watch(
 watch(
   () => props.collapsed,
   (value) => {
-    console.log(value);
     if (value) return findIndex();
     hiddenIndex.value = -1;
   }

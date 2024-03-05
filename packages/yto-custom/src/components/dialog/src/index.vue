@@ -1,7 +1,7 @@
 <template>
   <el-dialog
-    class="dialog-cst"
     ref="dialogRef"
+    class="dialog-cst"
     v-bind="$attrs"
     :style="{ marginLeft: offset[0], marginTop: offset[1] }"
   >
@@ -26,7 +26,6 @@
 
 <script lang="ts" setup name="Dialog">
 import { ButtonProps, ElButton, ElDialog } from "element-plus";
-import type { Component } from "vue";
 import { ref } from "vue";
 
 const dialogRef = ref();
@@ -40,14 +39,14 @@ type MyButtonProps = MyParital<ButtonProps> & {
   hidden?: boolean | undefined;
 };
 
-interface IConfirmOption {
+export interface IConfirmOption {
   confirmCallback?: () => Promise<boolean>;
 }
-interface ICancelOption {
+export interface ICancelOption {
   cancelCallback?: () => Promise<boolean>;
 }
 
-interface IProps {
+export interface IProps {
   visible: boolean;
   offset?: Array<string>;
   hiddenFooter?: boolean | undefined;

@@ -39,28 +39,9 @@
 </template>
 <script lang="ts" setup name="TareaTag">
 import { List } from "immutable";
-const props = defineProps({
-  modelValue: {
-    type: [Array, String],
-    default: () => [],
-  },
-  placeholder: {
-    type: String,
-    default: "",
-  },
-  regular: {
-    type: [RegExp, Function],
-    default: null,
-  },
-  required: {
-    type: Boolean,
-    default: false,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-});
+import { Props } from "./props";
+
+const props = defineProps(Props);
 const emits = defineEmits(["update:modelValue", "on-updated"]);
 const editDiv = ref();
 const editInput = ref();
