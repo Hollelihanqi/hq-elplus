@@ -41,10 +41,10 @@ interface Props {
   collapseLine?: number; //折叠行数
 }
 const props = withDefaults(defineProps<Props>(), {
-  isUseForm: false,
+  isUseForm: true,
   itemMinWidth: 300,
   autoLayout: true,
-  isCollapse: true,
+  isCollapse: false,
   collapseLine: 3,
 });
 const formInstance = ref();
