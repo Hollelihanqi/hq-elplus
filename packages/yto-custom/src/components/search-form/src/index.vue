@@ -158,7 +158,7 @@ export default defineComponent({
     expose({ resetField, getFormatValues, handleDefaultValue });
 
     onActivated(() => {
-      const rect = searchFormInstance.value.getBoundingClientRect();
+      const rect = searchFormInstance.value?.getBoundingClientRect();
       handleResize(rect);
     });
 

@@ -12,7 +12,7 @@
       ref="ElTableInstance"
       v-loading="requestApi ? _loading : loading"
       class="my-el-table w-[100%]"
-      :class="{ 'pagination-hide-table': paginationHide, 'flex-1': !isDataEmpty }"
+      :class="{ 'pagination-hide-table': !cpaginationShow, 'flex-1': !isDataEmpty || !_showSummary }"
       :data="_tdata"
       :default-sort="_defaultSort"
       v-bind="$attrs"
@@ -55,7 +55,7 @@
         </TableColumn>
       </template>
     </el-table>
-    <div v-if="isDataEmpty" class="flex-1 opacity-0 h-0"></div>
+    <div v-if="_showSummary" class="flex-1 opacity-0 h-0 phd"></div>
     <el-pagination
       v-if="cpaginationShow"
       v-model:page-size="paginationParams.pageSize"
@@ -92,6 +92,7 @@ const emits = defineEmits(["on-table"]);
 const _loading = ref(false);
 const _tableData = ref<any>([]);
 const _tableDataTotal = ref(0);
+const _showSummary = ref(false);
 const paginationParams = reactive({
   currentPage: props.currentPage,
   pageSize: props.pageSize,
@@ -275,6 +276,7 @@ const getData = () => {
 };
 
 onMounted(() => {
+  _showSummary.value = ElTableInstance.value?.showSummary;
   if (props.requestAuto) {
     getTableData();
   }

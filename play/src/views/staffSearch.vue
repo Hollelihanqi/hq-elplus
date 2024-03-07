@@ -1,12 +1,11 @@
 <template>
   <div class="search-box flex items-center">
-    <!-- <yto-c-staff-search v-model="user" key="3"></yto-c-staff-search>
-    <CustomLeakagewaySelect key="1" v-model="user2" multiple ref="testInstance" /> -->
-    <!-- <yto-c-user-search v-model="user2" url="" :requestApi="getList"></yto-c-user-search> -->
+    <!-- <CustomLeakagewaySelect key="1" v-model="user2" multiple ref="testInstance" /> -->
+    <yto-c-user-search v-model="user2" multiple></yto-c-user-search>
     <!-- <TestSearch /> -->
     <!-- <el-button @click="testInstance.testFun()">test</el-button> -->
   </div>
-  <el-form ref="FormInstanceRef" :model="formModel" :rules="rules" label-width="80px" label-position="right">
+  <!-- <el-form ref="FormInstanceRef" :model="formModel" :rules="rules" label-width="80px" label-position="right">
     <el-form-item label="标准字段" prop="country">
       <CustomCountrySelect
         v-model="formModel.country"
@@ -16,8 +15,8 @@
         @change="handleChange"
       />
     </el-form-item>
-  </el-form>
-  <el-button @click="handleSubmit">Submit</el-button>
+  </el-form> -->
+  <!-- <el-button @click="handleSubmit">Submit</el-button> -->
 </template>
 <script lang="ts" setup>
 import { ref } from "vue";
