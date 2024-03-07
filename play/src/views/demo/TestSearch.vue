@@ -2,7 +2,7 @@
   <div class="p-5">
     <!-- <yto-c-user-search v-model="user1"></yto-c-user-search> -->
     <el-form>
-      <el-form-item label="testtwet"  class="non-interactive-label">
+      <el-form-item label="testtwet" class="non-interactive-label">
         <textSearch2 v-model="user1" />
       </el-form-item>
     </el-form>
@@ -12,7 +12,7 @@
 </template>
 <script lang="ts" setup>
 import { h, ref } from "vue";
-import _request from "../request";
+import _request from "../../request";
 import textSearch2 from "./textSearch2.vue";
 const user1 = ref("");
 const user = ref("");
