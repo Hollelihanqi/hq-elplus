@@ -18,7 +18,7 @@
           <el-sub-menu v-if="isArray(item.children)" :index="getLabel(item)">
             <template #title>
               <slot name="label" v-bind="item">
-                <inner-node-menu :data="item" :show-icon="!!item.icon"></inner-node-menu>
+                <inner-node-menu :collapse="collapse" :data="item" :show-icon="!!item.icon"></inner-node-menu>
               </slot>
             </template>
             <!-- 三级菜单 -->
@@ -26,7 +26,7 @@
               <el-sub-menu v-if="isArray(itemSub.children)" class="second-sub-menu" :index="getLabel(itemSub)">
                 <template #title>
                   <slot name="label" v-bind="itemSub">
-                    <inner-node-menu :data="itemSub" :show-icon="!!itemSub.icon"></inner-node-menu>
+                    <inner-node-menu :collapse="collapse" :data="itemSub" :show-icon="!!itemSub.icon"></inner-node-menu>
                   </slot>
                 </template>
                 <template
@@ -50,7 +50,7 @@
           <!-- 一级菜单 -->
           <el-menu-item v-else :index="item.code" @click="menuClick(item)">
             <slot name="label" v-bind="item">
-              <inner-node-menu :data="item" :show-icon="!!item.icon"></inner-node-menu>
+              <inner-node-menu :collapse="collapse" :data="item" :show-icon="!!item.icon"></inner-node-menu>
             </slot>
           </el-menu-item>
         </template>
@@ -118,7 +118,6 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
   --el-menu-base-level-padding: 18px;
   --el-menu-level-padding: 18px;
   --el-menu-item-height: 48px;
-  --el-menu-icon-width: 18px;
 }
 </style>
 <style lang="scss" scoped>
