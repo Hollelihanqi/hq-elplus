@@ -14,7 +14,7 @@
         </yto-c-layout-header>
       </template>
       <yto-c-layout-menu
-        title="圆通党建"
+        title="测试项目"
         :logo="logo"
         :collapse="collapse"
         :unique-opened="true"
@@ -54,13 +54,6 @@ const listNavigation: any[] = [
     label: "layoutmenu名称超长测试",
     icon: "icon iconfont party-web-icon-caidan3",
     children: [
-      {
-        label: "测试数据",
-        href: "/layout-child-4",
-        code: "/layout-child-4",
-        // closable: false,
-        mode: "router",
-      },
       {
         label: "公告列表公告列表公告列表公告列表",
         href: "/layout-child-1?abc=1",
