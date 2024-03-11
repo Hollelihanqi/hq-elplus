@@ -14,7 +14,7 @@
         </yto-c-layout-header>
       </template>
       <yto-c-layout-menu
-        title="圆通党建"
+        title="测试项目"
         :logo="logo"
         :collapse="collapse"
         :unique-opened="true"
@@ -50,57 +50,10 @@ const listNavigation: any[] = [
     // closable: false,
     mode: "router",
   },
-  // {
-  //   label: "测试123",
-  //   href: "/layout-child-6",
-  //   code: "/layout-child-6",
-  //   icon: "icon iconfont party-web-icon-caidan3",
-  //   // closable: false,
-  //   mode: "router",
-  // },
-  // {
-  //   label: "测试12378",
-  //   href: "/layout-child-7",
-  //   code: "/layout-child-7",
-  //   icon: "icon iconfont party-web-icon-caidan3",
-  //   // closable: false,
-  //   mode: "router",
-  // },
-  // {
-  //   label: "测试看看看看",
-  //   href: "/layout-child-8",
-  //   code: "/layout-child-8",
-  //   icon: "icon iconfont party-web-icon-caidan3",
-  //   // closable: false,
-  //   mode: "router",
-  // },
-  // {
-  //   label: "测试uu看看",
-  //   href: "/layout-child-9",
-  //   code: "/layout-child-9",
-  //   icon: "icon iconfont party-web-icon-caidan3",
-  //   // closable: false,
-  //   mode: "router",
-  // },
-  // {
-  //   label: "测试看rty看",
-  //   href: "/layout-child-10",
-  //   code: "/layout-child-10",
-  //   icon: "icon iconfont party-web-icon-caidan3",
-  //   // closable: false,
-  //   mode: "router",
-  // },
   {
-    label: "公告管理公告管理公告管理",
+    label: "layoutmenu名称超长测试",
     icon: "icon iconfont party-web-icon-caidan3",
     children: [
-      {
-        label: "测试数据",
-        href: "/layout-child-4",
-        code: "/layout-child-4",
-        // closable: false,
-        mode: "router",
-      },
       {
         label: "公告列表公告列表公告列表公告列表",
         href: "/layout-child-1?abc=1",
@@ -111,15 +64,11 @@ const listNavigation: any[] = [
     ],
   },
   {
-    label: "资讯管理",
+    label: "三级菜单测试",
     icon: "icon iconfont party-web-icon-caidan3",
     children: [
       {
         label: "资讯列表",
-        // href: "/layout-child-2",
-        // code: "/layout-child-2",
-        // mode: "router",
-
         children: [
           {
             label: "资讯详情",
@@ -131,43 +80,140 @@ const listNavigation: any[] = [
       },
     ],
   },
-  // {
-  //   label: "测试数据",
-  //   icon: "icon iconfont party-web-icon-caidan3",
-  //   children: [
-  //     {
-  //       label: "测试列表",
-  //       href: "/layout-child-3",
-  //       code: "/layout-child-3",
-  //       mode: "router",
-  //     },
-  //   ],
-  // },
+  {
+    label: "组件调试",
+    icon: "icon iconfont party-web-icon-caidan3",
+    children: [
+      {
+        label: "Form",
+        href: "/form",
+        code: "/form",
+        mode: "router",
+      },
+      {
+        label: "Chart",
+        href: "/chart",
+        code: "/chart",
+        mode: "router",
+      },
+      {
+        label: "Table",
+        href: "/table",
+        code: "/table",
+        mode: "router",
+      },
+      {
+        label: "StaffSearch",
+        href: "/staffSearch",
+        code: "/staffSearch",
+        mode: "router",
+      },
+      {
+        label: "Dialog",
+        href: "/dialog",
+        code: "/dialog",
+        mode: "router",
+      },
+      {
+        label: "Dialog2",
+        href: "/dialog2",
+        code: "/dialog2",
+        mode: "router",
+      },
+      {
+        label: "UserSearch",
+        href: "/userSearch",
+        code: "/userSearch",
+        mode: "router",
+      },
+      {
+        label: "Uploader",
+        href: "/uploaderf",
+        code: "/uploaderf",
+        mode: "router",
+      },
+      {
+        label: "LayoutFrom",
+        href: "/layoutFrom",
+        code: "/layoutFrom",
+        mode: "router",
+      },
+      {
+        label: "Theme",
+        href: "/theme",
+        code: "/theme",
+        mode: "router",
+      },
+      {
+        label: "CustomFieldContainer",
+        href: "/customFieldContainer",
+        code: "/customFieldContainer",
+        mode: "router",
+      },
+      {
+        label: "CustomFieldDemo",
+        href: "/customFieldConfig",
+        code: "/customFieldConfig",
+        mode: "router",
+      },
+      {
+        label: "SearchContainer",
+        href: "/searchContainer",
+        code: "/searchContainer",
+        mode: "router",
+      },
+      {
+        label: "AdaptionContainer",
+        href: "/adaptionContainer",
+        code: "/adaptionContainer",
+        mode: "router",
+      },
+      {
+        label: "EllipsisTag",
+        href: "/ellipsisTag",
+        code: "/ellipsisTag",
+        mode: "router",
+      },
+      {
+        label: "SearchFormItemContainer",
+        href: "/searchFormItemContainer",
+        code: "/searchFormItemContainer",
+        mode: "router",
+      },
+      {
+        label: "tableSearch",
+        href: "/tableSearch",
+        code: "/tableSearch",
+        mode: "router",
+      },
+      {
+        label: "TareaTag",
+        href: "/tareaTag",
+        code: "/tareaTag",
+        mode: "router",
+      },
+      {
+        label: "CusRadio",
+        href: "/cusRadio",
+        code: "/cusRadio",
+        mode: "router",
+      },
+    ],
+  },
 ];
 // const frist = listNavigation[0].children[0];
 
 // if (route.path === "/") {
 //   tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
 // }
-// tabPaneAdd(
-//   `/layout-child-3?iFrameUrl=${encodeURIComponent(
-//     "http://action-analysis-tst.ytokj.com/user-access-records"
-//   )}` as string,
-//   {
-//     label: "测试列表3",
-//     href: "/layout-child-3",
-//     code: "/layout-child-3",
-//     mode: "router",
-//     closable: false,
-//   }
-// );
-tabPaneAdd(`/layout-child-3?iFrameUrl=http://action-analysis-tst.ytokj.com/user-access-records` as string, {
-  label: "测试列表3",
-  href: "/layout-child-3",
-  code: "/layout-child-3",
-  mode: "router",
-  closable: false,
-});
+
+// tabPaneAdd(`/layout-child-3?iFrameUrl=http://action-analysis-tst.ytokj.com/user-access-records` as string, {
+//   label: "测试列表3",
+//   href: "/layout-child-3",
+//   code: "/layout-child-3",
+//   mode: "router",
+//   closable: false,
+// });
 const handleMenuClick = (info: any) => {
   console.log("handleMenuClick-----");
 };

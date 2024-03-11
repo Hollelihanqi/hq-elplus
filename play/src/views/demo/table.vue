@@ -24,7 +24,7 @@
 </template>
 <script lang="tsx" setup>
 import { TableProps } from "@yto/custom";
-import request from "../request";
+import request from "../../request";
 const ShowHiddenFieldKeys = ["id", "title", "level", "status"];
 const ShowHiddenFieldKeys2 = {
   fields: ["id", "title", "level", "status"],
