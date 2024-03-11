@@ -39,8 +39,9 @@ export default defineComponent({
           .request({
             url: props.url,
             method: props.method,
-            params: _params,
-            data: JSON.stringify(_params),
+            ...(props.method.toUpperCase() === "POST" ? { data: _params } : { params: _params }),
+            // params: _params,
+            // data: JSON.stringify(_params),
             headers: _headers,
             cancelToken: source.token,
           })
@@ -103,9 +104,7 @@ export default defineComponent({
       if (props.optTemp && typeof props.optTemp === "function") {
         return props.optTemp(item);
       }
-      return h("div", { class: "cus-temp" }, [
-        h("span", {}, props.labelKey && item[props.labelKey]),
-      ]);
+      return h("div", { class: "cus-temp" }, [h("span", {}, props.labelKey && item[props.labelKey])]);
     };
 
     const getOptions = (params = {}) => {
@@ -123,7 +122,7 @@ export default defineComponent({
     };
 
     const disLabelEvent = () => {
-      console.log('RemoteSearchSelectInstance.value',RemoteSearchSelectInstance.value)
+      console.log("RemoteSearchSelectInstance.value", RemoteSearchSelectInstance.value);
       const label = RemoteSearchSelectInstance.value?.$el.parentElement.parentElement;
       label && label.classList.add("el-form-label-dis");
     };
@@ -219,3 +218,4 @@ export default defineComponent({
 <style lang="scss">
 @import "./index.scss";
 </style>
+import { toUpperCamelCase } from "gold-core";
