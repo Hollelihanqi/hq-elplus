@@ -10,7 +10,6 @@
         :item-min-width="350"
         :model="form"
         label-width="100px"
-        :is-use-form="true"
         @resize="handleResize"
       >
         <el-form-item

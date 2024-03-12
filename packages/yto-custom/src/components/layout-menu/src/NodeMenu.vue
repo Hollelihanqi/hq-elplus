@@ -4,7 +4,7 @@
     <i v-if="!isBlank(getIcon(data))" :class="getIcon(data)"></i>
     <template v-else>{{ labelFirst(data) }}</template>
   </el-icon>
-  <div :class="showIcon ? 'w-[calc(100%-18px)]' : 'w-full'">
+  <div :class="showIcon ? 'w-[calc(100%-18px)]' : 'w-full'" :style="`display:${collapse ? 'none' : 'block'}`">
     <p class="truncate w-full">{{ getLable(data) }}</p>
   </div>
   <!-- <span class="truncate ">{{ getLable(data) }}</span> -->
@@ -17,7 +17,7 @@ import "element-plus/es/components/icon/style/css";
 
 import { isBlank, isEmpty } from "gold-core";
 import { EnumSessionKey } from "@/common/EnumConstant";
-defineProps({ data: Object, showIcon: { type: Boolean, default: true } });
+defineProps({ data: Object, showIcon: { type: Boolean, default: true }, collapse: { type: Boolean, default: false } });
 const keyLabel = inject<any>(EnumSessionKey.MenuKeyLabel);
 const keyIcon = inject<any>(EnumSessionKey.MenuKeyIcon);
 // const width = inject<any>(EnumSessionKey.MenuWidth);

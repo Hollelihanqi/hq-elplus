@@ -21,7 +21,7 @@
 
 <script lang="ts" setup>
 import { Plus } from "@element-plus/icons-vue";
-import _request from "../request";
+import _request from "../../request";
 const UploaderInstance = ref();
 const mergeFile = (params = {}) => {
   return _request.request({

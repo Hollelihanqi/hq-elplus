@@ -1,8 +1,8 @@
 <template>
-  <div class="p-[16px]">
+  <div class="p-[16px] bg-white">
     <yto-c-search-container
       ref="searchContainerRef"
-      custom-class="p-[16px] bg-[#eeeffc]"
+      custom-class="p-[16px] "
       :item-min-width="350"
       :model="form"
       label-width="100px"
@@ -44,7 +44,7 @@ for (let index = 0; index < 10; index++) {
     value: "",
     label: "测试数据" + (index + 1),
     contentClass: "w-full",
-    cols: index == 1 ? 2 : 1,
+    cols: !index ? 2 : 1,
   });
 }
 const handleResize = (itemWidth: number) => {
