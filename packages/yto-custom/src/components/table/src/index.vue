@@ -95,6 +95,7 @@ const _loading = ref(false);
 const _tableData = ref<any>([]);
 const _tableDataTotal = ref(0);
 const _showSummary = ref(false);
+
 const paginationParams = reactive({
   currentPage: props.currentPage,
   pageSize: props.pageSize,
@@ -117,6 +118,10 @@ const _total = computed(() => {
 
 const _tdata = computed(() => {
   return props.requestApi ? _tableData.value : props.tableData;
+});
+
+const _lastPage = computed(() => {
+  return Math.ceil(_tableDataTotal.value / paginationParams.pageSize) || 1;
 });
 
 const _defaultSort = computed(() => {
@@ -178,7 +183,6 @@ const getTableData = async (params = {}) => {
       _tableData.value = result[props.dataKey] || [];
       _tableDataTotal.value = result.total || 0;
     }
-
     await nextTick();
     props.dataUpdateAfter(_params, result);
   } catch (error) {
@@ -234,7 +238,6 @@ const handleSortChange = (item: { prop: string; order: string; column: any }) =>
   _sortItem = item && item.order ? item : null;
   paginationParams.currentPage = 1;
   emits("on-table", "sort", item);
-
   // 为了兼容以前旧的 api
   if (props.tableChange && typeof props.tableChange === "function") {
     props.tableChange("sort", item);
@@ -246,11 +249,7 @@ const handleSortChange = (item: { prop: string; order: string; column: any }) =>
 };
 
 const updateTableData = (params = {}) => {
-  if (_total.value === paginationParams.pageSize) {
-    resetTableData(params);
-  } else {
-    getTableData(params);
-  }
+  getTableData(params);
 };
 
 const resetTableData = (params = {}) => {
@@ -272,6 +271,16 @@ const updatePage = (obj: { currentPage?: number; pageSize?: number }) => {
 const getData = () => {
   return _tableData.value;
 };
+
+watch(
+  () => _tdata.value,
+  () => {
+    if (!_tdata.value.length && _lastPage.value === (paginationParams.currentPage-1) && paginationParams.currentPage > 1) {
+      updatePage({ ...paginationParams, currentPage: paginationParams.currentPage - 1 });
+      updateTableData();
+    }
+  }
+);
 
 onMounted(() => {
   _showSummary.value = ElTableInstance.value?.showSummary;
