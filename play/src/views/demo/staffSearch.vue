@@ -1,9 +1,9 @@
 <template>
   <div class="search-box flex items-center">
     <!-- <CustomLeakagewaySelect key="1" v-model="user2" multiple ref="testInstance" /> -->
-    <yto-c-user-search v-model="user2" multiple></yto-c-user-search>
+    <CustomProvinceAreaSelect v-model="regions" model-item multiple />
     <!-- <TestSearch /> -->
-    <!-- <el-button @click="testInstance.testFun()">test</el-button> -->
+    <el-button @click="AddHandlePersonalInstance?.actionDialog">test</el-button>
   </div>
   <!-- <el-form ref="FormInstanceRef" :model="formModel" :rules="rules" label-width="80px" label-position="right">
     <el-form-item label="标准字段" prop="country">
@@ -17,6 +17,7 @@
     </el-form-item>
   </el-form> -->
   <!-- <el-button @click="handleSubmit">Submit</el-button> -->
+  <AddHandlePersonal ref="AddHandlePersonalInstance" />
 </template>
 <script lang="ts" setup>
 import { ref } from "vue";
@@ -25,10 +26,11 @@ import CustomRuleCategoryName from "../components/CustomRuleCategoryName.vue";
 import CustomCountrySelect from "./CustomCountrySelect.vue";
 import TestSearch from "./TestSearch.vue";
 import { request } from "@/utils";
-
+import CustomProvinceAreaSelect from "./CustomProvinceAreaSelect.vue";
+import AddHandlePersonal from "@/components/AddHandlePersonal.vue";
 const FormInstanceRef = ref();
 const formModel = ref<any>({ country: {} });
-
+const regions = ref([]);
 const validatePass = (rule: any, value: any, callback: any) => {
   if (value && value.length) {
     callback();
@@ -36,6 +38,8 @@ const validatePass = (rule: any, value: any, callback: any) => {
     callback(new Error("请输入"));
   }
 };
+
+const AddHandlePersonalInstance = ref();
 
 const rules = {
   columns: [{ required: true, validator: validatePass, trigger: ["change", "blur"] }],

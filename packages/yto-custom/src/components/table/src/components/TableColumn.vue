@@ -13,6 +13,7 @@ const props = defineProps({
     default: () => ({}),
   },
 });
+
 const slots = useSlots();
 const formatEnum = (column: any, row: any) => {
   if (Array.isArray(column.enum)) {
@@ -48,10 +49,18 @@ const renderCellData = (item: any, scope: any) => {
     : scope.row[item.prop] ?? "--";
 };
 
+const _showColumn = (column: any) => {
+  if (column.hide && typeof column.hide === "function") {
+    return column.hide();
+  } else {
+    return column.show !== false;
+  }
+};
+
 const renderColumn = (column: any) => {
   return (
     <>
-      {column.show !== false && (
+      {_showColumn(column) && (
         <ElTableColumn
           className={column.sortable && column.align === "right" ? "sort-cell-td" : ""}
           showOverflowTooltip={column.showOverflowTooltip ?? column.prop !== "action"}

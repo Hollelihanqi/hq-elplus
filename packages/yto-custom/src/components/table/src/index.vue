@@ -54,6 +54,8 @@
           </template>
         </TableColumn>
       </template>
+
+      <slot name="inAction"></slot>
     </el-table>
     <div v-if="_showSummary" class="flex-1 opacity-0 h-0 phd"></div>
     <el-pagination
@@ -131,15 +133,7 @@ const _defaultSort = computed(() => {
 const isDataEmpty = computed(() => {
   return props.requestApi ? _tableData.value.length : props.tableData.length;
 });
-// const cpaginationShow = computed(() => {
-//   if (props.paginationHide) {
-//     return false;
-//   }
-//   if (props.paginationHideAuto && props.pageSize >= _total.value) {
-//     return false;
-//   }
-//   return true;
-// });
+
 const cpaginationShow = computed(() => {
   // 返回一个布尔值，当不隐藏分页，或者自动隐藏且页面尺寸小于总数时显示
   return !(props.paginationHide || (props.paginationHideAuto && props.pageSize >= _total.value));
@@ -252,7 +246,11 @@ const handleSortChange = (item: { prop: string; order: string; column: any }) =>
 };
 
 const updateTableData = (params = {}) => {
-  getTableData(params);
+  if (_total.value === paginationParams.pageSize) {
+    resetTableData(params);
+  } else {
+    getTableData(params);
+  }
 };
 
 const resetTableData = (params = {}) => {

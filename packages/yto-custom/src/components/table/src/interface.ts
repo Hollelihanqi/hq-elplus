@@ -1,6 +1,7 @@
 export interface ColumnsItemProps {
     label?: string,
     prop?: string,
+    hide?: (row?:any)=>boolean
     [propsName: string]: any;
 }
 export type CanWrite<T> = {

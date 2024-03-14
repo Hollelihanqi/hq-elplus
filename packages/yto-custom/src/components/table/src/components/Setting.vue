@@ -29,7 +29,6 @@
 </template>
 <script lang="ts" setup>
 import { ElDrawer } from "element-plus";
-import { Search } from "@element-plus/icons-vue";
 
 interface setColumnsProps {
   label: string;

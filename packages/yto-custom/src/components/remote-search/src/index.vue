@@ -138,10 +138,7 @@ export default defineComponent({
 
     const RemoteSearchSelectInstance = ref();
     expose({ getOptions, clearOptions });
-    // setTimeout(() => {
-    //   console.log("清除列表");
-    //   clearOptions();
-    // }, 10000);
+
     const renderSelect = () => {
       return h(
         ElSelect,
@@ -198,11 +195,13 @@ export default defineComponent({
       return (
         <ElSelectV2
           class="remote-search-select"
+          style={{ width: props.w }}
           options={options.value}
           value-key={props.valueKey}
           props={_props}
           clearable
           filterable
+          remoteMethod={remoteMethod}
           loading={loading.value}
           {...attrs}
         ></ElSelectV2>

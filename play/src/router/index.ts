@@ -44,6 +44,7 @@ const routes = [
   { path: "/tableSearch", component: () => import("@/views/demo/TableSearch.vue") },
   { path: "/tareaTag", component: () => import("@/views/demo/TareaTag.vue") },
   { path: "/cusRadio", component: () => import("@/views/demo/CusRadio.vue") },
+  { path: "/selectRemote", component: () => import("@/views/demo/CustomProvinceAreaSelect.vue") },
 ];
 
 export const router = createRouter({
