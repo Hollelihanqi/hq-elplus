@@ -103,9 +103,7 @@ export default defineComponent({
       if (props.optTemp && typeof props.optTemp === "function") {
         return props.optTemp(item);
       }
-      return h("div", { class: "cus-temp" }, [
-        h("span", {}, props.labelKey && item[props.labelKey]),
-      ]);
+      return h("div", { class: "cus-temp" }, [h("span", {}, props.labelKey && item[props.labelKey])]);
     };
 
     const getOptions = (params = {}) => {
@@ -123,7 +121,7 @@ export default defineComponent({
     };
 
     const disLabelEvent = () => {
-      console.log('RemoteSearchSelectInstance.value',RemoteSearchSelectInstance.value)
+      console.log("RemoteSearchSelectInstance.value", RemoteSearchSelectInstance.value);
       const label = RemoteSearchSelectInstance.value?.$el.parentElement.parentElement;
       label && label.classList.add("el-form-label-dis");
     };

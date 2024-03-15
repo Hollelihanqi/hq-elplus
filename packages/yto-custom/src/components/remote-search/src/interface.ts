@@ -1,2 +1,1 @@
-export type { RemoteSearchProps } from './props'
-
+export type { RemoteSearchProps } from "./props";

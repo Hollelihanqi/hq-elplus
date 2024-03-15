@@ -100,7 +100,6 @@ if (slots.default && typeof slots.default === "function") {
   slots = slots.default();
 }
 
-
 // 寻找需要开始折叠的字段 index，实现折叠功能
 const findIndex = () => {
   let fields: VNodeArrayChildren = [];

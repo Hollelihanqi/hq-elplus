@@ -1,4 +1,4 @@
-import type { PropType } from 'vue'
+import type { PropType } from "vue";
 
 /**
  * 设置组件的 prop 参数
@@ -23,11 +23,11 @@ import type { PropType } from 'vue'
 export const setBooleanProp = (
   defaultVal = false
 ): {
-  readonly type: BooleanConstructor
-  readonly default: boolean
+  readonly type: BooleanConstructor;
+  readonly default: boolean;
 } => {
-  return { type: Boolean, default: defaultVal } as const
-}
+  return { type: Boolean, default: defaultVal } as const;
+};
 
 /**
  * 设置 number 类型 props 参数
@@ -38,11 +38,11 @@ export const setBooleanProp = (
 export const setNumberProp = (
   defaultVal?: number
 ): {
-  readonly type: NumberConstructor
-  readonly default: number | undefined
+  readonly type: NumberConstructor;
+  readonly default: number | undefined;
 } => {
-  return { type: Number, default: defaultVal } as const
-}
+  return { type: Number, default: defaultVal } as const;
+};
 
 /**
  * 设置 string 类型的 prop 参数
@@ -55,25 +55,25 @@ export const setStringProp = <T extends string>(
   defaultVal?: T,
   validator?: (value: T) => boolean
 ): {
-  readonly type: PropType<T>
-  readonly default: T extends string ? T : undefined
-  readonly validator?: (value: T) => boolean
+  readonly type: PropType<T>;
+  readonly default: T extends string ? T : undefined;
+  readonly validator?: (value: T) => boolean;
 } => {
   const prop = {
     type: String as unknown as PropType<T>,
-    default: defaultVal
+    default: defaultVal,
   } as {
-    type: PropType<T>
-    default: T extends string ? T : undefined
-    validator?: (value: T) => boolean
-  }
+    type: PropType<T>;
+    default: T extends string ? T : undefined;
+    validator?: (value: T) => boolean;
+  };
 
   if (validator) {
-    prop.validator = validator
+    prop.validator = validator;
   }
 
-  return prop
-}
+  return prop;
+};
 
 /**
  * 设置 string & number 类型 props 参数
@@ -84,14 +84,14 @@ export const setStringProp = <T extends string>(
 export const setStringNumberProp = <T extends string | number>(
   defaultVal?: T
 ): {
-  readonly type: PropType<string | number>
-  readonly default: T | undefined
+  readonly type: PropType<string | number>;
+  readonly default: T | undefined;
 } => {
   return {
     type: [String, Number] as unknown as PropType<string | number>,
-    default: defaultVal
-  } as const
-}
+    default: defaultVal,
+  } as const;
+};
 
 /**
  * 为了保证组件实例之间的独立性和数据隔离，避免因为共享引用导致的副作用和意外修改
@@ -108,14 +108,14 @@ export const setStringNumberProp = <T extends string | number>(
 export const setObjectProp = <T extends object>(
   defaultVal = null
 ): {
-  readonly type: PropType<T>
-  readonly default: () => T | null
+  readonly type: PropType<T>;
+  readonly default: () => T | null;
 } => {
   return {
     type: Object as PropType<T>,
-    default: (): T | null => defaultVal
-  } as const
-}
+    default: (): T | null => defaultVal,
+  } as const;
+};
 
 /**
  * 设置 function 类型 props 参数
@@ -126,14 +126,14 @@ export const setObjectProp = <T extends object>(
 export const setFunctionProp = <T extends Function>(
   defaultVal = null
 ): {
-  readonly type: PropType<T>
-  readonly default: T | null
+  readonly type: PropType<T>;
+  readonly default: T | null;
 } => {
   return {
     type: Function as PropType<T>,
-    default: defaultVal
-  } as const
-}
+    default: defaultVal,
+  } as const;
+};
 
 /**
  * 设置 array 类型 props 参数
@@ -144,11 +144,11 @@ export const setFunctionProp = <T extends Function>(
 export const setArrayProp = <T>(
   defaultVal = []
 ): {
-  readonly type: PropType<T>
-  readonly default: () => T | null
+  readonly type: PropType<T>;
+  readonly default: () => T | null;
 } => {
   return {
     type: Array as unknown as PropType<T>,
-    default: (): T | null => defaultVal as T
-  } as const
-}
+    default: (): T | null => defaultVal as T,
+  } as const;
+};
