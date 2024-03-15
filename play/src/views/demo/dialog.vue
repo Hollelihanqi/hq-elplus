@@ -5,11 +5,11 @@
     <yto-c-dialog v-model="dialogVisible" width="1000px" @confirm="handleConfirm" @cancel="handleCancel">
       <template #header> title </template>
       <yto-c-form
+        id="123"
         ref="formInstance"
         :label-width="100"
         :form="commitForm"
         :form-config="formConfig"
-        id="123"
         class="12485"
         :span="12"
       >

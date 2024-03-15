@@ -80,17 +80,17 @@ defineProps({
     type: Boolean,
     default: false,
   },
-})
-const emits = defineEmits(["update:modelValue", "on-cancel", "on-ok"])
+});
+const emits = defineEmits(["update:modelValue", "on-cancel", "on-ok"]);
 
 // modal 关闭时的回调函数
 const handleCancel = () => {
-  emits("on-cancel")
-  emits("update:modelValue", false)
-}
+  emits("on-cancel");
+  emits("update:modelValue", false);
+};
 const handleOk = () => {
-  emits("on-ok")
-}
+  emits("on-ok");
+};
 </script>
 <style lang="scss">
 .my-modal {

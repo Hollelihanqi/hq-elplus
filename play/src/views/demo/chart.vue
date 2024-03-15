@@ -3,7 +3,7 @@
     <p class="p-[10px] text-[#5B8FF9]">线图测试</p>
     <yto-c-echart ref="lineChartRef" echart-id="lineChart" type="line" :options="lineChartOptions"></yto-c-echart>
     <p class="p-[10px] text-[#5B8FF9]">柱状图测试</p>
-    <yto-c-echart type="bar" :showLoading="false" :options="barChartOptions"></yto-c-echart>
+    <yto-c-echart type="bar" :show-loading="false" :options="barChartOptions"></yto-c-echart>
     <p class="p-[10px] text-[#5B8FF9]">饼图测试</p>
     <yto-c-echart ref="pieChartRef" type="pie" :options="pieChartOptions"></yto-c-echart>
   </div>

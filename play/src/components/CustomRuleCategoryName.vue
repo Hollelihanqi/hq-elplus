@@ -7,21 +7,20 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <script lang="tsx">
-import { defineComponent, h } from "vue"
-import { YtoRemoteSearch } from "@yto/custom"
-
+import { defineComponent, h } from "vue";
+import { YtoRemoteSearch } from "@yto/custom";
 
 const getToken = () => {
-  let token = sessionStorage.getItem("authorization") as string
+  let token = sessionStorage.getItem("authorization") as string;
   if (token) {
     if (token.indexOf('"') !== -1) {
-      const regex = /^"(.*)"$/
-      const matches: any = token.match(regex)
-      token = matches[1]
+      const regex = /^"(.*)"$/;
+      const matches: any = token.match(regex);
+      token = matches[1];
     }
   }
-  return token
-}
+  return token;
+};
 export default defineComponent({
   setup(props, context) {
     return () => {
@@ -34,8 +33,8 @@ export default defineComponent({
           authorization: getToken(),
         },
         ...context.attrs,
-      })
-    }
+      });
+    };
   },
-})
+});
 </script>

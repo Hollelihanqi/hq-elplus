@@ -1,5 +1,5 @@
 <template>
-  <yto-c-menu :menu-data="menuData" :menuItemConfig="{ 'unique-opened': true, collapse: true }"></yto-c-menu>
+  <yto-c-menu :menu-data="menuData" :menu-item-config="{ 'unique-opened': true, collapse: true }"></yto-c-menu>
 </template>
 <script lang="ts" setup name="Menu">
 interface IMenuData {

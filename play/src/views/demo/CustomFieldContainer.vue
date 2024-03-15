@@ -8,7 +8,7 @@
   <div :class="`flex w-full ${direction === 'vertical' ? 'flex-wrap' : 'flex-col'}`">
     <slot name="prepend"></slot>
     <div :class="`flex ${direction === 'vertical' ? 'flex-col flex-1 w-0' : 'flex-wrap w-full'}`">
-      <div v-for="(item, index) in modelValue" class="flex items-center my-2" :style="`width: ${width}`">
+      <div v-for="(item, index) in modelValue" :key="index" class="flex items-center my-2" :style="`width: ${width}`">
         <div class="flex-1 w-0">
           <slot name="content" :item="item" :index="index"></slot>
         </div>
@@ -39,7 +39,7 @@ interface IProps {
   modelValue: IAnyObject[];
   width?: string;
 }
-const props = withDefaults(defineProps<IProps>(), {
+withDefaults(defineProps<IProps>(), {
   direction: "horizontal",
   width: "100%",
 });

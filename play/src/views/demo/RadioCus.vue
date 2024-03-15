@@ -6,8 +6,8 @@
         { label: '单间', value: 0 },
         { label: '标间', value: 1 },
       ]"
-      @change="onChange"
       :disabled="false"
+      @change="onChange"
     ></yto-c-radio>
   </div>
 </template>
