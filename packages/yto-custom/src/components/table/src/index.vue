@@ -275,7 +275,11 @@ const getData = () => {
 watch(
   () => _tdata.value,
   () => {
-    if (!_tdata.value.length && _lastPage.value === (paginationParams.currentPage-1) && paginationParams.currentPage > 1) {
+    if (
+      !_tdata.value.length &&
+      _lastPage.value === paginationParams.currentPage - 1 &&
+      paginationParams.currentPage > 1
+    ) {
       updatePage({ ...paginationParams, currentPage: paginationParams.currentPage - 1 });
       updateTableData();
     }

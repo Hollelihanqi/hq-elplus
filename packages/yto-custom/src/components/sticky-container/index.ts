@@ -6,5 +6,3 @@ export const YtoStickyContainer = install(StickyContainer);
 export default YtoStickyContainer;
 
 export type StickyContainerInstance = InstanceType<typeof StickyContainer>;
-
-

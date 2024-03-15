@@ -1,14 +1,14 @@
-import { DefineComponent, Slot } from 'vue';
+import { DefineComponent, Slot } from "vue";
 
 export interface TableColumnProps {
-    column: {
-        type: ObjectConstructor;
-        default: () => Record<string, any>;
-    };
+  column: {
+    type: ObjectConstructor;
+    default: () => Record<string, any>;
+  };
 }
 
 export interface TableColumnSlots {
-    [key: string]: Slot | undefined;
+  [key: string]: Slot | undefined;
 }
 
 export const TableColumn: DefineComponent<TableColumnProps, {}, TableColumnSlots>;

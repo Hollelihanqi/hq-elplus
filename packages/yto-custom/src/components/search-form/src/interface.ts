@@ -64,4 +64,4 @@ type El = keyof FormEl;
 
 export type SearchFormControlProps = SearchProps<El>;
 
-export type { SearchFormProps } from './props'
+export type { SearchFormProps } from "./props";

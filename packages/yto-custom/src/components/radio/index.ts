@@ -12,8 +12,5 @@ import { install } from "../../_utils";
 export const YtoRadio = install(Radio);
 export default YtoRadio;
 
-export * from './src/interface'
+export * from "./src/interface";
 export type RadioInstance = InstanceType<typeof Radio>;
-
-
-
