@@ -2,7 +2,7 @@
  * @Description: 自定义容器
  * @Author: ym
  * @Date: 2023-12-07 16:20:35
- * @LastEditTime: 2023-12-25 16:26:26
+ * @LastEditTime: 2024-03-18 13:13:17
 -->
 <template>
   <div :class="`custom-field-container flex w-full ${direction === 'vertical' ? 'flex-wrap' : 'flex-col'}`">
@@ -23,7 +23,7 @@
             <el-button class="mx-2" link :icon="Plus" @click="onClick('add', index, item)"></el-button>
             <span class="mr-2 w-[20px] inline-block">
               <el-button
-                v-show="modelValue.length > 1"
+                v-show="termHiddenDel ? modelValue.length > 1 : true"
                 link
                 :icon="Delete"
                 @click="onClick('delete', index, item)"
@@ -46,10 +46,12 @@ interface IProps {
   direction?: "vertical" | "horizontal";
   modelValue: IAnyObject[];
   width?: string;
+  termHiddenDel?: boolean; // 根据条件隐藏删除按钮
 }
 const props = withDefaults(defineProps<IProps>(), {
   direction: "horizontal",
   width: "100%",
+  termHiddenDel: true,
 });
 const emits = defineEmits(["add", "delete"]);
 const onClick = (flag: "add" | "delete", index: number, item: IAnyObject) => {

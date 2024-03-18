@@ -2,7 +2,7 @@
  * @Description: 模块名称
  * @Author: ym
  * @Date: 2023-12-07 16:01:04
- * @LastEditTime: 2023-12-25 14:30:37
+ * @LastEditTime: 2024-03-18 13:23:52
 -->
 
 # CustomFieldContainer
@@ -30,6 +30,9 @@
 自定义/追加操作按钮
 <demo src="./basic3.vue"></demo>
 
+删除按钮一直展示
+<demo src="./basic4.vue"></demo>
+
 ### CustomFieldContainer 属性
 
 | 属性名      | 说明              | 类型   | 可选值                | 默认值       | 备注           |
@@ -46,13 +49,14 @@
 
 ### CustomFieldContainer 插槽
 
-| 属性名      | 说明                                   |
-| ----------- | -------------------------------------- |
-| `prepend`   | 前置插槽                               |
-| `content`   | 左侧内容区域，作用域参数 item, index   |
-| `btn`       | 右侧操作按钮作用域参数 item, index     |
-| `btnAppend` | 右侧操作追加按钮作用域参数 item, index |
-| `append`    | 后置插槽                               |
+| 属性名          | 说明                                                          |
+| --------------- | ------------------------------------------------------------- |
+| `prepend`       | 前置插槽                                                      |
+| `content`       | 左侧内容区域，作用域参数 item, index                          |
+| `btn`           | 右侧操作按钮作用域参数 item, index                            |
+| `btnAppend`     | 右侧操作追加按钮作用域参数 item, index                        |
+| `append`        | 后置插槽                                                      |
+| `termHiddenDel` | 是否条件隐藏删除按钮（只有一条数据时隐藏删除按钮），默认 true |
 
 ### CustomFieldContainer 样式变量
 
