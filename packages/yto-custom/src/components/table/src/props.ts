@@ -1,6 +1,6 @@
-import type { ExtractPropTypes, PropType } from "vue";
-import type { PaginationProps } from "element-plus";
-import { ColumnsItemProps, CanWrite, ShowHideFieldsInterface } from "./interface";
+import type { ExtractPropTypes, PropType } from 'vue';
+import type { PaginationProps } from 'element-plus';
+import { ColumnsItemProps, CanWrite, ShowHideFieldsInterface } from './interface';
 export const Props = {
   tableData: {
     type: Array,
@@ -29,7 +29,7 @@ export const Props = {
   },
   dataKey: {
     type: String,
-    default: "items",
+    default: 'items',
   },
   dataCallback: {
     type: Function,
@@ -62,7 +62,7 @@ export const Props = {
   },
   layout: {
     type: String,
-    default: "total, sizes, prev, pager, next, jumper",
+    default: 'total, sizes, prev, pager, next, jumper',
   },
   pageSize: {
     type: Number,
@@ -78,11 +78,11 @@ export const Props = {
   },
   currentPageKey: {
     type: String,
-    default: "page",
+    default: 'page',
   },
   pageSizeKey: {
     type: String,
-    default: "size",
+    default: 'size',
   },
   tableChange: {
     type: Function,
@@ -102,7 +102,7 @@ export const Props = {
   },
   cellEmptyText: {
     type: String,
-    default: "--",
+    default: '--',
   },
   headerbgHide: {
     type: Boolean,
@@ -122,7 +122,7 @@ export const Props = {
   },
   tableKey: {
     type: String,
-    default: "",
+    default: '',
   },
 };
 

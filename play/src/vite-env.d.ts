@@ -5,6 +5,6 @@
 // }
 // declare module "@yto/custom";
 
-declare module "@yto/utils";
+declare module '@yto/utils';
 
 // declare module "@yto/utils/dist";

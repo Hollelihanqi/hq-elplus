@@ -1,1 +1,1 @@
-export type { TareaProps } from "./props";
+export type { TareaProps } from './props';

@@ -1,5 +1,5 @@
-import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
-import { ElMessage } from "element-plus";
+import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { ElMessage } from 'element-plus';
 type Result<T> = {
   code: number;
   message: string;
@@ -7,7 +7,7 @@ type Result<T> = {
 };
 
 export const baseConfig = {
-  baseURL: "/api",
+  baseURL: '/api',
   timeout: 50000,
   withCredentials: true,
 };
@@ -17,12 +17,12 @@ export class RequestHttp {
   resInterceptors: any;
   constructor(config: AxiosRequestConfig) {
     // 创建 axios 实例
-    console.log("config", config);
+    console.log('config', config);
     this.instance = axios.create(config);
     this.instance.interceptors.request.use(
       (config) => {
         // 添加 token
-        let token = sessionStorage.getItem("authorization") as string;
+        let token = sessionStorage.getItem('authorization') as string;
         if (token) {
           if (token.indexOf('"') !== -1) {
             const regex = /^"(.*)"$/;
@@ -34,14 +34,14 @@ export class RequestHttp {
         return config;
       },
       (error) => {
-        console.log("config2", error);
+        console.log('config2', error);
         // return Promise.reject(error);
       }
     );
 
     this.resInterceptors = this.instance.interceptors.response.use(
       (res: AxiosResponse) => {
-        console.log("resusule___", res);
+        console.log('resusule___', res);
         if (res.status === 200 && (res.data.success || res.data.status === 0)) {
           return Promise.resolve(res.data.data);
         } else {

@@ -1,6 +1,6 @@
-import LayoutFrame from "./src/index.vue";
+import LayoutFrame from './src/index.vue';
 
-import { install } from "@/_utils";
+import { install } from '@/_utils';
 
 export const YtoLayoutFrame = install(LayoutFrame);
 

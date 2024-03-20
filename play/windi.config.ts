@@ -17,7 +17,7 @@ module.exports = {
     extend: {
       colors: {
         // primary: 'var(--el-color-primary)',
-        primary: color("var(--el-color-primary-windi)"),
+        primary: color('var(--el-color-primary-windi)'),
       },
     },
   },

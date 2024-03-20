@@ -27,24 +27,24 @@
 </template>
 
 <script lang="ts" setup name="Uploader">
-import { ref, onMounted, provide, defineEmits } from "vue";
-import { Props } from "./props";
-import SimpleUploader from "simple-uploader.js";
-import SparkMD5 from "spark-md5";
-import UploadList from "./components/UploadList.vue";
-import UploadInfo from "./components/UploadInfo.vue";
+import { ref, onMounted, provide, defineEmits } from 'vue';
+import { Props } from './props';
+import SimpleUploader from 'simple-uploader.js';
+import SparkMD5 from 'spark-md5';
+import UploadList from './components/UploadList.vue';
+import UploadInfo from './components/UploadInfo.vue';
 
-const FILE_ADDED_EVENT = "fileAdded";
+const FILE_ADDED_EVENT = 'fileAdded';
 // const FILES_ADDED_EVENT = "filesAdded";
-const UPLOAD_START_EVENT = "uploadStart";
+const UPLOAD_START_EVENT = 'uploadStart';
 const props = defineProps(Props);
 
-const emits = defineEmits(["on-type-error", "on-exceed-limit", "on-files-submitted", "on-complete"]);
+const emits = defineEmits(['on-type-error', 'on-exceed-limit', 'on-files-submitted', 'on-complete']);
 const _options = {
-  target: "/api/v2/upload", // 目标上传 URL
+  target: '/api/v2/upload', // 目标上传 URL
   chunkSize: props.isSlice ? 1024 * 1024 * 1 : Number.MAX_SAFE_INTEGER, // 分块大小 4M
   connectionCount: 3, //同时上传的连接数
-  fileParameterName: "file", // 上传文件时文件的参数名，默认file
+  fileParameterName: 'file', // 上传文件时文件的参数名，默认file
   maxChunkRetries: 3, // 最大自动失败重试上传次数
   simultaneousUploads: 3, // 并发上传数 默认为 3
   testChunks: props.isSlice, // 是否开启服务器分片校验
@@ -58,7 +58,7 @@ const _options = {
         return (_message.data.chunks || []).indexOf(chunk.offset + 1) >= 0;
       }
     : null,
-  headers: typeof props.headers === "function" ? props.headers() : props.headers,
+  headers: typeof props.headers === 'function' ? props.headers() : props.headers,
   // 额外的自定义查询参数
   query: (file: any, chunk: any) => {
     return {
@@ -84,7 +84,7 @@ const started = ref(false);
 const files = ref<any>([]);
 const fileList = ref<any>([]);
 let UPLOADER = ref<any>();
-provide("uploader", UPLOADER);
+provide('uploader', UPLOADER);
 
 const initUploader = () => {
   const uploader: any = new SimpleUploader({ ..._options, ...props.options });
@@ -92,18 +92,18 @@ const initUploader = () => {
 };
 
 const initUploaderEvent = () => {
-  const elements = uploadBtn.value.querySelectorAll(":scope > *:not(input)");
+  const elements = uploadBtn.value.querySelectorAll(':scope > *:not(input)');
   const arr = Array.from(elements);
   UPLOADER.value.assignBrowse(arr[0]);
   UPLOADER.value.fileStatusText = props.statusText;
   UPLOADER.value.on(FILE_ADDED_EVENT, fileAdded);
-  UPLOADER.value.on("fileRemoved", fileRemoved);
-  UPLOADER.value.on("filesSubmitted", filesSubmitted);
-  UPLOADER.value.on("fileComplete", fileComplete);
-  UPLOADER.value.on("fileSuccess", fileSuccess);
-  UPLOADER.value.on("fileError", fileError);
-  UPLOADER.value.on("complete", complete);
-  UPLOADER.value.on("uploadStart", uploadStart);
+  UPLOADER.value.on('fileRemoved', fileRemoved);
+  UPLOADER.value.on('filesSubmitted', filesSubmitted);
+  UPLOADER.value.on('fileComplete', fileComplete);
+  UPLOADER.value.on('fileSuccess', fileSuccess);
+  UPLOADER.value.on('fileError', fileError);
+  UPLOADER.value.on('complete', complete);
+  UPLOADER.value.on('uploadStart', uploadStart);
 };
 // function kebabCase(s) {
 //   return s.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
@@ -130,10 +130,10 @@ const _removeFile = (file: any) => {
 // 文件类型校验
 const checkFileType = (file: any) => {
   const suffix = file.getExtension();
-  const suffies = props.accept.split(",");
+  const suffies = props.accept.split(',');
   if (!suffies.includes(`.${suffix}`)) {
     _removeFile(file);
-    emits("on-type-error", file, props.accept);
+    emits('on-type-error', file, props.accept);
     return false;
   }
   return true;
@@ -142,8 +142,8 @@ const checkFileType = (file: any) => {
 // 超出 limit 数量 时触发
 const fileLimitOver = (file: any) => {
   _removeFile(file);
-  console.error("超出最大上传数量");
-  emits("on-exceed-limit", file, props.limit);
+  console.error('超出最大上传数量');
+  emits('on-exceed-limit', file, props.limit);
 };
 //文件添加到上传队列之前调用，可用于文件校验，返回 false 禁止文件上传,并且从列表中移除当前文件
 const fileAdded = (file: any) => {
@@ -179,7 +179,7 @@ const fileRemoved = (file: any) => {
 const filesSubmitted = (files: any, _fileList: any) => {
   files.value = UPLOADER.value.files;
   fileList.value = UPLOADER.value.fileList;
-  emits("on-files-submitted", UPLOADER.value.getFileList());
+  emits('on-files-submitted', UPLOADER.value.getFileList());
   if (props.autoUpload) {
     files.forEach((file: any) => startUpload(file));
   }
@@ -198,14 +198,14 @@ const processResponse = (message: any, file: any) => {
     res = JSON.parse(message);
     file._response = res;
   } catch (e) {
-    console.error("processResponse", e);
+    console.error('processResponse', e);
   }
 };
 
 // 单个文件上传成功后触发
 const fileSuccess = (rootFile: any, file: any, message: any, chunk: any) => {
   setTimeout(() => {
-    rootFile.setStatus("success");
+    rootFile.setStatus('success');
   }, 500);
   processResponse(message, file);
   if (props.onFileSuccess) {
@@ -222,12 +222,12 @@ const fileError = (rootFile: any, file: any, message: any, chunk: any) => {
 
 // 上传完成
 const complete = () => {
-  emits("on-complete", UPLOADER.value.fileList);
+  emits('on-complete', UPLOADER.value.fileList);
 };
 
 // 文件开始上传
 const uploadStart = () => {
-  console.log("文件开始上传");
+  console.log('文件开始上传');
 };
 
 //开始上传

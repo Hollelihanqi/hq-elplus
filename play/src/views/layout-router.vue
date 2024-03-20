@@ -29,180 +29,186 @@
 <script lang="ts" setup>
 // import { IOptionTabPane, session, tabPaneAdd } from "../../../packages/yto-custom/src/gold-core";
 
-import { IOptionTabPane, session, tabPaneAdd } from "gold-core";
-import logo from "@/assets/vue.svg";
-import { useRouter, useRoute } from "vue-router";
+import { IOptionTabPane, session, tabPaneAdd } from 'gold-core';
+import logo from '@/assets/vue.svg';
+import { useRouter, useRoute } from 'vue-router';
 const router = useRouter();
 const route = useRoute();
 const collapse = ref(false);
 const routerRef = ref();
 const userInfo = {
-  userCode: "02348618",
-  userName: "魏春霈",
+  userCode: '02348618',
+  userName: '魏春霈',
 };
 // 	vertical/horizontal
 const listNavigation: any[] = [
   {
-    label: "首页",
-    href: "/layout-child-3",
-    code: "/layout-child-3",
-    icon: "icon iconfont party-web-icon-caidan3",
+    label: '首页',
+    href: '/layout-child-3',
+    code: '/layout-child-3',
+    icon: 'icon iconfont party-web-icon-caidan3',
     // closable: false,
-    mode: "router",
+    mode: 'router',
   },
   {
-    label: "layoutmenu名称超长测试",
-    icon: "icon iconfont party-web-icon-caidan3",
+    label: 'layoutmenu名称超长测试',
+    icon: 'icon iconfont party-web-icon-caidan3',
     children: [
       {
-        label: "公告列表公告列表公告列表公告列表",
-        href: "/layout-child-1?abc=1",
-        code: "/layout-child-1",
+        label: '公告列表公告列表公告列表公告列表',
+        href: '/layout-child-1?abc=1',
+        code: '/layout-child-1',
         // closable: false,
-        mode: "router",
+        mode: 'router',
       },
     ],
   },
   {
-    label: "三级菜单测试",
-    icon: "icon iconfont party-web-icon-caidan3",
+    label: '三级菜单测试',
+    icon: 'icon iconfont party-web-icon-caidan3',
     children: [
       {
-        label: "资讯列表",
+        label: '资讯列表',
         children: [
           {
-            label: "资讯详情",
-            href: "/layout-child-2",
-            code: "/layout-child-2",
-            mode: "router",
+            label: '资讯详情',
+            href: '/layout-child-2',
+            code: '/layout-child-2',
+            mode: 'router',
           },
         ],
       },
     ],
   },
   {
-    label: "组件调试",
-    icon: "icon iconfont party-web-icon-caidan3",
+    label: '组件调试',
+    icon: 'icon iconfont party-web-icon-caidan3',
     children: [
       {
-        label: "Form",
-        href: "/form",
-        code: "/form",
-        mode: "router",
+        label: 'Form',
+        href: '/form',
+        code: '/form',
+        mode: 'router',
       },
       {
-        label: "Chart",
-        href: "/chart",
-        code: "/chart",
-        mode: "router",
+        label: 'Chart',
+        href: '/chart',
+        code: '/chart',
+        mode: 'router',
       },
       {
-        label: "Table",
-        href: "/table",
-        code: "/table",
-        mode: "router",
+        label: 'Table',
+        href: '/table',
+        code: '/table',
+        mode: 'router',
       },
       {
-        label: "StaffSearch",
-        href: "/staffSearch",
-        code: "/staffSearch",
-        mode: "router",
+        label: 'StaffSearch',
+        href: '/staffSearch',
+        code: '/staffSearch',
+        mode: 'router',
       },
       {
-        label: "Dialog",
-        href: "/dialog",
-        code: "/dialog",
-        mode: "router",
+        label: 'Dialog',
+        href: '/dialog',
+        code: '/dialog',
+        mode: 'router',
       },
       {
-        label: "Dialog2",
-        href: "/dialog2",
-        code: "/dialog2",
-        mode: "router",
+        label: 'Dialog2',
+        href: '/dialog2',
+        code: '/dialog2',
+        mode: 'router',
       },
       {
-        label: "UserSearch",
-        href: "/userSearch",
-        code: "/userSearch",
-        mode: "router",
+        label: 'UserSearch',
+        href: '/userSearch',
+        code: '/userSearch',
+        mode: 'router',
       },
       {
-        label: "Uploader",
-        href: "/uploaderf",
-        code: "/uploaderf",
-        mode: "router",
+        label: 'Uploader',
+        href: '/uploaderf',
+        code: '/uploaderf',
+        mode: 'router',
       },
       {
-        label: "LayoutFrom",
-        href: "/layoutFrom",
-        code: "/layoutFrom",
-        mode: "router",
+        label: 'LayoutFrom',
+        href: '/layoutFrom',
+        code: '/layoutFrom',
+        mode: 'router',
       },
       {
-        label: "Theme",
-        href: "/theme",
-        code: "/theme",
-        mode: "router",
+        label: 'Theme',
+        href: '/theme',
+        code: '/theme',
+        mode: 'router',
       },
       {
-        label: "CustomFieldContainer",
-        href: "/customFieldContainer",
-        code: "/customFieldContainer",
-        mode: "router",
+        label: 'CustomFieldContainer',
+        href: '/customFieldContainer',
+        code: '/customFieldContainer',
+        mode: 'router',
       },
       {
-        label: "CustomFieldDemo",
-        href: "/customFieldConfig",
-        code: "/customFieldConfig",
-        mode: "router",
+        label: 'CustomFieldDemo',
+        href: '/customFieldConfig',
+        code: '/customFieldConfig',
+        mode: 'router',
       },
       {
-        label: "SearchContainer",
-        href: "/searchContainer",
-        code: "/searchContainer",
-        mode: "router",
+        label: 'SearchContainer',
+        href: '/searchContainer',
+        code: '/searchContainer',
+        mode: 'router',
       },
       {
-        label: "AdaptionContainer",
-        href: "/adaptionContainer",
-        code: "/adaptionContainer",
-        mode: "router",
+        label: 'AdaptionContainer',
+        href: '/adaptionContainer',
+        code: '/adaptionContainer',
+        mode: 'router',
       },
       {
-        label: "EllipsisTag",
-        href: "/ellipsisTag",
-        code: "/ellipsisTag",
-        mode: "router",
+        label: 'EllipsisTag',
+        href: '/ellipsisTag',
+        code: '/ellipsisTag',
+        mode: 'router',
       },
       {
-        label: "SearchFormItemContainer",
-        href: "/searchFormItemContainer",
-        code: "/searchFormItemContainer",
-        mode: "router",
+        label: 'SearchFormItemContainer',
+        href: '/searchFormItemContainer',
+        code: '/searchFormItemContainer',
+        mode: 'router',
       },
       {
-        label: "tableSearch",
-        href: "/tableSearch",
-        code: "/tableSearch",
-        mode: "router",
+        label: 'tableSearch',
+        href: '/tableSearch',
+        code: '/tableSearch',
+        mode: 'router',
       },
       {
-        label: "TareaTag",
-        href: "/tareaTag",
-        code: "/tareaTag",
-        mode: "router",
+        label: 'TareaTag',
+        href: '/tareaTag',
+        code: '/tareaTag',
+        mode: 'router',
       },
       {
-        label: "CusRadio",
-        href: "/cusRadio",
-        code: "/cusRadio",
-        mode: "router",
+        label: 'CusRadio',
+        href: '/cusRadio',
+        code: '/cusRadio',
+        mode: 'router',
       },
       {
-        label: "selectRemote",
-        href: "/selectRemote",
-        code: "/selectRemote",
-        mode: "router",
+        label: 'selectRemote',
+        href: '/selectRemote',
+        code: '/selectRemote',
+        mode: 'router',
+      },
+      {
+        label: 'TimeLine',
+        href: '/TimeLine',
+        code: '/TimeLine',
+        mode: 'router',
       },
     ],
   },
@@ -221,11 +227,11 @@ const listNavigation: any[] = [
 //   closable: false,
 // });
 const handleMenuClick = (info: any) => {
-  console.log("handleMenuClick-----");
+  console.log('handleMenuClick-----');
 };
 const handleTabChange = (info: any) => {
   const list = unref(routerRef).getTabsList();
-  console.log("handleTabChange-----", list);
+  console.log('handleTabChange-----', list);
 };
 onMounted(() => {
   // router.push({ name: "layoutChild3" });

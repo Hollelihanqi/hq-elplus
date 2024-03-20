@@ -18,8 +18,8 @@ import {
   onActivated,
   VNodeArrayChildren,
   VNode,
-} from "vue";
-import type { BreakPoint } from "./interface/index";
+} from 'vue';
+import type { BreakPoint } from './interface/index';
 
 type Props = {
   cols?: number | Record<BreakPoint, number>; // 列数
@@ -60,43 +60,43 @@ onBeforeMount(() => props.collapsed && findIndex());
 const resize = (width: number) => {
   switch (!!width) {
     case width < 768:
-      breakPoint.value = "xs";
+      breakPoint.value = 'xs';
       break;
     case width >= 768 && width < 992:
-      breakPoint.value = "sm";
+      breakPoint.value = 'sm';
       break;
     case width >= 992 && width < 1200:
-      breakPoint.value = "md";
+      breakPoint.value = 'md';
       break;
     case width >= 1200 && width < 1920:
-      breakPoint.value = "lg";
+      breakPoint.value = 'lg';
       break;
     case width >= 1920:
-      breakPoint.value = "xl";
+      breakPoint.value = 'xl';
       break;
   }
 };
 
 // 注入 gap 间距，如果 gap 是一个数组，则取第一个值作为间距值
-provide("gap", Array.isArray(props.gap) ? props.gap[0] : props.gap);
+provide('gap', Array.isArray(props.gap) ? props.gap[0] : props.gap);
 
 // 注入响应式断点，即屏幕大小变化时的断点值
-let breakPoint = ref<BreakPoint>("xl");
-provide("breakPoint", breakPoint);
+let breakPoint = ref<BreakPoint>('xl');
+provide('breakPoint', breakPoint);
 
 // 注入要开始折叠的 index，即需要折叠的部分在 fields 数组中的起始位置
 const hiddenIndex = ref(-1);
-provide("shouldHiddenIndex", hiddenIndex);
+provide('shouldHiddenIndex', hiddenIndex);
 
 // 注入 cols，即当前屏幕大小下的列数
 const cols = computed(() => {
-  if (typeof props.cols === "object") return props.cols[breakPoint.value] ?? props.cols;
+  if (typeof props.cols === 'object') return props.cols[breakPoint.value] ?? props.cols;
   return props.cols;
 });
-provide("cols", cols);
+provide('cols', cols);
 
 let slots: any = useSlots();
-if (slots.default && typeof slots.default === "function") {
+if (slots.default && typeof slots.default === 'function') {
   slots = slots.default();
 }
 
@@ -106,12 +106,12 @@ const findIndex = () => {
   let suffix: any = null;
   console.log(slots);
   slots.forEach((slot: any) => {
-    if (typeof slot.type === "object") {
-      if (slot.type.name === "GridItem" && slot.props?.suffix !== undefined) {
+    if (typeof slot.type === 'object') {
+      if (slot.type.name === 'GridItem' && slot.props?.suffix !== undefined) {
         suffix = slot;
       }
     }
-    if (typeof slot.type === "symbol") {
+    if (typeof slot.type === 'symbol') {
       if (Array.isArray(slot.children)) {
         slot.children.forEach((child: any) => {
           fields.push(child);
@@ -137,7 +137,7 @@ const findIndex = () => {
       if ((prev as number) > props.collapsedRows * cols.value - suffixCols) {
         hiddenIndex.value = index;
         find = true;
-        throw "find it";
+        throw 'find it';
       }
       return prev;
     }, 0);
@@ -166,15 +166,15 @@ watch(
 
 // 设置间距
 const gap = computed(() => {
-  if (typeof props.gap === "number") return `${props.gap}px`;
+  if (typeof props.gap === 'number') return `${props.gap}px`;
   if (Array.isArray(props.gap)) return `${props.gap[1]}px ${props.gap[0]}px`;
-  return "unset";
+  return 'unset';
 });
 
 // 设置 style
 const style = computed(() => {
   return {
-    display: "grid",
+    display: 'grid',
     gridGap: gap.value,
     gridTemplateColumns: `repeat(${cols.value}, minmax(0, 1fr))`,
   };

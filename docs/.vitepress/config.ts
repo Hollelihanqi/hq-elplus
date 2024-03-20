@@ -1,176 +1,179 @@
 /*
  * @Author: DESKTOP-7338OS6\LHQ LHQ
  * @Date: 2023-03-24 17:52:24
- * @LastEditors: weichunpei
- * @LastEditTime: 2024-01-25 16:31:10
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2024-03-20 10:22:09
  * @FilePath: \yto-engine\docs\docs\.vitepress\config.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AErts
  */
 
-import { defineConfig } from "vitepress";
-import { applyPlugins } from "@ruabick/md-demo-plugins";
+import { defineConfig } from 'vitepress';
+import { applyPlugins } from '@ruabick/md-demo-plugins';
 
 export default defineConfig({
-  title: "技术平台部-业务组件库",
+  title: '技术平台部-业务组件库',
   lastUpdated: true,
   themeConfig: {
-    socialLinks: [{ icon: "github", link: "https://github.com" }],
+    socialLinks: [{ icon: 'github', link: 'https://github.com' }],
     sidebar: {
-      "/": [
+      '/': [
         {
-          text: "快速开始",
-          link: "/guide/fast",
+          text: '快速开始',
+          link: '/guide/fast',
         },
         {
-          text: "组件",
+          text: '组件',
           items: [
             // {
             //   text: "ProTable",
             //   link: "/examples/pro-table/index.md",
             // },
             {
-              text: "Table 表格",
-              link: "/examples/table/index.md",
+              text: 'Table 表格',
+              link: '/examples/table/index.md',
             },
             {
-              text: "Menu 菜单",
-              link: "/examples/menu/index.md",
+              text: 'Menu 菜单',
+              link: '/examples/menu/index.md',
             },
             {
-              text: "Chart 图表",
-              link: "/examples/echart/index.md",
+              text: 'Chart 图表',
+              link: '/examples/echart/index.md',
             },
             {
-              text: "Form 表单",
-              link: "/examples/from/index.md",
+              text: 'Form 表单',
+              link: '/examples/from/index.md',
             },
             {
-              text: "formItems 表单",
-              link: "/examples/fromItems/index.md",
+              text: 'formItems 表单',
+              link: '/examples/fromItems/index.md',
             },
             {
-              text: "Dialog 弹框",
-              link: "/examples/dialog/index.md",
+              text: 'Dialog 弹框',
+              link: '/examples/dialog/index.md',
             },
             {
-              text: "RemoteSearch 远程搜索",
-              link: "/examples/remote-search/index.md",
+              text: 'RemoteSearch 远程搜索',
+              link: '/examples/remote-search/index.md',
             },
             {
-              text: "SearchForm 用户搜索",
-              link: "/examples/user-search/index.md",
+              text: 'SearchForm 用户搜索',
+              link: '/examples/user-search/index.md',
             },
             {
-              text: "SearchForm 表格搜索",
-              link: "/examples/search-form/index.md",
+              text: 'SearchForm 表格搜索',
+              link: '/examples/search-form/index.md',
             },
             {
-              text: "Uploader 大文件上传",
-              link: "/examples/uploader/index.md",
+              text: 'Uploader 大文件上传',
+              link: '/examples/uploader/index.md',
             },
             {
-              text: "LayoutHeader ",
-              link: "/examples/layout-header/index.md",
+              text: 'LayoutHeader ',
+              link: '/examples/layout-header/index.md',
             },
             {
-              text: "LayoutMenu",
-              link: "/examples/layout-menu/index.md",
+              text: 'LayoutMenu',
+              link: '/examples/layout-menu/index.md',
             },
             {
-              text: "LayoutRouter",
-              link: "/examples/layout-router/index.md",
+              text: 'LayoutRouter',
+              link: '/examples/layout-router/index.md',
             },
             {
-              text: "LayoutFrame",
-              link: "/examples/layout-frame/index.md",
+              text: 'LayoutFrame',
+              link: '/examples/layout-frame/index.md',
             },
             {
-              text: "stickyContainer 粘性布局",
-              link: "/examples/sticky-container/index.md",
+              text: 'stickyContainer 粘性布局',
+              link: '/examples/sticky-container/index.md',
             },
             {
-              text: "Theme",
-              link: "/examples/theme/index.md",
+              text: 'Theme',
+              link: '/examples/theme/index.md',
             },
             {
-              text: "CustomFieldConfig",
-              link: "/examples/custom-field-config/index.md",
+              text: 'CustomFieldConfig',
+              link: '/examples/custom-field-config/index.md',
             },
             {
-              text: "CustomFieldContainer",
-              link: "/examples/custom-field-container/index.md",
+              text: 'CustomFieldContainer',
+              link: '/examples/custom-field-container/index.md',
             },
             {
-              text: "SearchContainer",
-              link: "/examples/search-container/index.md",
+              text: 'SearchContainer',
+              link: '/examples/search-container/index.md',
             },
             {
-              text: "AdaptionContainer",
-              link: "/examples/adaption-container/index.md",
+              text: 'AdaptionContainer',
+              link: '/examples/adaption-container/index.md',
             },
             {
-              text: "EllipsisTag",
-              link: "/examples/ellipsis-tag/index.md",
+              text: 'EllipsisTag',
+              link: '/examples/ellipsis-tag/index.md',
             },
             {
-              text: "TareaTag 文本校验",
-              link: "/examples/tarea-tag/index.md",
+              text: 'TareaTag 文本校验',
+              link: '/examples/tarea-tag/index.md',
             },
             {
-              text: "Radio 单选框",
-              link: "/examples/radio/index.md",
-            }
-          ],
-          collapsed: false,
-        },
-        {
-          text: "指令",
-          items: [
+              text: 'Radio 单选框',
+              link: '/examples/radio/index.md',
+            },
             {
-              text: "指令",
-              link: "/examples/directives/index.md",
+              text: 'TimeLine 时间线',
+              link: '/examples/time-line/index.md',
             },
           ],
           collapsed: false,
         },
         {
-          text: "工具类",
+          text: '指令',
           items: [
             {
-              text: "分享",
-              link: "/examples/utils/share.md",
-            },
-            {
-              text: "文件下载",
-              link: "/examples/utils/download.md",
-            },
-            {
-              text: "水印",
-              link: "/examples/utils/waterMarker.md",
-            },
-            {
-              text: "其他方法",
-              link: "/examples/utils/other.md",
+              text: '指令',
+              link: '/examples/directives/index.md',
             },
           ],
           collapsed: false,
         },
         {
-          text: "其他",
+          text: '工具类',
           items: [
             {
-              text: "系统维护统一提示",
-              link: "/examples/others/systemMaintenance.md",
+              text: '分享',
+              link: '/examples/utils/share.md',
+            },
+            {
+              text: '文件下载',
+              link: '/examples/utils/download.md',
+            },
+            {
+              text: '水印',
+              link: '/examples/utils/waterMarker.md',
+            },
+            {
+              text: '其他方法',
+              link: '/examples/utils/other.md',
             },
           ],
           collapsed: false,
         },
-
+        {
+          text: '其他',
+          items: [
+            {
+              text: '系统维护统一提示',
+              link: '/examples/others/systemMaintenance.md',
+            },
+          ],
+          collapsed: false,
+        },
       ],
     },
     docFooter: {
-      prev: "上一篇",
-      next: "下一篇",
+      prev: '上一篇',
+      next: '下一篇',
     },
   },
   /**

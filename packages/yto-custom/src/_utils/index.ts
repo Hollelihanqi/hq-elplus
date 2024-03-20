@@ -1,6 +1,6 @@
-export * from "./install";
-export * from "./props";
-import request from "./request";
+export * from './install';
+export * from './props';
+import request from './request';
 
 /**
  * @deprecated 防抖

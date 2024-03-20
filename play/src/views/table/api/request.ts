@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 type Result<T> = {
   code: number;
@@ -7,7 +7,7 @@ type Result<T> = {
 };
 
 export const baseConfig = {
-  baseURL: "/api",
+  baseURL: '/api',
   timeout: 50000,
   withCredentials: true,
 };
@@ -21,7 +21,7 @@ export class RequestHttp {
     this.instance.interceptors.request.use(
       (config) => {
         // 添加 token
-        let token = sessionStorage.getItem("authorization") as string;
+        let token = sessionStorage.getItem('authorization') as string;
         if (token) {
           token = JSON.parse(token);
           config.headers.authorization = token;

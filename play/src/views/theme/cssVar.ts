@@ -1,4 +1,4 @@
-import { reactive, watch } from "vue";
+import { reactive, watch } from 'vue';
 
 export function useCssVar(varName: string, initialValue: string) {
   const cssVars = reactive({
@@ -17,7 +17,7 @@ export function useCssVar(varName: string, initialValue: string) {
 }
 
 export const newColorWithOpacity = (color: string, opacity: number, isRgb = false) => {
-  const hex = color.replace(/^#/, "");
+  const hex = color.replace(/^#/, '');
   const r = parseInt(hex.substr(0, 2), 16);
   const g = parseInt(hex.substr(2, 2), 16);
   const b = parseInt(hex.substr(4, 2), 16);
@@ -28,9 +28,9 @@ export const newColorWithOpacity = (color: string, opacity: number, isRgb = fals
   const newB = Math.round((1 - opacity) * 255 + opacity * b);
 
   // 将新的RGB值转换为16位颜色值
-  const newColor = `#${newR.toString(16).padStart(2, "0")}${newG.toString(16).padStart(2, "0")}${newB
+  const newColor = `#${newR.toString(16).padStart(2, '0')}${newG.toString(16).padStart(2, '0')}${newB
     .toString(16)
-    .padStart(2, "0")}`;
+    .padStart(2, '0')}`;
 
   return isRgb ? `${newR},${newG},${newB}` : newColor;
 };

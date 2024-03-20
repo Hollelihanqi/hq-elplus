@@ -1,6 +1,6 @@
-import form from "./src/index.vue";
+import form from './src/index.vue';
 
-import { install } from "../../_utils";
+import { install } from '../../_utils';
 
 export const YtoForm = install(form);
 

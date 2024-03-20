@@ -39,10 +39,10 @@
   </div>
 </template>
 <script lang="ts" setup name="LayoutRouter">
-import { provide } from "vue";
-import { useFrame } from "gold-core";
-import { EnumSessionKey } from "@/common/EnumConstant";
-import NavTabs from "./NavTabs.vue";
+import { provide } from 'vue';
+import { useFrame } from 'gold-core';
+import { EnumSessionKey } from '@/common/EnumConstant';
+import NavTabs from './NavTabs.vue';
 
 const props = defineProps({
   footer: Boolean,
@@ -54,7 +54,7 @@ const props = defineProps({
   routerGoback: Boolean,
   type: {
     type: String,
-    default: "vertical",
+    default: 'vertical',
   },
   showTab: {
     type: Boolean,
@@ -68,9 +68,9 @@ const { listRoute, activate } = useFrame({
   max: props.max as number,
 });
 // 是否为垂直布局
-const isVertical = computed(() => props.type === "vertical");
-const emit = defineEmits(["tab-change"]);
-const handleTabChange = (tab: any) => emit("tab-change", tab);
+const isVertical = computed(() => props.type === 'vertical');
+const emit = defineEmits(['tab-change']);
+const handleTabChange = (tab: any) => emit('tab-change', tab);
 const getTabsList = () => listRoute;
 provide(EnumSessionKey.TabsActivate, activate);
 defineExpose({ getTabsList });

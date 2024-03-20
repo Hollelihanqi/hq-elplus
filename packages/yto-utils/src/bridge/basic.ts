@@ -1,7 +1,7 @@
 // @ts-nocheck
 export const JsBridge = {
   init: function (callback) {
-    console.log("jsBridge:init");
+    console.log('jsBridge:init');
     const u = navigator.userAgent;
     const isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
     if (!isiOS) {
@@ -11,7 +11,7 @@ export const JsBridge = {
       } else {
         // console.log("jsBridge:init:WebViewJavascriptBridgeReady")
         document.addEventListener(
-          "WebViewJavascriptBridgeReady",
+          'WebViewJavascriptBridgeReady',
           function () {
             callback(WebViewJavascriptBridge);
           },
@@ -26,9 +26,9 @@ export const JsBridge = {
         return window.WVJBCallbacks.push(callback);
       }
       window.WVJBCallbacks = [callback];
-      const WVJBIframe = document.createElement("iframe");
-      WVJBIframe.style.display = "none";
-      WVJBIframe.src = "wvjbscheme://__BRIDGE_LOADED__";
+      const WVJBIframe = document.createElement('iframe');
+      WVJBIframe.style.display = 'none';
+      WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
       document.documentElement.appendChild(WVJBIframe);
       setTimeout(function () {
         document.documentElement.removeChild(WVJBIframe);
@@ -37,11 +37,11 @@ export const JsBridge = {
   },
 
   first: function () {
-    console.log("jsBridge:first");
+    console.log('jsBridge:first');
     const u = navigator.userAgent;
     const isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
     if (!isiOS) {
-      console.log("jsBridge:first:::!isiOS");
+      console.log('jsBridge:first:::!isiOS');
       try {
         JsBridge.init(function (bridge) {
           bridge.init(function (data, responseCallback) {
@@ -49,7 +49,7 @@ export const JsBridge = {
           });
         });
       } catch (error) {
-        console.log("jsBridge:first:::!isiOS-error: ", error);
+        console.log('jsBridge:first:::!isiOS-error: ', error);
       }
     }
   },

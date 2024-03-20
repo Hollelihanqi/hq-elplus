@@ -12,9 +12,9 @@
   </div>
 </template>
 <script lang="ts" setup>
-import LayoutRouter from "@/views/layout-router.vue";
-import LayoutFrame from "@/views/layout-frame.vue";
-import formItems from "@/views/formItems/index.vue";
+import LayoutRouter from '@/views/layout-router.vue';
+import LayoutFrame from '@/views/layout-frame.vue';
+import formItems from '@/views/formItems/index.vue';
 </script>
 <style lang="scss">
 .app {

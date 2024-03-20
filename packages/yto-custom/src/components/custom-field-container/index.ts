@@ -5,9 +5,9 @@
  * @LastEditTime: 2023-12-07 16:32:53
  */
 // index
-import CustomFieldContainer from "./src/index.vue";
+import CustomFieldContainer from './src/index.vue';
 
-import { install } from "@/_utils";
+import { install } from '@/_utils';
 
 export const YtoCustomFieldContainer = install(CustomFieldContainer);
 

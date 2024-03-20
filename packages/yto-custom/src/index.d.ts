@@ -1,7 +1,7 @@
-import installer from "./defaults";
+import installer from './defaults';
 
-export * from "./components";
+export * from './components';
 
-export * from "./global";
+export * from './global';
 
 export default installer;

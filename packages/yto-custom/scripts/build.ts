@@ -1,5 +1,5 @@
-import { defineConfig, build } from "vite";
-import path, { resolve } from "path";
+import { defineConfig, build } from 'vite';
+import path, { resolve } from 'path';
 
 /** 单组件按需构建 */
 // const buildSingle = async name => {

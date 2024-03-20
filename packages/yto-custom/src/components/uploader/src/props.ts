@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from "vue";
+import type { ExtractPropTypes } from 'vue';
 
 export const Props = {
   options: {
@@ -27,7 +27,7 @@ export const Props = {
   },
   accept: {
     type: String,
-    default: "",
+    default: '',
   },
   isCheckFileType: {
     type: Boolean,
@@ -37,12 +37,12 @@ export const Props = {
     type: [Object, Function],
     default: () => {
       return {
-        success: "成功",
-        error: "错误",
-        uploading: "上传中...",
-        paused: "暂停",
-        md5: "计算MD5...",
-        waiting: "等待中...",
+        success: '成功',
+        error: '错误',
+        uploading: '上传中...',
+        paused: '暂停',
+        md5: '计算MD5...',
+        waiting: '等待中...',
       };
     },
   },

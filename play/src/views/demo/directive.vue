@@ -17,14 +17,14 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue";
+import { reactive } from 'vue';
 
 const el: any = ref();
 
 const handle = (e: any) => {
   el.value = e;
   // el.value = e;
-  console.log("000000000000", el.value);
+  console.log('000000000000', el.value);
 };
 </script>
 

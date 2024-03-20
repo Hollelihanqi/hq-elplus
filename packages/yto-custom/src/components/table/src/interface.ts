@@ -19,4 +19,4 @@ export interface setColumnsProps {
   disabled: boolean;
 }
 
-export type { TableProps } from "./props";
+export type { TableProps } from './props';

@@ -1,4 +1,4 @@
-import { DefineComponent, Slot } from "vue";
+import { DefineComponent, Slot } from 'vue';
 
 export interface TableColumnProps {
   column: {

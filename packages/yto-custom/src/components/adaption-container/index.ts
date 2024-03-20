@@ -1,6 +1,6 @@
-import AdaptionContainer from "./src/index.vue";
+import AdaptionContainer from './src/index.vue';
 
-import { install } from "@/_utils";
+import { install } from '@/_utils';
 
 export const YtoAdaptionContainer = install(AdaptionContainer);
 

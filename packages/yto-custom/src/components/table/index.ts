@@ -1,9 +1,9 @@
-import Table from "./src/index.vue";
+import Table from './src/index.vue';
 
-import { install } from "../../_utils";
+import { install } from '../../_utils';
 
 export const YtoTable = install(Table);
 export default YtoTable;
 
-export * from "./src/interface";
+export * from './src/interface';
 export type TableInstance = InstanceType<typeof Table>;

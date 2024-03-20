@@ -1,18 +1,18 @@
 <script lang="tsx">
-import { defineComponent, ref, computed } from "vue";
-import { Props } from "./props";
-import { SearchFormControlProps } from "./interface";
-import Grid from "./components/Grid/index.vue";
-import GridItem from "./components/Grid/components/GridItem.vue";
-import SearchFormItem from "./components/SearchFormItem.vue";
-import { resizeElement } from "@/directives";
-import { BreakPoint } from "./components/Grid/interface/index";
+import { defineComponent, ref, computed } from 'vue';
+import { Props } from './props';
+import { SearchFormControlProps } from './interface';
+import Grid from './components/Grid/index.vue';
+import GridItem from './components/Grid/components/GridItem.vue';
+import SearchFormItem from './components/SearchFormItem.vue';
+import { resizeElement } from '@/directives';
+import { BreakPoint } from './components/Grid/interface/index';
 
 export default defineComponent({
-  name: "SearchForm",
+  name: 'SearchForm',
   directives: { resizeElement },
   props: Props,
-  emits: ["update:searchModel", "on-search", "on-reset"],
+  emits: ['update:searchModel', 'on-search', 'on-reset'],
   setup(props, { emit, expose, slots }) {
     const collapsed = ref(false);
     const searchFormInstance = ref();
@@ -33,21 +33,21 @@ export default defineComponent({
         return props.searchModel;
       },
       set(model: any) {
-        emit("update:searchModel", model);
+        emit('update:searchModel', model);
       },
     });
 
-    const resetField = (field: string, value = "") => {
+    const resetField = (field: string, value = '') => {
       const newModle: any = { ..._searchModel.value };
       newModle[field] = value;
-      emit("update:searchModel", newModle);
+      emit('update:searchModel', newModle);
     };
 
     const getFormatValues = () => {
       return props.formControls.reduce((acc: any, item: SearchFormControlProps) => {
         const { field, formatValue } = item as any;
         // 只处理那些有 formatValue 函数的属性
-        if (typeof formatValue === "function") {
+        if (typeof formatValue === 'function') {
           const value = _searchModel.value[field];
           // 只添加那些经过formatValue处理的属性到累加器对象中
           acc[field] = formatValue(value);
@@ -75,15 +75,15 @@ export default defineComponent({
       const _dv: any = {};
       if (props.modelDefault) {
         for (const [key, value] of Object.entries(props.modelDefault)) {
-          _dv[key] = typeof value === "function" ? value() : value;
+          _dv[key] = typeof value === 'function' ? value() : value;
         }
       }
       for (const item of props.formControls) {
         if (item.field && item.defaultValue) {
-          _dv[item.field] = typeof item.defaultValue === "function" ? item.defaultValue() : item.defaultValue;
+          _dv[item.field] = typeof item.defaultValue === 'function' ? item.defaultValue() : item.defaultValue;
         }
       }
-      emit("update:searchModel", _dv);
+      emit('update:searchModel', _dv);
     };
 
     const isDefaultValue = () => {
@@ -101,11 +101,11 @@ export default defineComponent({
       } else {
         _searchModel.value = {};
       }
-      emit("on-reset");
+      emit('on-reset');
       props.afterResetFun();
     };
     const handleQuery = () => {
-      emit("on-search", { ..._searchModel.value });
+      emit('on-search', { ..._searchModel.value });
       props.afterSearchFun({ ..._searchModel.value });
     };
 
@@ -118,7 +118,7 @@ export default defineComponent({
       let totalSpan = 0;
       let show = false;
 
-      const isColConfigNumber = typeof props.colConfig === "number";
+      const isColConfigNumber = typeof props.colConfig === 'number';
       const breakpointValue = breakPoint.value;
 
       const totalCol = props.formControls.reduce((prev, control: SearchFormControlProps) => {
@@ -198,7 +198,7 @@ export default defineComponent({
               })}
               <GridItem suffix>
                 <div class="search-action-box flex items-center justify-end mb-[20px]">
-                  {props.okpos === "right" ? (
+                  {props.okpos === 'right' ? (
                     <>
                       <el-button onClick={handleReset}>重置</el-button>
                       <el-button type="primary" onClick={handleQuery}>
@@ -222,9 +222,9 @@ export default defineComponent({
             </Grid>
           </el-form>
           {showCollapse.value && (
-            <div class={`absolute bottom-0 left-0 w-full flex justify-center ${collapsed.value ? "hbottom-20" : ""}`}>
+            <div class={`absolute bottom-0 left-0 w-full flex justify-center ${collapsed.value ? 'hbottom-20' : ''}`}>
               <div
-                class={`w-[60px] h-[20px] cursor-pointer ${collapsed.value ? "downi" : "upi"}`}
+                class={`w-[60px] h-[20px] cursor-pointer ${collapsed.value ? 'downi' : 'upi'}`}
                 onClick={() => (collapsed.value = !collapsed.value)}
               >
                 {/* <el-icon>{collapsed.value ? <ArrowDown /> : <ArrowUp />}</el-icon> */}

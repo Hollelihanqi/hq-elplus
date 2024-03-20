@@ -1,6 +1,6 @@
-import FormItems from "./src/index.vue";
+import FormItems from './src/index.vue';
 
-import { install } from "../../_utils";
+import { install } from '../../_utils';
 
 export const YtoFormItems = install(FormItems);
 export default YtoFormItems;

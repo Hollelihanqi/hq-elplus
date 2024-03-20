@@ -1,4 +1,4 @@
-import type * as components from "./components";
+import type * as components from './components';
 
 /**
  * Volar 插件实现代码提示
@@ -6,7 +6,7 @@ import type * as components from "./components";
  * https://github.com/johnsoncodehk/volar/blob/master/extensions/vscode-vue-language-features/README.md
  */
 
-declare module "@vue/runtime-core" {
+declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     YtoTable: typeof components.YtoTable;
     // YtoMenu: typeof components.YtoMenu;

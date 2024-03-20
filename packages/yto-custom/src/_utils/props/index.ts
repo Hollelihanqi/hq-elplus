@@ -1,4 +1,4 @@
-import type { PropType } from "vue";
+import type { PropType } from 'vue';
 
 /**
  * 设置组件的 prop 参数

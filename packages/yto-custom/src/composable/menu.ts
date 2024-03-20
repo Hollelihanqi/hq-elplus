@@ -1,22 +1,22 @@
-import { EnumSessionKey } from "@/common/EnumConstant";
-import { inject, provide, reactive, ref } from "vue";
-import { tabPaneAdd, isBlank, session } from "gold-core";
+import { EnumSessionKey } from '@/common/EnumConstant';
+import { inject, provide, reactive, ref } from 'vue';
+import { tabPaneAdd, isBlank, session } from 'gold-core';
 
 export function useMenu(props: any): any {
   function paneAdd(item: any) {
     const href: string = getHref(item);
-    console.log("useMenu--paneAdd", href, { ...item, href });
+    console.log('useMenu--paneAdd', href, { ...item, href });
     tabPaneAdd(href, { ...item, href });
   }
 
   function getHref(item: any) {
     const key: string = props.keyHref as string;
-    return Reflect.get(item, isBlank(key) ? "href" : key);
+    return Reflect.get(item, isBlank(key) ? 'href' : key);
   }
 
   function getLabel(item: any) {
     const key: string = props.keyLabel as string;
-    return Reflect.get(item, isBlank(key) ? "label" : key);
+    return Reflect.get(item, isBlank(key) ? 'label' : key);
   }
   provide(EnumSessionKey.MenuKeyLabel, props.keyLabel);
   provide(EnumSessionKey.MenuKeyIcon, props.keyIcon);

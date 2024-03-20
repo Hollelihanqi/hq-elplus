@@ -1,4 +1,4 @@
-import type { TableProps, ColumnsItemProps, setColumnsProps } from "./interface";
+import type { TableProps, ColumnsItemProps, setColumnsProps } from './interface';
 
 const useController = (props: TableProps) => {
   const _columns = ref<any>([]);
@@ -54,7 +54,7 @@ const useController = (props: TableProps) => {
     };
     const _columns = props?.columns.map((item: ColumnsItemProps) => {
       const isColumnChecked = isChecked(item.prop as string);
-      const checkedValue = typeof isColumnChecked === "boolean" ? isColumnChecked : isColumnChecked.checked;
+      const checkedValue = typeof isColumnChecked === 'boolean' ? isColumnChecked : isColumnChecked.checked;
       return {
         label: item.label,
         prop: item.prop,
@@ -67,12 +67,12 @@ const useController = (props: TableProps) => {
 
   const getCacheColumns = () => {
     let cacheSetColumns = window.localStorage.getItem(props.tableKey) as any;
-    if (!cacheSetColumns) return "";
+    if (!cacheSetColumns) return '';
     try {
       cacheSetColumns = JSON.parse(cacheSetColumns);
       // _columns.value = columns;
     } catch (error) {
-      console.error("getCacheColumns 解析失败--", error);
+      console.error('getCacheColumns 解析失败--', error);
     }
     return cacheSetColumns;
   };
@@ -106,7 +106,7 @@ const useController = (props: TableProps) => {
 };
 
 function _ideepClone<T>(obj: T): T {
-  if (obj === null || typeof obj !== "object") {
+  if (obj === null || typeof obj !== 'object') {
     return obj;
   }
 

@@ -3,11 +3,11 @@ export const isEmptyFun = (value: any): boolean => {
     // undefined 或 null
     return true;
   }
-  if (typeof value === "string" || Array.isArray(value)) {
+  if (typeof value === 'string' || Array.isArray(value)) {
     // 字符串或数组
     return value.length === 0;
   }
-  if (typeof value === "object") {
+  if (typeof value === 'object') {
     // 对象
     for (const key in value) {
       if (Object.prototype.hasOwnProperty.call(value, key)) {
@@ -20,7 +20,7 @@ export const isEmptyFun = (value: any): boolean => {
 };
 
 export const isFunctionFun = (value: any): boolean => {
-  return typeof value === "function";
+  return typeof value === 'function';
 };
 
 export function debounceFun<F extends (...args: any[]) => any>(
@@ -54,7 +54,7 @@ export const guid = () => {
   function S4() {
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
   }
-  return S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4();
+  return S4() + S4() + '-' + S4() + '-' + S4() + '-' + S4() + '-' + S4() + S4() + S4();
 };
 
 /**
@@ -64,10 +64,10 @@ export const guid = () => {
  */
 export const copyStr = (str: string) => {
   if (!str) return;
-  const inputEle: any = document.createElement("input");
+  const inputEle: any = document.createElement('input');
   document.body.appendChild(inputEle);
   inputEle.value = str;
   inputEle.select();
-  document.execCommand("Copy");
+  document.execCommand('Copy');
   inputEle.remove();
 };

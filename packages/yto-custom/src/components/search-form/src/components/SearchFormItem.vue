@@ -1,21 +1,21 @@
 <script lang="tsx">
-import { PropType, defineComponent, defineAsyncComponent, computed } from "vue";
-import { SearchFormControlProps, SelectOptionsProps } from "../interface";
-import "./style.scss";
-import { YtoRemoteSearch } from "../../../remote-search/index";
+import { PropType, defineComponent, defineAsyncComponent, computed } from 'vue';
+import { SearchFormControlProps, SelectOptionsProps } from '../interface';
+import './style.scss';
+import { YtoRemoteSearch } from '../../../remote-search/index';
 
 interface ObjectAny {
   [propsName: string]: any;
 }
 
 const _elNameMap: any = {
-  input: "ElInput",
-  select: "ElSelect",
-  "tree-select": "ElTreeSelect",
-  "date-picker": "ElDatePicker",
-  "time-picker": "ElTimePicker",
-  switch: "ElSwitch",
-  checkbox: "ElCheckbox",
+  input: 'ElInput',
+  select: 'ElSelect',
+  'tree-select': 'ElTreeSelect',
+  'date-picker': 'ElDatePicker',
+  'time-picker': 'ElTimePicker',
+  switch: 'ElSwitch',
+  checkbox: 'ElCheckbox',
 };
 
 export default defineComponent({
@@ -26,24 +26,24 @@ export default defineComponent({
     },
     modelValue: {
       type: [String, Number, Boolean, Array, Object],
-      default: "",
+      default: '',
     },
     cslot: {
       type: [Function],
       default: null,
     },
   },
-  emits: ["update:modelValue"],
+  emits: ['update:modelValue'],
   setup(props, ctx) {
     const _control = props.control;
     const _el: any = props?.control?.el;
     const _elName: any = _elNameMap[_el];
-    const ElInputComponent = defineAsyncComponent(() => import("element-plus").then((module: any) => module[_elName]));
-    const _ElOption = defineAsyncComponent(() => import("element-plus").then((module: any) => module["ElOption"]));
+    const ElInputComponent = defineAsyncComponent(() => import('element-plus').then((module: any) => module[_elName]));
+    const _ElOption = defineAsyncComponent(() => import('element-plus').then((module: any) => module['ElOption']));
 
     // 判断 placeholder
     const _placeholder = (control: SearchFormControlProps | undefined) => {
-      return control?.props?.placeholder ?? (control?.el === "input" ? "请输入" : "请选择");
+      return control?.props?.placeholder ?? (control?.el === 'input' ? '请输入' : '请选择');
     };
     // 是否有清除按钮 (当搜索项有默认值时，清除按钮不显示)
     const _clearable = (control: SearchFormControlProps | undefined) => {
@@ -55,7 +55,7 @@ export default defineComponent({
         return props.modelValue;
       },
       set(value) {
-        ctx.emit("update:modelValue", value);
+        ctx.emit('update:modelValue', value);
       },
     });
 
@@ -76,7 +76,7 @@ export default defineComponent({
         return options.map((item) => <_ElOption label={item.label} value={item.value}></_ElOption>);
       };
 
-      if (props.control.el === "select") {
+      if (props.control.el === 'select') {
         if (props.control.options) {
           return renderElInputComponent(renderElOption(props.control.options));
         } else if (props.control.isRemote) {

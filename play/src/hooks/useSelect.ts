@@ -1,4 +1,4 @@
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, reactive, ref } from 'vue';
 
 //定义下拉框接收得数据格式
 export interface SelectOption {
@@ -31,7 +31,7 @@ export function useSelect(props: FetchSelectProps) {
         loading.value = false;
         options.value = [
           {
-            value: "-1",
+            value: '-1',
             label: err.message,
             disabled: true,
           },

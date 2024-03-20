@@ -3,7 +3,7 @@ export const downloadFileStream = (streamData: any, fileName?: string) => {
   // 创建 URL 对象
   const url = URL.createObjectURL(blob);
   // 创建链接
-  const link = document.createElement("a");
+  const link = document.createElement('a');
   link.href = url;
   link.download = fileName || new Date().getTime().toString();
   // 模拟点击链接进行下载
@@ -38,8 +38,8 @@ export const downloadFileDataCSV = (params: downLoadType) => {
   params.fileDataArr.forEach((item: any) => {
     str += params.formatter(item);
   });
-  const url = "data:text/csv;charset=utf-8,\ufeff" + encodeURIComponent(str);
-  const link = document.createElement("a");
+  const url = 'data:text/csv;charset=utf-8,\ufeff' + encodeURIComponent(str);
+  const link = document.createElement('a');
   link.href = url;
   link.download = `${params.fileName || new Date().getTime()}.csv`;
   link.click();

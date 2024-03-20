@@ -1,5 +1,5 @@
-import type { ExtractPropTypes, PropType } from "vue";
-import { SearchFormControlProps } from "./interface";
+import type { ExtractPropTypes, PropType } from 'vue';
+import { SearchFormControlProps } from './interface';
 
 export const Props = {
   searchModel: {
@@ -24,7 +24,7 @@ export const Props = {
   },
   okpos: {
     type: String,
-    default: "right",
+    default: 'right',
   },
   collapse: {
     type: Boolean,

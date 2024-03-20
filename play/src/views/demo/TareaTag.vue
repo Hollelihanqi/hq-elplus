@@ -29,7 +29,7 @@
   </div>
 </template>
 <script lang="tsx" setup>
-const textList = ref<any>("ouooueortoeuot");
+const textList = ref<any>('ouooueortoeuot');
 const ips = ref<any>([]);
 const phone = ref<any>([]);
 const IpReg =

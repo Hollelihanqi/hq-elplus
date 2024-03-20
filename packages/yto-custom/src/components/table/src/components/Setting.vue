@@ -28,7 +28,7 @@
   </ElDrawer>
 </template>
 <script lang="ts" setup>
-import { ElDrawer } from "element-plus";
+import { ElDrawer } from 'element-plus';
 
 interface setColumnsProps {
   label: string;
@@ -43,7 +43,7 @@ defineProps({
     default: () => [],
   },
 });
-const emits = defineEmits(["on-save", "on-return"]);
+const emits = defineEmits(['on-save', 'on-return']);
 
 const dialogVisible = ref(false);
 const actionDialog = (): void => {
@@ -58,11 +58,11 @@ const handleSCancel = () => {
   dialogVisible.value = false;
 };
 const handleSSave = () => {
-  emits("on-save");
+  emits('on-save');
   dialogVisible.value = false;
 };
 const handleSReture = () => {
-  emits("on-return");
+  emits('on-return');
 };
 
 defineExpose({

@@ -1,4 +1,4 @@
-import { isFunctionFun } from "@yto/utils";
+import { isFunctionFun } from '@yto/utils';
 /**
  * @description: 将MapOptions转换为options
  * @param {any} options

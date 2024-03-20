@@ -40,16 +40,16 @@ const formConfig: Array<any> = reactive([]);
 const searchContainerRef = ref();
 for (let index = 0; index < 10; index++) {
   formConfig.push({
-    itemType: "input",
-    value: "",
-    label: "测试数据" + (index + 1),
-    contentClass: "w-full",
+    itemType: 'input',
+    value: '',
+    label: '测试数据' + (index + 1),
+    contentClass: 'w-full',
     cols: !index ? 2 : 1,
   });
 }
 const handleResize = (itemWidth: number) => {
-  console.log("handleResize", itemWidth);
-  console.log("searchContainerRef", unref(searchContainerRef));
+  console.log('handleResize', itemWidth);
+  console.log('searchContainerRef', unref(searchContainerRef));
   // formItemWidth.value = itemWidth;
   // cardStyle.value = `width: ${(info.width - num * props.gap) / num}px; min-width:${props.minWidth}px`;
 };

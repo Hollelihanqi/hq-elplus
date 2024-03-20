@@ -1,6 +1,6 @@
-import LayoutMenu from "./src/index.vue";
+import LayoutMenu from './src/index.vue';
 
-import { install } from "@/_utils";
+import { install } from '@/_utils';
 
 export const YtoLayoutMenu = install(LayoutMenu);
 

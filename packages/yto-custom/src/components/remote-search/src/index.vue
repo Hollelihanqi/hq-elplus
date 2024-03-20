@@ -1,13 +1,13 @@
 <script lang="tsx">
-import { defineComponent, h, ref, getCurrentInstance } from "vue";
-import { Props, RemoteSearchProps } from "./props";
-import { ElSelect, ElOption, ElSelectV2 } from "element-plus";
-import { request, debounce } from "@/_utils";
+import { defineComponent, h, ref, getCurrentInstance } from 'vue';
+import { Props, RemoteSearchProps } from './props';
+import { ElSelect, ElOption, ElSelectV2 } from 'element-plus';
+import { request, debounce } from '@/_utils';
 
 export default defineComponent({
-  name: "RemoteSearch",
+  name: 'RemoteSearch',
   props: Props,
-  emits: ["after-remote"],
+  emits: ['after-remote'],
   setup(props: RemoteSearchProps, { attrs, expose, emit }) {
     const options: any = ref([]);
     const copyOptions: any = ref([]);
@@ -22,7 +22,7 @@ export default defineComponent({
       source.cancel();
       source.token = request.CancelToken.source().token;
       let _headers: any = { ...props.requestHeaders };
-      if (typeof props.requestHeaders === "function") {
+      if (typeof props.requestHeaders === 'function') {
         _headers = props.requestHeaders();
       }
       if (!collapse.value) {
@@ -39,7 +39,7 @@ export default defineComponent({
           .request({
             url: props.url,
             method: props.method,
-            ...(props.method.toUpperCase() === "POST" ? { data: _params } : { params: _params }),
+            ...(props.method.toUpperCase() === 'POST' ? { data: _params } : { params: _params }),
             // params: _params,
             // data: JSON.stringify(_params),
             headers: _headers,
@@ -57,13 +57,13 @@ export default defineComponent({
               options.value = props.resultKey && res[props.resultKey];
               copyOptions.value = props.resultKey && [...res[props.resultKey]];
             }
-            emit("after-remote", res);
+            emit('after-remote', res);
           })
           .finally(() => {
             loading.value = false;
           });
       } catch (error) {
-        console.error("获取数据失败", error);
+        console.error('获取数据失败', error);
       }
     };
 
@@ -74,7 +74,7 @@ export default defineComponent({
           const list = await props.requestApi(keywords);
           setData(list);
         } catch (error) {
-          console.error("请求报错", error);
+          console.error('请求报错', error);
         } finally {
           loading.value = false;
         }
@@ -101,10 +101,10 @@ export default defineComponent({
       }
     });
     const cusTemplate = (item: any) => {
-      if (props.optTemp && typeof props.optTemp === "function") {
+      if (props.optTemp && typeof props.optTemp === 'function') {
         return props.optTemp(item);
       }
-      return h("div", { class: "cus-temp" }, [h("span", {}, props.labelKey && item[props.labelKey])]);
+      return h('div', { class: 'cus-temp' }, [h('span', {}, props.labelKey && item[props.labelKey])]);
     };
 
     const getOptions = (params = {}) => {
@@ -122,15 +122,15 @@ export default defineComponent({
     };
 
     const disLabelEvent = () => {
-      console.log("RemoteSearchSelectInstance.value", RemoteSearchSelectInstance.value);
+      console.log('RemoteSearchSelectInstance.value', RemoteSearchSelectInstance.value);
       const label = RemoteSearchSelectInstance.value?.$el.parentElement.parentElement;
-      label && label.classList.add("el-form-label-dis");
+      label && label.classList.add('el-form-label-dis');
     };
     onMounted(() => {
-      if (props.getInstance && typeof props.getInstance === "function") {
+      if (props.getInstance && typeof props.getInstance === 'function') {
         props.getInstance(getCurrentInstance());
       }
-      if (props.getExposed && typeof props.getExposed === "function") {
+      if (props.getExposed && typeof props.getExposed === 'function') {
         props.getExposed(getCurrentInstance()?.exposed);
       }
       disLabelEvent();
@@ -143,17 +143,17 @@ export default defineComponent({
       return h(
         ElSelect,
         {
-          class: "remote-search-select",
+          class: 'remote-search-select',
           ref: RemoteSearchSelectInstance,
           loading: loading.value,
-          "value-key": props.valueKey,
+          'value-key': props.valueKey,
           remote: false,
           clearable: true,
           filterable: true,
           reserveKeyword: true,
           collapseTags: true,
           collapseTagsTooltip: true,
-          placeholder: props.isRemoteSearch ? "请输入" : "请选择",
+          placeholder: props.isRemoteSearch ? '请输入' : '请选择',
           style: {
             width: props.w,
           },
@@ -190,7 +190,7 @@ export default defineComponent({
     const renderSelectV2 = () => {
       const _props = {
         label: props.labelKey,
-        value: props.modelItem ? "value" : props.valueKey,
+        value: props.modelItem ? 'value' : props.valueKey,
       };
       return (
         <ElSelectV2
@@ -208,13 +208,13 @@ export default defineComponent({
       );
     };
     return () => {
-      return props.stag === "select" ? renderSelect() : renderSelectV2();
+      return props.stag === 'select' ? renderSelect() : renderSelectV2();
     };
   },
 });
 </script>
 
 <style lang="scss">
-@import "./index.scss";
+@import './index.scss';
 </style>
 import { toUpperCamelCase } from "gold-core";

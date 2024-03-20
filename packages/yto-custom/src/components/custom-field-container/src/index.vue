@@ -38,27 +38,27 @@
   </div>
 </template>
 <script setup lang="ts" name="CustomFieldContainer">
-import { Plus, Delete } from "@element-plus/icons-vue";
+import { Plus, Delete } from '@element-plus/icons-vue';
 export interface IAnyObject {
   [key: string]: any;
 }
 interface IProps {
-  direction?: "vertical" | "horizontal";
+  direction?: 'vertical' | 'horizontal';
   modelValue: IAnyObject[];
   width?: string;
   termHiddenDel?: boolean; // 根据条件隐藏删除按钮
 }
 const props = withDefaults(defineProps<IProps>(), {
-  direction: "horizontal",
-  width: "100%",
+  direction: 'horizontal',
+  width: '100%',
   termHiddenDel: true,
 });
-const emits = defineEmits(["add", "delete"]);
-const onClick = (flag: "add" | "delete", index: number, item: IAnyObject) => {
-  if (flag === "add") {
-    emits("add", index, item);
+const emits = defineEmits(['add', 'delete']);
+const onClick = (flag: 'add' | 'delete', index: number, item: IAnyObject) => {
+  if (flag === 'add') {
+    emits('add', index, item);
   } else {
-    emits("delete", index, item);
+    emits('delete', index, item);
   }
 };
 </script>

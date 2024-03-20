@@ -1,7 +1,7 @@
-import { JsBridge } from "./basic";
+import { JsBridge } from './basic';
 class Bridge {
   constructor() {
-    console.log("JsBridge.first：setupWebViewJavascriptBridge");
+    console.log('JsBridge.first：setupWebViewJavascriptBridge');
     JsBridge.first();
   }
   callHandler(funName, funParams = {}, otherParams = { timeout: 3000 }) {
@@ -9,7 +9,7 @@ class Bridge {
     return new Promise<any>((resolve, reject) => {
       try {
         JsBridge.init((bridge: any) => {
-          console.log("JsBridge.init：setupWebViewJavascriptBridge", bridge);
+          console.log('JsBridge.init：setupWebViewJavascriptBridge', bridge);
           bridge.registerHandler(funName, (data, responseCallback) => {
             responseCallback(data);
           });
@@ -18,7 +18,7 @@ class Bridge {
             resolve(res);
           });
           setTimeout(() => {
-            if (!isCallback) resolve("返回值为空");
+            if (!isCallback) resolve('返回值为空');
           }, otherParams.timeout);
         });
       } catch (error) {

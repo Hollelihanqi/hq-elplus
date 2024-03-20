@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 type Result<T> = {
   code: number;
@@ -7,7 +7,7 @@ type Result<T> = {
 };
 
 export const baseConfig = {
-  baseURL: "",
+  baseURL: '',
   timeout: 50000,
   withCredentials: true,
 };

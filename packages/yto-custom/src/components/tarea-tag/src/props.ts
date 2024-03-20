@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from "vue";
+import type { ExtractPropTypes } from 'vue';
 
 export const Props = {
   modelValue: {
@@ -7,7 +7,7 @@ export const Props = {
   },
   placeholder: {
     type: String,
-    default: "",
+    default: '',
   },
   regular: {
     type: [RegExp, Function],

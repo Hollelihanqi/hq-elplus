@@ -3,8 +3,8 @@
  * 2. 挂载
  */
 
-import { render, h, VNode } from "vue";
-import type { Component } from "vue";
+import { render, h, VNode } from 'vue';
+import type { Component } from 'vue';
 let mountDom: Element | null = null;
 let appendToContainer: Element = document.body;
 
@@ -17,9 +17,9 @@ interface IReturnObj {
 }
 
 export const createMountContainer = (customClass?: string[]): Element => {
-  const container = document.createElement("div");
-  console.log("customClass", customClass);
-  container.className = `creator-api-container ${customClass ? customClass : ""}`;
+  const container = document.createElement('div');
+  console.log('customClass', customClass);
+  container.className = `creator-api-container ${customClass ? customClass : ''}`;
   return container;
 };
 

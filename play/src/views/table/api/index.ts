@@ -1,10 +1,10 @@
-import request from "./request";
+import request from './request';
 
 // 列表
 export const getList = (params = {}) => {
   console.log(params);
   return request.request({
-    url: "/v2/opttag",
+    url: '/v2/opttag',
     params,
   });
 };
@@ -12,8 +12,8 @@ export const getList = (params = {}) => {
 // 新建
 export const createItem = (params = {}) => {
   return request.request({
-    url: "/v2/opttag",
-    method: "POST",
+    url: '/v2/opttag',
+    method: 'POST',
     data: params,
   });
 };
@@ -21,8 +21,8 @@ export const createItem = (params = {}) => {
 // 编辑
 export const deleteItem = (params = {}) => {
   return request.request({
-    url: "/v2/opttag",
-    method: "DELETE",
+    url: '/v2/opttag',
+    method: 'DELETE',
     params,
   });
 };

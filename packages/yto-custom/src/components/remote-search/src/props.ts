@@ -1,13 +1,13 @@
-import type { ExtractPropTypes, PropType } from "vue";
+import type { ExtractPropTypes, PropType } from 'vue';
 
 export const Props = {
   url: {
     type: String,
-    default: "",
+    default: '',
   },
   method: {
     type: String,
-    default: "GET",
+    default: 'GET',
   },
   isRemoteSearch: {
     type: Boolean,
@@ -23,7 +23,7 @@ export const Props = {
   },
   searchField: {
     type: String,
-    default: "",
+    default: '',
   },
   requestParams: {
     type: Object,
@@ -39,7 +39,7 @@ export const Props = {
   },
   resultKey: {
     type: String,
-    default: "items",
+    default: 'items',
   },
   dataCallback: {
     type: [Function],
@@ -48,11 +48,11 @@ export const Props = {
   },
   valueKey: {
     type: String,
-    default: "id",
+    default: 'id',
   },
   labelKey: {
     type: String,
-    default: "label",
+    default: 'label',
   },
   modelItem: {
     type: Boolean,
@@ -64,7 +64,7 @@ export const Props = {
   },
   w: {
     type: String,
-    default: "100%",
+    default: '100%',
   },
   getInstance: {
     type: Function,
@@ -76,7 +76,7 @@ export const Props = {
   },
   stag: {
     type: String,
-    default: "select",
+    default: 'select',
   },
 };
 

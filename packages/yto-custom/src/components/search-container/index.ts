@@ -4,9 +4,9 @@
  * @Date: 2023-12-07 16:20:35
  * @LastEditTime: 2023-12-19 17:23:17
  */
-import SearchContainer from "./src/index.vue";
+import SearchContainer from './src/index.vue';
 
-import { install } from "@/_utils";
+import { install } from '@/_utils';
 
 export const YtoSearchContainer = install(SearchContainer);
 

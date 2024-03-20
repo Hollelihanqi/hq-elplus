@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 type Result<T> = {
   code: number;
   message: string;
@@ -6,7 +6,7 @@ type Result<T> = {
 };
 
 export const baseConfig = {
-  baseURL: "/api",
+  baseURL: '/api',
   timeout: 50000,
   withCredentials: true,
 };

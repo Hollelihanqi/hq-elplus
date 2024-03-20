@@ -9,8 +9,8 @@
   <div v-waterMarker="{text:'版权所有',textColor:'rgba(180, 180, 180, 0.4)'}"></div>
 */
 
-import type { Directive, DirectiveBinding } from "vue";
-import { addWaterMarker } from "@yto/utils";
+import type { Directive, DirectiveBinding } from 'vue';
+import { addWaterMarker } from '@yto/utils';
 
 const waterMarker = {
   mounted(el: DirectiveBinding, binding: DirectiveBinding) {

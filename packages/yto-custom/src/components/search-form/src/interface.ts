@@ -6,9 +6,9 @@ import {
   TimePickerDefaultProps,
   CheckboxProps,
   ElDatePicker,
-} from "element-plus";
-import { TimeSelectProps } from "element-plus/es/components/time-select/src/time-select";
-import { YtoRemoteSearch } from "../../remote-search";
+} from 'element-plus';
+import { TimeSelectProps } from 'element-plus/es/components/time-select/src/time-select';
+import { YtoRemoteSearch } from '../../remote-search';
 
 export type RemoteSelectProps = Partial<typeof YtoRemoteSearch.__defaults>;
 type ElDatePickerProps = typeof ElDatePicker.props;
@@ -21,15 +21,15 @@ interface _SelectProps {
 type FormEl = {
   input: Partial<InputProps>;
   select: _SelectProps;
-  "tree-select": ElSelectProps;
-  "date-picker": ElDatePickerProps;
-  "time-picker": TimePickerDefaultProps;
-  "time-select": TimeSelectProps;
+  'tree-select': ElSelectProps;
+  'date-picker': ElDatePickerProps;
+  'time-picker': TimePickerDefaultProps;
+  'time-select': TimeSelectProps;
   switch: SwitchProps;
   checkbox: CheckboxProps;
 };
 
-export type BreakPoint = "xs" | "sm" | "md" | "lg" | "xl";
+export type BreakPoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type Responsive = {
   span?: number;
   offset?: number;
@@ -64,4 +64,4 @@ type El = keyof FormEl;
 
 export type SearchFormControlProps = SearchProps<El>;
 
-export type { SearchFormProps } from "./props";
+export type { SearchFormProps } from './props';

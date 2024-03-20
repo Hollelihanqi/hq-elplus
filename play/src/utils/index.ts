@@ -1,7 +1,7 @@
-import request from "./request";
+import request from './request';
 export { request };
 export const getToken = () => {
-  let token = sessionStorage.getItem("authorization") as string;
+  let token = sessionStorage.getItem('authorization') as string;
   if (token) {
     if (token.indexOf('"') !== -1) {
       const regex = /^"(.*)"$/;

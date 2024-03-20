@@ -10,25 +10,25 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from "vue";
+import { reactive } from 'vue';
 const lineChartRef = ref();
 const pieChartRef = ref();
 const lineChartOptions = reactive({
-  color: ["#5B8FF9"],
+  color: ['#5B8FF9'],
   legend: {
-    data: ["访客人数"],
+    data: ['访客人数'],
   },
   xAxis: {
-    data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
+    data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'],
   },
   series: [
     {
-      name: "访客人数",
-      type: "line",
+      name: '访客人数',
+      type: 'line',
       data: [5, 20, 36, 10, 10, 20],
       label: {
         show: true,
-        color: "#000",
+        color: '#000',
       },
     },
   ],
@@ -36,51 +36,51 @@ const lineChartOptions = reactive({
 
 const barChartOptions = reactive({
   xAxis: {
-    data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
+    data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'],
   },
   series: [
     {
-      name: "销量",
-      type: "bar",
+      name: '销量',
+      type: 'bar',
       data: [5, 20, 36, 10, 10, 20],
     },
   ],
 });
 const pieChartOptions = {
   title: {
-    text: "Referer of a Website",
+    text: 'Referer of a Website',
   },
   series: [
     {
-      name: "Access From",
-      type: "pie",
-      radius: "50%",
+      name: 'Access From',
+      type: 'pie',
+      radius: '50%',
       data: [
-        { value: 1048, name: "Search Engine" },
-        { value: 735, name: "Direct" },
-        { value: 580, name: "Email" },
-        { value: 484, name: "Union Ads" },
-        { value: 300, name: "Video Ads" },
+        { value: 1048, name: 'Search Engine' },
+        { value: 735, name: 'Direct' },
+        { value: 580, name: 'Email' },
+        { value: 484, name: 'Union Ads' },
+        { value: 300, name: 'Video Ads' },
       ],
       emphasis: {
         itemStyle: {
           shadowBlur: 10,
           shadowOffsetX: 0,
-          shadowColor: "rgba(0, 0, 0, 0.5)",
+          shadowColor: 'rgba(0, 0, 0, 0.5)',
         },
       },
     },
   ],
 };
 onMounted(() => {
-  console.log("chart-onMounted", unref(pieChartRef).getEchartInstance());
+  console.log('chart-onMounted', unref(pieChartRef).getEchartInstance());
   const lineChart = unref(lineChartRef).getEchartInstance();
-  lineChart.on("click", function (params: any) {
-    console.log("lineChart", params);
+  lineChart.on('click', function (params: any) {
+    console.log('lineChart', params);
   });
   const pieChart = unref(pieChartRef).getEchartInstance();
-  pieChart.on("click", function (params: any) {
-    console.log("pieChart", params);
+  pieChart.on('click', function (params: any) {
+    console.log('pieChart', params);
   });
 });
 </script>

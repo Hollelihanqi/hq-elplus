@@ -1,6 +1,6 @@
-import StickyContainer from "./src/index";
+import StickyContainer from './src/index';
 
-import { install } from "../../_utils";
+import { install } from '../../_utils';
 
 export const YtoStickyContainer = install(StickyContainer);
 export default YtoStickyContainer;

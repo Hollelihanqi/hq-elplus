@@ -1,5 +1,5 @@
-import { version } from "./version";
-import type { App, Plugin } from "vue";
+import { version } from './version';
+import type { App, Plugin } from 'vue';
 
 export const makeInstaller = (components: Plugin[] = []) => {
   const install = (app: App) => {

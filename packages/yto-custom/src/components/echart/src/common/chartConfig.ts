@@ -3,29 +3,29 @@ export const getLineChartConfig = () => {
   return {
     title: {
       show: false,
-      text: "暂无数据",
-      x: "center",
-      y: "center",
+      text: '暂无数据',
+      x: 'center',
+      y: 'center',
       textStyle: {
-        color: "#8c8c8c",
-        fontWeight: "normal",
+        color: '#8c8c8c',
+        fontWeight: 'normal',
         fontSize: 14,
       },
     },
     color: [],
     tooltip: {
       show: true,
-      trigger: "axis",
-      backgroundColor: "rgba(0, 0, 0, 0.75)",
+      trigger: 'axis',
+      backgroundColor: 'rgba(0, 0, 0, 0.75)',
       textStyle: {
         fontSize: 14,
-        color: "#fff",
+        color: '#fff',
       },
       axisPointer: {
-        type: "line",
+        type: 'line',
         lineStyle: {
           show: true,
-          type: "solid",
+          type: 'solid',
         },
       },
     },
@@ -35,29 +35,29 @@ export const getLineChartConfig = () => {
     },
     grid: {
       left: 50,
-      right: "5%",
-      top: "10%",
+      right: '5%',
+      top: '10%',
       bottom: 50,
     },
     xAxis: {
       show: true,
-      type: "category",
+      type: 'category',
       axisTick: {
         show: false,
       },
       axisLine: {
         lineStyle: {
-          color: "background: rgba(0, 0, 0, 0.15)",
+          color: 'background: rgba(0, 0, 0, 0.15)',
         },
       },
       data: [],
     },
     yAxis: {
       show: true,
-      type: "value",
+      type: 'value',
       splitLine: {
         lineStyle: {
-          type: "dashed",
+          type: 'dashed',
         },
       },
     },
@@ -72,46 +72,46 @@ export const getBarChartBaseOptions = () => {
     animation: true,
     title: {
       show: false,
-      text: "暂无数据",
-      x: "center",
-      y: "center",
+      text: '暂无数据',
+      x: 'center',
+      y: 'center',
       textStyle: {
-        color: "#8c8c8c",
-        fontWeight: "normal",
+        color: '#8c8c8c',
+        fontWeight: 'normal',
         fontSize: 14,
       },
     },
     textStyle: {
       fontSize: 14,
-      color: "#999",
+      color: '#999',
     },
     tooltip: {
       show: true,
     },
     grid: {
       left: 50,
-      right: "5%",
-      top: "10%",
+      right: '5%',
+      top: '10%',
       bottom: 50,
     },
     xAxis: {
       show: true,
-      type: "category",
+      type: 'category',
       axisTick: {
         show: false,
       },
       axisLine: {
         show: true,
         lineStyle: {
-          color: "#D9D9D9",
+          color: '#D9D9D9',
         },
       },
       data: [],
     },
     yAxis: {
       show: true,
-      name: "",
-      type: "value",
+      name: '',
+      type: 'value',
       axisLabel: {
         show: true,
         margin: 15,
@@ -119,7 +119,7 @@ export const getBarChartBaseOptions = () => {
       },
       splitLine: {
         lineStyle: {
-          type: "dashed",
+          type: 'dashed',
         },
       },
       axisTick: {
@@ -138,17 +138,17 @@ export const getBarChartBaseOptions = () => {
 export const getPieChartBaseOptions = () => {
   return {
     title: {
-      text: "",
-      left: "center",
+      text: '',
+      left: 'center',
       top: 10,
     },
     tooltip: {
-      trigger: "item",
+      trigger: 'item',
     },
     legend: {
-      top: "5%",
-      orient: "vertical",
-      left: "left",
+      top: '5%',
+      orient: 'vertical',
+      left: 'left',
     },
     series: [],
   };

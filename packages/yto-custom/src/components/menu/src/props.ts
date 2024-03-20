@@ -1,5 +1,5 @@
-import type { ExtractPropTypes, PropType } from "vue";
-import type { MenuItemProps, SubMenuProps } from "element-plus";
+import type { ExtractPropTypes, PropType } from 'vue';
+import type { MenuItemProps, SubMenuProps } from 'element-plus';
 export interface ColumnsItemProps {
   label?: string;
   prop?: string;
@@ -13,7 +13,7 @@ export interface IMenuData {
   name: string;
   path?: string;
   icon?: String;
-  type?: "group";
+  type?: 'group';
   children: IMenuData[];
 }
 export const Props = {

@@ -7,7 +7,7 @@
  * @use <div v-resize-element="handle"> </div></div>
  */
 
-import { Directive } from "vue";
+import { Directive } from 'vue';
 const map = new WeakMap();
 const ob = new ResizeObserver((entries) => {
   for (const entry of entries) {

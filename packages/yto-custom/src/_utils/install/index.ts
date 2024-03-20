@@ -1,4 +1,4 @@
-import type { App, Directive, Component } from "vue";
+import type { App, Directive, Component } from 'vue';
 
 export type Install<T> = T & {
   install(app: App): void;
