@@ -50,7 +50,14 @@ export default defineComponent({
         if (typeof formatValue === "function") {
           const value = _searchModel.value[field];
           // 只添加那些经过formatValue处理的属性到累加器对象中
-          acc[field] = formatValue(value);
+          const _formatV = formatValue(value);
+          if (Object.prototype.toString.call(_formatV) === "[object Object]") {
+            for (const key in _formatV) {
+              acc[key] = _formatV[key];
+            }
+          } else {
+            acc[field] = _formatV;
+          }
         }
         return acc;
       }, {});
@@ -105,8 +112,19 @@ export default defineComponent({
       props.afterResetFun();
     };
     const handleQuery = () => {
-      emit("on-search", { ..._searchModel.value });
-      props.afterSearchFun({ ..._searchModel.value });
+      let _obj = { ..._searchModel.value };
+      const filterFields = props.filterFields;
+      if (filterFields && filterFields.length) {
+        const filteredObj = Object.keys(_obj).reduce((acc: any, key) => {
+          if (!filterFields.includes(key)) {
+            acc[key] = _obj[key];
+          }
+          return acc;
+        }, {});
+        _obj = filteredObj;
+      }
+      emit("on-search", _obj);
+      props.afterSearchFun(_obj);
     };
 
     const handleResize = (e: any) => {

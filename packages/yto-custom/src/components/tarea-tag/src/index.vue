@@ -133,6 +133,12 @@ const valided = (values: []) => {
   }
   valid.value = values.every((item: any) => item.valid);
 };
+
+const validState = () => {
+  return valid.value;
+};
+
+defineExpose({ validState });
 </script>
 <style lang="scss" scoped>
 @import "./index.scss";

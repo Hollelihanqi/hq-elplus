@@ -18,6 +18,10 @@ export const Props = {
     type: Array as PropType<SearchFormControlProps[]>,
     default: () => [],
   },
+  filterFields: {
+    type: Array,
+    default: () => [],
+  },
   modelDefault: {
     type: Object,
     default: null,
