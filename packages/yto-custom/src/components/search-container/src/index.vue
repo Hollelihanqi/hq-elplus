@@ -27,9 +27,9 @@
   </div>
 </template>
 <script lang="ts" setup name="SearchContainer">
-import { resizeElement as vResizeElement } from "@/directives";
-import { guid } from "@yto/utils";
-import { DArrowRight } from "@element-plus/icons-vue";
+import { resizeElement as vResizeElement } from '@/directives';
+import { guid } from '@yto/utils';
+import { DArrowRight } from '@element-plus/icons-vue';
 
 interface Props {
   isUseForm?: boolean;
@@ -53,7 +53,7 @@ const containerId = computed(() => {
 });
 const showCollapse = ref(false);
 const collapse = ref(false);
-const emit = defineEmits(["resize"]);
+const emit = defineEmits(['resize']);
 const handleResize = (info: any) => {
   if (!props.itemMinWidth || !info.width) return;
   let num = Math.floor(info.width / props.itemMinWidth);
@@ -66,7 +66,7 @@ const handleResize = (info: any) => {
   if (props.itemMaxWidth && itemWidth > props.itemMaxWidth) {
     itemWidth = props.itemMaxWidth;
   }
-  emit("resize", itemWidth);
+  emit('resize', itemWidth);
   props.autoLayout && setChildWidth(itemWidth); // 设置子元素宽度
   nextTick(() => {
     props.isCollapse && dealCollapse(num, itemWidth);
@@ -76,11 +76,11 @@ const setChildWidth = (itemWidth: number) => {
   const tmpChildren = document.querySelector(`#${containerId.value} .container-content`)?.children;
   if (!tmpChildren || !tmpChildren.length) return;
   const children = Array.from(tmpChildren).filter((item: any) => {
-    return !item.className.includes("container-operation");
+    return !item.className.includes('container-operation');
   });
   children.forEach((item: any) => {
-    const cols = item.getAttribute("data-cols") || 1;
-    item.style.width = itemWidth * cols + "px";
+    const cols = item.getAttribute('data-cols') || 1;
+    item.style.width = itemWidth * cols + 'px';
   });
 };
 const dealCollapse = (lineNum: number, itemWidth: number) => {
@@ -89,9 +89,9 @@ const dealCollapse = (lineNum: number, itemWidth: number) => {
   let row = 1;
   let currentTotalLineCols = 0;
   Array.from(tmpChildren).forEach((child: any, idx: number) => {
-    const cols = Number(child.getAttribute("data-cols")) || 1;
+    const cols = Number(child.getAttribute('data-cols')) || 1;
     currentTotalLineCols += cols;
-    child.setAttribute("data-line-count", row);
+    child.setAttribute('data-line-count', row);
     if (currentTotalLineCols >= lineNum && Array.from(tmpChildren)[idx + 1]) {
       currentTotalLineCols = 0;
       row++;
@@ -107,25 +107,25 @@ const handleCollapse = () => {
   if (unref(collapse)) {
     //处理展开
     Array.from(tmpChildren).forEach((child: any) => {
-      child.style.display = child.getAttribute("data-display") || "block";
+      child.style.display = child.getAttribute('data-display') || 'block';
     });
   } else {
     //处理折叠
     Array.from(tmpChildren).forEach((child: any) => {
       //存储该元素的display属性
-      child.setAttribute("data-display", window.getComputedStyle(child).display);
+      child.setAttribute('data-display', window.getComputedStyle(child).display);
       if (
-        !child.className.includes("container-operation") &&
-        Number(child.getAttribute("data-line-count")) > props.collapseLine
+        !child.className.includes('container-operation') &&
+        Number(child.getAttribute('data-line-count')) > props.collapseLine
       ) {
-        child.style.display = "none";
+        child.style.display = 'none';
       }
     });
     // 隐藏最后一个刚好达到限制行数的子元素
     const childrenArr: Array<any> = Array.from(tmpChildren).filter((child: any) => {
-      return Number(child.getAttribute("data-line-count")) === props.collapseLine;
+      return Number(child.getAttribute('data-line-count')) === props.collapseLine;
     });
-    childrenArr[childrenArr.length - 1].style.display = "none";
+    childrenArr[childrenArr.length - 1].style.display = 'none';
   }
   collapse.value = !unref(collapse);
 };

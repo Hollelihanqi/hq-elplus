@@ -68,3 +68,6 @@ export { YtoTareaTag } from "./tarea-tag";
 export * from "./tarea-tag";
 export { YtoRadio } from "./radio";
 export * from "./radio";
+
+export { YtoTimeLine } from "./time-line";
+export * from "./time-line";

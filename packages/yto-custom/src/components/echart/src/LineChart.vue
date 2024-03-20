@@ -3,13 +3,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
-import BaseEchart from "./BaseChart.vue";
-import { Map } from "immutable";
-import { getLineChartConfig } from "./common/chartConfig";
-import { getOptiops } from "./common/util";
-import echartsComposable from "./common/echartsComposable";
-import { isEmptyFun } from "@yto/utils";
+import { computed } from 'vue';
+import BaseEchart from './BaseChart.vue';
+import { Map } from 'immutable';
+import { getLineChartConfig } from './common/chartConfig';
+import { getOptiops } from './common/util';
+import echartsComposable from './common/echartsComposable';
+import { isEmptyFun } from '@yto/utils';
 
 interface Props {
   options?: any;

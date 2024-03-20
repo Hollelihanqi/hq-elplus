@@ -37,31 +37,31 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { useCssVar, newColorWithOpacity } from "./cssVar";
-import layoutFrom from "../layoutFrom.vue";
+import { ref, onMounted } from 'vue';
+import { useCssVar, newColorWithOpacity } from './cssVar';
+import layoutFrom from '../layoutFrom.vue';
 const themConfig: { [key: string]: number } = {
-  "--el-color-primary": 1,
-  "--layout-header-background": 0.8,
-  "--el-color-primary-light-9": 0.9,
-  "--el-color-primary-light-8": 0.8,
-  "--el-color-primary-light-7": 0.7,
-  "--el-color-primary-light-6": 0.6,
-  "--el-color-primary-light-5": 0.5,
-  "--el-color-primary-light-4": 0.4,
-  "--el-color-primary-light-3": 0.3,
-  "--el-color-primary-light-2": 0.2,
-  "--el-color-primary-light-1": 0.1,
-  "--el-button-active-color": 0.9,
+  '--el-color-primary': 1,
+  '--layout-header-background': 0.8,
+  '--el-color-primary-light-9': 0.9,
+  '--el-color-primary-light-8': 0.8,
+  '--el-color-primary-light-7': 0.7,
+  '--el-color-primary-light-6': 0.6,
+  '--el-color-primary-light-5': 0.5,
+  '--el-color-primary-light-4': 0.4,
+  '--el-color-primary-light-3': 0.3,
+  '--el-color-primary-light-2': 0.2,
+  '--el-color-primary-light-1': 0.1,
+  '--el-button-active-color': 0.9,
 };
-const { setCssVar } = useCssVar("--el-color-primary", "#3434ce");
-const colorThem = ref("#3434ce");
+const { setCssVar } = useCssVar('--el-color-primary', '#3434ce');
+const colorThem = ref('#3434ce');
 const onChange = (val: string) => {
   Object.keys(themConfig).forEach((e) => {
     if (themConfig[e] === 1) {
       setCssVar(e, val);
-      console.log("********** newColorWithOpacity(val, 1, true)", newColorWithOpacity(val, 1, true));
-      setCssVar("--el-color-primary-windi", newColorWithOpacity(val, 1, true));
+      console.log('********** newColorWithOpacity(val, 1, true)', newColorWithOpacity(val, 1, true));
+      setCssVar('--el-color-primary-windi', newColorWithOpacity(val, 1, true));
     } else {
       const _color = newColorWithOpacity(val, themConfig[e]);
       setCssVar(e, _color);

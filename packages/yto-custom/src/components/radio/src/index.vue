@@ -30,13 +30,13 @@
           'disabled-text': disabled,
         }"
       >
-        {{ typeof op === "string" ? op : op[props.label] }}
+        {{ typeof op === 'string' ? op : op[props.label] }}
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts" name="Radio">
-import { computed } from "vue";
+import { computed } from 'vue';
 export interface IOptions {
   label: string;
   value: any;
@@ -53,28 +53,28 @@ export interface IProps {
 const props = withDefaults(defineProps<IProps>(), {
   options: () => [],
   modelValue: () => [],
-  value: "value",
-  label: "label",
+  value: 'value',
+  label: 'label',
   cancel: true,
   disabled: false,
 });
-const emit = defineEmits(["update:modelValue", "change"]);
+const emit = defineEmits(['update:modelValue', 'change']);
 const isCheck = computed({
   set: (val) => {
-    emit("update:modelValue", val);
+    emit('update:modelValue', val);
   },
   get: () => props.modelValue,
 });
 const onClicked = (op: string | IOptions) => {
   if (props.disabled) return;
-  const _key = typeof op === "string" ? op : op[props.value];
+  const _key = typeof op === 'string' ? op : op[props.value];
   if (isCheck.value === _key) {
     if (!props.cancel) return;
-    isCheck.value = "";
+    isCheck.value = '';
   } else {
     isCheck.value = _key;
   }
-  emit("change", isCheck.value, typeof op === "string" ? "" : op[props.value]);
+  emit('change', isCheck.value, typeof op === 'string' ? '' : op[props.value]);
 };
 </script>
 <style lang="scss" scoped>

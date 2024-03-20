@@ -59,14 +59,14 @@
   </div>
 </template>
 <script lang="ts" setup name="LayoutMenu">
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import { useMenu } from "../../../composable/menu";
-import { isArray, isBoolean, toURL } from "gold-core";
-import InnerNodeMenu from "./NodeMenu.vue";
-import "@/icon-font/iconfont.css";
-import StickyContainer from "../../sticky-container";
-import Logo from "./Logo.vue";
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useMenu } from '../../../composable/menu';
+import { isArray, isBoolean, toURL } from 'gold-core';
+import InnerNodeMenu from './NodeMenu.vue';
+import '@/icon-font/iconfont.css';
+import StickyContainer from '../../sticky-container';
+import Logo from './Logo.vue';
 const props = defineProps({
   keyLabel: String,
   keyIcon: String,
@@ -78,15 +78,15 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  width: { type: String, default: "210px" },
+  width: { type: String, default: '210px' },
   title: String,
   logo: String,
-  linkType: { type: String, default: "router" },
+  linkType: { type: String, default: 'router' },
 });
 
-const emit = defineEmits(["menuClick", "update:collapse"]);
+const emit = defineEmits(['menuClick', 'update:collapse']);
 // 菜单过滤
-const searchVal = ref("");
+const searchVal = ref('');
 const fileNavMenu = (arr: any) => {
   return arr.filter((e: any) => {
     if (e.label.includes(searchVal.value)) {
@@ -101,8 +101,8 @@ const fileNavMenu = (arr: any) => {
 };
 
 const menuClick = (item: any) => {
-  emit("menuClick", item);
-  if (props.linkType === "router") {
+  emit('menuClick', item);
+  if (props.linkType === 'router') {
     paneAdd(item);
   }
 };
@@ -192,7 +192,7 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
   :deep(.el-menu) {
     @apply bg-[var(--layout-menu-background)] border-none;
     &:not(.el-menu--collapse) {
-      width: v-bind("props.width");
+      width: v-bind('props.width');
     }
     /**************处理菜单折叠后图标对不齐的问题*****************/
     &.el-menu--collapse {
@@ -214,7 +214,7 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
         .second-sub-menu.is-active .el-sub-menu__title {
           @apply relative;
           &::before {
-            content: "";
+            content: '';
             @apply w-[4px] h-[28px] bg-[var(--layout-menu-active-border-color)] absolute left-0 top-[3px];
           }
         }
@@ -236,7 +236,7 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
       .leaf-menu.is-active div {
         @apply relative;
         &::before {
-          content: "";
+          content: '';
           @apply absolute w-[4px] h-[4px] rounded-[4px] absolute left-[-8px] top-[15px] bg-[var(--layout-menu-active-color)];
         }
       }
@@ -246,7 +246,7 @@ const { paneAdd, getHref, getLabel, data, activate } = useMenu(props);
           @apply hidden;
         }
         &::after {
-          content: "";
+          content: '';
           @apply w-0 h-0 border-solid;
 
           border-color: transparent;

@@ -23,9 +23,9 @@
 </template>
 
 <script lang="ts" setup>
-import { EnumSessionKey } from "@/common/EnumConstant";
-import { tabPaneClose, tabPaneAdd, toURL, IOptionTabPane, isBoolean } from "gold-core";
-import { useRouter, RouteLocationNormalized } from "vue-router";
+import { EnumSessionKey } from '@/common/EnumConstant';
+import { tabPaneClose, tabPaneAdd, toURL, IOptionTabPane, isBoolean } from 'gold-core';
+import { useRouter, RouteLocationNormalized } from 'vue-router';
 
 interface Props {
   tabsMenuList: IOptionTabPane[];
@@ -34,7 +34,7 @@ interface Props {
   routerGoback: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
-  keyLabel: "title",
+  keyLabel: 'title',
   routerGoback: false,
   tabsMenuList: () => {
     return [];
@@ -58,7 +58,7 @@ watch(
   (value) => {
     if (!value) return;
     const { mode, href } = unref(props.tabsMenuList).find((tab: any) => tab.code === value) || {};
-    if (mode === "router") {
+    if (mode === 'router') {
       const url = toURL(href as string);
       console.log(url.pathname);
       router.push(url.pathname + url.search);
@@ -72,7 +72,7 @@ const getUrl = (path: string) => {
   let href = path;
   const buildUrl = (obj: any) =>
     Object.keys(obj).forEach((key) => {
-      href += href.includes("?") ? `&${key}=${obj[key]}` : `?${key}=${obj[key]}`;
+      href += href.includes('?') ? `&${key}=${obj[key]}` : `?${key}=${obj[key]}`;
     });
   buildUrl(Object.assign({}, route.params, route.query));
   return href;
@@ -86,7 +86,7 @@ const getTabsItem = (path: string): any => {
     code: path,
     href,
     label: curRoute.meta ? curRoute.meta[props.keyLabel] : curRoute.name,
-    mode: "router",
+    mode: 'router',
     closable: curRoute.meta && isBoolean(curRoute.meta.closable) ? curRoute.meta.closable : undefined,
   };
   return props.formatTab ? props.formatTab(tabItem) : tabItem;
@@ -193,7 +193,7 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
       top: 50%;
       transform: translateY(-50%);
       display: block;
-      content: "";
+      content: '';
       width: 1px;
       height: 20px;
       background: var(--nav-tab-item-divider-color);

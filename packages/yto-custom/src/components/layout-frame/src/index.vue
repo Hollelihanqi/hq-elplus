@@ -35,9 +35,9 @@
   </div>
 </template>
 <script lang="ts" setup name="LayoutFrame">
-import { provide } from "vue";
-import { useFrame, tabPaneClose, isBoolean } from "gold-core";
-import { EnumSessionKey } from "@/common/EnumConstant";
+import { provide } from 'vue';
+import { useFrame, tabPaneClose, isBoolean } from 'gold-core';
+import { EnumSessionKey } from '@/common/EnumConstant';
 
 const props = defineProps({
   footer: Boolean,
@@ -46,11 +46,11 @@ const props = defineProps({
   max: Number,
   type: {
     type: String,
-    default: "vertical",
+    default: 'vertical',
   },
 });
 // 是否为垂直布局
-const isVertical = computed(() => props.type === "vertical");
+const isVertical = computed(() => props.type === 'vertical');
 const { listRoute, activate } = useFrame({
   cacheable: props.cacheable as boolean,
   sso: props.sso as boolean,

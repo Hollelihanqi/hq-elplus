@@ -4,8 +4,8 @@
   </div>
 </template>
 <script setup lang="ts" name="GridItem">
-import { computed, inject, Ref, ref, useAttrs, watch } from "vue";
-import { BreakPoint, Responsive } from "../interface/index";
+import { computed, inject, Ref, ref, useAttrs, watch } from 'vue';
+import { BreakPoint, Responsive } from '../interface/index';
 
 // 定义 GridItem 组件的 Props 类型
 type Props = {
@@ -35,8 +35,8 @@ const attrs: any = useAttrs();
 const isShow = ref(true); // 是否显示网格项，默认为true
 
 // 注入断点
-const breakPoint = inject<Ref<BreakPoint>>("breakPoint", ref("xl"));
-const shouldHiddenIndex = inject<Ref<number>>("shouldHiddenIndex", ref(-1));
+const breakPoint = inject<Ref<BreakPoint>>('breakPoint', ref('xl'));
+const shouldHiddenIndex = inject<Ref<number>>('shouldHiddenIndex', ref(-1));
 // 监听 shouldHiddenIndex 和 breakPoint 的变化，根据条件判断是否显示网格项
 watch(
   () => [shouldHiddenIndex.value, breakPoint.value],
@@ -49,8 +49,8 @@ watch(
   { immediate: true }
 );
 
-const gap = inject("gap", 0); // 获取间距值
-const cols = inject<Ref<number>>("cols", ref(4)); // 获取列数值
+const gap = inject('gap', 0); // 获取间距值
+const cols = inject<Ref<number>>('cols', ref(4)); // 获取列数值
 
 // 根据当前断点和 Props 计算样式
 const style = computed(() => {
@@ -61,7 +61,7 @@ const style = computed(() => {
     return {
       gridColumnStart: cols.value - span - offset + 1,
       gridColumnEnd: `span ${span + offset}`,
-      marginLeft: offset !== 0 ? `calc(((100% + ${gap}px) / ${span + offset}) * ${offset})` : "unset",
+      marginLeft: offset !== 0 ? `calc(((100% + ${gap}px) / ${span + offset}) * ${offset})` : 'unset',
     };
   } else {
     // 如果不是后缀项，则使用 gridColumn 来设置网格项的位置
@@ -69,7 +69,7 @@ const style = computed(() => {
       gridColumn: `span ${span + offset > cols.value ? cols.value : span + offset}/span ${
         span + offset > cols.value ? cols.value : span + offset
       }`,
-      marginLeft: offset !== 0 ? `calc(((100% + ${gap}px) / ${span + offset}) * ${offset})` : "unset",
+      marginLeft: offset !== 0 ? `calc(((100% + ${gap}px) / ${span + offset}) * ${offset})` : 'unset',
     };
   }
 });

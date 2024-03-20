@@ -20,13 +20,13 @@
 </template>
 
 <script lang="ts" setup>
-import { Plus } from "@element-plus/icons-vue";
-import _request from "../../request";
+import { Plus } from '@element-plus/icons-vue';
+import _request from '../../request';
 const UploaderInstance = ref();
 const mergeFile = (params = {}) => {
   return _request.request({
-    url: "/v2/mergeChunks",
-    method: "POST",
+    url: '/v2/mergeChunks',
+    method: 'POST',
     data: params,
   });
 };
@@ -47,7 +47,7 @@ const handleUploadSuccess = async (rootFile: any, file: any, message: any, chunk
   try {
     msg = JSON.parse(message);
   } catch (e) {
-    console.error("json.parse error", e);
+    console.error('json.parse error', e);
   }
   if (msg.success) {
     const skipUpload = msg.data ? msg.data.ifExist : 0; // 判断服务器是否已有当前上传文件
@@ -69,10 +69,10 @@ const handleFileRemoved = () => {
   //
 };
 const options = ref({
-  target: "/api/v2/upload", // 目标上传 URL
+  target: '/api/v2/upload', // 目标上传 URL
   chunkSize: 1024 * 1024 * 4, // 分块大小 4M
   connectionCount: 3, //同时上传的连接数
-  fileParameterName: "file", // 上传文件时文件的参数名，默认file
+  fileParameterName: 'file', // 上传文件时文件的参数名，默认file
   maxChunkRetries: 3, // 最大自动失败重试上传次数
   simultaneousUploads: 12, // 并发上传数 默认为 3
   // testChunks: true, // 是否开启服务器分片校验

@@ -34,19 +34,19 @@ defineProps({
   },
   title: {
     type: String,
-    default: "",
+    default: '',
   },
   w: {
     type: String,
-    default: "600px",
+    default: '600px',
   },
   maxh: {
     type: String,
-    default: "600px",
+    default: '600px',
   },
   titleAlign: {
     type: String,
-    default: "",
+    default: '',
   },
   footerHide: {
     type: Boolean,
@@ -66,11 +66,11 @@ defineProps({
   },
   okBtnText: {
     type: String,
-    default: "确认",
+    default: '确认',
   },
   cancelBtnText: {
     type: String,
-    default: "取消",
+    default: '取消',
   },
   cancelBtnHide: {
     type: Boolean,
@@ -81,15 +81,15 @@ defineProps({
     default: false,
   },
 });
-const emits = defineEmits(["update:modelValue", "on-cancel", "on-ok"]);
+const emits = defineEmits(['update:modelValue', 'on-cancel', 'on-ok']);
 
 // modal 关闭时的回调函数
 const handleCancel = () => {
-  emits("on-cancel");
-  emits("update:modelValue", false);
+  emits('on-cancel');
+  emits('update:modelValue', false);
 };
 const handleOk = () => {
-  emits("on-ok");
+  emits('on-ok');
 };
 </script>
 <style lang="scss">

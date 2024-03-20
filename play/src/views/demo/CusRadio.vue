@@ -12,9 +12,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import RadioCus from "./RadioCus.vue";
-const check = ref("");
+import RadioCus from './RadioCus.vue';
+const check = ref('');
 const onChange = () => {
-  console.log("**********check", check.value);
+  console.log('**********check', check.value);
 };
 </script>

@@ -29,26 +29,26 @@
 </template>
 
 <script lang="ts" setup>
-import { useRouter } from "vue-router";
+import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const handleClick = () => {
-  router.push({ path: "/layout-child-3", query: { id: "456" } });
+  router.push({ path: '/layout-child-3', query: { id: '456' } });
 };
 const form = {};
 const formItemWidth = ref(350);
 const formConfig: Array<any> = reactive([]);
 for (let index = 0; index < 10; index++) {
   formConfig.push({
-    itemType: "input",
-    value: "",
-    label: "测试数据二" + (index + 1),
-    contentClass: "w-full",
+    itemType: 'input',
+    value: '',
+    label: '测试数据二' + (index + 1),
+    contentClass: 'w-full',
     cols: index == 1 ? 2 : 1,
   });
 }
 const handleResize = (itemWidth: number) => {
-  console.log("handleResize-测试页面2", itemWidth);
+  console.log('handleResize-测试页面2', itemWidth);
   // formItemWidth.value = itemWidth;
   // cardStyle.value = `width: ${(info.width - num * props.gap) / num}px; min-width:${props.minWidth}px`;
 };

@@ -8,10 +8,10 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { inject, computed } from "vue";
-import UploadInfo from "./UploadInfo.vue";
+import { inject, computed } from 'vue';
+import UploadInfo from './UploadInfo.vue';
 
-const uploader: any = inject("uploader");
+const uploader: any = inject('uploader');
 
 const fileList = computed(() => {
   return uploader.value.fileList;
