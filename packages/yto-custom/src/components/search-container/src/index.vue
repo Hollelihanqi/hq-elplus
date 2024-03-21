@@ -17,7 +17,7 @@
     </div>
     <div
       v-if="showCollapse"
-      class="cursor-pointer container-collapse text-center text-[12px] absolute bottom-0 left-[50%] ml-[-12px]"
+      class="bg-[#F7F9FA] w-[32px] h-[16px] flex items-center justify-center cursor-pointer container-collapse text-[12px] absolute bottom-0 left-[50%] ml-[-16px]"
       @click="handleCollapse"
     >
       <el-icon :style="`transform: rotate(${collapse ? 90 : -90}deg)`"><DArrowRight /></el-icon>
