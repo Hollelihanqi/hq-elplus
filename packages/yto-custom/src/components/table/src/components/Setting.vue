@@ -22,13 +22,13 @@
       <div class="flex items-center justify-end">
         <el-button type="default" @click="handleSCancel">取消</el-button>
         <!-- <el-button type="primary" @click="handleSReture">恢复默认</el-button> -->
-        <el-button type="primary" @click="handleSSave">保存</el-button>
+        <!-- <el-button type="primary" @click="handleSSave">保存</el-button> -->
       </div>
     </template>
   </ElDrawer>
 </template>
 <script lang="ts" setup>
-import { ElDrawer } from 'element-plus';
+import { ElDrawer } from "element-plus";
 
 interface setColumnsProps {
   label: string;
@@ -43,7 +43,7 @@ defineProps({
     default: () => [],
   },
 });
-const emits = defineEmits(['on-save', 'on-return']);
+const emits = defineEmits(["on-save", "on-return"]);
 
 const dialogVisible = ref(false);
 const actionDialog = (): void => {
@@ -51,18 +51,18 @@ const actionDialog = (): void => {
 };
 
 const handleChange = () => {
-  //
+  emits("on-save");
 };
 
 const handleSCancel = () => {
   dialogVisible.value = false;
 };
 const handleSSave = () => {
-  emits('on-save');
-  dialogVisible.value = false;
+  emits("on-save");
+  // dialogVisible.value = false;
 };
 const handleSReture = () => {
-  emits('on-return');
+  emits("on-return");
 };
 
 defineExpose({
