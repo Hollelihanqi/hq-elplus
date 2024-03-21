@@ -19,15 +19,16 @@
 
 ### 属性
 
-| 属性名         | 说明               | 类型    | 可选值 | 默认值 | 备注                    |
-| -------------- | ------------------ | ------- | ------ | ------ | ----------------------- |
-| `isUseForm`    | 是否使用 form 表单 | Boolean | -      | true   |                         |
-| `itemMinWidth` | 每一项的最小宽度   | Number  | -      | 300    |                         |
-| `itemMaxWidth` | 每一项的最大宽度   | Number  | -      | --     |                         |
-| `customClass`  | 自定义 class       | String  | -      | -      |                         |
-| `autoLayout`   | 开启自动布局       | Boolean | -      | true   |                         |
-| `isCollapse`   | 是否开启折叠       | Boolean | -      | false  |                         |
-| `collapseLine` | 开启折叠的行数     | number  | -      | 3      | 开启 `isCollapse`后生效 |
+| 属性名            | 说明               | 类型    | 可选值 | 默认值 | 备注                    |
+| ----------------- | ------------------ | ------- | ------ | ------ | ----------------------- |
+| `isUseForm`       | 是否使用 form 表单 | Boolean | -      | true   |                         |
+| `itemMinWidth`    | 每一项的最小宽度   | Number  | -      | 300    |                         |
+| `itemMaxWidth`    | 每一项的最大宽度   | Number  | -      | --     |                         |
+| `customClass`     | 自定义 class       | String  | -      | -      |                         |
+| `autoLayout`      | 开启自动布局       | Boolean | -      | true   |                         |
+| `isCollapse`      | 是否开启折叠       | Boolean | -      | false  |                         |
+| `collapseLine`    | 开启折叠的行数     | number  | -      | 3      | 开启 `isCollapse`后生效 |
+| `defaultCollapse` | 默认是否折叠       | Boolean | -      | false  | 开启 `isCollapse`后生效 |
 
 ### 插槽
 
