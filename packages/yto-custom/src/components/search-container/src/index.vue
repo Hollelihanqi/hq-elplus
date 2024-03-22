@@ -113,7 +113,6 @@ const dealCollapse = (lineNum: number, itemWidth: number) => {
     child.setAttribute("data-line-count", row);
     // 如果是折叠状态，resize过程中,动态改变元素的display属性,避免元素被隐藏
     if (unref(collapse) && !isOperateEl(child)) {
-      console.log("dealCollapse---", row, props.collapseLine);
       row <= props.collapseLine ? showEl(child) : hideEl(child);
     }
     if (currentTotalLineCols >= lineNum && Array.from(tmpChildren)[idx + 1]) {
