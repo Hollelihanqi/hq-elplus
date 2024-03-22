@@ -14,12 +14,16 @@ interface Props {
   height?: string;
   width?: string;
   showLoading?: boolean;
+  loadingOptions?: object;
 }
 const props = withDefaults(defineProps<Props>(), {
   echartId: "",
   height: "400px",
   width: "100%",
   showLoading: true,
+  loadingOptions: () => {
+    return {};
+  },
   options: () => {
     return {};
   },
@@ -39,12 +43,17 @@ const containerId = computed(() => {
 const showLoading = () => {
   props.showLoading &&
     myChart &&
-    myChart.showLoading({
-      text: "正在加载...",
-      color: "#2c3cd8",
-      textColor: "#2c3cd8",
-      zlevel: 0,
-    });
+    myChart.showLoading(
+      Object.assign(
+        {
+          text: "正在加载...",
+          color: "#2c3cd8",
+          textColor: "#2c3cd8",
+          zlevel: 0,
+        },
+        props.loadingOptions
+      )
+    );
 };
 
 /**
@@ -73,7 +82,7 @@ const setChartOption = (options?: any) => {
   setTimeout(() => {
     //为了解决绘制图形时无动画效果的问题
     myChart && myChart.hideLoading();
-    console.log("setChartOption", options || props.options);
+    sessionStorage.getItem("YTO-ENGINE-LOG") && console.log("setChartOption", options || props.options);
     myChart && myChart.setOption(options || props.options);
   }, 350);
 };
