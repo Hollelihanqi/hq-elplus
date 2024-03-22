@@ -35,7 +35,7 @@
 <script lang="ts" setup>
 import SimpleUploader from "simple-uploader.js";
 import { computed, defineProps, watch, inject } from "vue";
-import { logger, error } from "@/_utils";
+import { logger, error as logError } from "@/_utils";
 
 const props = defineProps({
   file: {
@@ -200,7 +200,7 @@ const _fileSuccess = (rootFile?: any, file?: any, message?: any) => {
 //     res = JSON.parse(message);
 //     file._response = res;
 //   } catch (e) {
-//     error("processResponse", e);
+//     logError("processResponse", e);
 //   }
 //   response.value = res;
 // };
