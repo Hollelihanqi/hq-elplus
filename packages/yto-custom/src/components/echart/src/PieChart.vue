@@ -3,13 +3,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-import BaseEchart from './BaseChart.vue';
-import { Map } from 'immutable';
-import { getPieChartBaseOptions } from './common/chartConfig';
-import { getOptiops } from './common/util';
-import echartsComposable from './common/echartsComposable';
-import { isEmptyFun } from '@yto/utils';
+import { computed } from "vue";
+import BaseEchart from "./BaseChart.vue";
+import { Map } from "immutable";
+import { getPieChartBaseOptions } from "./common/chartConfig";
+import { getOptiops } from "./common/util";
+import echartsComposable from "./common/echartsComposable";
+import { isEmptyFun } from "@yto/utils";
 
 interface Props {
   options?: any;
@@ -35,11 +35,11 @@ const dealNodata = (options: any) => {
     isEmptyFun(options.series) ||
     (Array.isArray(options.series) && options.series.every((item: any) => isEmptyFun(item.data)))
   ) {
-    options.title.text = '暂无数据';
+    options.title.text = "暂无数据";
     !options.title.textStyle &&
       (options.title.textStyle = {
-        color: '#8c8c8c',
-        fontWeight: 'normal',
+        color: "#8c8c8c",
+        fontWeight: "normal",
         fontSize: 14,
       });
   }
