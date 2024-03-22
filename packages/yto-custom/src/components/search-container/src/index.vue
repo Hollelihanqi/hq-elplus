@@ -29,6 +29,7 @@
 import { resizeElement as vResizeElement } from "@/directives";
 import { guid } from "@yto/utils";
 import { DArrowRight } from "@element-plus/icons-vue";
+import { logger } from "@/_utils";
 
 interface Props {
   isUseForm?: boolean;
@@ -125,7 +126,7 @@ const dealCollapse = (lineNum: number, itemWidth: number) => {
   showCollapse.value = row > props.collapseLine;
 
   unref(showCollapse) && unref(collapse) && hiddenLastEl(tmpChildren);
-  // console.log("内部元素共显示了大致", row, "行（不包含最后一行可能未满的情况）", showCollapse.value);
+  logger("内部元素共显示了大致", row, "行（不包含最后一行可能未满的情况）", showCollapse.value);
   //如果开启了默认折叠 超过最大行数则自动折叠
   if (props.isCollapse && props.defaultCollapse && unref(showCollapse)) {
     doCollapse(tmpChildren);
@@ -153,7 +154,7 @@ const handleCollapse = () => {
 };
 onMounted(() => {
   const tmpEl: any = document.querySelector(`#${containerId.value} .container-content`);
-  // console.log("search-container-onMounted", tmpEl.offsetWidth);
+  // logger("search-container-onMounted", tmpEl.offsetWidth);
   if (!tmpEl) return;
   setOrgElDisplay(tmpEl.children);
   handleResize({ width: tmpEl.offsetWidth });

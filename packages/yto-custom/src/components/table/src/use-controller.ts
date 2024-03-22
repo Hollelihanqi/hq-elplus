@@ -1,4 +1,5 @@
 import type { TableProps, ColumnsItemProps, setColumnsProps } from "./interface";
+import { error } from "@/_utils";
 
 const useController = (props: TableProps) => {
   const _columns = ref<any>([]);
@@ -72,7 +73,7 @@ const useController = (props: TableProps) => {
       cacheSetColumns = JSON.parse(cacheSetColumns);
       // _columns.value = columns;
     } catch (error) {
-      console.error("getCacheColumns 解析失败--", error);
+      error("getCacheColumns 解析失败--", error);
     }
     return cacheSetColumns;
   };

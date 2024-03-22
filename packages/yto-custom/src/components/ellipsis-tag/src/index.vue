@@ -37,8 +37,8 @@
 </template>
 
 <script lang="ts" setup name="EllipsisTag">
-import { MoreFilled } from '@element-plus/icons-vue';
-import { resizeElement as vResizeElement } from '@/directives';
+import { MoreFilled } from "@element-plus/icons-vue";
+import { resizeElement as vResizeElement } from "@/directives";
 
 interface Props {
   tags?: Array<any>;
@@ -46,8 +46,8 @@ interface Props {
   labelKey?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
-  valueKey: 'value',
-  labelKey: 'label',
+  valueKey: "value",
+  labelKey: "label",
   tags: () => {
     return [];
   },
@@ -55,8 +55,7 @@ const props = withDefaults(defineProps<Props>(), {
 const ellipsisTagRef = ref();
 const shoEllipsis = ref(false);
 const handleResize = (info: any) => {
-  // console.log('resize', info);
-  const boxEl = unref(ellipsisTagRef).querySelector('.ellipsis-tag .tag-box');
+  const boxEl = unref(ellipsisTagRef).querySelector(".ellipsis-tag .tag-box");
   if (!boxEl) return;
   const boxWidth = boxEl.getBoundingClientRect().width;
   shoEllipsis.value = info.width < boxWidth;

@@ -38,29 +38,30 @@
   </div>
 </template>
 <script lang="ts" setup name="TareaTag">
-import { List } from 'immutable';
-import { Props } from './props';
+import { List } from "immutable";
+import { Props } from "./props";
+import { logger } from "@/_utils";
 
 const props = defineProps(Props);
-const emits = defineEmits(['update:modelValue', 'on-updated']);
+const emits = defineEmits(["update:modelValue", "on-updated"]);
 const editDiv = ref();
 const editInput = ref();
 const valid = ref(true);
 const isFocus = ref(false);
-const inputText = ref('');
+const inputText = ref("");
 const _autosize = computed(() => {
   return tags.value.length ? { minRows: 1 } : { minRows: 2 };
 });
 
 const tags: any = computed({
   get() {
-    const list = checkText(typeof props.modelValue === 'string' ? [props.modelValue] : props.modelValue);
+    const list = checkText(typeof props.modelValue === "string" ? [props.modelValue] : props.modelValue);
     return list;
   },
   set(value) {
     const _v = value.map((item: any) => item);
-    emits('update:modelValue', _v.length ? _v : '');
-    emits('on-updated', _v);
+    emits("update:modelValue", _v.length ? _v : "");
+    emits("on-updated", _v);
   },
 });
 
@@ -82,8 +83,8 @@ const handleWBlur = () => {
   isFocus.value = false;
   if (inputText.value || tags.value.length) {
     const formattedText = formatInputText();
-    const oldValue = typeof props.modelValue === 'string' ? [props.modelValue] : props.modelValue;
-    tags.value = [...oldValue, ...formattedText.split(',')];
+    const oldValue = typeof props.modelValue === "string" ? [props.modelValue] : props.modelValue;
+    tags.value = [...oldValue, ...formattedText.split(",")];
   } else if (props.required && !inputText.value) {
     valid.value = false;
   } else {
@@ -100,19 +101,19 @@ const handleWFocus = () => {
 };
 
 const formatInputText = () => {
-  return inputText.value.replace(/[\n\r\s,，]+/g, ',');
+  return inputText.value.replace(/[\n\r\s,，]+/g, ",");
 };
 
 const checkText = (value: any) => {
-  inputText.value = '';
+  inputText.value = "";
   // 用于验证文本项的函数
   const validateItem = (item: string) => {
-    console.log('validateItem', item);
+    logger("validateItem", item);
     if (!item) return null;
     const isValid =
       props.regular instanceof RegExp
         ? props.regular.test(item)
-        : typeof props.regular === 'function'
+        : typeof props.regular === "function"
         ? props.regular(item)
         : true;
     return {
@@ -141,5 +142,5 @@ const validState = () => {
 defineExpose({ validState });
 </script>
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>

@@ -3,9 +3,10 @@
 </template>
 
 <script lang="tsx" setup>
-import { useSlots } from 'vue';
-import { ElMessage, ElTableColumn } from 'element-plus';
-import { CopyDocument } from '@element-plus/icons-vue';
+import { useSlots } from "vue";
+import { ElMessage, ElTableColumn } from "element-plus";
+import { CopyDocument } from "@element-plus/icons-vue";
+import { logger } from "@/_utils";
 
 const props = defineProps({
   column: {
@@ -18,23 +19,23 @@ const slots = useSlots();
 const formatEnum = (column: any, row: any) => {
   if (Array.isArray(column.enum)) {
     const target = column.enum.find((e: any) => e.value === row[column.prop]);
-    return target?.label || '--';
+    return target?.label || "--";
   } else {
-    return column.enum[row[column.prop]] || '--';
+    return column.enum[row[column.prop]] || "--";
   }
 };
 // 复制
-const handleCopyClick = (copyData = '') => {
-  const input = document.createElement('input');
-  console.log(copyData);
+const handleCopyClick = (copyData = "") => {
+  const input = document.createElement("input");
+  logger(copyData);
   input.value = copyData.toLocaleString();
   document.body.appendChild(input);
   input.select();
-  document.execCommand('Copy');
+  document.execCommand("Copy");
   document.body.removeChild(input);
   ElMessage({
-    type: 'success',
-    message: '复制成功',
+    type: "success",
+    message: "复制成功",
   });
 };
 
@@ -44,13 +45,13 @@ const renderCellData = (item: any, scope: any) => {
     ? item.formatText(scope.row)
     : item.enum
     ? formatEnum(item, scope.row)
-    : item.prop && scope.row[item.prop] === ''
-    ? '--'
-    : scope.row[item.prop] ?? '--';
+    : item.prop && scope.row[item.prop] === ""
+    ? "--"
+    : scope.row[item.prop] ?? "--";
 };
 
 const _showColumn = (column: any) => {
-  if (column.hide && typeof column.hide === 'function') {
+  if (column.hide && typeof column.hide === "function") {
     return column.hide();
   } else {
     return column.show !== false;
@@ -62,8 +63,8 @@ const renderColumn = (column: any) => {
     <>
       {_showColumn(column) && (
         <ElTableColumn
-          className={column.sortable && column.align === 'right' ? 'sort-cell-td' : ''}
-          showOverflowTooltip={column.showOverflowTooltip ?? column.prop !== 'action'}
+          className={column.sortable && column.align === "right" ? "sort-cell-td" : ""}
+          showOverflowTooltip={column.showOverflowTooltip ?? column.prop !== "action"}
           {...column}
         >
           {{

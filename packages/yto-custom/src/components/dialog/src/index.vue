@@ -14,10 +14,10 @@
     <template #footer>
       <slot v-if="!_hiddenFooter" name="footer">
         <el-button v-if="_showCancel" v-bind="_cancelOption" @click="handleClose">{{
-          _cancelOption.txt ? _cancelOption.txt : '取消'
+          _cancelOption.txt ? _cancelOption.txt : "取消"
         }}</el-button>
         <el-button v-if="_showConfirm" v-bind="_confirmOption" @click="handleConfirm">{{
-          _confirmOption.txt ? _confirmOption.txt : '确认'
+          _confirmOption.txt ? _confirmOption.txt : "确认"
         }}</el-button>
       </slot>
     </template>
@@ -25,8 +25,9 @@
 </template>
 
 <script lang="ts" setup name="Dialog">
-import { ButtonProps, ElButton, ElDialog } from 'element-plus';
-import { ref } from 'vue';
+import { ButtonProps, ElButton, ElDialog } from "element-plus";
+import { ref } from "vue";
+import { logger } from "@/_utils";
 
 const dialogRef = ref();
 
@@ -58,17 +59,17 @@ export interface IProps {
 const props = withDefaults(defineProps<IProps>(), {
   visible: false,
   offset: () => {
-    return ['auto', '20vh'];
+    return ["auto", "20vh"];
   },
 });
-const $emit = defineEmits(['update:visible', 'cancel', 'confirm']);
+const $emit = defineEmits(["update:visible", "cancel", "confirm"]);
 
 // -------------------------------- footer btn start--------------------------
 const _confirmOption = computed(() => {
   let option: MyButtonProps = {
-    type: 'primary',
-    size: 'default',
-    txt: '确认',
+    type: "primary",
+    size: "default",
+    txt: "确认",
     hidden: false,
   };
   option = Object.assign({}, option, props.confirmOption);
@@ -76,9 +77,9 @@ const _confirmOption = computed(() => {
 });
 const _cancelOption = computed(() => {
   let option: MyButtonProps = {
-    type: 'default',
-    size: 'default',
-    txt: '取消',
+    type: "default",
+    size: "default",
+    txt: "取消",
     hidden: false,
   };
   option = Object.assign({}, option, props.cancelOption);
@@ -86,53 +87,53 @@ const _cancelOption = computed(() => {
 });
 
 const _hiddenFooter = computed(() => {
-  if (Reflect.has(props, 'hiddenFooter') && typeof props.hiddenFooter == 'boolean') return props.hiddenFooter;
-  return Reflect.has(props, 'hiddenFooter');
+  if (Reflect.has(props, "hiddenFooter") && typeof props.hiddenFooter == "boolean") return props.hiddenFooter;
+  return Reflect.has(props, "hiddenFooter");
 });
 const _hiddenConfirm = computed(() => {
-  if (Reflect.has(props, 'hiddenConfirm') && typeof props.hiddenConfirm == 'boolean') return props.hiddenConfirm;
-  return Reflect.has(props, 'hiddenConfirm');
+  if (Reflect.has(props, "hiddenConfirm") && typeof props.hiddenConfirm == "boolean") return props.hiddenConfirm;
+  return Reflect.has(props, "hiddenConfirm");
 });
 const _hiddenCancel = computed(() => {
-  if (Reflect.has(props, 'hiddenCancel') && typeof props.hiddenCancel == 'boolean') return props.hiddenCancel;
-  return Reflect.has(props, 'hiddenCancel');
+  if (Reflect.has(props, "hiddenCancel") && typeof props.hiddenCancel == "boolean") return props.hiddenCancel;
+  return Reflect.has(props, "hiddenCancel");
 });
 
 const _showConfirm = computed(() => {
   if (_hiddenConfirm.value) return false;
   const { confirmOption } = props;
   if (!confirmOption) return true;
-  if (Reflect.has(confirmOption, 'hidden') && typeof confirmOption.hidden == 'boolean') return !confirmOption.hidden;
-  return !Reflect.has(confirmOption!, 'hidden');
+  if (Reflect.has(confirmOption, "hidden") && typeof confirmOption.hidden == "boolean") return !confirmOption.hidden;
+  return !Reflect.has(confirmOption!, "hidden");
 });
 const _showCancel = computed(() => {
   if (_hiddenCancel.value) return false;
   const { cancelOption } = props;
-  console.log('cancelOption', cancelOption);
+  logger("cancelOption", cancelOption);
   if (!cancelOption) return true;
-  if (Reflect.has(cancelOption, 'hidden') && typeof cancelOption.hidden == 'boolean') return !cancelOption.hidden;
-  return !Reflect.has(cancelOption!, 'hidden');
+  if (Reflect.has(cancelOption, "hidden") && typeof cancelOption.hidden == "boolean") return !cancelOption.hidden;
+  return !Reflect.has(cancelOption!, "hidden");
 });
 
 const handleClose = () => {
   props.cancelOption?.cancelCallback &&
     props.cancelOption?.cancelCallback().then((val: boolean) => {
-      console.log('handleClose', val);
+      logger("handleClose", val);
     });
   dialogRef.value.visible = false;
-  $emit('update:visible', false);
-  $emit('cancel', 'cancel');
+  $emit("update:visible", false);
+  $emit("cancel", "cancel");
 };
 const handleConfirm = () => {
   props.confirmOption?.confirmCallback &&
     props.confirmOption?.confirmCallback().then((val: boolean) => {
-      console.log('handleConfirm', val);
+      logger("handleConfirm", val);
       if (val) {
         dialogRef.value.visible = false;
       }
     });
-  $emit('update:visible', false);
-  $emit('confirm', 'confirm');
+  $emit("update:visible", false);
+  $emit("confirm", "confirm");
 };
 // -------------------------------- footer btn end--------------------------
 </script>

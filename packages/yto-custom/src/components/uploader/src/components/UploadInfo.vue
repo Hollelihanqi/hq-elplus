@@ -33,8 +33,9 @@
   </div>
 </template>
 <script lang="ts" setup>
-import SimpleUploader from 'simple-uploader.js';
-import { computed, defineProps, watch, inject } from 'vue';
+import SimpleUploader from "simple-uploader.js";
+import { computed, defineProps, watch, inject } from "vue";
+import { logger, error } from "@/_utils";
 
 const props = defineProps({
   file: {
@@ -55,21 +56,21 @@ const isUploading = ref(false); // 是否正在上传
 const averageSpeed = ref(0);
 const currentSpeed = ref(0);
 const progress = ref(0); //当前文件上传进度
-const progressingClass = ref('');
-const uploadedSize = ref('');
-const timeRemaining = ref(''); // 剩余时间
-const uploadFileSize = ref(''); // 上传文件总大小
-const extension = ref(''); // 文件扩展名
-const fileType = ref(''); // 文件类型
+const progressingClass = ref("");
+const uploadedSize = ref("");
+const timeRemaining = ref(""); // 剩余时间
+const uploadFileSize = ref(""); // 上传文件总大小
+const extension = ref(""); // 文件扩展名
+const fileType = ref(""); // 文件类型
 const response = ref(null);
 
 const statusText = {
-  success: '成功',
-  error: '错误',
-  uploading: '正在上传...',
-  paused: '暂停',
-  cmd5: '计算MD5...',
-  waiting: '等待中...',
+  success: "成功",
+  error: "错误",
+  uploading: "正在上传...",
+  paused: "暂停",
+  cmd5: "计算MD5...",
+  waiting: "等待中...",
 } as any;
 
 // const status = computed(() => {
@@ -90,7 +91,7 @@ const statusText = {
 //   return s;
 // });
 
-const status2 = ref('waiting');
+const status2 = ref("waiting");
 
 // watch(
 //   () => status.value,
@@ -111,13 +112,13 @@ watch(
   () => status2.value,
   (newStatus, oldStatus) => {
     let timer: any = null;
-    if (oldStatus && newStatus === 'uploading' && oldStatus !== 'uploading') {
+    if (oldStatus && newStatus === "uploading" && oldStatus !== "uploading") {
       timer = setTimeout(() => {
-        progressingClass.value = 'uploader-file-progressing';
+        progressingClass.value = "uploader-file-progressing";
       }, 300);
     } else {
       clearTimeout(timer);
-      progressingClass.value = '';
+      progressingClass.value = "";
     }
   }
 );
@@ -146,7 +147,7 @@ const pause = () => {
   props.file.pause();
   // _actionCheck();
   // _fileProgress();
-  status2.value = 'paused';
+  status2.value = "paused";
 };
 const resume = () => {
   props.file.resume();
@@ -170,7 +171,7 @@ const _fileProgress = () => {
   timeRemaining.value = props.file.timeRemaining();
   uploadedSize.value = props.file.sizeUploaded();
   if (_isUploading) {
-    status2.value = 'uploading';
+    status2.value = "uploading";
   }
 };
 
@@ -199,13 +200,13 @@ const _fileSuccess = (rootFile?: any, file?: any, message?: any) => {
 //     res = JSON.parse(message);
 //     file._response = res;
 //   } catch (e) {
-//     console.error("processResponse", e);
+//     error("processResponse", e);
 //   }
 //   response.value = res;
 // };
 // const _fileComplete = (rootFile: any) => {
-//   console.log("_fileComplete");
-//   console.log(rootFile);
+//   logger("_fileComplete");
+//   logger(rootFile);
 //   // error.value = props.file.error;
 //   if (props.file.error) {
 //     _errorStatus();
@@ -241,7 +242,7 @@ watch(
   () => props.file.error,
   (newValue) => {
     if (newValue) {
-      setStatus('error');
+      setStatus("error");
     }
   }
 );
@@ -249,9 +250,9 @@ watch(
 watch(
   () => props.cmd5,
   (newValue) => {
-    console.log('cmd5');
+    logger("cmd5");
     if (newValue) {
-      setStatus('cmd5');
+      setStatus("cmd5");
     }
   }
 );
@@ -271,7 +272,7 @@ onBeforeMount(() => {
   // props.file.setErrorStatus = _setErrorStatus;
   props.file.setStatus = setStatus;
   props.file.status = status2;
-  props.file.uploader.on('fileProgress', _fileProgress);
+  props.file.uploader.on("fileProgress", _fileProgress);
 });
 onMounted(() => {
   // averageSpeed.value = props.file.averageSpeed;
@@ -306,20 +307,20 @@ defineExpose({ setStatus });
   overflow: hidden;
   background-color: rgba(240, 240, 240);
 }
-.upload-info[status='waiting'] .uploader-file-pause,
-.upload-info[status='uploading'] .uploader-file-pause {
+.upload-info[status="waiting"] .uploader-file-pause,
+.upload-info[status="uploading"] .uploader-file-pause {
   display: block;
 }
-.upload-info[status='paused'] .uploader-file-resume {
+.upload-info[status="paused"] .uploader-file-resume {
   display: block;
 }
-.upload-info[status='error'] .uploader-file-retry {
+.upload-info[status="error"] .uploader-file-retry {
   display: block;
 }
-.upload-info[status='success'] .uploader-file-remove {
+.upload-info[status="success"] .uploader-file-remove {
   display: none;
 }
-.upload-info[status='error'] .uploader-file-progress {
+.upload-info[status="error"] .uploader-file-progress {
   background: #ffe0e0;
 }
 .error-uploader-file-progress {
@@ -374,7 +375,7 @@ defineExpose({ setStatus });
     width: 18px;
     height: 18px;
     cursor: pointer;
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAABkCAYAAAD0ZHJ6AAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAACxMAAAsTAQCanBgAAARkSURBVGje7ZnfS1NRHMAH4ptPkvQSuAdBkCxD8FUQJMEULUgzy1KyyPVQ4JMiiP4Bvg6EwUQQfMmwhwRDshwaKUjDVCgoSdDNHkzTJZ6+Z37Purve8+PeTb2TM/ggu+ew89l33x8H9BBCPG7GowXTJej3+wnDvEm0JuLC04+EYWftVAUv+fiCvDUdQR1BHUEdQR3BTIygvixoQS14XgTtthLVdpNWwXRLqvQ724LplFRtyrYF0yVpFLQrKRVMh6RZ0I6kkmCqklaCqpKZH0FX56Crq9jVfdDVk0RfFrSgFsxkQVmLcdKCVrKySCrryhPEyYShhzOcrFtG0EoilfHHk1CRU5rF6ZjNZhlVOW6RnMSVyyilKies4pO41diVy8wIujoHXV3FGdMHXTtJKLFYTLhZtq4vC1rwXApCZTIqgR6g1PBMCO9DL3bMMSqBHqDU8EyISDAHiGKvWwcCQG2KgjlAFCDAOhAAap0K5gKLphk8mqJgLrCIgoxRJ4J5wKpJ7gAoMkn5EBXBPGDVJHcAFJmkfIhQcAql1oBpTvTol9gG9pm4RHAKpdaAaU706JfYBvaZuJVgPQrt4sFlnOh5MC/p3lmJYD0K7eLBZZzoeTAv6d5ZnuAYHjpgEOnk5F0ufhG6v1ggOIaHDhhEOjl5l4tfhO4vthLcwAMrFNvLJO5vEwhu4IEViu1lEve3WQmyoihQFBzG/V0CQVYUBYqCw7i/SxTBcpsRbFeIYLnNCLZbCY5b5KAnxRwct8hBj9McZFVMW0ihRNBuFdMWUigRlFaxuQ9WWYjRMTiIe5z0wSoLMToGB3GPsA9aTZIJoB+nRgBnM1tzOkkmgH6cGgGczWzNpzqLx3n/aULJJgezeNw07oxQySbVywKjBOgFRnDs+VEsx8FlgVEC9AIjOPb8KJYjvSzoG7UW1IJaUAtqQS14toLNM5fN5APdwBJA8G83Pk/aK/rgzVvXzeQD3cASQPBvNz5P2ssTzAaGUIrHEO6zI5gNDKEUjyHcxxWkh4Ylcowwk1QQpIeGJXKMMJO0EgwqyjGCioJBJvDrxRMSuVOTJEXfbz1/bHwWtBL0yoQehK6RucgE+bGzanzulQh6E3IgQV+xpc8kcrfuSO7eTfJ3ZYmQw0Oy9azVKOk1C/bJ5D5F38YPeLfx0rjWJxHsS0SqsSYuxySjj5qO5Oj7xQWy2VBtFOwzCy6ryH3YfE3uh64Y1xckgstJPydEjkkeHv07Iy4Xaao15+KCWTBx6M/db+T9xivSErqaJDdzXI6yLRE8Vgg0coex/SPJvT0SbWu0KpZtbgSpCH3NRt7I5OxHkObc6heU+/M/J5vrpBFM5GBLqCQux14COXs5CNXK5OjPGm1tSMrJSOMNYQ4mVTGV/L6zTL7+DovkbFUxbSW0Wo05l8hJWsU+cRWfSh+Mt5Lb1ck/J1TvVsdDaR/MiEni+llsdZuZp62EViu+96bpNjNPWwmtVnzvFd5m9IVVC54x/wA7gNvqFG9vXQAAAABJRU5ErkJggg==')
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAABkCAYAAAD0ZHJ6AAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAACxMAAAsTAQCanBgAAARkSURBVGje7ZnfS1NRHMAH4ptPkvQSuAdBkCxD8FUQJMEULUgzy1KyyPVQ4JMiiP4Bvg6EwUQQfMmwhwRDshwaKUjDVCgoSdDNHkzTJZ6+Z37Purve8+PeTb2TM/ggu+ew89l33x8H9BBCPG7GowXTJej3+wnDvEm0JuLC04+EYWftVAUv+fiCvDUdQR1BHUEdQR3BTIygvixoQS14XgTtthLVdpNWwXRLqvQ724LplFRtyrYF0yVpFLQrKRVMh6RZ0I6kkmCqklaCqpKZH0FX56Crq9jVfdDVk0RfFrSgFsxkQVmLcdKCVrKySCrryhPEyYShhzOcrFtG0EoilfHHk1CRU5rF6ZjNZhlVOW6RnMSVyyilKies4pO41diVy8wIujoHXV3FGdMHXTtJKLFYTLhZtq4vC1rwXApCZTIqgR6g1PBMCO9DL3bMMSqBHqDU8EyISDAHiGKvWwcCQG2KgjlAFCDAOhAAap0K5gKLphk8mqJgLrCIgoxRJ4J5wKpJ7gAoMkn5EBXBPGDVJHcAFJmkfIhQcAql1oBpTvTol9gG9pm4RHAKpdaAaU706JfYBvaZuJVgPQrt4sFlnOh5MC/p3lmJYD0K7eLBZZzoeTAv6d5ZnuAYHjpgEOnk5F0ufhG6v1ggOIaHDhhEOjl5l4tfhO4vthLcwAMrFNvLJO5vEwhu4IEViu1lEve3WQmyoihQFBzG/V0CQVYUBYqCw7i/SxTBcpsRbFeIYLnNCLZbCY5b5KAnxRwct8hBj9McZFVMW0ihRNBuFdMWUigRlFaxuQ9WWYjRMTiIe5z0wSoLMToGB3GPsA9aTZIJoB+nRgBnM1tzOkkmgH6cGgGczWzNpzqLx3n/aULJJgezeNw07oxQySbVywKjBOgFRnDs+VEsx8FlgVEC9AIjOPb8KJYjvSzoG7UW1IJaUAtqQS14toLNM5fN5APdwBJA8G83Pk/aK/rgzVvXzeQD3cASQPBvNz5P2ssTzAaGUIrHEO6zI5gNDKEUjyHcxxWkh4Ylcowwk1QQpIeGJXKMMJO0EgwqyjGCioJBJvDrxRMSuVOTJEXfbz1/bHwWtBL0yoQehK6RucgE+bGzanzulQh6E3IgQV+xpc8kcrfuSO7eTfJ3ZYmQw0Oy9azVKOk1C/bJ5D5F38YPeLfx0rjWJxHsS0SqsSYuxySjj5qO5Oj7xQWy2VBtFOwzCy6ryH3YfE3uh64Y1xckgstJPydEjkkeHv07Iy4Xaao15+KCWTBx6M/db+T9xivSErqaJDdzXI6yLRE8Vgg0coex/SPJvT0SbWu0KpZtbgSpCH3NRt7I5OxHkObc6heU+/M/J5vrpBFM5GBLqCQux14COXs5CNXK5OjPGm1tSMrJSOMNYQ4mVTGV/L6zTL7+DovkbFUxbSW0Wo05l8hJWsU+cRWfSh+Mt5Lb1ck/J1TvVsdDaR/MiEni+llsdZuZp62EViu+96bpNjNPWwmtVnzvFd5m9IVVC54x/wA7gNvqFG9vXQAAAABJRU5ErkJggg==")
       no-repeat 0 0;
   }
 }

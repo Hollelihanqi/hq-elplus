@@ -75,12 +75,14 @@
 </template>
 
 <script lang="tsx" setup name="Table">
-import { ref, onMounted, defineEmits } from 'vue';
-import { Props } from './props';
-import TableColumn from './components/TableColumn.vue';
-import SettingV from './components/Setting.vue';
-import { Setting } from '@element-plus/icons-vue';
-import useController from './use-controller';
+import { ref, onMounted, defineEmits } from "vue";
+import { Props } from "./props";
+import TableColumn from "./components/TableColumn.vue";
+import SettingV from "./components/Setting.vue";
+import { Setting } from "@element-plus/icons-vue";
+import useController from "./use-controller";
+import { error } from "@/_utils";
+
 export interface ColumnsItemProps {
   [propsName: string]: any;
 }
@@ -89,7 +91,7 @@ const props = defineProps(Props);
 const { _columns, setColumns, SettingInstance, handleSetting, HandleSetSave } = useController(props);
 
 const ElTableInstance = ref();
-const emits = defineEmits(['on-table']);
+const emits = defineEmits(["on-table"]);
 // const { total, pageSizes } = toRefs(props) as any;
 const _loading = ref(false);
 const _tableData = ref<any>([]);
@@ -106,7 +108,7 @@ const _sortFormat = (item?: any) => {
   if (item && item.order) {
     return {
       sortField: item.prop,
-      sortBy: item.order === 'descending' ? 'desc' : 'asc',
+      sortBy: item.order === "descending" ? "desc" : "asc",
     };
   }
   return {};
@@ -125,13 +127,13 @@ const _lastPage = computed(() => {
 });
 
 const _defaultSort = computed(() => {
-  return props.defaultSort && typeof props.defaultSort === 'function'
+  return props.defaultSort && typeof props.defaultSort === "function"
     ? props.defaultSort()
     : props.defaultSort
     ? props.defaultSort
     : {
-        prop: '',
-        order: '',
+        prop: "",
+        order: "",
       };
 });
 
@@ -154,10 +156,10 @@ const _sortFieldFormat = (sort?: any) => {
 };
 
 const getTableData = async (params = {}) => {
-  if (!props.requestApi || typeof props.requestApi !== 'function') return;
+  if (!props.requestApi || typeof props.requestApi !== "function") return;
   _loading.value = props.requestLoadingHide ? false : true;
   let _requestParams = props.requestParams;
-  if (typeof props.requestParams === 'function') {
+  if (typeof props.requestParams === "function") {
     _requestParams = props.requestParams();
   }
   const _params: any = {
@@ -173,7 +175,7 @@ const getTableData = async (params = {}) => {
   try {
     let result = (await props.requestApi(_params)) || [];
     _loading.value = false;
-    if (props.dataCallback && typeof props.dataCallback === 'function') {
+    if (props.dataCallback && typeof props.dataCallback === "function") {
       result = props.dataCallback(result);
     }
     if (Array.isArray(result)) {
@@ -187,30 +189,30 @@ const getTableData = async (params = {}) => {
     props.dataUpdateAfter(_params, result);
   } catch (error) {
     _loading.value = false;
-    console.error('表格请求数据发生错误...');
-    console.error(error);
+    error("表格请求数据发生错误...");
+    error(error);
     return Promise.reject(error);
   }
 };
 
-const handlePaginationChange = (type: 'size' | 'page' | 'sort', num: number): void => {
-  if (type === 'size') {
+const handlePaginationChange = (type: "size" | "page" | "sort", num: number): void => {
+  if (type === "size") {
     paginationParams.currentPage = 1; // 只有在改变大小时才重置当前页码
     paginationParams.pageSize = num;
   }
 
   emits(
-    'on-table',
+    "on-table",
     type,
     {
       currentPage: paginationParams.currentPage,
-      pageSize: type === 'size' ? num : paginationParams.pageSize,
+      pageSize: type === "size" ? num : paginationParams.pageSize,
     },
     _sortItem
   );
 
   // 如果不需要通过API请求数据，则直接调用tableChange
-  if (props.tableChange && typeof props.tableChange === 'function') {
+  if (props.tableChange && typeof props.tableChange === "function") {
     props.tableChange(type, num);
   }
 
@@ -225,22 +227,22 @@ const handlePaginationChange = (type: 'size' | 'page' | 'sort', num: number): vo
 
 // 用于分页大小变化
 const handleSizeChange = (num: number): void => {
-  handlePaginationChange('size', num);
+  handlePaginationChange("size", num);
 };
 
 // 用于分页页码变化
 const handlePageChange = (num: number) => {
-  handlePaginationChange('page', num);
+  handlePaginationChange("page", num);
 };
 
 // 用于表格排序
 const handleSortChange = (item: { prop: string; order: string; column: any }) => {
   _sortItem = item && item.order ? item : null;
   paginationParams.currentPage = 1;
-  emits('on-table', 'sort', item);
+  emits("on-table", "sort", item);
   // 为了兼容以前旧的 api
-  if (props.tableChange && typeof props.tableChange === 'function') {
-    props.tableChange('sort', item);
+  if (props.tableChange && typeof props.tableChange === "function") {
+    props.tableChange("sort", item);
   }
   // 如果设置为调用API，则获取表格数据
   if (props.tableActionIsCallApi && !props.tableChange) {
@@ -305,5 +307,5 @@ defineExpose({
 });
 </script>
 <style lang="scss">
-@import './index.scss';
+@import "./index.scss";
 </style>
