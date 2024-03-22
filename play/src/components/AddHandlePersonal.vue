@@ -16,18 +16,18 @@
   </BaseDialog>
 </template>
 <script lang="ts" setup>
-import BaseDialog from './BaseDialog.vue';
-import { FormInstance } from 'element-plus';
-import CustomProvinceAreaSelect from './CustomProvinceAreaSelect.vue';
-const emits = defineEmits(['on-confirm']);
+import BaseDialog from "./BaseDialog.vue";
+import { FormInstance } from "element-plus";
+import CustomProvinceAreaSelect from "./CustomProvinceAreaSelect.vue";
+const emits = defineEmits(["on-confirm"]);
 const dialogVisible = ref(false);
 const FormInstanceRef = ref<FormInstance>();
 const defaultValue = { regions: [] };
 
 let formModel = reactive<any>({ ...defaultValue });
 const rules = {
-  regions: [{ required: true, message: '请输入', trigger: ['blur', 'change'] }],
-  user: [{ required: true, message: '请输入', trigger: ['blur', 'change'] }],
+  regions: [{ required: true, message: "请输入", trigger: ["blur", "change"] }],
+  user: [{ required: true, message: "请输入", trigger: ["blur", "change"] }],
 };
 
 const actionDialog = (): void => {
@@ -48,8 +48,8 @@ const handleSubmit = (): void => {
         regionNames,
       };
       console.log(params);
-      emits('on-confirm', params, () => {
-        window._message.success(params.id ? '编辑成功' : '新增成功');
+      emits("on-confirm", params, () => {
+        window._message.success(params.id ? "编辑成功" : "新增成功");
         dialogVisible.value = false;
       });
     }

@@ -30,25 +30,25 @@
   </div>
 </template>
 <script setup lang="ts" name="CustomFieldContainer">
-import { Plus, Delete } from '@element-plus/icons-vue';
+import { Plus, Delete } from "@element-plus/icons-vue";
 interface IAnyObject {
   [key: string]: any;
 }
 interface IProps {
-  direction?: 'vertical' | 'horizontal';
+  direction?: "vertical" | "horizontal";
   modelValue: IAnyObject[];
   width?: string;
 }
 withDefaults(defineProps<IProps>(), {
-  direction: 'horizontal',
-  width: '100%',
+  direction: "horizontal",
+  width: "100%",
 });
-const emits = defineEmits(['add', 'delete']);
-const onClick = (flag: 'add' | 'delete', index: number) => {
-  if (flag === 'add') {
-    emits('add', index);
+const emits = defineEmits(["add", "delete"]);
+const onClick = (flag: "add" | "delete", index: number) => {
+  if (flag === "add") {
+    emits("add", index);
   } else {
-    emits('delete', index);
+    emits("delete", index);
   }
 };
 </script>

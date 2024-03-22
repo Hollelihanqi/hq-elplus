@@ -6,9 +6,9 @@
       :item-min-width="350"
       :model="form"
       label-width="100px"
-      :isCollapse="true"
-      :defaultCollapse="true"
-      :collapseLine="3"
+      :is-collapse="true"
+      :default-collapse="true"
+      :collapse-line="3"
       @resize="handleResize"
     >
       <!-- <yto-c-form-items

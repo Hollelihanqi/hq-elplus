@@ -18,22 +18,22 @@
 </template>
 
 <script lang="ts" setup>
-import { addWaterMarker, removeWatermark } from '@yto/utils';
+import { addWaterMarker, removeWatermark } from "@yto/utils";
 const list = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
 const formList = [
   {
-    label: '活动名称',
-    value: '1',
+    label: "活动名称",
+    value: "1",
   },
   {
-    label: '活动名称',
-    value: '2',
+    label: "活动名称",
+    value: "2",
   },
 ];
 onMounted(() => {
-  addWaterMarker({ text: '魏春霈 2024-1-25' });
+  addWaterMarker({ text: "魏春霈 2024-1-25" });
   setTimeout(() => {
-    addWaterMarker({ text: '魏春霈 2024-1-26 ' });
+    addWaterMarker({ text: "魏春霈 2024-1-26 " });
   }, 2000);
   setTimeout(() => {
     // removeWatermark();

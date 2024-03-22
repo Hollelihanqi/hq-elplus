@@ -10,13 +10,13 @@
   <!-- <span class="truncate ">{{ getLable(data) }}</span> -->
 </template>
 <script lang="ts" setup>
-import { inject } from 'vue';
+import { inject } from "vue";
 
-import { ElIcon } from 'element-plus';
-import 'element-plus/es/components/icon/style/css';
+import { ElIcon } from "element-plus";
+import "element-plus/es/components/icon/style/css";
 
-import { isBlank, isEmpty } from 'gold-core';
-import { EnumSessionKey } from '@/common/EnumConstant';
+import { isBlank, isEmpty } from "gold-core";
+import { EnumSessionKey } from "@/common/EnumConstant";
 defineProps({ data: Object, showIcon: { type: Boolean, default: true }, collapse: { type: Boolean, default: false } });
 const keyLabel = inject<any>(EnumSessionKey.MenuKeyLabel);
 const keyIcon = inject<any>(EnumSessionKey.MenuKeyIcon);
@@ -24,10 +24,10 @@ const keyIcon = inject<any>(EnumSessionKey.MenuKeyIcon);
 
 function getLable(target: any) {
   if (isEmpty(target)) {
-    return '';
+    return "";
   }
   const key: string = keyLabel as string;
-  return Reflect.get(target, isBlank(key) ? 'label' : key);
+  return Reflect.get(target, isBlank(key) ? "label" : key);
 }
 
 function labelFirst(target: any) {
@@ -36,9 +36,9 @@ function labelFirst(target: any) {
 
 function getIcon(target: any) {
   if (isEmpty(target)) {
-    return '';
+    return "";
   }
   const key: string = keyIcon as string;
-  return Reflect.get(target, isBlank(key) ? 'icon' : key);
+  return Reflect.get(target, isBlank(key) ? "icon" : key);
 }
 </script>

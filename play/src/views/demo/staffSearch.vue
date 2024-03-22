@@ -20,14 +20,14 @@
   <AddHandlePersonal ref="AddHandlePersonalInstance" />
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
-import CustomLeakagewaySelect from './CustomLeakagewaySelect.vue';
-import CustomRuleCategoryName from '../components/CustomRuleCategoryName.vue';
-import CustomCountrySelect from './CustomCountrySelect.vue';
-import TestSearch from './TestSearch.vue';
-import { request } from '@/utils';
-import CustomProvinceAreaSelect from './CustomProvinceAreaSelect.vue';
-import AddHandlePersonal from '@/components/AddHandlePersonal.vue';
+import { ref } from "vue";
+import CustomLeakagewaySelect from "./CustomLeakagewaySelect.vue";
+import CustomRuleCategoryName from "../components/CustomRuleCategoryName.vue";
+import CustomCountrySelect from "./CustomCountrySelect.vue";
+import TestSearch from "./TestSearch.vue";
+import { request } from "@/utils";
+import CustomProvinceAreaSelect from "./CustomProvinceAreaSelect.vue";
+import AddHandlePersonal from "@/components/AddHandlePersonal.vue";
 const FormInstanceRef = ref();
 const formModel = ref<any>({ country: {} });
 const regions = ref([]);
@@ -35,14 +35,14 @@ const validatePass = (rule: any, value: any, callback: any) => {
   if (value && value.length) {
     callback();
   } else {
-    callback(new Error('请输入'));
+    callback(new Error("请输入"));
   }
 };
 
 const AddHandlePersonalInstance = ref();
 
 const rules = {
-  columns: [{ required: true, validator: validatePass, trigger: ['change', 'blur'] }],
+  columns: [{ required: true, validator: validatePass, trigger: ["change", "blur"] }],
 };
 
 const handleChange = (value: any) => {
@@ -68,11 +68,11 @@ const handleSubmit = (): void => {
   });
 };
 
-const user = ref('');
-const user2 = ref('');
+const user = ref("");
+const user2 = ref("");
 const testInstance = ref();
 const _headers = () => {
-  let token = sessionStorage.getItem('authorization') as string;
+  let token = sessionStorage.getItem("authorization") as string;
   if (token) {
     if (token.indexOf('"') !== -1) {
       const regex = /^"(.*)"$/;
@@ -85,14 +85,14 @@ const _headers = () => {
   };
 };
 const getList = (keywords: string) => {
-  console.log('开始调用 getList');
+  console.log("开始调用 getList");
   console.log(keywords);
   return new Promise((resolve, reject) => {
     request
       .request({
-        baseURL: '',
-        url: '/category/user/searchUser',
-        method: 'get',
+        baseURL: "",
+        url: "/category/user/searchUser",
+        method: "get",
         params: {
           keyword: keywords,
         },

@@ -27,6 +27,6 @@
   </el-form>
 </template>
 <script lang="ts" setup>
-import { ArrowDown, ArrowUp } from '@element-plus/icons-vue';
+import { ArrowDown, ArrowUp } from "@element-plus/icons-vue";
 const collapsed = ref(false);
 </script>

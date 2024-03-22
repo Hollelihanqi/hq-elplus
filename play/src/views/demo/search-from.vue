@@ -9,70 +9,70 @@
 </template>
 <script lang="tsx" setup>
 // import { SearchFormControlProps } from "@/components/SearchForm/index";
-import CustomStaffSelect from '@/cusComponents/CustomStaffSelect.vue';
-import { getToken } from '@/utils';
+import CustomStaffSelect from "@/cusComponents/CustomStaffSelect.vue";
+import { getToken } from "@/utils";
 const filterData = ref<any>({});
-import type { SearchFormControlProps } from '@yto/custom';
+import type { SearchFormControlProps } from "@yto/custom";
 
 const handleSearch = () => {
   console.log(filterData.value);
 };
 const list: SearchFormControlProps[] = [
   {
-    el: 'input',
-    label: '搜索组件',
-    field: 'input0',
-    defaultValue: '我是默认值，重置后我还会回来的',
+    el: "input",
+    label: "搜索组件",
+    field: "input0",
+    defaultValue: "我是默认值，重置后我还会回来的",
   },
   {
-    el: 'select',
-    label: '搜索组件',
-    field: 'input1',
+    el: "select",
+    label: "搜索组件",
+    field: "input1",
     options: [
       {
-        label: 'name',
+        label: "name",
         value: 0,
       },
       {
-        label: 'age',
+        label: "age",
         value: 1,
       },
     ],
   },
   {
-    el: 'switch',
-    label: '搜索组件',
-    field: 'input2',
+    el: "switch",
+    label: "搜索组件",
+    field: "input2",
   },
   {
-    el: 'checkbox',
-    label: '搜索组件',
-    field: 'input3',
+    el: "checkbox",
+    label: "搜索组件",
+    field: "input3",
   },
   {
-    el: 'date-picker',
-    label: '搜索组件',
-    field: 'input4',
+    el: "date-picker",
+    label: "搜索组件",
+    field: "input4",
   },
   {
-    el: 'input',
-    label: '搜索组件',
-    field: 'input5',
+    el: "input",
+    label: "搜索组件",
+    field: "input5",
   },
   {
-    label: '远程搜索',
-    field: 'input6',
+    label: "远程搜索",
+    field: "input6",
     render: (_value: any) => <CustomStaffSelect v-model={_value.value} />,
   },
   {
-    el: 'select',
-    label: '远程搜索2',
+    el: "select",
+    label: "远程搜索2",
     isRemote: true,
-    field: 'input7',
+    field: "input7",
     remoteProps: {
-      url: '/api/v2/allopttag',
-      valueKey: 'id',
-      labelKey: 'name',
+      url: "/api/v2/allopttag",
+      valueKey: "id",
+      labelKey: "name",
       isRemoteSearch: false,
       requestParams: {
         page: 1,

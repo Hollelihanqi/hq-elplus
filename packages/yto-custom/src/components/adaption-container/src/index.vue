@@ -9,8 +9,8 @@
 </template>
 
 <script lang="ts" setup name="AdaptionContainer">
-import { ref } from 'vue';
-import { resizeElement as vResizeElement } from '@/directives';
+import { ref } from "vue";
+import { resizeElement as vResizeElement } from "@/directives";
 
 interface Props {
   list: Array<any>;
@@ -26,7 +26,7 @@ const props = withDefaults(defineProps<Props>(), {
   minNum: 1,
   containerMinWidth: 0,
 });
-const cardStyle = ref('');
+const cardStyle = ref("");
 const handleResize = (info: any) => {
   let num = Math.floor(info.width / props.minWidth);
   const cardWidth = (info.width - num * props.gap) / num;
@@ -37,10 +37,10 @@ const handleResize = (info: any) => {
 };
 const getStyle = () => {
   return {
-    gap: props.gap + 'px',
-    'min-width': props.containerMinWidth
-      ? props.containerMinWidth + 'px'
-      : props.minNum * props.minWidth + props.gap * props.minNum + 'px',
+    gap: props.gap + "px",
+    "min-width": props.containerMinWidth
+      ? props.containerMinWidth + "px"
+      : props.minNum * props.minWidth + props.gap * props.minNum + "px",
   };
 };
 </script>

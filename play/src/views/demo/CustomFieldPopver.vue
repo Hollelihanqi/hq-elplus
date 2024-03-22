@@ -42,7 +42,7 @@
   </el-popover>
 </template>
 <script setup lang="ts">
-import { ArrowDown, ArrowUp } from '@element-plus/icons-vue';
+import { ArrowDown, ArrowUp } from "@element-plus/icons-vue";
 interface IOptions {
   label: string;
   value: any;
@@ -60,15 +60,15 @@ interface IProps {
 }
 const props = withDefaults(defineProps<IProps>(), {
   options: () => [],
-  optionsTitle: '其他条件',
-  cacheTitle: '常用条件',
+  optionsTitle: "其他条件",
+  cacheTitle: "常用条件",
 });
 const cacheList = computed(() => {
   const list = props?.cachefun ? props?.cachefun() : [];
   return list;
 });
 const isShow = ref(false);
-const inputValue = ref('');
+const inputValue = ref("");
 const myPopoverRef = ref();
 const onPopoverShow = () => {
   isShow.value = !isShow.value;
@@ -79,10 +79,10 @@ const onHiddenClick = (e: any) => {
   }
 };
 onMounted(() => {
-  document.addEventListener('click', onHiddenClick);
+  document.addEventListener("click", onHiddenClick);
 });
 onBeforeUnmount(() => {
-  document.removeEventListener('click', onHiddenClick);
+  document.removeEventListener("click", onHiddenClick);
 });
 </script>
 <style lang="scss">

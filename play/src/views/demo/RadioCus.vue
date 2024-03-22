@@ -12,7 +12,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
-const check = ref('');
+import { ref } from "vue";
+const check = ref("");
 const onChange = () => {};
 </script>

@@ -5,8 +5,8 @@
  * @LastEditTime: 2023-12-13 10:20:44
 -->
 <script lang="tsx">
-import { defineComponent, PropType, resolveComponent, h } from 'vue';
-import { ElInput, ElSelectV2 } from 'element-plus';
+import { defineComponent, PropType, resolveComponent, h } from "vue";
+import { ElInput, ElSelectV2 } from "element-plus";
 interface IAnyObject {
   [key: string]: any;
 }
@@ -17,7 +17,7 @@ export interface IFieldConfig extends IAnyObject {
   disabled?: boolean;
 }
 export default defineComponent({
-  name: 'CustomFieldConfig',
+  name: "CustomFieldConfig",
   components: {
     ElInput,
     ElSelectV2,
@@ -56,9 +56,9 @@ export default defineComponent({
       required: false,
     },
   },
-  emits: ['cbChange', 'update:modelValue'],
+  emits: ["cbChange", "update:modelValue"],
   setup(props, { slots, emit }) {
-    const nameConfig: IAnyObject = { fieldConfig: 'field', operatorConfig: 'operator', valueConfig: 'value' };
+    const nameConfig: IAnyObject = { fieldConfig: "field", operatorConfig: "operator", valueConfig: "value" };
     const itemRender = (key: string) => {
       // @ts-ignore:
       const _itemConfig = props[key];
@@ -66,21 +66,21 @@ export default defineComponent({
       if (slotsFun) {
         return slotsFun();
       } else if (_itemConfig.elType) {
-        return h(resolveComponent('el-' + _itemConfig.elType), {
+        return h(resolveComponent("el-" + _itemConfig.elType), {
           modelValue: props.modelValue[_itemConfig.props],
-          'onUpdate:modelValue': (val: any) => {
+          "onUpdate:modelValue": (val: any) => {
             props.modelValue[_itemConfig.props] = val;
-            emit('cbChange', _itemConfig.props, val);
+            emit("cbChange", _itemConfig.props, val);
           },
-          class: `${key === 'operatorConfig' ? '' : 'flex-1'} ${nameConfig[key]}-view`,
-          style: `width:${key === 'operatorConfig' ? props.optionWidth || '100px' : 'auto'}`,
+          class: `${key === "operatorConfig" ? "" : "flex-1"} ${nameConfig[key]}-view`,
+          style: `width:${key === "operatorConfig" ? props.optionWidth || "100px" : "auto"}`,
           disabled: props.disabled || _itemConfig.disabled || false,
           ..._itemConfig,
         });
       }
     };
     const rowRender = () => {
-      const _domConfigs = ['fieldConfig', 'operatorConfig', 'valueConfig'];
+      const _domConfigs = ["fieldConfig", "operatorConfig", "valueConfig"];
       return (
         <div class="custom-field-config-row flex border items-center">{_domConfigs.map((e) => itemRender(e))}</div>
       );

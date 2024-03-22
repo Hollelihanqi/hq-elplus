@@ -7,19 +7,19 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <script lang="tsx">
-import { defineComponent, h } from 'vue';
-import SearchSelect from '@/components/remote-search';
+import { defineComponent, h } from "vue";
+import SearchSelect from "@/components/remote-search";
 export default defineComponent({
-  name: 'UserSearch',
+  name: "UserSearch",
   setup(props, context) {
     return () => {
       return h(SearchSelect, {
-        url: '/service-api/index/user/search',
+        url: "/service-api/index/user/search",
         remote: true,
-        searchField: 'keyword',
-        valueKey: 'userCode',
-        labelKey: 'selText',
-        placeholder: '请输入用户编号/姓名',
+        searchField: "keyword",
+        valueKey: "userCode",
+        labelKey: "selText",
+        placeholder: "请输入用户编号/姓名",
         requestParams: {
           pageNum: 1,
           pageSize: 50,
@@ -32,19 +32,19 @@ export default defineComponent({
         },
         optTemp: (item: any) => {
           return h(
-            'div',
+            "div",
             {
-              class: 'option-c',
+              class: "option-c",
               style: {
-                display: 'flex',
-                alignItems: 'center',
+                display: "flex",
+                alignItems: "center",
               },
             },
             [
-              h('span', {}, `${item.userName} -`),
-              h('span', {}, `${item.userCode} -`),
-              h('span', {}, `${item.deptName} -`),
-              h('span', {}, item.jobName),
+              h("span", {}, `${item.userName} -`),
+              h("span", {}, `${item.userCode} -`),
+              h("span", {}, `${item.deptName} -`),
+              h("span", {}, item.jobName),
             ]
           );
         },

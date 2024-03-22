@@ -5,7 +5,7 @@
       ref="lineChartRef"
       echart-id="lineChart"
       type="line"
-      :loadingOptions="{ text: '哈哈哈...' }"
+      :loading-options="{ text: '哈哈哈...' }"
       :options="lineChartOptions"
     ></yto-c-echart>
     <p class="p-[10px] text-[#5B8FF9]">柱状图测试</p>

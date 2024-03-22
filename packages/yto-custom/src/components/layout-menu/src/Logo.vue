@@ -8,11 +8,11 @@
 defineProps({
   title: {
     type: String,
-    default: '',
+    default: "",
   },
   logo: {
     type: String,
-    default: '',
+    default: "",
   },
   collapse: {
     type: Boolean,

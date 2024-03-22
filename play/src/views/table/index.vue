@@ -19,34 +19,34 @@
   </div>
 </template>
 <script lang="tsx" setup>
-import { getList } from './api';
+import { getList } from "./api";
 
 const YtoCTableInstance = ref();
 // 表格配置项
 const columns = [
   {
-    label: 'Index',
-    prop: 'idx',
+    label: "Index",
+    prop: "idx",
     _children: [
       {
-        label: '李瀚祺',
+        label: "李瀚祺",
       },
       {
-        label: 'Hello',
+        label: "Hello",
       },
     ],
   },
   {
-    label: 'ID',
-    prop: 'id',
+    label: "ID",
+    prop: "id",
   },
   {
-    label: '标签',
-    prop: 'name',
+    label: "标签",
+    prop: "name",
   },
   {
-    label: '描述',
-    prop: 'desc',
+    label: "描述",
+    prop: "desc",
   },
 ];
 

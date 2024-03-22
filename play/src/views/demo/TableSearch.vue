@@ -10,7 +10,7 @@
   </div>
 </template>
 <script lang="tsx" setup>
-import { SearchFormControlProps } from '@yto/custom';
+import { SearchFormControlProps } from "@yto/custom";
 const filterData = ref<any>({});
 
 const handleSearch = () => {
@@ -19,60 +19,60 @@ const handleSearch = () => {
 
 const list: SearchFormControlProps[] = [
   {
-    el: 'input',
-    label: '搜索组件',
-    field: 'input0',
-    defaultValue: '我是默认值，重置后我还会回来的',
+    el: "input",
+    label: "搜索组件",
+    field: "input0",
+    defaultValue: "我是默认值，重置后我还会回来的",
   },
   {
-    el: 'select',
-    label: '搜索组件',
-    field: 'input1',
+    el: "select",
+    label: "搜索组件",
+    field: "input1",
     options: [
       {
-        label: 'name',
+        label: "name",
         value: 0,
       },
       {
-        label: 'age',
+        label: "age",
         value: 1,
       },
     ],
   },
   {
-    el: 'switch',
-    label: '搜索组件',
-    field: 'input2',
+    el: "switch",
+    label: "搜索组件",
+    field: "input2",
   },
   {
-    el: 'checkbox',
-    label: '搜索组件',
-    field: 'input3',
+    el: "checkbox",
+    label: "搜索组件",
+    field: "input3",
   },
   {
-    el: 'date-picker',
-    label: '搜索组件',
-    field: 'input4',
+    el: "date-picker",
+    label: "搜索组件",
+    field: "input4",
   },
   {
-    el: 'input',
-    label: '搜索组件',
-    field: 'input5',
+    el: "input",
+    label: "搜索组件",
+    field: "input5",
   },
   {
-    el: 'input',
-    label: '搜索组件',
-    field: 'input6',
+    el: "input",
+    label: "搜索组件",
+    field: "input6",
   },
   {
-    el: 'input',
-    label: '搜索组件',
-    field: 'input7',
+    el: "input",
+    label: "搜索组件",
+    field: "input7",
   },
   {
-    el: 'input',
-    label: '搜索组件10',
-    field: 'input10',
+    el: "input",
+    label: "搜索组件10",
+    field: "input10",
   },
 ];
 </script>

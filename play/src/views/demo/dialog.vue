@@ -19,76 +19,76 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from 'vue';
+import { defineComponent, ref, reactive } from "vue";
 // import { YtoDialog } from "@yto/custom";
 
 export default defineComponent({
   setup() {
     const confirm = reactive({
       // loading: true,
-      type: 'warning',
+      type: "warning",
       // size: 'large'
     });
     const style = {
-      width: '100%',
+      width: "100%",
     };
     const commitForm = ref({});
     const formConfig = [
       {
-        itemType: 'select',
-        prop: 'systemCode',
-        label: '所属系统',
+        itemType: "select",
+        prop: "systemCode",
+        label: "所属系统",
         options: [],
         style,
-        contentClass: 'w-100',
+        contentClass: "w-100",
       },
       {
-        itemType: 'select',
-        prop: 'applicationCode',
-        label: '所属应用',
+        itemType: "select",
+        prop: "applicationCode",
+        label: "所属应用",
         options: [],
         style,
-        contentClass: 'w-100',
+        contentClass: "w-100",
       },
       {
-        itemType: 'select',
-        prop: 'menuCode',
-        label: '所属页面',
+        itemType: "select",
+        prop: "menuCode",
+        label: "所属页面",
         options: [],
         style,
-        contentClass: 'w-100',
+        contentClass: "w-100",
       },
       {
-        itemType: 'select',
-        prop: 'targetType',
-        label: '菜单分类',
-        placeholder: '请选择',
+        itemType: "select",
+        prop: "targetType",
+        label: "菜单分类",
+        placeholder: "请选择",
         style,
         options: [],
-        contentClass: 'w-100',
+        contentClass: "w-100",
       },
       {
-        itemType: 'select',
-        prop: 'ruleCategory',
-        label: '规则类型',
-        placeholder: '请选择',
+        itemType: "select",
+        prop: "ruleCategory",
+        label: "规则类型",
+        placeholder: "请选择",
         options: [],
         style,
-        contentClass: 'w-100',
+        contentClass: "w-100",
       },
       {
-        itemType: 'input',
-        prop: 'ruleValue',
-        label: '规则值',
-        placeholder: '请输入',
-        contentClass: 'w-100',
+        itemType: "input",
+        prop: "ruleValue",
+        label: "规则值",
+        placeholder: "请输入",
+        contentClass: "w-100",
       },
       {
-        itemType: 'input',
-        prop: 'callback',
-        label: '回调函数',
+        itemType: "input",
+        prop: "callback",
+        label: "回调函数",
         span: 24,
-        contentClass: 'w-100',
+        contentClass: "w-100",
       },
     ];
     const dialogVisible = ref(false);

@@ -40,13 +40,13 @@
   </div>
 </template>
 <script lang="ts" setup name="LayoutHeader">
-import { ref } from 'vue';
-import { ElIcon } from 'element-plus';
-import { SwitchButton } from '@element-plus/icons-vue';
-import { session } from 'gold-core';
-import { EnumSessionKey } from '@/common/EnumConstant';
-import useFullScreen from '@/composable/fullScreen';
-import '@/icon-font/iconfont.css';
+import { ref } from "vue";
+import { ElIcon } from "element-plus";
+import { SwitchButton } from "@element-plus/icons-vue";
+import { session } from "gold-core";
+import { EnumSessionKey } from "@/common/EnumConstant";
+import useFullScreen from "@/composable/fullScreen";
+import "@/icon-font/iconfont.css";
 
 const props = defineProps({
   title: String,
@@ -61,27 +61,27 @@ const props = defineProps({
     default: () => {},
   },
 });
-const $emit = defineEmits(['logout', 'collapse', 'fullscreen']);
+const $emit = defineEmits(["logout", "collapse", "fullscreen"]);
 const user = ref<any>(props.userInfo ? props.userInfo : session.get(EnumSessionKey.Session_User));
 function onLogout(): void {
-  $emit('logout');
+  $emit("logout");
   session.clear();
 }
 //处理折叠事件
 function onCollapse(): void {
   setTimeout(() => {
-    const el: any = document.querySelector(' .layout-header .left-header .title');
-    el && (el.style.display = props.collapse ? 'none' : 'block');
+    const el: any = document.querySelector(" .layout-header .left-header .title");
+    el && (el.style.display = props.collapse ? "none" : "block");
   }, 150);
 
-  $emit('collapse');
+  $emit("collapse");
 }
 // 处理全屏事件
 const { toggleFullScreen } = useFullScreen();
 const fullscreen = ref(false);
 function onFullScreen(): void {
   toggleFullScreen();
-  $emit('fullscreen');
+  $emit("fullscreen");
 }
 const KeyDown = (event: any) => {
   if (event.keyCode === 122) {
@@ -89,8 +89,8 @@ const KeyDown = (event: any) => {
     toggleFullScreen(); //触发全屏的方法
   }
 };
-window.addEventListener('keydown', KeyDown, true);
-document.addEventListener('fullscreenchange', () => {
+window.addEventListener("keydown", KeyDown, true);
+document.addEventListener("fullscreenchange", () => {
   fullscreen.value = !unref(fullscreen); //你要切换得图标使用得属性
 });
 </script>
@@ -101,7 +101,7 @@ document.addEventListener('fullscreenchange', () => {
   --layout-header-left-width: 200px;
   --layout-header-left-collapse-width: 60px;
   --layout-header-left-title-size: 20px;
-  --display-title: 'block';
+  --display-title: "block";
   background: var(--layout-header-background);
   color: var(--layout-header-text-color);
   .left-header {

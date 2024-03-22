@@ -13,17 +13,17 @@
           :style="`width: ${props.leftWidth}`"
           class="relative -top-1 flex justify-end"
         >
-          <div class="time-line-status">{{ item[propsConfig.status || 'status'] }}</div>
+          <div class="time-line-status">{{ item[propsConfig.status || "status"] }}</div>
         </div>
       </slot>
       <div class="relative ml-4 flex-1 border-l-1 time-border cus-line">
         <div class="min-h-[32px] px-4 relative -top-1">
           <slot :item="item">
             <div v-if="item[propsConfig.timestamp || 'timestamp']" class="mb-2">
-              {{ item[propsConfig.timestamp || 'timestamp'] }}
+              {{ item[propsConfig.timestamp || "timestamp"] }}
             </div>
             <div v-if="item[propsConfig.content || 'content']" class="time-line-item-content">
-              {{ item[propsConfig.content || 'content'] }}
+              {{ item[propsConfig.content || "content"] }}
             </div>
           </slot>
         </div>
@@ -46,8 +46,8 @@ export interface IProps {
 }
 
 const props = withDefaults(defineProps<IProps>(), {
-  leftWidth: '88px',
-  propsConfig: () => ({ status: 'status', timestamp: 'timestamp', content: 'content' }),
+  leftWidth: "88px",
+  propsConfig: () => ({ status: "status", timestamp: "timestamp", content: "content" }),
 });
 </script>
 <style lang="scss" scoped>

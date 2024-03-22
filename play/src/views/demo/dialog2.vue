@@ -7,10 +7,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from 'vue';
-import { YtoDialog } from '@yto/custom';
+import { defineComponent, ref, reactive } from "vue";
+import { YtoDialog } from "@yto/custom";
 
-console.log('YtoDialog', YtoDialog);
+console.log("YtoDialog", YtoDialog);
 
 export default defineComponent({
   setup() {
@@ -22,27 +22,27 @@ export default defineComponent({
           closeOnClickModal: false,
           modelValue: true,
           confirmOption: {
-            txt: '确认按钮',
+            txt: "确认按钮",
             confirmCallback: () => {
-              console.log('确认按钮的 confirmCallback 回调');
+              console.log("确认按钮的 confirmCallback 回调");
               return Promise.resolve(true);
             },
           },
           cancelOption: {
-            txt: '关闭',
+            txt: "关闭",
             cancelCallback: () => {
-              console.log('取消按钮的 cancelCallback 回调');
+              console.log("取消按钮的 cancelCallback 回调");
               return Promise.resolve(true);
             },
           },
-          title: '我是函数弹框',
+          title: "我是函数弹框",
         },
-        ['show']
+        ["show"]
       );
     };
 
     const show2 = () => {
-      const container = document.getElementById('container');
+      const container = document.getElementById("container");
 
       YtoDialog.$creator(
         {
@@ -50,22 +50,22 @@ export default defineComponent({
           // visible: true,
           modelValue: true,
           confirmOption: {
-            txt: '确认按钮222',
+            txt: "确认按钮222",
             confirmCallback: () => {
-              console.log('确认按钮的 confirmCallback 回调');
+              console.log("确认按钮的 confirmCallback 回调");
               return Promise.resolve(true);
             },
           },
           cancelOption: {
-            txt: '关闭',
+            txt: "关闭",
             cancelCallback: () => {
-              console.log('取消按钮的 cancelCallback 回调');
+              console.log("取消按钮的 cancelCallback 回调");
               return Promise.resolve(true);
             },
           },
-          title: '我是函数弹框22222',
+          title: "我是函数弹框22222",
         },
-        ['show2']
+        ["show2"]
       );
     };
 
