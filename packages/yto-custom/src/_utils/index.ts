@@ -1,5 +1,6 @@
 export * from "./install";
 export * from "./props";
+export * from "./console-log";
 import request from "./request";
 
 /**

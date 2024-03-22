@@ -8,6 +8,7 @@
 import * as echarts from "echarts";
 import { guid, debounceFun } from "@yto/utils";
 import { resizeElement as vResizeElement } from "@/directives";
+import { logger } from "@/_utils";
 interface Props {
   echartId?: string;
   options: object;
@@ -82,7 +83,7 @@ const setChartOption = (options?: any) => {
   setTimeout(() => {
     //为了解决绘制图形时无动画效果的问题
     myChart && myChart.hideLoading();
-    sessionStorage.getItem("YTO-ENGINE-LOG") && console.log("setChartOption", options || props.options);
+    logger("setChartOption", options || props.options);
     myChart && myChart.setOption(options || props.options);
   }, 350);
 };
