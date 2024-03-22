@@ -86,20 +86,20 @@
 <script lang="ts" setup name="Form">
 // @ts-nocheck
 
-import itemInput from '../../../basis-components/form-items/itemInput.vue';
-import itemSelect from '../../../basis-components/form-items/itemSelect.vue';
-import itemSwitch from '../../../basis-components/form-items/itemSwitch.vue';
-import itemRadio from '../../../basis-components/form-items/itemRadio.vue';
-import itemCascader from '../../../basis-components/form-items/itemCascader.vue';
-import itemCheckbox from '../../../basis-components/form-items/itemCheckbox.vue';
-import itemDate from '../../../basis-components/form-items/itemDate.vue';
-import itemDateTime from '../../../basis-components/form-items/itemDateTime.vue';
-import itemInputNumber from '../../../basis-components/form-items/itemInputNumber.vue';
-import itemRate from '../../../basis-components/form-items/itemRate.vue';
-import itemTimePicker from '../../../basis-components/form-items/itemTimePicker.vue';
-import itemTimeSelect from '../../../basis-components/form-items/itemTimeSelect.vue';
-import { ElInput } from 'element-plus';
-import { PropType } from 'vue';
+import itemInput from "../../../basis-components/form-items/itemInput.vue";
+import itemSelect from "../../../basis-components/form-items/itemSelect.vue";
+import itemSwitch from "../../../basis-components/form-items/itemSwitch.vue";
+import itemRadio from "../../../basis-components/form-items/itemRadio.vue";
+import itemCascader from "../../../basis-components/form-items/itemCascader.vue";
+import itemCheckbox from "../../../basis-components/form-items/itemCheckbox.vue";
+import itemDate from "../../../basis-components/form-items/itemDate.vue";
+import itemDateTime from "../../../basis-components/form-items/itemDateTime.vue";
+import itemInputNumber from "../../../basis-components/form-items/itemInputNumber.vue";
+import itemRate from "../../../basis-components/form-items/itemRate.vue";
+import itemTimePicker from "../../../basis-components/form-items/itemTimePicker.vue";
+import itemTimeSelect from "../../../basis-components/form-items/itemTimeSelect.vue";
+import { ElInput } from "element-plus";
+import { PropType } from "vue";
 interface Obj {
   [key: string]: any;
 }
@@ -131,7 +131,7 @@ const props = defineProps({
   size: {
     type: String,
     default: () => {
-      return '';
+      return "";
     },
   },
   span: { type: Number, default: 6 },
@@ -146,11 +146,11 @@ const props = defineProps({
     default: () => {
       return {
         options: [],
-        contentClass: '',
+        contentClass: "",
         disabled: false,
         clearable: true,
-        activeColor: '#13ce66',
-        inactiveColor: '',
+        activeColor: "#13ce66",
+        inactiveColor: "",
         activeValue: true,
         inactiveValue: false,
       };

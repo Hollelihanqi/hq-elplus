@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts" setup>
-import * as echarts from 'echarts';
-import { guid, debounceFun } from '@yto/utils';
-import { resizeElement as vResizeElement } from '@/directives';
+import * as echarts from "echarts";
+import { guid, debounceFun } from "@yto/utils";
+import { resizeElement as vResizeElement } from "@/directives";
 interface Props {
   echartId?: string;
   options: object;
@@ -16,15 +16,15 @@ interface Props {
   showLoading?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
-  echartId: '',
-  height: '400px',
-  width: '100%',
+  echartId: "",
+  height: "400px",
+  width: "100%",
   showLoading: true,
   options: () => {
     return {};
   },
 });
-const emits = defineEmits(['chart-click']);
+const emits = defineEmits(["chart-click"]);
 let myChart: any | null;
 
 const containerId = computed(() => {
@@ -40,9 +40,9 @@ const showLoading = () => {
   props.showLoading &&
     myChart &&
     myChart.showLoading({
-      text: '正在加载...',
-      color: '#2c3cd8',
-      textColor: '#2c3cd8',
+      text: "正在加载...",
+      color: "#2c3cd8",
+      textColor: "#2c3cd8",
       zlevel: 0,
     });
 };
@@ -54,8 +54,8 @@ const showLoading = () => {
 const initChart = () => {
   const container: any = document.querySelector(`#${containerId.value}`);
   myChart = echarts.init(container);
-  myChart.on('click', (params: any) => {
-    emits('chart-click', params);
+  myChart.on("click", (params: any) => {
+    emits("chart-click", params);
   });
   showLoading();
   setChartOption();
@@ -73,7 +73,7 @@ const setChartOption = (options?: any) => {
   setTimeout(() => {
     //为了解决绘制图形时无动画效果的问题
     myChart && myChart.hideLoading();
-    console.log('setChartOption', options || props.options);
+    console.log("setChartOption", options || props.options);
     myChart && myChart.setOption(options || props.options);
   }, 350);
 };
