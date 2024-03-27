@@ -57,3 +57,15 @@ formatNumber(20000);
 import { thousandsSeparatoe } from '@yto/utils'
 thousandsSeparatoe(20000);
 ```
+###  字段映射
+```typescript
+import { ocrValueMapping } from '@yto/utils'
+ocrValueMapping(res2.successData,{
+  businessScope:'businessScope',
+  companyName:'companyName',
+  expireDate:'expireDate',
+  issueDate:'issueDate',
+  licenseNumber:'licenseNumber',
+  regionScope:'regionScope'
+})
+```

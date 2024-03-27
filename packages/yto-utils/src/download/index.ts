@@ -45,3 +45,26 @@ export const downloadFileDataCSV = (params: downLoadType) => {
   link.click();
   document.removeChild(link);
 };
+/*
+ ocr 字段映射使用方法
+ocrValueMapping(res2.successData,{
+  businessScope:'businessScope',
+  companyName:'companyName',
+  expireDate:'expireDate',
+  issueDate:'issueDate',
+  licenseNumber:'licenseNumber',
+  regionScope:'regionScope'
+})
+*/
+export const ocrValueMapping = (originalData,field)=>{
+  const obj = {}
+  Object.values(field).forEach((item,index)=>{
+    console.log("xxxx",Object.keys(field)[index])
+    // @ts-ignore
+    console.log("originalData[item]",originalData[item])
+    // @ts-ignore
+    obj[Object.keys(field)[index]] = originalData[item]
+  })
+  return obj;
+}
+
