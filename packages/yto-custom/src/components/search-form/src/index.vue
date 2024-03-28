@@ -184,6 +184,12 @@ export default defineComponent({
       isDefaultValue() && handleDefaultValue();
     });
 
+    const showHideGridItem = (control: SearchFormControlProps) => {
+      if (control.hide && typeof control.hide === "function") {
+        return control.hide();
+      }
+      return true;
+    };
     return () => {
       return props?.formControls?.length ? (
         <div
@@ -201,17 +207,19 @@ export default defineComponent({
             >
               {props.formControls.map((control: SearchFormControlProps, index: number) => {
                 return (
-                  <GridItem key={control.field} {...getResponsive(control, index)}>
-                    <el-form-item label={control.label} class="!mb-[20px]">
-                      {control.field ? (
-                        <SearchFormItem
-                          v-model={_searchModel.value[control.field]}
-                          control={control}
-                          cslot={slots[control.field]}
-                        />
-                      ) : null}
-                    </el-form-item>
-                  </GridItem>
+                  showHideGridItem(control) && (
+                    <GridItem key={control.field} {...getResponsive(control, index)}>
+                      <el-form-item label={control.label} class="!mb-[20px]">
+                        {control.field ? (
+                          <SearchFormItem
+                            v-model={_searchModel.value[control.field]}
+                            control={control}
+                            cslot={slots[control.field]}
+                          />
+                        ) : null}
+                      </el-form-item>
+                    </GridItem>
+                  )
                 );
               })}
               <GridItem suffix>

@@ -88,11 +88,9 @@ export interface ColumnsItemProps {
 }
 
 const props = defineProps(Props);
-const { _columns, setColumns, SettingInstance, handleSetting, HandleSetSave } = useController(props);
+const { ElTableInstance, _columns, setColumns, SettingInstance, handleSetting, HandleSetSave } = useController(props);
 
-const ElTableInstance = ref();
 const emits = defineEmits(["on-table"]);
-// const { total, pageSizes } = toRefs(props) as any;
 const _loading = ref(false);
 const _tableData = ref<any>([]);
 const _tableDataTotal = ref(0);
@@ -187,11 +185,11 @@ const getTableData = async (params = {}) => {
     }
     await nextTick();
     props.dataUpdateAfter(_params, result);
-  } catch (error) {
+  } catch (eor) {
     _loading.value = false;
     error("表格请求数据发生错误...");
-    error(error);
-    return Promise.reject(error);
+    error(eor);
+    return Promise.reject(eor);
   }
 };
 

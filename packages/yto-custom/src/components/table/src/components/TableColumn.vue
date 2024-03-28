@@ -63,9 +63,9 @@ const renderColumn = (column: any) => {
     <>
       {_showColumn(column) && (
         <ElTableColumn
-          className={column.sortable && column.align === "right" ? "sort-cell-td" : ""}
           showOverflowTooltip={column.showOverflowTooltip ?? column.prop !== "action"}
           {...column}
+          className={`${column.sortable && column.align === "right" ? "sort-cell-td" : ""} ${column?.className || ""} `}
         >
           {{
             default: (scope: any) => {

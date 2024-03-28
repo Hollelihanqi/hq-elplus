@@ -18,7 +18,7 @@
     "unplugin-vue-macros": "^2.6.1",
     "vite-plugin-inspect": "^0.7.40",
     "vite-plugin-mkcert": "^1.16.0",
-    "vitepress": "1.0.0-alpha.74"
+    "vitepress": "1.0.1"
   },
   "dependencies": {
     "@unocss/vite": "^0.57.0",

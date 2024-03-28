@@ -2,6 +2,7 @@ import type { TableProps, ColumnsItemProps, setColumnsProps } from "./interface"
 import { error } from "@/_utils";
 
 const useController = (props: TableProps) => {
+  const ElTableInstance = ref();
   const _columns = ref<any>([]);
   let _cacheSaveColumns: any = null;
   _columns.value = _ideepClone(props?.columns);
@@ -21,6 +22,9 @@ const useController = (props: TableProps) => {
       });
     });
     _columns.value = newColumns;
+    nextTick(() => {
+      ElTableInstance.value?.doLayout();
+    });
     if (props.tableKey) {
       window.localStorage.setItem(props.tableKey, JSON.stringify(setColumns.value));
     } else {
@@ -71,7 +75,6 @@ const useController = (props: TableProps) => {
     if (!cacheSetColumns) return "";
     try {
       cacheSetColumns = JSON.parse(cacheSetColumns);
-      // _columns.value = columns;
     } catch (error) {
       error("getCacheColumns 解析失败--", error);
     }
@@ -86,6 +89,9 @@ const useController = (props: TableProps) => {
         HandleSetSave();
       } else {
         _columns.value = _ideepClone(props.columns);
+        nextTick(() => {
+          ElTableInstance.value?.doLayout();
+        });
       }
     }
   );
@@ -98,6 +104,7 @@ const useController = (props: TableProps) => {
   });
 
   return {
+    ElTableInstance,
     _columns,
     setColumns,
     SettingInstance,

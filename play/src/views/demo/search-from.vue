@@ -1,15 +1,16 @@
 <template>
   <div>
-    <yto-c-search-from
+    <yto-c-search-form
       v-model:search-model="filterData"
       :form-controls="list"
       @on-search="handleSearch"
-    ></yto-c-search-from>
+    ></yto-c-search-form>
   </div>
+  <el-button @click="show = !show">显示搜索组件1</el-button>
 </template>
 <script lang="tsx" setup>
 // import { SearchFormControlProps } from "@/components/SearchForm/index";
-import CustomStaffSelect from "@/cusComponents/CustomStaffSelect.vue";
+// import CustomStaffSelect from "@/cusComponents/CustomStaffSelect.vue";
 import { getToken } from "@/utils";
 const filterData = ref<any>({});
 import type { SearchFormControlProps } from "@yto/custom";
@@ -17,16 +18,18 @@ import type { SearchFormControlProps } from "@yto/custom";
 const handleSearch = () => {
   console.log(filterData.value);
 };
+const show = ref(false);
 const list: SearchFormControlProps[] = [
   {
     el: "input",
-    label: "搜索组件",
+    label: "搜索组件1",
     field: "input0",
     defaultValue: "我是默认值，重置后我还会回来的",
+    hide: () => show.value,
   },
   {
     el: "select",
-    label: "搜索组件",
+    label: "搜索组件2",
     field: "input1",
     options: [
       {
@@ -58,11 +61,6 @@ const list: SearchFormControlProps[] = [
     el: "input",
     label: "搜索组件",
     field: "input5",
-  },
-  {
-    label: "远程搜索",
-    field: "input6",
-    render: (_value: any) => <CustomStaffSelect v-model={_value.value} />,
   },
   {
     el: "select",
