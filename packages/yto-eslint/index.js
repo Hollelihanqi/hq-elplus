@@ -4,7 +4,7 @@ module.exports = defineConfig({
   env: {
     browser: true,
     es2021: true,
-    node: true
+    node: true,
   },
   extends: [
     "eslint:recommended",
@@ -23,16 +23,16 @@ module.exports = defineConfig({
       jsx: true,
     },
   },
-  plugins: ["vue", "@typescript-eslint", 'prettier'],
+  plugins: ["vue", "@typescript-eslint", "prettier"],
   overrides: [
     {
-      files: ['*.vue'],
-      parser: require.resolve('vue-eslint-parser'),
+      files: ["*.vue"],
+      parser: require.resolve("vue-eslint-parser"),
     },
     {
-      files: ['**/*.md/*.js', '**/*.md/*.ts'],
+      files: ["**/*.md/*.js", "**/*.md/*.ts"],
       rules: {
-        '@typescript-eslint/no-unused-vars': 'off',
+        "@typescript-eslint/no-unused-vars": "off",
       },
     },
   ],
@@ -45,12 +45,22 @@ module.exports = defineConfig({
     "@typescript-eslint/no-unused-vars": "off", // 禁止未使用的变量
     "@typescript-eslint/no-non-null-assertion": "off", // 禁止断言为 any
     "@typescript-eslint/ban-ts-comment": "off", // 禁止@ts-ignore
-    "vue/no-mutating-props": ["error", { // 禁止检测引用类型
-      "shallowOnly": true
-    }],
-    "vue/no-reserved-component-names":"off", // 警用组件名使用 HTML 保留字段
-    '@typescript-eslint/no-empty-function': 'off', //禁用空函数
-    'vue/require-default-prop': "off", // 禁用属性默认值
+    "vue/no-mutating-props": [
+      "error",
+      {
+        // 禁止检测引用类型
+        shallowOnly: true,
+      },
+    ],
+    "vue/no-reserved-component-names": "off", // 警用组件名使用 HTML 保留字段
+    "@typescript-eslint/no-empty-function": "off", //禁用空函数
+    "vue/require-default-prop": "off", // 禁用属性默认值
+    "prettier/prettier": [
+      "error",
+      {
+        endOfLine: "auto", // 表示Prettier将根据文件现有的行尾字符自动确定并保持一致的风格。这意味着如果文件原来使用的是CRLF（Windows风格），则格式化后仍会保留CRLF；如果文件原来使用的是LF（Unix或Mac风格），则格式化后依然使用LF。这样可以确保在跨平台协作时避免因为换行符不同而引起的冲突
+      },
+    ],
   },
   settings: {
     "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
