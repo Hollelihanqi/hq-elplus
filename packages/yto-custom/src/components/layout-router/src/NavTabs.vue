@@ -26,6 +26,7 @@
 import { EnumSessionKey } from "@/common/EnumConstant";
 import { tabPaneClose, tabPaneAdd, toURL, IOptionTabPane, isBoolean } from "gold-core";
 import { useRouter, RouteLocationNormalized } from "vue-router";
+import { logger } from "@/_utils";
 
 interface Props {
   tabsMenuList: IOptionTabPane[];
@@ -60,7 +61,7 @@ watch(
     const { mode, href } = unref(props.tabsMenuList).find((tab: any) => tab.code === value) || {};
     if (mode === "router") {
       const url = toURL(href as string);
-      console.log(url.pathname);
+      logger(url.pathname);
       router.push(url.pathname + url.search);
     }
   },
@@ -108,7 +109,7 @@ const getTabsItem = (path: string): any => {
 //     const tmpItem = getTabsItem(path, to);
 //     tmpItem && tabPaneAdd(tmpItem.href as string, { ...tmpItem });
 //   } catch (error) {
-//     console.log("layout-router-afterEach-error", error);
+//     logger("layout-router-afterEach-error", error);
 //   }
 // });
 watch(

@@ -54,6 +54,8 @@
           </template>
         </TableColumn>
       </template>
+
+      <slot name="inAction"></slot>
     </el-table>
     <div v-if="_showSummary" class="flex-1 opacity-0 h-0 phd"></div>
     <el-pagination
@@ -79,6 +81,8 @@ import TableColumn from "./components/TableColumn.vue";
 import SettingV from "./components/Setting.vue";
 import { Setting } from "@element-plus/icons-vue";
 import useController from "./use-controller";
+import { error } from "@/_utils";
+
 export interface ColumnsItemProps {
   [propsName: string]: any;
 }
@@ -93,6 +97,7 @@ const _loading = ref(false);
 const _tableData = ref<any>([]);
 const _tableDataTotal = ref(0);
 const _showSummary = ref(false);
+
 const paginationParams = reactive({
   currentPage: props.currentPage,
   pageSize: props.pageSize,
@@ -117,6 +122,10 @@ const _tdata = computed(() => {
   return props.requestApi ? _tableData.value : props.tableData;
 });
 
+const _lastPage = computed(() => {
+  return Math.ceil(_tableDataTotal.value / paginationParams.pageSize) || 1;
+});
+
 const _defaultSort = computed(() => {
   return props.defaultSort && typeof props.defaultSort === "function"
     ? props.defaultSort()
@@ -131,15 +140,7 @@ const _defaultSort = computed(() => {
 const isDataEmpty = computed(() => {
   return props.requestApi ? _tableData.value.length : props.tableData.length;
 });
-// const cpaginationShow = computed(() => {
-//   if (props.paginationHide) {
-//     return false;
-//   }
-//   if (props.paginationHideAuto && props.pageSize >= _total.value) {
-//     return false;
-//   }
-//   return true;
-// });
+
 const cpaginationShow = computed(() => {
   // 返回一个布尔值，当不隐藏分页，或者自动隐藏且页面尺寸小于总数时显示
   return !(props.paginationHide || (props.paginationHideAuto && props.pageSize >= _total.value));
@@ -184,13 +185,12 @@ const getTableData = async (params = {}) => {
       _tableData.value = result[props.dataKey] || [];
       _tableDataTotal.value = result.total || 0;
     }
-
     await nextTick();
     props.dataUpdateAfter(_params, result);
   } catch (error) {
     _loading.value = false;
-    console.error("表格请求数据发生错误...");
-    console.error(error);
+    error("表格请求数据发生错误...");
+    error(error);
     return Promise.reject(error);
   }
 };
@@ -240,7 +240,6 @@ const handleSortChange = (item: { prop: string; order: string; column: any }) =>
   _sortItem = item && item.order ? item : null;
   paginationParams.currentPage = 1;
   emits("on-table", "sort", item);
-
   // 为了兼容以前旧的 api
   if (props.tableChange && typeof props.tableChange === "function") {
     props.tableChange("sort", item);
@@ -274,6 +273,20 @@ const updatePage = (obj: { currentPage?: number; pageSize?: number }) => {
 const getData = () => {
   return _tableData.value;
 };
+
+watch(
+  () => _tdata.value,
+  () => {
+    if (
+      !_tdata.value.length &&
+      _lastPage.value === paginationParams.currentPage - 1 &&
+      paginationParams.currentPage > 1
+    ) {
+      updatePage({ ...paginationParams, currentPage: paginationParams.currentPage - 1 });
+      updateTableData();
+    }
+  }
+);
 
 onMounted(() => {
   _showSummary.value = ElTableInstance.value?.showSummary;

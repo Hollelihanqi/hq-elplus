@@ -1,8 +1,8 @@
 /*
  * @Author: DESKTOP-7338OS6\LHQ LHQ
  * @Date: 2023-03-24 17:52:24
- * @LastEditors: weichunpei
- * @LastEditTime: 2024-01-25 16:31:10
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2024-03-20 10:22:09
  * @FilePath: \yto-engine\docs\docs\.vitepress\config.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AErts
  */
@@ -119,7 +119,11 @@ export default defineConfig({
             {
               text: "Radio 单选框",
               link: "/examples/radio/index.md",
-            }
+            },
+            {
+              text: "TimeLine 时间线",
+              link: "/examples/time-line/index.md",
+            },
           ],
           collapsed: false,
         },
@@ -165,7 +169,6 @@ export default defineConfig({
           ],
           collapsed: false,
         },
-
       ],
     },
     docFooter: {

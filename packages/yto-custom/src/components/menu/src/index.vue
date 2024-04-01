@@ -8,6 +8,7 @@
 import { defineComponent, PropType, h } from "vue";
 import { Props, IMenuData } from "./props";
 import { ElMenu, ElMenuItem, ElSubMenu, ElMenuItemGroup } from "element-plus";
+import { logger } from "@/_utils";
 
 // export interface IMenuData {
 //   name: string;
@@ -58,7 +59,7 @@ export default defineComponent({
       return title;
     };
     const renderChildren = (meu: IMenuData[]) => {
-      console.log("***", meu);
+      logger("***", meu);
 
       return meu.map((e: IMenuData) => {
         if (e.type === "group") {

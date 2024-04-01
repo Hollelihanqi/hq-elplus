@@ -3,6 +3,7 @@ import { defineComponent, h, ref, getCurrentInstance } from "vue";
 import { Props, RemoteSearchProps } from "./props";
 import { ElSelect, ElOption, ElSelectV2 } from "element-plus";
 import { request, debounce } from "@/_utils";
+import { logger, error } from "@/_utils";
 
 export default defineComponent({
   name: "RemoteSearch",
@@ -39,8 +40,9 @@ export default defineComponent({
           .request({
             url: props.url,
             method: props.method,
-            params: _params,
-            data: JSON.stringify(_params),
+            ...(props.method.toUpperCase() === "POST" ? { data: _params } : { params: _params }),
+            // params: _params,
+            // data: JSON.stringify(_params),
             headers: _headers,
             cancelToken: source.token,
           })
@@ -62,7 +64,7 @@ export default defineComponent({
             loading.value = false;
           });
       } catch (error) {
-        console.error("获取数据失败", error);
+        error("获取数据失败", error);
       }
     };
 
@@ -73,7 +75,7 @@ export default defineComponent({
           const list = await props.requestApi(keywords);
           setData(list);
         } catch (error) {
-          console.error("请求报错", error);
+          error("请求报错", error);
         } finally {
           loading.value = false;
         }
@@ -103,9 +105,7 @@ export default defineComponent({
       if (props.optTemp && typeof props.optTemp === "function") {
         return props.optTemp(item);
       }
-      return h("div", { class: "cus-temp" }, [
-        h("span", {}, props.labelKey && item[props.labelKey]),
-      ]);
+      return h("div", { class: "cus-temp" }, [h("span", {}, props.labelKey && item[props.labelKey])]);
     };
 
     const getOptions = (params = {}) => {
@@ -123,7 +123,7 @@ export default defineComponent({
     };
 
     const disLabelEvent = () => {
-      console.log('RemoteSearchSelectInstance.value',RemoteSearchSelectInstance.value)
+      logger("RemoteSearchSelectInstance.value", RemoteSearchSelectInstance.value);
       const label = RemoteSearchSelectInstance.value?.$el.parentElement.parentElement;
       label && label.classList.add("el-form-label-dis");
     };
@@ -139,10 +139,7 @@ export default defineComponent({
 
     const RemoteSearchSelectInstance = ref();
     expose({ getOptions, clearOptions });
-    // setTimeout(() => {
-    //   console.log("清除列表");
-    //   clearOptions();
-    // }, 10000);
+
     const renderSelect = () => {
       return h(
         ElSelect,
@@ -199,11 +196,13 @@ export default defineComponent({
       return (
         <ElSelectV2
           class="remote-search-select"
+          style={{ width: props.w }}
           options={options.value}
           value-key={props.valueKey}
           props={_props}
           clearable
           filterable
+          remoteMethod={remoteMethod}
           loading={loading.value}
           {...attrs}
         ></ElSelectV2>
@@ -219,3 +218,4 @@ export default defineComponent({
 <style lang="scss">
 @import "./index.scss";
 </style>
+import { toUpperCamelCase } from "gold-core";

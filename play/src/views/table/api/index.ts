@@ -2,7 +2,7 @@ import request from "./request";
 
 // 列表
 export const getList = (params = {}) => {
-  console.log(params)
+  console.log(params);
   return request.request({
     url: "/v2/opttag",
     params,

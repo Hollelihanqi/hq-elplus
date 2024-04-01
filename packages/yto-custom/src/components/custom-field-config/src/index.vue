@@ -2,7 +2,7 @@
  * @Description: 自定义输入框
  * @Author: ym
  * @Date: 2023-12-07 16:20:35
- * @LastEditTime: 2024-02-21 13:10:54
+ * @LastEditTime: 2024-03-18 13:18:21
 -->
 <script lang="tsx">
 import { defineComponent, PropType, resolveComponent, h } from "vue";
@@ -107,6 +107,7 @@ export default defineComponent({
   .el-select-v2__wrapper,
   .el-input__inner,
   .el-input__wrapper.is-focus,
+  .el-select__wrapper,
   .el-input__wrapper {
     box-shadow: none !important;
     border: none !important;

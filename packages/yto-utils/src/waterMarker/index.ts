@@ -1,4 +1,3 @@
-
 /*
  * @Author: weichunpei
  * @Date: 2024-01-24 17:37:59
@@ -8,26 +7,28 @@
  * @param {string} text 文字
  */
 
-export const addWaterMarker = (params = {
-  text: '',
-  elNode: '',
-  font: '',
-  fillStyle: '',
-  rotateAngle: 0,
-  fillX: 0,
-  fillY: 0
-}) => {
-  const { text, elNode, font, fillStyle, rotateAngle, fillX, fillY } = params
-
-  const tmpFillX = fillX || 20
-  const tmpFillY = fillY || 75
-  let node: any = elNode
-  if (!text) return
-  if (!elNode) {
-    node = document.body
+export const addWaterMarker = (
+  params = {
+    text: "",
+    elNode: "",
+    font: "",
+    fillStyle: "",
+    rotateAngle: 0,
+    fillX: 0,
+    fillY: 0,
   }
-  if (elNode && typeof elNode === 'string') {
-    node = document.querySelector(node) as HTMLElement
+) => {
+  const { text, elNode, font, fillStyle, rotateAngle, fillX, fillY } = params;
+
+  const tmpFillX = fillX || 20;
+  const tmpFillY = fillY || 75;
+  let node: any = elNode;
+  if (!text) return;
+  if (!elNode) {
+    node = document.body;
+  }
+  if (elNode && typeof elNode === "string") {
+    node = document.querySelector(node) as HTMLElement;
   }
   try {
     const can: HTMLCanvasElement = document.createElement("canvas");
@@ -44,10 +45,9 @@ export const addWaterMarker = (params = {
     cans.fillText(text, tmpFillX, tmpFillY);
     node.style.backgroundImage = "url(" + can.toDataURL("image/png") + ")";
   } catch (error) {
-    console.error("addWaterMarker error: ", error)
+    console.error("addWaterMarker error: ", error);
   }
 };
-
 
 /*
  * @Author: weichunpei
@@ -57,12 +57,12 @@ export const addWaterMarker = (params = {
  * @Description: 移除水印
  */
 export const removeWatermark = (elNode) => {
-  let node: any = elNode
+  let node: any = elNode;
   if (!elNode) {
-    node = document.body
+    node = document.body;
   }
-  if (elNode && typeof elNode === 'string') {
-    node = document.querySelector(node) as HTMLElement
+  if (elNode && typeof elNode === "string") {
+    node = document.querySelector(node) as HTMLElement;
   }
-  node.style.backgroundImage = null
-}
+  node.style.backgroundImage = null;
+};

@@ -8,7 +8,7 @@
 -->
 <template>
   <div class="table-box">
-    <yto-c-table :columns="columns" :request-api="getList" headerbgHide ref="YtoCTableInstance">
+    <yto-c-table ref="YtoCTableInstance" :columns="columns" :request-api="getList" headerbg-hide>
       <template #tableHeader>
         <el-button type="primary" class="el-button">新增</el-button>
       </template>
@@ -53,19 +53,6 @@ const columns = [
 onMounted(() => {
   console.log(YtoCTableInstance.value.ElTableInstance.clearSort);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 <style lang="scss" scoped>
 .table-box {

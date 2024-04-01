@@ -8,18 +8,23 @@
 import * as echarts from "echarts";
 import { guid, debounceFun } from "@yto/utils";
 import { resizeElement as vResizeElement } from "@/directives";
+import { logger } from "@/_utils";
 interface Props {
   echartId?: string;
   options: object;
   height?: string;
   width?: string;
   showLoading?: boolean;
+  loadingOptions?: object;
 }
 const props = withDefaults(defineProps<Props>(), {
   echartId: "",
   height: "400px",
   width: "100%",
   showLoading: true,
+  loadingOptions: () => {
+    return {};
+  },
   options: () => {
     return {};
   },
@@ -39,12 +44,17 @@ const containerId = computed(() => {
 const showLoading = () => {
   props.showLoading &&
     myChart &&
-    myChart.showLoading({
-      text: "正在加载...",
-      color: "#2c3cd8",
-      textColor: "#2c3cd8",
-      zlevel: 0,
-    });
+    myChart.showLoading(
+      Object.assign(
+        {
+          text: "正在加载...",
+          color: "#2c3cd8",
+          textColor: "#2c3cd8",
+          zlevel: 0,
+        },
+        props.loadingOptions
+      )
+    );
 };
 
 /**
@@ -73,7 +83,7 @@ const setChartOption = (options?: any) => {
   setTimeout(() => {
     //为了解决绘制图形时无动画效果的问题
     myChart && myChart.hideLoading();
-    console.log("setChartOption", options || props.options);
+    logger("setChartOption", options || props.options);
     myChart && myChart.setOption(options || props.options);
   }, 350);
 };

@@ -12,9 +12,5 @@ import { install } from "../../_utils";
 export const YtoMenu = install(Menu);
 export default YtoMenu;
 
-export * from './src/interface'
+export * from "./src/interface";
 export type MenuInstance = InstanceType<typeof Menu>;
-
-
-
-

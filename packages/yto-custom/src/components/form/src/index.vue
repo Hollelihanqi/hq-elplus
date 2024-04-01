@@ -98,7 +98,7 @@ import itemInputNumber from "../../../basis-components/form-items/itemInputNumbe
 import itemRate from "../../../basis-components/form-items/itemRate.vue";
 import itemTimePicker from "../../../basis-components/form-items/itemTimePicker.vue";
 import itemTimeSelect from "../../../basis-components/form-items/itemTimeSelect.vue";
-import {ElInput} from "element-plus";
+import { ElInput } from "element-plus";
 import { PropType } from "vue";
 interface Obj {
   [key: string]: any;

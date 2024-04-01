@@ -1,5 +1,6 @@
 export * from "./install";
 export * from "./props";
+export * from "./console-log";
 import request from "./request";
 
 /**
@@ -8,19 +9,16 @@ import request from "./request";
  * @param {Number} delay 延迟毫秒数
  */
 export const debounce = (fn: (...args: any[]) => any, delay: number = 300) => {
-    let timer: any;
-    return (...args: any[]) => {
-        if (timer) {
-            clearTimeout(timer);
-        }
-        timer = setTimeout(() => {
-            timer = null;
-            return fn(...args);
-        }, delay);
-    };
+  let timer: any;
+  return (...args: any[]) => {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+      timer = null;
+      return fn(...args);
+    }, delay);
+  };
 };
 
-
-export {
-    request
-}
+export { request };

@@ -27,8 +27,23 @@
       @on-updated="handleUpdated"
     ></yto-c-tarea-tag>
   </div>
+  <div class="p-4">
+    <h3>自定验证函数</h3>
+    <yto-c-tarea-tag
+      ref="YtoTareaInstance"
+      v-model="retrieve_content"
+      :autosize="{ minRows: 2 }"
+      required
+      :regular="sreg"
+      placeholder="请输入K码，多个K码请使用半角“,”符合、回车、空格进行分割"
+      @on-updated="handleUpdated2"
+    ></yto-c-tarea-tag>
+  </div>
 </template>
 <script lang="tsx" setup>
+const YtoTareaInstance = ref();
+const sreg = /k\d+/i;
+const retrieve_content = ref("");
 const textList = ref<any>("ouooueortoeuot");
 const ips = ref<any>([]);
 const phone = ref<any>([]);
@@ -45,4 +60,10 @@ const handleUpdated = () => {
 };
 
 const _disabled = ref(false);
+
+const handleUpdated2 = () => {
+  setTimeout(() => {
+    console.log(YtoTareaInstance.value.validState());
+  }, 200);
+};
 </script>

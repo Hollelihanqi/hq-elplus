@@ -10,6 +10,7 @@ import path, { resolve } from "path";
 import AutoImport from "unplugin-auto-import/vite";
 import WindiCSS from "vite-plugin-windicss";
 import vueJsx from "@vitejs/plugin-vue-jsx";
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -20,7 +21,14 @@ export default defineConfig({
     }),
     WindiCSS(),
     AutoImport({
-      imports: ["vue"],
+      imports: ["vue", "vue-router"],
+      resolvers: [ElementPlusResolver()],
+      dts: "types/auto-imports.d.ts",
+      eslintrc: {
+        enabled: false,
+        filepath: "types/.eslintrc-auto-import.json",
+        globalsPropValue: true,
+      },
     }),
   ],
   resolve: {
@@ -38,7 +46,7 @@ export default defineConfig({
         changeOrigin: true,
       },
       "/api": {
-        target: "http://10.130.137.53:8080",
+        target: "http://10.130.136.73:8080",
         changeOrigin: true,
       },
       "/_search": {

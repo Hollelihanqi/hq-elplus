@@ -1,28 +1,26 @@
 <template>
-    <div style="padding: 0 10px">
-          <yto-c-form
-              :form="form"
-              ref="test"
-              :form-config="formConfig"
-              :span="12"
-              layoutAuto
-              :item-config="{
-                clearable:true
-              }"
-          >
-            <template #cascader>
-              测试卡槽
-            </template>
-            <div >
-              <el-button type="primary">测试</el-button>
-            </div>
-          </yto-c-form>
+  <div style="padding: 0 10px">
+    <yto-c-form
+      ref="test"
+      :form="form"
+      :form-config="formConfig"
+      :span="12"
+      layout-auto
+      :item-config="{
+        clearable: true,
+      }"
+    >
+      <template #cascader> 测试卡槽 </template>
+      <div>
+        <el-button type="primary">测试</el-button>
+      </div>
+    </yto-c-form>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { reactive } from "vue";
-import {ElForm,ElButton} from "element-plus";
+import { ElForm, ElButton } from "element-plus";
 
 const options = [
   {
@@ -294,10 +292,16 @@ const options = [
 ];
 const form = reactive({});
 const formConfig = [
-  { itemType: "input", prop: "name", label: "文本框",contentClass:"test" ,  formItemBinds:{
-      class:'888888888',
-      id:999
-    },},
+  {
+    itemType: "input",
+    prop: "name",
+    label: "文本框",
+    contentClass: "test",
+    formItemBinds: {
+      class: "888888888",
+      id: 999,
+    },
+  },
   {
     itemType: "cascader",
     prop: "cascader",
@@ -331,14 +335,14 @@ const formConfig = [
   },
 ];
 
-const test = ref()
-onMounted(()=>{
-  console.log("???????????????:",test.value);
-})
+const test = ref();
+onMounted(() => {
+  console.log("???????????????:", test.value);
+});
 </script>
 
 <style scoped lang="scss">
-:deep(.test){
+:deep(.test) {
   width: 100%;
   background: red;
 }

@@ -27,6 +27,7 @@
 <script lang="ts" setup name="Dialog">
 import { ButtonProps, ElButton, ElDialog } from "element-plus";
 import { ref } from "vue";
+import { logger } from "@/_utils";
 
 const dialogRef = ref();
 
@@ -108,7 +109,7 @@ const _showConfirm = computed(() => {
 const _showCancel = computed(() => {
   if (_hiddenCancel.value) return false;
   const { cancelOption } = props;
-  console.log("cancelOption", cancelOption);
+  logger("cancelOption", cancelOption);
   if (!cancelOption) return true;
   if (Reflect.has(cancelOption, "hidden") && typeof cancelOption.hidden == "boolean") return !cancelOption.hidden;
   return !Reflect.has(cancelOption!, "hidden");
@@ -117,7 +118,7 @@ const _showCancel = computed(() => {
 const handleClose = () => {
   props.cancelOption?.cancelCallback &&
     props.cancelOption?.cancelCallback().then((val: boolean) => {
-      console.log("handleClose", val);
+      logger("handleClose", val);
     });
   dialogRef.value.visible = false;
   $emit("update:visible", false);
@@ -126,7 +127,7 @@ const handleClose = () => {
 const handleConfirm = () => {
   props.confirmOption?.confirmCallback &&
     props.confirmOption?.confirmCallback().then((val: boolean) => {
-      console.log("handleConfirm", val);
+      logger("handleConfirm", val);
       if (val) {
         dialogRef.value.visible = false;
       }

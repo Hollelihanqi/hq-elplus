@@ -55,7 +55,6 @@ const props = withDefaults(defineProps<Props>(), {
 const ellipsisTagRef = ref();
 const shoEllipsis = ref(false);
 const handleResize = (info: any) => {
-  // console.log('resize', info);
   const boxEl = unref(ellipsisTagRef).querySelector(".ellipsis-tag .tag-box");
   if (!boxEl) return;
   const boxWidth = boxEl.getBoundingClientRect().width;

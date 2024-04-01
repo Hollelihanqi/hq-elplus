@@ -5,7 +5,7 @@ import draggable from "./modules/draggable";
 import longpress from "./modules/longpress";
 import { resizeElement } from "./modules/resizeElement";
 
-export * from "./modules/resizeElement"
+export * from "./modules/resizeElement";
 
 export const directivesList: any = {
   // Custom directives

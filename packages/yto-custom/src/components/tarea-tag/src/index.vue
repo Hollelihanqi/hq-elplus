@@ -40,6 +40,7 @@
 <script lang="ts" setup name="TareaTag">
 import { List } from "immutable";
 import { Props } from "./props";
+import { logger } from "@/_utils";
 
 const props = defineProps(Props);
 const emits = defineEmits(["update:modelValue", "on-updated"]);
@@ -107,7 +108,7 @@ const checkText = (value: any) => {
   inputText.value = "";
   // 用于验证文本项的函数
   const validateItem = (item: string) => {
-    console.log("validateItem", item);
+    logger("validateItem", item);
     if (!item) return null;
     const isValid =
       props.regular instanceof RegExp
@@ -133,6 +134,12 @@ const valided = (values: []) => {
   }
   valid.value = values.every((item: any) => item.valid);
 };
+
+const validState = () => {
+  return valid.value;
+};
+
+defineExpose({ validState });
 </script>
 <style lang="scss" scoped>
 @import "./index.scss";

@@ -25,6 +25,7 @@
 | `v-model:searchModel` | 数据绑定                                                        | Object           | —          | --                                      |
 | `colConfig`           | 全局配置不同屏幕下一行所显示的控件个数, 参考 `FormControlsItem` | [Number, Object] | —          | `{ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }` |
 | `formControls`        | 搜索项配置项，参考 `ColConfigItem`                              | Array            | —          | []                                      |
+| `filterFields`        | 搜索项过滤字段                                                  | Array            | —          | []                                      |
 | `collapsedRows`       | 默认收起行数                                                    | Number           | —          | 1                                       |
 | `modelDefault`        | 默认值,可以同时支持多个表单项的默认值配置                       | Object           | —          | null                                    |
 | `modelDefault`        | 默认值,可以同时支持多个表单项的默认值配置                       | Object           | —          | null                                    |

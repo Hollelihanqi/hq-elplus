@@ -2,7 +2,7 @@
  * @Description: 模块名称
  * @Author: ym
  * @Date: 2023-12-11 14:08:36
- * @LastEditTime: 2024-02-02 09:29:40
+ * @LastEditTime: 2024-03-19 16:01:40
  */
 /*
  * @Description: 模块名称
@@ -44,6 +44,8 @@ const routes = [
   { path: "/tableSearch", component: () => import("@/views/demo/TableSearch.vue") },
   { path: "/tareaTag", component: () => import("@/views/demo/TareaTag.vue") },
   { path: "/cusRadio", component: () => import("@/views/demo/CusRadio.vue") },
+  { path: "/selectRemote", component: () => import("@/views/demo/CustomProvinceAreaSelect.vue") },
+  { path: "/timeLine", component: () => import("@/views/demo/TimeLineDemo.vue") },
 ];
 
 export const router = createRouter({

@@ -22,14 +22,13 @@
       <div class="flex items-center justify-end">
         <el-button type="default" @click="handleSCancel">取消</el-button>
         <!-- <el-button type="primary" @click="handleSReture">恢复默认</el-button> -->
-        <el-button type="primary" @click="handleSSave">保存</el-button>
+        <!-- <el-button type="primary" @click="handleSSave">保存</el-button> -->
       </div>
     </template>
   </ElDrawer>
 </template>
 <script lang="ts" setup>
 import { ElDrawer } from "element-plus";
-import { Search } from "@element-plus/icons-vue";
 
 interface setColumnsProps {
   label: string;
@@ -52,7 +51,7 @@ const actionDialog = (): void => {
 };
 
 const handleChange = () => {
-  //
+  emits("on-save");
 };
 
 const handleSCancel = () => {
@@ -60,7 +59,7 @@ const handleSCancel = () => {
 };
 const handleSSave = () => {
   emits("on-save");
-  dialogVisible.value = false;
+  // dialogVisible.value = false;
 };
 const handleSReture = () => {
   emits("on-return");

@@ -33,6 +33,7 @@ import SimpleUploader from "simple-uploader.js";
 import SparkMD5 from "spark-md5";
 import UploadList from "./components/UploadList.vue";
 import UploadInfo from "./components/UploadInfo.vue";
+import { logger, error } from "@/_utils";
 
 const FILE_ADDED_EVENT = "fileAdded";
 // const FILES_ADDED_EVENT = "filesAdded";
@@ -142,7 +143,7 @@ const checkFileType = (file: any) => {
 // 超出 limit 数量 时触发
 const fileLimitOver = (file: any) => {
   _removeFile(file);
-  console.error("超出最大上传数量");
+  error("超出最大上传数量");
   emits("on-exceed-limit", file, props.limit);
 };
 //文件添加到上传队列之前调用，可用于文件校验，返回 false 禁止文件上传,并且从列表中移除当前文件
@@ -198,7 +199,7 @@ const processResponse = (message: any, file: any) => {
     res = JSON.parse(message);
     file._response = res;
   } catch (e) {
-    console.error("processResponse", e);
+    error("processResponse", e);
   }
 };
 
@@ -227,7 +228,7 @@ const complete = () => {
 
 // 文件开始上传
 const uploadStart = () => {
-  console.log("文件开始上传");
+  logger("文件开始上传");
 };
 
 //开始上传
@@ -261,7 +262,7 @@ const startUpload = (file: any) => {
       file.uniqueIdentifier = HASH2; // 增加文件唯一标识
       file.resume(); // 恢复文件开始上传
       cmd5.value = false;
-      console.log(
+      logger(
         `MD5计算完毕：${file.name} \nMD5：${HASH} \n分片：${chunks} 大小:${file.size} 用时：${
           new Date().getTime() - time
         } ms`
@@ -270,7 +271,7 @@ const startUpload = (file: any) => {
   };
   // 文件读取过程中发生错误
   fileReader.onerror = function () {
-    console.error(`文件${file.name}读取出错，请检查该文件`);
+    error(`文件${file.name}读取出错，请检查该文件`);
     file.cancel(); // 取消上传
   };
 

@@ -198,6 +198,18 @@ const listNavigation: any[] = [
         code: "/cusRadio",
         mode: "router",
       },
+      {
+        label: "selectRemote",
+        href: "/selectRemote",
+        code: "/selectRemote",
+        mode: "router",
+      },
+      {
+        label: "TimeLine",
+        href: "/TimeLine",
+        code: "/TimeLine",
+        mode: "router",
+      },
     ],
   },
 ];

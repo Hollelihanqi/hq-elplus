@@ -1,130 +1,94 @@
 <template>
-  <div class="flex flex-col overflow-hidden p-[16px]">
-    <yto-c-table
-      ref="YtoTableInstance"
-      :columns="columns"
-      :request-api="getList"
-      show-summary
-      :tool-bar="false"
-      :show-hide-fields="ShowHiddenFieldKeys2"
-    >
-      <!-- <template #callStatus="scope">
-      <span>{{ scope.row.status }}</span>
-    </template> -->
-      <!-- <template #append>
-        <div class="bg-yellow-500 h-[50px]">total</div>
-      </template> -->
-      <template #tableHeader>
-        <div>
-          <el-button @click="settting">设置</el-button>
-        </div>
-      </template>
-    </yto-c-table>
-  </div>
+  <yto-c-table :columns="columns" :table-data="tableData" :total="total" tool-bar :show-hide-fields="showHideFields">
+    <template #tableHeader>
+      <el-button @click="_show = !_show">显示列</el-button>
+    </template>
+  </yto-c-table>
 </template>
-<script lang="tsx" setup>
-import { TableProps } from "@yto/custom";
-import request from "../../request";
-const ShowHiddenFieldKeys = ["id", "title", "level", "status"];
-const ShowHiddenFieldKeys2 = {
-  fields: ["id", "title", "level", "status"],
-  showFields: ["id", "title", "level"],
-};
+<script lang="ts" setup>
+import { ref } from "vue";
+const total = 60;
+const paginationParams = ref({
+  pageNum: 1,
+  pageSize: 10,
+});
 
-const YtoTableInstance = ref();
-const settting = () => {
-  YtoTableInstance.value.setting();
+const showHideFields = ["name"];
+// 分页选择
+const handleTableChange = async (type: string, num: number) => {
+  type === "page" && (paginationParams.value.pageNum = num);
+  if (type === "size") {
+    //页码重置
+    paginationParams.value.pageNum = 1;
+    paginationParams.value.pageSize = num;
+  }
 };
-const columns = [
-  {
-    label: "事件编号",
-    prop: "id",
-    width: 160,
-    copy: true,
-  },
-  {
-    label: "事件名称",
-    prop: "title",
-  },
-  { label: "事件类型", prop: "source", width: 120 },
-  { label: "上报来源", prop: "cate", width: 120 },
-  {
-    label: "泄漏途径",
-    prop: "leakages_way",
-    width: 120,
-  },
-  {
-    label: "事件等级",
-    prop: "level",
-    sortable: "custom",
-    align: "right",
-    width: 120,
-  },
-  {
-    label: "状态",
-    prop: "status",
-    align: "center",
-    width: 100,
-  },
-  {
-    label: "创建人",
-    prop: "report_person",
-    width: 100,
-  },
-  { label: "创建时间", prop: "c_time", width: 170 },
-  {
-    label: "逾期统计",
-    width: 180,
-  },
-  { label: "操作", prop: "action", fixed: "right", align: "center" },
-];
 
 const tableData = [
   {
-    callerCode: 0,
-    callerName: undefined,
-    ownerStr: null,
-    status: "",
-    lastCallTime: false,
+    id: 1,
+    name: "魏春霈",
+    age: "26岁",
+    sex: "男",
+    isWife: "未婚",
+    dream: "妻妾成群",
   },
   {
-    callerCode: "0",
-    callerName: null,
-    ownerStr: undefined,
-    status: true,
-    lastCallTime: "2023.01.10",
+    id: 2,
+    name: "李涵祺",
+    age: "26岁",
+    sex: "男",
+    isWife: "未婚",
+    dream: "你好，我是 李涵祺",
+  },
+  {
+    id: 3,
+    name: "闫萌",
+    age: "26岁",
+    sex: "女",
+    isWife: "已婚",
+    dream: "按时下班",
+  },
+  {
+    id: 4,
+    name: "李炳儒",
+    age: "26岁",
+    sex: "男",
+    isWife: "已婚",
+    dream: "有为青年",
+  },
+  {
+    id: 5,
+    name: "柯发泽",
+    age: "26岁",
+    sex: "男",
+    isWife: "已婚",
+    dream: "天天发财",
   },
 ];
-const handleTableChange = (type: string, val: number) => {
-  console.log("handleTableChange", type, val);
-};
 
-const getList = (params = {}) => {
-  const _params = {};
-  return request.request({
-    url: "/v2/incident",
-    params,
-  });
-  // return Promise.resolve({ items: [], total: 0 });
-};
-const getList2 = (params = {}) => {
-  const _params = {};
-  return request.request({
-    url: "v2/alert/detail",
-    method: "POST",
-    data: {
-      searchOrgCode: 999999,
-      hash: "26bf78636b742dc58a05ce36674213cb",
-      pageNum: 0,
-      pageSize: 20,
-    },
-  });
-};
-
-const dataCallback = (data: any) => {
-  console.log(data);
-  return {
-    items: tableData,
-  };
-};
+const _show = ref(false);
+// 列配置
+const columns = [
+  {
+    label: "姓名",
+    prop: "name",
+  },
+  {
+    label: "年龄",
+    prop: "age",
+  },
+  {
+    label: "性别",
+    prop: "sex",
+  },
+  {
+    label: "是否已婚",
+    prop: "isWife",
+  },
+  {
+    label: "梦想",
+    prop: "dream",
+  },
+];
 </script>

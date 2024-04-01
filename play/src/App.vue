@@ -9,8 +9,6 @@
 <template>
   <div class="app flex flex-col">
     <LayoutRouter class="h-full"></LayoutRouter>
-    <!--     <LayoutFrame class="h-full"></LayoutFrame> -->
-    <!-- <formItems></formItems> -->
   </div>
 </template>
 <script lang="ts" setup>

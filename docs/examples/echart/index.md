@@ -33,14 +33,15 @@
 
 ### Chart 属性
 
-| 属性名        | 说明             | 类型    | 可选值       | 默认值 | 备注                                   |
-| ------------- | ---------------- | ------- | ------------ | ------ | -------------------------------------- |
-| `echartId`    | 容器 ID          | string  | -            | -      | 全局唯一                               |
-| `type`        | 图形类型         | string  | line/bar/pie | -      | 目前仅预定义线图/柱图/饼图三种常用图形 |
-| `options`     | 配置项           | object  | —            | {}     | —                                      |
-| `width`       | 图形宽度         | string  | —            | 100%   | —                                      |
-| `height`      | 图形高度         | string  | —            | 400px  | —                                      |
-| `showLoading` | 显示加载 loading | boolean | true/false   | true   | —                                      |
+| 属性名           | 说明                    | 类型    | 可选值       | 默认值 | 备注                                   |
+| ---------------- | ----------------------- | ------- | ------------ | ------ | -------------------------------------- |
+| `echartId`       | 容器 ID                 | string  | -            | -      | 全局唯一                               |
+| `type`           | 图形类型                | string  | line/bar/pie | -      | 目前仅预定义线图/柱图/饼图三种常用图形 |
+| `options`        | 配置项                  | object  | —            | {}     | —                                      |
+| `width`          | 图形宽度                | string  | —            | 100%   | —                                      |
+| `height`         | 图形高度                | string  | —            | 400px  | —                                      |
+| `showLoading`    | 显示加载 loading        | boolean | true/false   | true   | —                                      |
+| `loadingOptions` | 可扩展的 loading 配置项 | object  |              | {}     | —                                      |
 
 ### Chart 方法
 

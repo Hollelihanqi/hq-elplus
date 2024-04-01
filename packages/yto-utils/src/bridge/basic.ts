@@ -37,11 +37,9 @@ export const JsBridge = {
   },
 
   first: function () {
-    console.log("jsBridge:first");
     const u = navigator.userAgent;
     const isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
     if (!isiOS) {
-      console.log("jsBridge:first:::!isiOS");
       try {
         JsBridge.init(function (bridge) {
           bridge.init(function (data, responseCallback) {
@@ -77,7 +75,6 @@ export const JsBridge = {
    * @return {Object} 回调
    */
   callHandler: function (name, data, fun) {
-    // console.log("jsBridge:callHandler")
     JsBridge.init(function (bridge) {
       bridge.callHandler(name, data, fun);
     });

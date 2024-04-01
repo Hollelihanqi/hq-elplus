@@ -20,6 +20,7 @@ import {
   VNode,
 } from "vue";
 import type { BreakPoint } from "./interface/index";
+import { logger, warning } from "@/_utils";
 
 type Props = {
   cols?: number | Record<BreakPoint, number>; // 列数
@@ -100,12 +101,11 @@ if (slots.default && typeof slots.default === "function") {
   slots = slots.default();
 }
 
-
 // 寻找需要开始折叠的字段 index，实现折叠功能
 const findIndex = () => {
   let fields: VNodeArrayChildren = [];
   let suffix: any = null;
-  console.log(slots);
+  logger(slots);
   slots.forEach((slot: any) => {
     if (typeof slot.type === "object") {
       if (slot.type.name === "GridItem" && slot.props?.suffix !== undefined) {
@@ -144,7 +144,7 @@ const findIndex = () => {
     }, 0);
     if (!find) hiddenIndex.value = -1;
   } catch (e) {
-    // console.warn(e);
+    // warning(e);
   }
 };
 
