@@ -6,8 +6,6 @@ export default defineComponent({
   props: Props,
   setup(props) {
     const { _nodes, handleCopyClick } = useController(props);
-    // const _nodes = ref(jsonToNestedArray(props.vjson))
-    console.log("_nodes", _nodes.value);
     const paseKey = (key: string) => {
       const keys = key.split(".");
       return keys[keys.length - 1];
