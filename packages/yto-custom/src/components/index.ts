@@ -71,3 +71,6 @@ export * from "./radio";
 
 export { YtoTimeLine } from "./time-line";
 export * from "./time-line";
+
+export { YtoJsonViewer } from "./json-viewer";
+export * from "./json-viewer";

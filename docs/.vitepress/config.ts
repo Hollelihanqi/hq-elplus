@@ -24,10 +24,6 @@ export default defineConfig({
         {
           text: "组件",
           items: [
-            // {
-            //   text: "ProTable",
-            //   link: "/examples/pro-table/index.md",
-            // },
             {
               text: "Table 表格",
               link: "/examples/table/index.md",
@@ -123,6 +119,10 @@ export default defineConfig({
             {
               text: "TimeLine 时间线",
               link: "/examples/time-line/index.md",
+            },
+            {
+              text: "JsonViewer Json查看器",
+              link: "/examples/json-viewer/index.md",
             },
           ],
           collapsed: false,

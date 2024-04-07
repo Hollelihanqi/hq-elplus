@@ -8,7 +8,7 @@ import { ElMessage, ElTableColumn } from "element-plus";
 import { CopyDocument } from "@element-plus/icons-vue";
 import { logger } from "@/_utils";
 
-const props = defineProps({
+defineProps({
   column: {
     type: Object,
     default: () => ({}),

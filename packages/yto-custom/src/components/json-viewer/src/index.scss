@@ -1,0 +1,81 @@
+.json-viewer {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  padding: 8px;
+  .node-box {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .jv-red {
+    color: #fc1e70;
+  }
+  .jv-greed {
+    color: #42b983;
+  }
+  .jv-n {
+    color: #e08331;
+  }
+  .json-search {
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    background: #fff;
+    input {
+      // height: 100%;
+      width: 100%;
+      padding: 8px 16px;
+    }
+  }
+  /* 向下的正三角形 */
+  .triangle-down {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: 8px solid #824c96;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    margin-right: 2px;
+    border-radius: 2px;
+    // transform: translateY(1px);
+  }
+
+  /* 向右的正三角形 */
+  .triangle-right {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 8px solid #824c96;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    transform: translateY(1px);
+    margin-right: 2px;
+    border-radius: 3px;
+  }
+
+  .json-copy {
+    position: absolute;
+    right: 16px;
+    top: 0;
+    cursor: pointer;
+    color: #824c96;
+    font-size: 14px;
+    padding: 2px 8px;
+    &:hover {
+      border-bottom: 1px solid #824c96;
+    }
+  }
+}
+.json-viewer-light {
+  background: #fff;
+}
+.json-viewer-dark {
+  background: #282c34;
+  .json-key-span {
+    color: #fff;
+  }
+  .color-f {
+    color: #fff;
+  }
+}
