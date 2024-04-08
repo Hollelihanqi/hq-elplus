@@ -31,7 +31,7 @@
       <template v-for="item in _columns" :key="item">
         <!-- selection || index -->
         <el-table-column
-          v-if="item.type === 'selection' || item.type === 'index'"
+          v-if="_showColumn(item) && (item.type === 'selection' || item.type === 'index')"
           v-bind="item"
           :align="item.align ?? 'center'"
           :reserve-selection="item.type === 'selection'"
@@ -48,7 +48,7 @@
           <slot v-else :name="item.type" :row="scope.row"></slot>
         </el-table-column>
         <!-- other 循环递归 -->
-        <TableColumn v-else :column="item">
+        <TableColumn v-else-if="_showColumn(item)" :column="item">
           <template v-for="slot in Object.keys($slots)" #[slot]="scope">
             <slot :name="slot" :row="scope.row" :index="scope.$index" v-bind="scope"></slot>
           </template>
@@ -88,7 +88,8 @@ export interface ColumnsItemProps {
 }
 
 const props = defineProps(Props);
-const { ElTableInstance, _columns, setColumns, SettingInstance, handleSetting, HandleSetSave } = useController(props);
+const { ElTableInstance, _columns, _showColumn, setColumns, SettingInstance, handleSetting, HandleSetSave } =
+  useController(props);
 
 const emits = defineEmits(["on-table"]);
 const _loading = ref(false);

@@ -96,6 +96,14 @@ const useController = (props: TableProps) => {
     }
   );
 
+  const _showColumn = (column: any) => {
+    if (column.hide && typeof column.hide === "function") {
+      return column.hide();
+    } else {
+      return column.show !== false;
+    }
+  };
+
   onBeforeMount(() => {
     if (props.showHideFields) {
       getShowHideColumns();
@@ -106,6 +114,7 @@ const useController = (props: TableProps) => {
   return {
     ElTableInstance,
     _columns,
+    _showColumn,
     setColumns,
     SettingInstance,
     handleSetting,
