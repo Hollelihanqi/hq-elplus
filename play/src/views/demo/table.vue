@@ -13,7 +13,7 @@ const paginationParams = ref({
   pageSize: 10,
 });
 
-const showHideFields = ["name"];
+const showHideFields = ["name", "sex"];
 // 分页选择
 const handleTableChange = async (type: string, num: number) => {
   type === "page" && (paginationParams.value.pageNum = num);
@@ -73,6 +73,8 @@ const columns = [
   {
     label: "姓名",
     prop: "name",
+    width: 100,
+    // hide: () => _show.value,
   },
   {
     label: "年龄",
@@ -89,6 +91,7 @@ const columns = [
   {
     label: "梦想",
     prop: "dream",
+    hide: () => _show.value,
   },
 ];
 </script>

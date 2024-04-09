@@ -31,7 +31,7 @@
       <template v-for="item in _columns" :key="item">
         <!-- selection || index -->
         <el-table-column
-          v-if="item.type === 'selection' || item.type === 'index'"
+          v-if="_showColumn(item) && (item.type === 'selection' || item.type === 'index')"
           v-bind="item"
           :align="item.align ?? 'center'"
           :reserve-selection="item.type === 'selection'"
@@ -48,7 +48,7 @@
           <slot v-else :name="item.type" :row="scope.row"></slot>
         </el-table-column>
         <!-- other 循环递归 -->
-        <TableColumn v-else :column="item">
+        <TableColumn v-else-if="_showColumn(item)" :column="item">
           <template v-for="slot in Object.keys($slots)" #[slot]="scope">
             <slot :name="slot" :row="scope.row" :index="scope.$index" v-bind="scope"></slot>
           </template>
@@ -88,11 +88,10 @@ export interface ColumnsItemProps {
 }
 
 const props = defineProps(Props);
-const { _columns, setColumns, SettingInstance, handleSetting, HandleSetSave } = useController(props);
+const { ElTableInstance, _columns, _showColumn, setColumns, SettingInstance, handleSetting, HandleSetSave } =
+  useController(props);
 
-const ElTableInstance = ref();
 const emits = defineEmits(["on-table"]);
-// const { total, pageSizes } = toRefs(props) as any;
 const _loading = ref(false);
 const _tableData = ref<any>([]);
 const _tableDataTotal = ref(0);
@@ -187,11 +186,11 @@ const getTableData = async (params = {}) => {
     }
     await nextTick();
     props.dataUpdateAfter(_params, result);
-  } catch (error) {
+  } catch (eor) {
     _loading.value = false;
     error("表格请求数据发生错误...");
-    error(error);
-    return Promise.reject(error);
+    error(eor);
+    return Promise.reject(eor);
   }
 };
 

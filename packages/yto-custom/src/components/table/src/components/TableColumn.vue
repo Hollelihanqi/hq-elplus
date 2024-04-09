@@ -8,7 +8,7 @@ import { ElMessage, ElTableColumn } from "element-plus";
 import { CopyDocument } from "@element-plus/icons-vue";
 import { logger } from "@/_utils";
 
-const props = defineProps({
+defineProps({
   column: {
     type: Object,
     default: () => ({}),
@@ -50,22 +50,22 @@ const renderCellData = (item: any, scope: any) => {
     : scope.row[item.prop] ?? "--";
 };
 
-const _showColumn = (column: any) => {
-  if (column.hide && typeof column.hide === "function") {
-    return column.hide();
-  } else {
-    return column.show !== false;
-  }
-};
+// const _showColumn = (column: any) => {
+//   if (column.hide && typeof column.hide === "function") {
+//     return column.hide();
+//   } else {
+//     return column.show !== false;
+//   }
+// };
 
 const renderColumn = (column: any) => {
   return (
     <>
-      {_showColumn(column) && (
+      {
         <ElTableColumn
-          className={column.sortable && column.align === "right" ? "sort-cell-td" : ""}
           showOverflowTooltip={column.showOverflowTooltip ?? column.prop !== "action"}
           {...column}
+          className={`${column.sortable && column.align === "right" ? "sort-cell-td" : ""} ${column?.className || ""} `}
         >
           {{
             default: (scope: any) => {
@@ -96,7 +96,7 @@ const renderColumn = (column: any) => {
             },
           }}
         </ElTableColumn>
-      )}
+      }
     </>
   );
 };

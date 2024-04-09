@@ -58,6 +58,7 @@ interface SearchProps<T extends keyof FormEl> {
   render?: Function;
   isRemote?: boolean;
   remoteProps?: any;
+  hide?: () => boolean;
 }
 
 type El = keyof FormEl;

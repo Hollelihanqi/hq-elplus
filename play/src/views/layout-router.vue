@@ -210,6 +210,12 @@ const listNavigation: any[] = [
         code: "/TimeLine",
         mode: "router",
       },
+      {
+        label: "searchForm",
+        href: "/searchForm",
+        code: "/searchForm",
+        mode: "router",
+      },
     ],
   },
 ];
