@@ -88,7 +88,7 @@ importers:
         specifier: ^2.5.6
         version: 2.5.6(vue@3.4.19)
       eslint:
-        specifier: ^8.51.0
+        specifier: ^8.56.0
         version: 8.56.0
       husky:
         specifier: ^8.0.3
@@ -242,7 +242,7 @@ importers:
         version: 1.6.7
       element-plus:
         specifier: ^2.4.0
-        version: 2.5.6(vue@3.4.19)
+        version: 2.5.6(vue@3.4.21)
       gold-core:
         specifier: 0.1.17
         version: 0.1.17
@@ -271,7 +271,7 @@ importers:
         version: 1.6.7
       element-plus:
         specifier: ^2.4.0
-        version: 2.5.6(vue@3.4.19)
+        version: 2.5.6(vue@3.4.21)
       gold-core:
         specifier: 0.1.17
         version: 0.1.17
@@ -311,6 +311,9 @@ importers:
       prettier:
         specifier: ^2.7.1
         version: 2.8.8
+      typescript:
+        specifier: ^4.9.5
+        version: 4.9.5
     devDependencies:
       eslint:
         specifier: ^8.18.0
@@ -1274,6 +1277,14 @@ packages:
       vue: ^3.2.0
     dependencies:
       vue: 3.4.19(typescript@4.9.5)
+
+  /@element-plus/icons-vue@2.3.1(vue@3.4.21):
+    resolution: {integrity: sha512-XxVUZv48RZAd87ucGS48jPf6pKu0yV5UCg9f4FFwtrYxXOwWuVJo6wOvSLKEoMQKjv8GsX/mhP6UsC1lRwbUWg==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      vue: 3.4.21(typescript@4.9.5)
+    dev: true
 
   /@esbuild/aix-ppc64@0.20.2:
     resolution: {integrity: sha512-D+EBOJHXdNZcLJRBkhENNG8Wji2kgc9AZ9KiPr1JuZjsNtyHzrsfLRrY0tk2H2aoFu6RANO1y1iPPUCDYWkb5g==}
@@ -3458,7 +3469,7 @@ packages:
     dependencies:
       '@vue/compiler-ssr': 3.4.21
       '@vue/shared': 3.4.21
-      vue: 3.4.21
+      vue: 3.4.21(typescript@4.9.5)
     dev: true
 
   /@vue/shared@3.4.19:
@@ -3498,6 +3509,18 @@ packages:
       '@vueuse/metadata': 9.13.0
       '@vueuse/shared': 9.13.0(vue@3.4.19)
       vue-demi: 0.14.7(vue@3.4.19)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: true
+
+  /@vueuse/core@9.13.0(vue@3.4.21):
+    resolution: {integrity: sha512-pujnclbeHWxxPRqXWmdkKV5OX4Wk4YeK7wusHqRwU0Q7EFusHoqNA/aPhB6KCh9hEqJkLAJo7bb0Lh9b+OIVzw==}
+    dependencies:
+      '@types/web-bluetooth': 0.0.16
+      '@vueuse/metadata': 9.13.0
+      '@vueuse/shared': 9.13.0(vue@3.4.21)
+      vue-demi: 0.14.7(vue@3.4.21)
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -3586,6 +3609,15 @@ packages:
     resolution: {integrity: sha512-UrnhU+Cnufu4S6JLCPZnkWh0WwZGUp72ktOF2DFptMlOs3TOdVv8xJN53zhHGARmVOsz5KqOls09+J1NR6sBKw==}
     dependencies:
       vue-demi: 0.14.7(vue@3.4.19)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: true
+
+  /@vueuse/shared@9.13.0(vue@3.4.21):
+    resolution: {integrity: sha512-UrnhU+Cnufu4S6JLCPZnkWh0WwZGUp72ktOF2DFptMlOs3TOdVv8xJN53zhHGARmVOsz5KqOls09+J1NR6sBKw==}
+    dependencies:
+      vue-demi: 0.14.7(vue@3.4.21)
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -4790,6 +4822,31 @@ packages:
       memoize-one: 6.0.0
       normalize-wheel-es: 1.2.0
       vue: 3.4.19(typescript@4.9.5)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+    dev: true
+
+  /element-plus@2.5.6(vue@3.4.21):
+    resolution: {integrity: sha512-zctKTiyIDmcnMp3K5WG1hglgraW9EbiCLiIDVtaMCS5mPMl2fRKdS0vOFGnECIq9taFoxnyoDwxHD81nv0B4RA==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@ctrl/tinycolor': 3.6.1
+      '@element-plus/icons-vue': 2.3.1(vue@3.4.21)
+      '@floating-ui/dom': 1.6.3
+      '@popperjs/core': /@sxzz/popperjs-es@2.11.7
+      '@types/lodash': 4.14.202
+      '@types/lodash-es': 4.17.12
+      '@vueuse/core': 9.13.0(vue@3.4.21)
+      async-validator: 4.2.5
+      dayjs: 1.11.10
+      escape-html: 1.0.3
+      lodash: 4.17.21
+      lodash-es: 4.17.21
+      lodash-unified: 1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.17.21)(lodash@4.17.21)
+      memoize-one: 6.0.0
+      normalize-wheel-es: 1.2.0
+      vue: 3.4.21(typescript@4.9.5)
     transitivePeerDependencies:
       - '@vue/composition-api'
     dev: true
@@ -9524,7 +9581,7 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
-      vue: 3.4.21
+      vue: 3.4.21(typescript@4.9.5)
     dev: true
 
   /vue-eslint-parser@9.4.2(eslint@8.56.0):
@@ -9601,6 +9658,22 @@ packages:
       '@vue/runtime-dom': 3.4.21
       '@vue/server-renderer': 3.4.21(vue@3.4.21)
       '@vue/shared': 3.4.21
+    dev: true
+
+  /vue@3.4.21(typescript@4.9.5):
+    resolution: {integrity: sha512-5hjyV/jLEIKD/jYl4cavMcnzKwjMKohureP8ejn3hhEjwhWIhWeuzL2kJAjzl/WyVsgPY56Sy4Z40C3lVshxXA==}
+    peerDependencies:
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@vue/compiler-dom': 3.4.21
+      '@vue/compiler-sfc': 3.4.21
+      '@vue/runtime-dom': 3.4.21
+      '@vue/server-renderer': 3.4.21(vue@3.4.21)
+      '@vue/shared': 3.4.21
+      typescript: 4.9.5
     dev: true
 
   /wcwidth@1.0.1:
