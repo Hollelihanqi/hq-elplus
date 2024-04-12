@@ -56,15 +56,14 @@ ocrValueMapping(res2.successData,{
   regionScope:'regionScope'
 })
 */
-export const ocrValueMapping = (originalData,field)=>{
-  const obj = {}
-  Object.values(field).forEach((item,index)=>{
-    console.log("xxxx",Object.keys(field)[index])
+export const ocrValueMapping = (originalData, field) => {
+  const obj = {};
+  Object.values(field).forEach((item, index) => {
+    console.log("xxxx", Object.keys(field)[index]);
     // @ts-ignore
-    console.log("originalData[item]",originalData[item])
+    console.log("originalData[item]", originalData[item]);
     // @ts-ignore
-    obj[Object.keys(field)[index]] = originalData[item]
-  })
+    obj[Object.keys(field)[index]] = originalData[item];
+  });
   return obj;
-}
-
+};
