@@ -124,6 +124,10 @@ export default defineConfig({
               text: "JsonViewer Json查看器",
               link: "/examples/json-viewer/index.md",
             },
+            {
+              text: "text-ellipsis 多行文字折叠",
+              link: "/examples/text-ellipsis/index.md",
+            },
           ],
           collapsed: false,
         },

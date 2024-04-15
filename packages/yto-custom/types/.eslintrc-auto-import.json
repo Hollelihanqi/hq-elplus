@@ -67,7 +67,6 @@
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
-    "watchSyncEffect": true,
-    "ElTableInstance": true
+    "watchSyncEffect": true
   }
 }

@@ -74,3 +74,6 @@ export * from "./time-line";
 
 export { YtoJsonViewer } from "./json-viewer";
 export * from "./json-viewer";
+
+export { YtoTextEllipsis } from "./text-ellipsis";
+export * from "./text-ellipsis";

@@ -123,7 +123,6 @@ export default defineComponent({
     };
 
     const disLabelEvent = () => {
-      logger("RemoteSearchSelectInstance.value", RemoteSearchSelectInstance.value);
       const label = RemoteSearchSelectInstance.value?.$el.parentElement.parentElement;
       label && label.classList.add("el-form-label-dis");
     };
@@ -137,7 +136,7 @@ export default defineComponent({
       disLabelEvent();
     });
 
-    const RemoteSearchSelectInstance = ref();
+    const RemoteSearchSelectInstance: any = ref();
     expose({ getOptions, clearOptions });
 
     const renderSelect = () => {
@@ -218,4 +217,3 @@ export default defineComponent({
 <style lang="scss">
 @import "./index.scss";
 </style>
-import { toUpperCamelCase } from "gold-core";
