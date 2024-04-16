@@ -60,7 +60,7 @@ const tags: any = computed({
   },
   set(value) {
     const _v = value.map((item: any) => item);
-    emits("update:modelValue", _v.length ? _v : "");
+    emits("update:modelValue", _v.length ? _v.filter((item: string) => item) : "");
     emits("on-updated", _v);
   },
 });
