@@ -5,7 +5,7 @@ import { install } from "../../_utils";
 import { creator } from "../../_utils/create-api/creator";
 creator(Dialog, {});
 
-export const YtoDialog = install(Dialog);
+export const YtoDialog: any = install(Dialog);
 
 export * from "./src/instance";
 
