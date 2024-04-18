@@ -9,9 +9,12 @@ export const makeStringProp = <T,>(defaultVal: T) => ({
   type: String as unknown as PropType<T>,
   default: defaultVal,
 });
-
 export const makeNumericProp = <T,>(defaultVal: T) => ({
   type: numericProp,
+  default: defaultVal,
+});
+export const makeBooleanProp = <T,>(defaultVal: T) => ({
+  type: Boolean as unknown as PropType<T>,
   default: defaultVal,
 });
 
@@ -22,7 +25,8 @@ export function getZIndexStyle(zIndex?: number | string) {
   }
   return style;
 }
-export function getScrollTop(el: Element | Window): number {
+export function getScrollTop(el: Element | Window | null): number {
+  if (!el) return 0;
   const top = "scrollTop" in el ? el.scrollTop : el.pageYOffset;
   return Math.max(top, 0);
 }
@@ -48,6 +52,7 @@ export const stickyProps = {
   container: Object as PropType<Element>,
   offsetTop: makeNumericProp(0),
   offsetBottom: makeNumericProp(0),
+  inGlobal: makeBooleanProp(true),
 };
 
 export default defineComponent({
@@ -58,6 +63,7 @@ export default defineComponent({
     const root = ref<HTMLElement>();
     const sticySelf = ref<HTMLElement>();
     const scrollParent = useScrollParent(root);
+    const { inGlobal } = props;
 
     const scrollParentRect = ref({
       width: 0,
@@ -92,10 +98,19 @@ export default defineComponent({
       if (!state.fixed) {
         return;
       }
+      const { clientHeight } = document.documentElement;
+
+      let positionY = 0;
+      if (props.position === "bottom") {
+        positionY = clientHeight - scrollParentRect.value.bottom + offset.value;
+      } else {
+        positionY = scrollParentRect.value.top + offset.value;
+      }
+
       const style: CSSProperties = Object.assign(getZIndexStyle(props.zIndex), {
         width: `${state.width}px`,
         height: `${state.height}px`,
-        [props.position]: `${offset.value}px`,
+        [props.position]: inGlobal ? `${offset.value}px` : `${positionY}px`,
         left: `${state.left}px`,
       });
 
@@ -108,12 +123,12 @@ export default defineComponent({
 
     const emitScroll = (scrollTop: number) => emit("scroll", { scrollTop, isFixed: state.fixed });
 
-    const onScroll = () => {
+    const onScroll = (e: Event) => {
       if (!root.value || isHidden(root)) return;
 
       const { container, position } = props;
       const rootRect = useRect(root);
-      const scrollTop = getScrollTop(window);
+      const scrollTop = getScrollTop(e.target as Element);
 
       state.width = rootRect.width;
       state.height = rootRect.height;
@@ -123,48 +138,34 @@ export default defineComponent({
         if (container) {
           // 获取容器的{ x, y, width, height }
           const containerRect = useRect(container);
-
-          console.log("containerRect", containerRect);
-          console.log("scrollParent", scrollParent);
+          const { top: scrollParentTop } = scrollParentRect.value;
           // 备注：container 在滚动元素中不可见时，取消吸顶; 【容器的 bottom - 滚动父级的top < 0 说明容器在滚动元素中不可见了】
-          const differenceHeight = containerRect.bottom - scrollParentRect.value.top;
-          console.log("differenceHeight", differenceHeight);
-
-          // 高度的差值 difference < 0 说明容器在滚动元素中不可见
-          const difference = containerRect.bottom - offset.value - state.height;
-          state.fixed = differenceHeight > 0 && containerRect.bottom > 0 && offset.value > rootRect.top; // offset.value > rootRect.top && containerRect.bottom > 0 && difference > 0;
+          const differenceY = containerRect.bottom - scrollParentTop;
+          state.fixed = differenceY > 0 && containerRect.bottom > 0 && offset.value <= scrollParentTop - rootRect.top;
           // state.transform = difference < 0 ? difference : 0;
-
-          console.log("difference", difference);
-          console.log("offset.value", offset.value);
-          console.log("state.height", state.height);
-          console.log("====================================");
         } else {
           // 没有指定容器的时候，在当前父级滚动parent中吸顶
-          console.log("rootRect.top:", rootRect.top);
-          // stickyStyle;
-          state.fixed = offset.value > rootRect.top;
+          const { top: scrollParentTop } = scrollParentRect.value;
+          state.fixed = offset.value <= scrollParentTop - rootRect.top;
         }
       } else {
         // 吸底
-        const { clientHeight } = document.documentElement;
         if (container) {
           // 获取容器的{ x, y, width, height }
           const containerRect = useRect(container);
-          // 高度的差值
-          const difference = clientHeight - containerRect.top - offset.value - state.height;
-          state.fixed = clientHeight - offset.value < rootRect.bottom && clientHeight > containerRect.top;
-          state.transform = difference < 0 ? -difference : 0;
+          const { bottom: scrollParentBottom, height: scrollParentHeight } = scrollParentRect.value;
+          // 备注：container 在滚动元素中不可见时，取消吸底部; 【容器top - 滚动父级的bottom > 0 说明容器在滚动父级不可见】===【容器的bottom - 滚动父级的bottom < 容器的高度 说明容器在滚动父级可见】
+          const differenceY = containerRect.top - scrollParentBottom;
+          state.fixed = differenceY > 0 && scrollParentBottom - offset.value < rootRect.bottom; // root 是否在滚动父级中可见:
+
+          // const difference = clientHeight - containerRect.top - offset.value - state.height;
+          // state.fixed = clientHeight - offset.value < rootRect.bottom && clientHeight > containerRect.top;
+          // state.transform = difference < 0 ? -difference : 0;
         } else {
-          const scrollParentHeight = scrollParentRect.value.height;
-
-          console.log("rootRect", rootRect);
-          console.log("scrollParentHeight", scrollParentHeight);
-
-          state.fixed = scrollParentHeight - offset.value < rootRect.bottom; // clientHeight - offset.value < rootRect.bottom;
+          const { bottom: scrollParentBottom } = scrollParentRect.value;
+          state.fixed = scrollParentBottom - offset.value < rootRect.bottom;
         }
       }
-
       emitScroll(scrollTop);
     };
 
@@ -181,11 +182,7 @@ export default defineComponent({
 
     onMounted(() => {
       state.left = useRect(sticySelf).left;
-      console.log("state.left", useRect(sticySelf), sticySelf.value);
-
       scrollParentRect.value = useRect(scrollParent);
-      console.log("scrollParent", scrollParent);
-      console.log("scrollParent useRect", useRect(scrollParent));
     });
 
     return () => (

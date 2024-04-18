@@ -216,6 +216,12 @@ const listNavigation: any[] = [
         code: "/searchForm",
         mode: "router",
       },
+      {
+        label: "sticky",
+        href: "/sticky",
+        code: "/sticky",
+        mode: "router",
+      },
     ],
   },
 ];
