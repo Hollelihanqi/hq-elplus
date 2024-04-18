@@ -123,12 +123,12 @@ export default defineComponent({
 
     const emitScroll = (scrollTop: number) => emit("scroll", { scrollTop, isFixed: state.fixed });
 
-    const onScroll = (e: Event) => {
+    const onScroll = () => {
       if (!root.value || isHidden(root)) return;
 
       const { container, position } = props;
       const rootRect = useRect(root);
-      const scrollTop = getScrollTop(e.target as Element);
+      const scrollTop = getScrollTop(scrollParent.value as Element);
 
       state.width = rootRect.width;
       state.height = rootRect.height;
