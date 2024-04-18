@@ -7,8 +7,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from "vue";
+import { defineComponent, ref, reactive, h } from "vue";
 import { YtoDialog } from "@yto/custom";
+import { ElInput } from "element-plus";
 
 console.log("YtoDialog", YtoDialog);
 
@@ -41,6 +42,7 @@ export default defineComponent({
       );
     };
 
+    const message = ref("");
     const show2 = () => {
       const container = document.getElementById("container");
 
@@ -65,7 +67,17 @@ export default defineComponent({
           },
           title: "我是函数弹框22222",
         },
-        ["show2"]
+        ["show2"],
+        {
+          default: () =>
+            h(ElInput, {
+              modelValue: message.value,
+              "onUpdate:modelValue": (val) => {
+                message.value = val;
+              },
+              placeholder: "请输入内容",
+            }),
+        }
       );
     };
 

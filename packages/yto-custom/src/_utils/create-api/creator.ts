@@ -23,8 +23,8 @@ export const createMountContainer = (customClass?: string[]): Element => {
   return container;
 };
 
-export const createVnode = (component: Component, props: IObj): VNode => {
-  const vnode = h(component, { ...props });
+export const createVnode = (component: Component, props: IObj, slots?: IObj): VNode => {
+  const vnode = h(component, { ...props }, { ...slots });
   return vnode;
 };
 
@@ -59,8 +59,8 @@ export const creator: ICreator = (component: Component, props: IObj, customClass
   appendToContainer = props.appendTo || document.body;
 
   Object.assign(component!, {
-    $creator: function (props: IObj, customClass?: string[]) {
-      const vnode = createVnode(this, props);
+    $creator: function (props: IObj, customClass?: string[], slots?: IObj) {
+      const vnode = createVnode(this, props, slots);
       mount(vnode, appendToContainer, customClass);
     },
   });
