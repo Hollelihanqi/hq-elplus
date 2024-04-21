@@ -72,15 +72,15 @@
 
 ### Column 属性
 
-| 属性名         | 说明                                     | 类型          | 备注              |
-| -------------- | ---------------------------------------- | ------------- | ----------------- |
-| `hide`         | 隐藏列                                   | Boolean       |                   |
-| `copy`         | 鼠标左键点击后复制列文本                 | Boolean       |                   |
-| `enum`         | 字典，可格式化单元格内容                 | Array、Object |                   |
-| `formatText`   | 列文本格式化                             | Function      | `formatText(row)` |
-| `render`       | 自定义单元格内容渲染（tsx 语法、h 语法） | Function      |                   |
-| `headerRender` | 自定义单元格内容渲染（tsx 语法、h 语法） | Function      |                   |
-| `_children`    | 多级表头                                 | Array         |                   |
+| 属性名         | 说明                                     | 类型          | 备注                 |
+| -------------- | ---------------------------------------- | ------------- | -------------------- |
+| `hide`         | 隐藏列                                   | `()=>Boolean` |                      |
+| `copy`         | 鼠标左键点击后复制列文本                 | Boolean       |                      |
+| `enum`         | 字典，可格式化单元格内容                 | Array、Object |                      |
+| `formatText`   | 列文本格式化                             | Function      | `formatText(row)`    |
+| `render`       | 自定义单元格内容渲染（tsx 语法、h 语法） | Function      | `render:(scope)=>{}` |
+| `headerRender` | 自定义单元格内容渲染（tsx 语法、h 语法） | Function      |                      |
+| `_children`    | 多级表头                                 | Array         |                      |
 
 ### Table 方法
 
