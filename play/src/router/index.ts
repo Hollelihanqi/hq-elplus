@@ -47,6 +47,7 @@ const routes = [
   { path: "/selectRemote", component: () => import("@/views/demo/CustomProvinceAreaSelect.vue") },
   { path: "/timeLine", component: () => import("@/views/demo/TimeLineDemo.vue") },
   { path: "/searchForm", component: () => import("@/views/demo/search-from.vue") },
+  { path: "/sticky", component: () => import("@/views/demo/sticky.vue") },
 ];
 
 export const router = createRouter({

@@ -77,3 +77,6 @@ export * from "./json-viewer";
 
 export { YtoTextEllipsis } from "./text-ellipsis";
 export * from "./text-ellipsis";
+
+export { YtoSticky } from "./sticky";
+export * from "./sticky";
