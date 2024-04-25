@@ -124,6 +124,18 @@ export const Props = {
     type: String,
     default: "",
   },
+  emptySize: {
+    type: String,
+    default: "small",
+  },
+  emptyDesc: {
+    type: String,
+    default: "暂无数据",
+  },
+  emptyDescHide: {
+    type: Boolean,
+    default: false,
+  },
 };
 
 export type TableProps = ExtractPropTypes<typeof Props>;

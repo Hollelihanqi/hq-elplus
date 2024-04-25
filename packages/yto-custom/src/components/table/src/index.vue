@@ -25,7 +25,9 @@
         <slot name="append"></slot>
       </template>
       <template #empty>
-        <slot name="empty"></slot>
+        <slot name="empty">
+          <Empty :size="emptySize" :hidesc="emptyDescHide" :desc="emptyDesc"></Empty>
+        </slot>
       </template>
 
       <template v-for="item in _columns" :key="item">
@@ -79,6 +81,7 @@ import { ref, onMounted, defineEmits } from "vue";
 import { Props } from "./props";
 import TableColumn from "./components/TableColumn.vue";
 import SettingV from "./components/Setting.vue";
+import Empty from "./components/Empty.vue";
 import { Setting } from "@element-plus/icons-vue";
 import useController from "./use-controller";
 import { error } from "@/_utils";

@@ -1,5 +1,5 @@
 <template>
-  <yto-c-table :columns="columns" :table-data="tableData" :total="total" tool-bar :show-hide-fields="showHideFields">
+  <yto-c-table :columns="columns" :table-data="[]" :total="total" tool-bar :show-hide-fields="showHideFields">
     <template #tableHeader>
       <el-button @click="_show = !_show">显示列</el-button>
     </template>
