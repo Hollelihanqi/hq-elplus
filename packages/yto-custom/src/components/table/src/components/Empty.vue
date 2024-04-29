@@ -5,8 +5,8 @@ const BaseEmpty = (props: any) => {
     height: "120px",
   };
   const sizeSmall = {
-    width: "160px",
-    height: "80px",
+    width: "120px",
+    height: "60px",
   };
   const sizeMini = {
     width: "80px",
