@@ -1,5 +1,13 @@
+<!--
+ * @Author: DESKTOP-7338OS6\LHQ LHQ
+ * @Date: 2024-03-20 17:08:07
+ * @LastEditors: DESKTOP-7338OS6\LHQ LHQ
+ * @LastEditTime: 2024-05-08 09:47:24
+ * @FilePath: \yto-engine\play\src\views\demo\table.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <template>
-  <yto-c-table :columns="columns" :table-data="[]" :total="total" tool-bar :show-hide-fields="showHideFields">
+  <yto-c-table :columns="columns" :table-data="tableData" :total="total" tool-bar :show-hide-fields="showHideFields">
     <template #tableHeader>
       <el-button @click="_show = !_show">显示列</el-button>
     </template>
@@ -77,8 +85,10 @@ const columns = [
     // hide: () => _show.value,
   },
   {
-    label: "年龄",
+    label: "年龄年龄",
     prop: "age",
+    align: "right",
+    sortable: "custom",
   },
   {
     label: "性别",
