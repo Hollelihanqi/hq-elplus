@@ -48,6 +48,7 @@ const routes = [
   { path: "/timeLine", component: () => import("@/views/demo/TimeLineDemo.vue") },
   { path: "/searchForm", component: () => import("@/views/demo/search-from.vue") },
   { path: "/sticky", component: () => import("@/views/demo/sticky.vue") },
+  { path: "/util", component: () => import("@/views/demo/utils.vue") },
 ];
 
 export const router = createRouter({

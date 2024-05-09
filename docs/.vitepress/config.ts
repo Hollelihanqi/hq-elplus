@@ -157,6 +157,10 @@ export default defineConfig({
               link: "/examples/utils/waterMarker.md",
             },
             {
+              text: "时间",
+              link: "/examples/utils/time.md",
+            },
+            {
               text: "其他方法",
               link: "/examples/utils/other.md",
             },

@@ -224,6 +224,18 @@ const listNavigation: any[] = [
       },
     ],
   },
+  {
+    label: "工具库调试",
+    icon: "icon iconfont party-web-icon-caidan3",
+    children: [
+      {
+        label: "utils",
+        href: "/util",
+        code: "/util",
+        mode: "router",
+      },
+    ],
+  },
 ];
 // const frist = listNavigation[0].children[0];
 
