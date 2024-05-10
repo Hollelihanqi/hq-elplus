@@ -13,6 +13,8 @@ import { Props } from "./props";
 const BaseEmpty = (props: any) => {
   const descStyles = {
     fontSize: "14px",
+    color: "#909399",
+    marginTop: "16px",
   };
   return (
     <div class="flex flex-col justify-center items-center pt-[16px]">
