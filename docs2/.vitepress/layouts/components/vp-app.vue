@@ -16,54 +16,54 @@ const breakpoints = {
   xlg: 1280,
   xxl: 1440,
 };
-const [isSidebarOpen, toggleSidebar] = useToggle(false);
+const [isSidebarOpen, toggleSidebar] = useToggle(true);
 const { hasSidebar } = useSidebar();
 
-useToggleWidgets(isSidebarOpen, () => {
-  if (!isClient) return;
-  if (window.outerWidth >= breakpoints.lg) {
-    toggleSidebar(false);
-  }
-});
+// useToggleWidgets(isSidebarOpen, () => {
+//   if (!isClient) return;
+//   if (window.outerWidth >= breakpoints.lg) {
+//     toggleSidebar(false);
+//   }
+// });
 
-useEventListener("keydown", (e) => {
-  if (!isClient) return;
-  if (e.key === "Escape" && isSidebarOpen.value) {
-    toggleSidebar(false);
-    document.querySelector<HTMLButtonElement>(".sidebar-button")?.focus();
-  }
-});
+// useEventListener("keydown", (e) => {
+//   if (!isClient) return;
+//   if (e.key === "Escape" && isSidebarOpen.value) {
+//     toggleSidebar(false);
+//     document.querySelector<HTMLButtonElement>(".sidebar-button")?.focus();
+//   }
+// });
 
 onMounted(async () => {
   if (!isClient) return;
-  window.addEventListener(
-    "click",
-    (e) => {
-      const link = (e.target as HTMLElement).closest("a");
-      if (!link) return;
+  // window.addEventListener(
+  //   "click",
+  //   (e) => {
+  //     const link = (e.target as HTMLElement).closest("a");
+  //     if (!link) return;
 
-      const { protocol, hostname, pathname, target } = link;
-      const currentUrl = window.location;
-      const extMatch = pathname.match(/\.\w+$/);
-      // only intercept inbound links
-      if (
-        !e.ctrlKey &&
-        !e.shiftKey &&
-        !e.altKey &&
-        !e.metaKey &&
-        target !== `_blank` &&
-        protocol === currentUrl.protocol &&
-        hostname === currentUrl.hostname &&
-        !(extMatch && extMatch[0] !== ".html")
-      ) {
-        e.preventDefault();
-        if (pathname !== currentUrl.pathname) {
-          nprogress.start();
-        }
-      }
-    },
-    { capture: true }
-  );
+  //     const { protocol, hostname, pathname, target } = link;
+  //     const currentUrl = window.location;
+  //     const extMatch = pathname.match(/\.\w+$/);
+  //     // only intercept inbound links
+  //     if (
+  //       !e.ctrlKey &&
+  //       !e.shiftKey &&
+  //       !e.altKey &&
+  //       !e.metaKey &&
+  //       target !== `_blank` &&
+  //       protocol === currentUrl.protocol &&
+  //       hostname === currentUrl.hostname &&
+  //       !(extMatch && extMatch[0] !== ".html")
+  //     ) {
+  //       e.preventDefault();
+  //       if (pathname !== currentUrl.pathname) {
+  //         nprogress.start();
+  //       }
+  //     }
+  //   },
+  //   { capture: true }
+  // );
 
   // if (lang.value === 'zh-CN') {
   //   if (isMirrorUrl()) return
@@ -107,7 +107,7 @@ onMounted(async () => {
 <template>
   <div class="App">
     <VPNav />
-    <VPSubNav v-if="hasSidebar" :is-sidebar-open="isSidebarOpen" @open-menu="toggleSidebar(true)" />
+    <!-- <VPSubNav v-if="hasSidebar" :is-sidebar-open="isSidebarOpen" @open-menu="toggleSidebar(true)" /> -->
     <VPSidebar :open="isSidebarOpen" @close="toggleSidebar(false)">
       <template #top> </template>
       <template #bottom>

@@ -26,7 +26,7 @@
       </template>
       <template #empty>
         <slot name="empty">
-          <Empty :size="emptySize" :hidesc="emptyDescHide" :desc="emptyDesc"></Empty>
+          <Empty v-bind="emptyOptions"></Empty>
         </slot>
       </template>
 
@@ -81,7 +81,7 @@ import { ref, onMounted, defineEmits } from "vue";
 import { Props } from "./props";
 import TableColumn from "./components/TableColumn.vue";
 import SettingV from "./components/Setting.vue";
-import Empty from "./components/Empty.vue";
+import Empty from "../../empty";
 import { Setting } from "@element-plus/icons-vue";
 import useController from "./use-controller";
 import { error } from "@/_utils";

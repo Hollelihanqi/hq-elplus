@@ -3,3 +3,4 @@ packages:
   - "packages/**"
   - "play"
   - "docs"
+  - "docs2"

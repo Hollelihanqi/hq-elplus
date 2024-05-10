@@ -1,17 +1,16 @@
+<!--
+ * @Author: DESKTOP-7338OS6\LHQ LHQ
+ * @Date: 2024-05-10 09:32:31
+ * @LastEditors: DESKTOP-7338OS6\LHQ LHQ
+ * @LastEditTime: 2024-05-10 10:03:54
+ * @FilePath: \yto-engine\packages\yto-custom\src\components\empty\src\index.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <script lang="tsx">
+import { defineComponent } from "vue";
+import { Props } from "./props";
+
 const BaseEmpty = (props: any) => {
-  const sizeLarge = {
-    width: "240px",
-    height: "120px",
-  };
-  const sizeSmall = {
-    width: "120px",
-    height: "60px",
-  };
-  const sizeMini = {
-    width: "80px",
-    height: "40px",
-  };
   const descStyles = {
     fontSize: "14px",
   };
@@ -19,7 +18,7 @@ const BaseEmpty = (props: any) => {
     <div class="flex flex-col justify-center items-center pt-[16px]">
       <div>
         <svg
-          style={props.size === "small" ? sizeSmall : props.size === "mini" ? sizeMini : sizeLarge}
+          style={props.size === "small" ? props.smallSize : props.size === "mini" ? props.miniSize : props.largeSize}
           viewBox="0 0 240 120"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -140,5 +139,14 @@ const BaseEmpty = (props: any) => {
   );
 };
 
-export default BaseEmpty;
+export default defineComponent({
+  name: "Empty",
+  props: Props,
+  setup(props) {
+    return {};
+  },
+  render() {
+    return BaseEmpty(this);
+  },
+});
 </script>

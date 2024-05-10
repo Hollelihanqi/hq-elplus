@@ -1,6 +1,8 @@
 import type { ExtractPropTypes, PropType } from "vue";
 import type { PaginationProps } from "element-plus";
 import { ColumnsItemProps, CanWrite, ShowHideFieldsInterface } from "./interface";
+import { EmptyProps } from "../../empty";
+
 export const Props = {
   tableData: {
     type: Array,
@@ -124,17 +126,11 @@ export const Props = {
     type: String,
     default: "",
   },
-  emptySize: {
-    type: String,
-    default: "small",
-  },
-  emptyDesc: {
-    type: String,
-    default: "暂无数据",
-  },
-  emptyDescHide: {
-    type: Boolean,
-    default: false,
+  emptyOptions: {
+    type: Object as PropType<EmptyProps>,
+    default: () => ({
+      size: "small",
+    }),
   },
 };
 

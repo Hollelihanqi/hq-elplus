@@ -128,6 +128,10 @@ export default defineConfig({
               text: "text-ellipsis 多行文字折叠",
               link: "/examples/text-ellipsis/index.md",
             },
+            {
+              text: "empty 空状态",
+              link: "/examples/empty/index.md",
+            },
           ],
           collapsed: false,
         },

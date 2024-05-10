@@ -2,7 +2,7 @@
  * @Description: 模块名称
  * @Author: ym
  * @Date: 2023-12-13 15:34:28
- * @LastEditTime: 2024-02-21 13:44:49
+ * @LastEditTime: 2024-05-10 09:57:19
  */
 export { YtoDialog } from "./dialog";
 export * from "./dialog";
@@ -80,3 +80,6 @@ export * from "./text-ellipsis";
 
 export { YtoSticky } from "./sticky";
 export * from "./sticky";
+
+export { YtoEmpty } from "./empty";
+export * from "./empty";
