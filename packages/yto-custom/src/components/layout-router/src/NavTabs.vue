@@ -184,9 +184,10 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
     .active-pre-tab {
       border-bottom-right-radius: 4px;
     }
-    .el-icon {
+    .el-icon.is-icon-close {
       position: absolute;
       right: 20px;
+      color: var(--nav-tab-item-font-color);
     }
     & > div::before {
       position: absolute;
@@ -218,6 +219,7 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
       background: var(--nav-tab-active-bg);
       & > span {
         background: var(--nav-tab-active-bg);
+        color: var(--el-color-primary);
       }
     }
   }
