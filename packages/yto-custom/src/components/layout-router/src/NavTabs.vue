@@ -140,11 +140,9 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
 </script>
 <style lang="scss" scoped>
 .nav-tabs-w {
-  --nav-tabs-bg: #f0f1f5;
+  // --nav-tabs-bg: #e2e6e8;
   --nav-tab-item-divider-color: #b4b9bf;
   --nav-tab-item-bg: #fff;
-  --nav-tab-item-font-color: #151719;
-  --nav-tab-active-bg: #fff;
   background: var(--nav-tabs-bg);
   @apply px-[10px];
   :deep(.el-tabs) {
@@ -178,7 +176,7 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
       padding-right: 20px;
       & > span {
         background: var(--nav-tabs-bg);
-        color: var(--nav-tab-item-font-color);
+        color: var(--nav-tabs-text-color);
       }
     }
     .active-pre-tab {
@@ -187,7 +185,7 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
     .el-icon.is-icon-close {
       position: absolute;
       right: 20px;
-      color: var(--nav-tab-item-font-color);
+      color: var(--nav-tabs-text-color);
     }
     & > div::before {
       position: absolute;
@@ -216,9 +214,9 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
     & > div {
       border-top-left-radius: 4px;
       border-top-right-radius: 4px;
-      background: var(--nav-tab-active-bg);
+      background: var(--nav-tabs-active-bg);
       & > span {
-        background: var(--nav-tab-active-bg);
+        background: var(--nav-tabs-active-bg);
         color: var(--el-color-primary);
       }
     }

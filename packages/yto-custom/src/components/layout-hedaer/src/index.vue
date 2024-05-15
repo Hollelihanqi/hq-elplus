@@ -13,7 +13,7 @@
         <div class="collapse-icon flex items-center">
           <i
             class="icon iconfont cursor-pointer"
-            :class="collapse ? 'layout-icon_daohangzhankai' : 'layout-icon_daohangshouqi'"
+            :class="collapse ? 'layout-icon_dianjizhankai' : 'layout-icon_dianjishouqi'"
             @click="onCollapse"
           ></i>
         </div>
