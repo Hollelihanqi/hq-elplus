@@ -1,49 +1,108 @@
-/*
- * @Author: DESKTOP-7338OS6\LHQ LHQ
- * @Date: 2023-02-24 16:52:05
- * @LastEditors: 魏春霈
- * @LastEditTime: 2023-04-19 17:19:17
- * @FilePath: \xlfk-vite-vue3\vite.config.ts
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
-
-import { defineConfig, ConfigEnv, UserConfig, loadEnv } from "vite";
-import AutoImport from "unplugin-auto-import/vite";
+import path, { resolve } from "path";
+import Inspect from "vite-plugin-inspect";
+import { defineConfig, loadEnv } from "vite";
+import VueMacros from "unplugin-vue-macros/vite";
+import UnoCSS from "unocss/vite";
+import mkcert from "vite-plugin-mkcert";
+import glob from "fast-glob";
 import vueJsx from "@vitejs/plugin-vue-jsx";
-import UnoCSS from 'unocss/vite'
-// import dns from "dns";
-// dns.setDefaultResultOrder("verbatim");
-// // https://vitejs.dev/config/
-export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
-  const env = loadEnv(mode, process.cwd(), "VITE_");
+import Components from "unplugin-vue-components/vite";
+import Icons from "unplugin-icons/vite";
+import IconsResolver from "unplugin-icons/resolver";
+// import {
+//   docPackage,
+//   epPackage,
+//   getPackageDependencies,
+// } from '@element-plus/build-utils'
+import { MarkdownTransform } from "./.vitepress/plugins/markdown-transform";
+
+import type { Alias } from "vite";
+export const projRoot = resolve(__dirname, "..", "..", "..");
+const alias: Alias[] = [
+  {
+    find: "~/",
+    replacement: `${path.resolve(__dirname, "./.vitepress/vitepress")}/`,
+  },
+];
+// if (process.env.DOC_ENV !== 'production') {
+//   alias.push(
+//     {
+//       find: /^element-plus(\/(es|lib))?$/,
+//       replacement: path.resolve(projRoot, 'packages/element-plus/index.ts'),
+//     },
+//     {
+//       find: /^element-plus\/(es|lib)\/(.*)$/,
+//       replacement: `${path.resolve(projRoot, 'packages')}/$2`,
+//     }
+//   )
+// }
+
+export default defineConfig(async ({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), "");
+
+  // const { dependencies: epDeps } = getPackageDependencies(epPackage)
+  // const { dependencies: docsDeps } = getPackageDependencies(docPackage)
+
+  // const optimizeDeps = [...new Set([...epDeps, ...docsDeps])].filter(
+  //   (dep) =>
+  //     !dep.startsWith('@types/') &&
+  //     !['@element-plus/metadata', 'element-plus'].includes(dep)
+  // )
+
+  // optimizeDeps.push(
+  //   ...(await glob(['dayjs/plugin/*.js'], {
+  //     cwd: path.resolve(projRoot, 'node_modules'),
+  //     onlyFiles: true,
+  //   }))
+  // )
+
   return {
-    optimizeDeps: {
-      exclude: ["vitepress"],
-    },
-    plugins: [
-      vueJsx({
-        transformOn: true,
-        mergeProps: true,
-      }),
-      AutoImport({
-        imports: ["vue"],
-      }),
-      UnoCSS(),
-    ],
     server: {
-      // hmr: {
-      //   overlay: false,
-      // },
-      proxy: {
-        "/service-api": {
-          target: "http://10.130.16.149:8082",
-          changeOrigin: true,
-        },
-        "/api/v2": {
-          target: "http://10.130.137.53:8000", // sit
-          changeOrigin: true,
-        },
+      host: true,
+      fs: {
+        allow: [projRoot],
       },
     },
+    resolve: {
+      alias,
+    },
+    plugins: [
+      VueMacros({
+        setupComponent: false,
+        setupSFC: false,
+        plugins: {
+          vueJsx: vueJsx(),
+        },
+      }),
+
+      // https://github.com/antfu/unplugin-vue-components
+      Components({
+        dirs: [".vitepress/vitepress/components"],
+
+        allowOverrides: true,
+
+        // custom resolvers
+        resolvers: [
+          // auto import icons
+          // https://github.com/antfu/unplugin-icons
+          IconsResolver(),
+        ],
+
+        // allow auto import and register components used in markdown
+        include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+      }),
+
+      // https://github.com/antfu/unplugin-icons
+      Icons({
+        autoInstall: true,
+      }),
+      UnoCSS(),
+      MarkdownTransform(),
+      Inspect(),
+      mkcert(),
+    ],
+    // optimizeDeps: {
+    //   include: optimizeDeps,
+    // },
   };
 });

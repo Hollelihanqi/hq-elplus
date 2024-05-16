@@ -1,5 +1,6 @@
 ---
-title: '技术平台部业务组件库'
+title: "A Vue 3 UI Framework"
+lang: en-US
 page: true
 ---
 

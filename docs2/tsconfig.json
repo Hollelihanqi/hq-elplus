@@ -10,12 +10,27 @@
     "strict": true,
     "noImplicitAny": false,
     "skipLibCheck": true,
-    "lib": ["WebWorker"],
+    "lib": [
+      "WebWorker"
+    ],
     "paths": {
-      "~/*": ["./.vitepress/layouts/*"]
+      "@yto/custom": [
+        "../packages/yto-custom"
+      ],
+      "~/*": [
+        "./.vitepress/vitepress/*"
+      ]
     },
+    "types": [
+      "../packages/yto-custom/components"
+    ],
     "jsx": "preserve"
   },
-  "include": ["**/*", ".vitepress/**/*"],
-  "exclude": ["node_modules"]
+  "include": [
+    "**/*",
+    ".vitepress/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
