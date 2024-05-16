@@ -197,6 +197,29 @@ const getTableData = async (params = {}) => {
   }
 };
 
+const handlePagination = (
+  type: "size" | "page" | "sort",
+  value: number | { prop: string; order: string; column: any }
+): void => {
+  if (type === "size") {
+    paginationParams.currentPage = 1;
+    paginationParams.pageSize = value as number;
+  } else if (type === "sort") {
+    _sortItem = value && (value as { prop: string; order: string; column: any }).order ? value : null;
+    paginationParams.currentPage = 1;
+  }
+
+  emits("on-table", type, value, _sortItem);
+
+  if (props.tableChange && typeof props.tableChange === "function") {
+    props.tableChange(type, value);
+  }
+
+  if (props.tableActionIsCallApi) {
+    getTableData(_sortFieldFormat());
+  }
+};
+
 const handlePaginationChange = (type: "size" | "page" | "sort", num: number): void => {
   if (type === "size") {
     paginationParams.currentPage = 1; // 只有在改变大小时才重置当前页码
@@ -229,27 +252,30 @@ const handlePaginationChange = (type: "size" | "page" | "sort", num: number): vo
 
 // 用于分页大小变化
 const handleSizeChange = (num: number): void => {
-  handlePaginationChange("size", num);
+  // handlePaginationChange("size", num);
+  handlePagination("size", num);
 };
 
 // 用于分页页码变化
 const handlePageChange = (num: number) => {
-  handlePaginationChange("page", num);
+  // handlePaginationChange("page", num);
+  handlePagination("page", num);
 };
 
 // 用于表格排序
 const handleSortChange = (item: { prop: string; order: string; column: any }) => {
-  _sortItem = item && item.order ? item : null;
-  paginationParams.currentPage = 1;
-  emits("on-table", "sort", item);
-  // 为了兼容以前旧的 api
-  if (props.tableChange && typeof props.tableChange === "function") {
-    props.tableChange("sort", item);
-  }
-  // 如果设置为调用API，则获取表格数据
-  if (props.tableActionIsCallApi && !props.tableChange) {
-    getTableData(_sortFieldFormat(item));
-  }
+  // _sortItem = item && item.order ? item : null;
+  // paginationParams.currentPage = 1;
+  // emits("on-table", "sort", item);
+  // // 为了兼容以前旧的 api
+  // if (props.tableChange && typeof props.tableChange === "function") {
+  //   props.tableChange("sort", item);
+  // }
+  // // 如果设置为调用API，则获取表格数据
+  // if (props.tableActionIsCallApi && !props.tableChange) {
+  //   getTableData(_sortFieldFormat(item));
+  // }
+  handlePagination("sort", item);
 };
 
 const updateTableData = (params = {}) => {
@@ -257,9 +283,16 @@ const updateTableData = (params = {}) => {
 };
 
 const resetTableData = (params = {}) => {
-  paginationParams.currentPage = 1;
-  paginationParams.pageSize = props.pageSize;
-  getTableData(params);
+  resetPage();
+  if (props.defaultSort) {
+    try {
+      ElTableInstance.value.sort(_defaultSort.value.prop, _defaultSort.value.order);
+    } catch (error) {
+      console.error(error);
+    }
+  } else {
+    getTableData(params);
+  }
 };
 
 const resetPage = () => {

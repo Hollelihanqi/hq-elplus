@@ -1,5 +1,4 @@
 import type { TableProps, ColumnsItemProps, setColumnsProps } from "./interface";
-import { error } from "@/_utils";
 
 const useController = (props: TableProps) => {
   const ElTableInstance = ref();
