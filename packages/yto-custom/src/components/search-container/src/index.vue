@@ -1,17 +1,17 @@
 <template>
-  <div :id="containerId" class="search-container relative" :class="customClass">
+  <div :id="containerId" class="search-container relative w-full" :class="customClass">
     <el-form
       v-if="isUseForm"
       ref="formInstance"
       v-resize-element="handleResize"
       v-bind="$attrs"
-      class="flex flex-wrap container-content"
+      class="flex flex-wrap container-content w-full"
     >
       <slot></slot>
 
       <div class="flex-1 text-right container-operation"><slot name="operation"></slot></div>
     </el-form>
-    <div v-else v-resize-element="handleResize" class="container-content flex flex-wrap">
+    <div v-else v-resize-element="handleResize" class="container-content flex flex-wrap w-full">
       <slot></slot>
       <div class="flex-1 text-right container-operation"><slot name="operation"></slot></div>
     </div>
@@ -27,7 +27,7 @@
 </template>
 <script lang="ts" setup name="SearchContainer">
 import { resizeElement as vResizeElement } from "@/directives";
-import { guid } from "@yto/utils";
+import { guid, debounceFun } from "@yto/utils";
 import { DArrowRight } from "@element-plus/icons-vue";
 import { logger } from "@/_utils";
 
@@ -57,6 +57,7 @@ let prevWidth = 0; //记录上一次容器宽度
 const showCollapse = ref(false);
 const collapse = ref(false);
 const emit = defineEmits(["resize"]);
+
 const handleResize = (info: any) => {
   if (!props.itemMinWidth || !info.width || prevWidth == info.width) return;
   prevWidth = info.width;
