@@ -222,6 +222,12 @@ const listNavigation: any[] = [
         code: "/sticky",
         mode: "router",
       },
+      {
+        label: "jsonView",
+        href: "/jsonView",
+        code: "/jsonView",
+        mode: "router",
+      },
     ],
   },
   {

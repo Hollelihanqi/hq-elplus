@@ -225,7 +225,6 @@ const handlePaginationChange = (type: "size" | "page" | "sort", num: number): vo
     paginationParams.currentPage = 1; // 只有在改变大小时才重置当前页码
     paginationParams.pageSize = num;
   }
-
   emits(
     "on-table",
     type,
@@ -241,10 +240,6 @@ const handlePaginationChange = (type: "size" | "page" | "sort", num: number): vo
     props.tableChange(type, num);
   }
 
-  // 如果设置为调用API，则获取表格数据
-  // if (props.tableActionIsCallApi &&  _total.value !== _tdata.value.length) {
-  //   getTableData();
-  // }
   if (props.tableActionIsCallApi) {
     getTableData();
   }
@@ -252,30 +247,30 @@ const handlePaginationChange = (type: "size" | "page" | "sort", num: number): vo
 
 // 用于分页大小变化
 const handleSizeChange = (num: number): void => {
-  // handlePaginationChange("size", num);
-  handlePagination("size", num);
+  handlePaginationChange("size", num);
+  // handlePagination("size", num);
 };
 
 // 用于分页页码变化
 const handlePageChange = (num: number) => {
-  // handlePaginationChange("page", num);
-  handlePagination("page", num);
+  handlePaginationChange("page", num);
+  // handlePagination("page", num);
 };
 
 // 用于表格排序
 const handleSortChange = (item: { prop: string; order: string; column: any }) => {
-  // _sortItem = item && item.order ? item : null;
-  // paginationParams.currentPage = 1;
-  // emits("on-table", "sort", item);
-  // // 为了兼容以前旧的 api
-  // if (props.tableChange && typeof props.tableChange === "function") {
-  //   props.tableChange("sort", item);
-  // }
-  // // 如果设置为调用API，则获取表格数据
-  // if (props.tableActionIsCallApi && !props.tableChange) {
-  //   getTableData(_sortFieldFormat(item));
-  // }
-  handlePagination("sort", item);
+  _sortItem = item && item.order ? item : null;
+  paginationParams.currentPage = 1;
+  emits("on-table", "sort", item);
+  // 为了兼容以前旧的 api
+  if (props.tableChange && typeof props.tableChange === "function") {
+    props.tableChange("sort", item);
+  }
+  // 如果设置为调用API，则获取表格数据
+  if (props.tableActionIsCallApi && !props.tableChange) {
+    getTableData(_sortFieldFormat(item));
+  }
+  // handlePagination("sort", item);
 };
 
 const updateTableData = (params = {}) => {
@@ -283,7 +278,7 @@ const updateTableData = (params = {}) => {
 };
 
 const resetTableData = (params = {}) => {
-  resetPage();
+  paginationParams.currentPage = 1;
   if (props.defaultSort) {
     try {
       ElTableInstance.value.sort(_defaultSort.value.prop, _defaultSort.value.order);

@@ -1,7 +1,11 @@
 import { JsonViewerProps } from "./interface";
-
+import { ElMessage } from "element-plus";
 export const useController = (props: JsonViewerProps) => {
-  const _nodes = ref(jsonToNestedArray(props.data));
+  const _nodes = ref([]);
+  const isCollapsed = ref(false);
+  const toggleRoot = () => {
+    isCollapsed.value = !isCollapsed.value;
+  };
   const copyed = ref(false);
   // 复制
   const handleCopyClick = () => {
@@ -12,10 +16,19 @@ export const useController = (props: JsonViewerProps) => {
     document.execCommand("Copy");
     document.body.removeChild(input);
     copyed.value = true;
+    ElMessage.success("复制成功！");
   };
+
+  watchEffect(() => {
+    isCollapsed.value = false;
+    _nodes.value = jsonToNestedArray(props.data);
+  });
+
   return {
-    handleCopyClick,
+    isCollapsed,
     _nodes,
+    handleCopyClick,
+    toggleRoot,
   };
 };
 

@@ -1,6 +1,6 @@
 {
   "name": "@yto/custom",
-  "version": "1.11.5",
+  "version": "1.11.10",
   "type": "module",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -10,8 +10,10 @@
       "import": "./es/index.js",
       "types": "./es/index.d.ts"
     },
-    "./styles": "./es/style.css",
+    "./styles": "./es/style.css", 
     "./es": "./es/index.js",
+
+
     "./es/*": "./es/*.js",
     "./es/*.js": "./es/*.js",
     "./*": "./*"
