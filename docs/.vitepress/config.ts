@@ -136,6 +136,10 @@ export default defineConfig({
               text: "date picker 时间选择组件",
               link: "/examples/date-picker/index.md",
             },
+            {
+              text: "watermark 水印",
+              link: "/examples/watermark/index.md",
+            },
           ],
           collapsed: false,
         },
