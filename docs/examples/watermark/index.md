@@ -8,10 +8,6 @@
 
 ## Attributes
 
-[完整配置请参考-element-plus](https://element-plus.org/zh-CN/component/date-picker.html)
-
-### 自定义 dialog 属性
-
 | 属性名      | 说明                  | 类型   | 可选值 | 默认值                | 备注 |
 | ----------- | --------------------- | ------ | ------ | --------------------- | ---- |
 | `width`     | 水印宽度              | Number | -      | 200                   |      |
@@ -21,7 +17,3 @@
 | `fillStyle` | 字体填充样式          | String | -      | 'rgba(0, 0, 0, 0.08)' |      |
 | `rotate`    | 文字旋转角度          | Number | -      | -28                   |      |
 | `zIndex`    | 水印元素的 z-index 值 | String | -      | '99999'               |      |
-
-### 回调方法
-
-参考 element DatePicker 组件的使用
