@@ -10,6 +10,7 @@
     "build": "pnpm run -C packages/yto-custom build",
     "build:watch": "pnpm run -C packages/yto-custom watch",
     "utils:build": "pnpm run -C packages/yto-utils build",
+    "utils:buildwatch": "pnpm run -C packages/yto-utils watch",
     "play:dev": "pnpm utils:build && pnpm build && pnpm run -C play dev",
     "play:test": "pnpm run -C play dev",
     "docs:dev": "pnpm run -C docs docs:dev",

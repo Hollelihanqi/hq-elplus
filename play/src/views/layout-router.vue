@@ -222,6 +222,12 @@ const listNavigation: any[] = [
         code: "/sticky",
         mode: "router",
       },
+      {
+        label: "waterMarker",
+        href: "/waterMarker",
+        code: "/waterMarker",
+        mode: "router",
+      },
     ],
   },
   {

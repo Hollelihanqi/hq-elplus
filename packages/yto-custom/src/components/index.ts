@@ -86,3 +86,6 @@ export * from "./sticky";
 
 export { YtoEmpty } from "./empty";
 export * from "./empty";
+
+export { YtoWatermark } from "./water-mark";
+export * from "./water-mark";

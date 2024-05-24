@@ -9,21 +9,19 @@
 
 export const addWaterMarker = (
   params = {
-    text: "",
+    content: "",
     elNode: "",
     font: "",
     fillStyle: "",
-    rotateAngle: 0,
-    fillX: 0,
-    fillY: 0,
+    rotate: -28,
+    zIndex: "99999",
+    width: 200,
+    height: 100,
   }
 ) => {
-  const { text, elNode, font, fillStyle, rotateAngle, fillX, fillY } = params;
-
-  const tmpFillX = fillX || 20;
-  const tmpFillY = fillY || 75;
+  const { content, elNode, fillStyle, font, zIndex, rotate, width, height } = params;
   let node: any = elNode;
-  if (!text) return;
+  if (!content) return;
   if (!elNode) {
     node = document.body;
   }
@@ -32,18 +30,30 @@ export const addWaterMarker = (
   }
   try {
     const can: HTMLCanvasElement = document.createElement("canvas");
-    node.appendChild(can);
-    can.width = tmpFillX * 10;
-    can.height = tmpFillY * 2;
-    can.style.display = "none";
+    can.width = width ? width : 200;
+    can.height = height ? height : 100;
     const cans = can.getContext("2d") as CanvasRenderingContext2D;
-    cans.rotate(rotateAngle || (-20 * Math.PI) / 180);
-    cans.font = font || "16px Microsoft JhengHei";
-    cans.fillStyle = fillStyle || "rgba(180, 180, 180, 0.3)";
+    cans.rotate(rotate ? (rotate * Math.PI) / 180 : (-28 * Math.PI) / 180);
+    cans.font = font || "14px Inter, Avenir";
+    cans.fillStyle = fillStyle || "rgba(0, 0, 0, 0.08)";
     cans.textAlign = "left";
     cans.textBaseline = "Middle" as CanvasTextBaseline;
-    cans.fillText(text, tmpFillX, tmpFillY);
-    node.style.backgroundImage = "url(" + can.toDataURL("image/png") + ")";
+    cans.fillText(content, 0, can.height);
+
+    const div = document.createElement("div");
+    div.classList.add("water-mark");
+    div.style.pointerEvents = "none";
+    div.style.top = "0px";
+    div.style.left = "0px";
+    div.style.position = "absolute";
+    div.style.zIndex = zIndex || "99999";
+    div.style.width = "100%";
+    div.style.height = "100%";
+    div.style.backgroundRepeat = "repeat";
+    div.style.backgroundPosition = "0px 0px";
+    div.style.backgroundImage = "url(" + can.toDataURL("image/png") + ")";
+    node.style.position = "relative";
+    node.appendChild(div);
   } catch (error) {
     console.error("addWaterMarker error: ", error);
   }
@@ -64,5 +74,6 @@ export const removeWatermark = (elNode) => {
   if (elNode && typeof elNode === "string") {
     node = document.querySelector(node) as HTMLElement;
   }
-  node.style.backgroundImage = null;
+  const waterMarkEl = node.querySelector(".water-mark");
+  waterMarkEl && node.removeChild(waterMarkEl);
 };
