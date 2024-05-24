@@ -5,7 +5,7 @@ export default defineComponent({
   name: "JsonViewer",
   props: Props,
   setup(props) {
-    const { _nodes, handleCopyClick } = useController(props);
+    const { _nodes, isCollapsed, toggleRoot, handleCopyClick } = useController(props);
     const paseKey = (key: string) => {
       const keys = key.split(".");
       return keys[keys.length - 1];
@@ -21,55 +21,41 @@ export default defineComponent({
       }
     };
 
-    const toggleExpand = (e: Event, node: any) => {
-      e.stopPropagation(); // 阻止事件冒泡
-      const hasChildren = node._children && node._children.length > 0;
+    const toggleExpand = (node: any) => {
       node.collapse = !node.collapse;
     };
 
-    const isCollapsed = ref(false);
-    const toggleRoot = () => {
-      isCollapsed.value = !isCollapsed.value;
-    };
-
     // 定义一个箭头组件，用于显示展开和收起的状态
-    const CollapseArrow = ({ isCollapsed }: any) => (
+    const CollapseArrow = ({ toggleClick, isCollapsed }: any) => (
       <div
-        style={{ cursor: "pointer", display: "inline-block", ...dstyles(isCollapsed) }}
+        style={{ cursor: "pointer", display: "inline-block" }}
         class={`color-f ${isCollapsed ? "triangle-right" : "triangle-down"}`}
+        onClick={toggleClick}
       ></div>
     );
-
-    const dstyles = (isCollapsed: boolean) => {
-      return isCollapsed
-        ? {
-            borderLeftColor: props.expandColor,
-          }
-        : {
-            borderTopColor: props.expandColor,
-          };
-    };
     // 渲染单个节点的组件
     const JsonNode = ({ node }: any) => {
-      let _node = node;
       // 渲染节点内容
-      const renderNode = (key: string, value: any, children: [], type: string, index = 0) => {
+      const renderNode = (key: string, value: any, children: [], type: string, index = 0, childNode: any) => {
+        const _node = childNode || node;
         if ((type === "object" || type === "array") && value !== null) {
           return (
-            <div onClick={(e: Event) => toggleExpand(e, node)}>
-              <CollapseArrow isCollapsed={node.collapse} />
+            <div>
+              <CollapseArrow toggleClick={() => toggleExpand(_node)} isCollapsed={_node.collapse} />
               <div style="display:inline-block;word-break: break-all;">
                 <span>{paseKey(key)}</span>
                 <span> : </span>
                 <strong style={{ color: _colors[index] }}>{type === "object" ? "{" : "["}</strong>
               </div>
-              {node.collapse ? "..." : ""}
-              {!node.collapse && (
+              {_node.collapse ? "..." : ""}
+              {!_node.collapse && (
                 <div style={{ marginLeft: "20px" }}>
-                  {children.map((child: any, index) => {
-                    _node = child;
+                  {children.map((child: any, index2) => {
                     return (
-                      <div key={index}>{renderNode(child.key, child.value, child._children, child.type, index)}</div>
+                      <div key={index2}>
+                        {index2}
+                        {renderNode(child.key, child.value, child._children, child.type, index2, child)}
+                      </div>
                     );
                   })}
                 </div>
@@ -92,22 +78,31 @@ export default defineComponent({
         }
       };
 
-      return <div>{renderNode(node.key, node.value, node._children, node.type)}</div>;
+      return <div>{renderNode(node.key, node.value, node._children, node.type, 0, node)}</div>;
     };
     // 根组件，渲染整个JSON树
     const JsonTree = (data = []) => {
       return (
         <div>
-          <div onClick={toggleRoot}>
-            <CollapseArrow isCollapsed={isCollapsed.value} />
-            <span class="json-key-span">{props.rootKey}</span>
+          <div>
+            <CollapseArrow toggleClick={toggleRoot} isCollapsed={isCollapsed.value} />
+            <span class="json-key-span">{props.rootTagStart}</span>
+            {isCollapsed.value && (
+              <>
+                <span>...</span>
+                <span class="json-key-span">{props.rootTagEnd}</span>
+              </>
+            )}
           </div>
           {!isCollapsed.value && (
-            <div style={{ marginLeft: "20px" }}>
-              {data.map((node, index) => (
-                <JsonNode node={node} />
-              ))}
-            </div>
+            <>
+              <div style={{ marginLeft: "20px" }}>
+                {data.map((node, index) => (
+                  <JsonNode node={node} />
+                ))}
+              </div>
+              <span class="json-key-span">{props.rootTagEnd}</span>
+            </>
           )}
         </div>
       );
