@@ -1,5 +1,5 @@
 <template>
-  <div :id="containerId" class="search-container relative w-full" :class="customClass">
+  <div :id="containerId" class="search-container relative w-full" :class="customClass" @keyup.enter="handleEnterKeyup">
     <el-form
       v-if="isUseForm"
       ref="formInstance"
@@ -56,10 +56,11 @@ const containerId = computed(() => {
 let prevWidth = 0; //记录上一次容器宽度
 const showCollapse = ref(false);
 const collapse = ref(false);
-const emit = defineEmits(["resize"]);
+const emit = defineEmits(["resize", "enterKeyup"]);
 
 const handleResize = (info: any) => {
   if (!props.itemMinWidth || !info.width || prevWidth == info.width) return;
+  logger("search-container-handleResize", info.width);
   prevWidth = info.width;
   let num = Math.floor(info.width / props.itemMinWidth);
   const tmpItemWidth = info.width / num;
@@ -153,9 +154,13 @@ const handleCollapse = () => {
   unref(collapse) ? doExpand(tmpChildren) : doCollapse(tmpChildren);
   collapse.value = !unref(collapse);
 };
+//处理keyupEnter事件
+const handleEnterKeyup = () => {
+  logger("search-container inner enter keyup");
+  emit("enterKeyup");
+};
 onMounted(() => {
   const tmpEl: any = document.querySelector(`#${containerId.value} .container-content`);
-  // logger("search-container-onMounted", tmpEl.offsetWidth);
   if (!tmpEl) return;
   setOrgElDisplay(tmpEl.children);
   handleResize({ width: tmpEl.offsetWidth });

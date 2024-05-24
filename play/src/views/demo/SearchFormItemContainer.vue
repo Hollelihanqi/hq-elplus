@@ -10,6 +10,7 @@
       :default-collapse="true"
       :collapse-line="3"
       @resize="handleResize"
+      @enter-keyup="handleEnterKeyup"
     >
       <!-- <yto-c-form-items
         :form-config="formConfig"
@@ -54,5 +55,8 @@ const handleResize = (itemWidth: number) => {
   console.log("searchContainerRef", unref(searchContainerRef));
   // formItemWidth.value = itemWidth;
   // cardStyle.value = `width: ${(info.width - num * props.gap) / num}px; min-width:${props.minWidth}px`;
+};
+const handleEnterKeyup = () => {
+  console.log("outer handleEnterKeyup");
 };
 </script>

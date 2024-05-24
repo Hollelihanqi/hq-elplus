@@ -2,7 +2,7 @@
 
 基于 canvas 实现的水印组件
 
-## 日期范围
+## 基础用法
 
 <demo src="./basic.vue"></demo>
 
