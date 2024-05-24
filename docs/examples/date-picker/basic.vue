@@ -2,7 +2,7 @@
  * @Description: 模块名称
  * @Author: ym
  * @Date: 2024-05-17 14:32:55
- * @LastEditTime: 2024-05-17 14:55:02
+ * @LastEditTime: 2024-05-24 14:42:48
 -->
 <template>
   <div class="p-4">
@@ -12,7 +12,6 @@
       v-model:start="formData.start"
       v-model:end="formData.end"
       value-format="YYYY-MM-DD HH:mm:ss"
-      start-placeholder="哈哈哈"
     ></yto-c-data-picker>
   </div>
 </template>

@@ -2,13 +2,14 @@
  * @Description: 模块名称
  * @Author: ym
  * @Date: 2024-05-17 13:40:10
- * @LastEditTime: 2024-05-17 14:44:32
+ * @LastEditTime: 2024-05-24 14:40:45
 -->
 <template>
   <el-date-picker
     v-model="timer"
+    class="yto-c-date-picker"
     :type="type"
-    range-separator="至"
+    range-separator="-"
     start-placeholder="开始日期"
     end-placeholder="结束日期"
     :default-time="[new Date(2000, 1, 1, 0, 0, 0), new Date(2000, 2, 1, 23, 59, 59)]"
@@ -35,3 +36,10 @@ const timer: any = computed({
   },
 });
 </script>
+<style lang="scss">
+.yto-c-date-picker input:nth-of-type(1) {
+  /* 在这里添加你的样式 */
+  text-align: left !important;
+  padding-left: 8px !important;
+}
+</style>
