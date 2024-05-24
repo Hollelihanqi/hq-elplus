@@ -26,7 +26,4 @@ import formItems from "@/views/formItems/index.vue";
   align-items: center;
   gap: 16px;
 }
-:root {
-  --el-color-primary: red !important;
-}
 </style>

@@ -223,15 +223,15 @@ const listNavigation: any[] = [
         mode: "router",
       },
       {
-<<<<<<< HEAD
         label: "jsonView",
         href: "/jsonView",
         code: "/jsonView",
-=======
+        mode: "router",
+      },
+      {
         label: "waterMarker",
         href: "/waterMarker",
         code: "/waterMarker",
->>>>>>> 1fd99fb0823287c79686d16ae3d1be5c0edc97a7
         mode: "router",
       },
     ],
