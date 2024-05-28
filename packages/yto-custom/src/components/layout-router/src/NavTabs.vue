@@ -47,7 +47,9 @@ const router = useRouter();
 const route = useRoute();
 const handleTabRemove = (code: any) => {
   tabPaneClose(code);
-  props.routerGoback && router.go(-1);
+  logger("handleTabRemove", code, props.tabsMenuList);
+  const backPath = history.state.back;
+  props.routerGoback && props.tabsMenuList.find((item: IOptionTabPane) => item.code === backPath) && router.back();
 };
 
 const activePreidx = computed(() => {
