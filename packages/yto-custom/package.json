@@ -1,6 +1,6 @@
 {
   "name": "@yto/custom",
-  "version": "1.14.1",
+  "version": "1.14.4",
   "type": "module",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -10,10 +10,8 @@
       "import": "./es/index.js",
       "types": "./es/index.d.ts"
     },
-    "./styles": "./es/style.css", 
+    "./styles": "./es/style.css",
     "./es": "./es/index.js",
-
-
     "./es/*": "./es/*.js",
     "./es/*.js": "./es/*.js",
     "./*": "./*"
@@ -41,7 +39,7 @@
   "peerDependencies": {
     "axios": "^1.3.5",
     "echarts": "^5.4.2",
-    "element-plus": "*",
+    "element-plus": "^2.5.6",
     "gold-core": "0.1.17",
     "immutable": "^4.3.4",
     "simple-uploader.js": "^0.6.0",
@@ -50,7 +48,7 @@
   "devDependencies": {
     "@types/echarts": "^4.9.18",
     "axios": "^1.3.5",
-    "element-plus": "^2.4.0",
+    "element-plus": "^2.5.6",
     "gold-core": "0.1.17",
     "immutable": "^4.3.4",
     "simple-uploader.js": "^0.6.0",

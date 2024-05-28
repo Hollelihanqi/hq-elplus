@@ -68,7 +68,7 @@ const testData = {
   depName: null,
   customerName: null,
   actionResult: "true",
-  tags: [28],
+  tags: [28, 89, 65, { name: "lihanqi", age: 28 }],
   instancePort: "8002",
   macAddress: null,
   systemService: null,

@@ -53,7 +53,6 @@ export default defineComponent({
                   {children.map((child: any, index2) => {
                     return (
                       <div key={index2}>
-                        {index2}
                         {renderNode(child.key, child.value, child._children, child.type, index2, child)}
                       </div>
                     );

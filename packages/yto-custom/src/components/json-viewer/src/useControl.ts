@@ -47,7 +47,7 @@ function jsonToNestedArray(obj: any) {
         node.value = "Array";
         node.type = "array";
         value.forEach((item, index) => {
-          node._children.push(processNode(`${key}[${index}]`, item, "", level + 1));
+          node._children.push(processNode(`${index}`, item, "", level + 1));
         });
       } else {
         // 处理对象类型
