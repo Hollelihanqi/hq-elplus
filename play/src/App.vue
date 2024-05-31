@@ -8,10 +8,12 @@
 
 <template>
   <div class="app flex flex-col">
-    <LayoutRouter class="h-full"></LayoutRouter>
+    <!-- <LayoutRouter class="h-full"></LayoutRouter> -->
+    <Layout class="h-full"></Layout>
   </div>
 </template>
 <script lang="ts" setup>
+import Layout from "@/views/layout.vue";
 import LayoutRouter from "@/views/layout-router.vue";
 import LayoutFrame from "@/views/layout-frame.vue";
 import formItems from "@/views/formItems/index.vue";

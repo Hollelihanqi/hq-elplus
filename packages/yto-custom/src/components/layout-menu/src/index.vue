@@ -67,6 +67,7 @@ import InnerNodeMenu from "./NodeMenu.vue";
 import "@/icon-font/iconfont.css";
 import StickyContainer from "../../sticky-container";
 import Logo from "./Logo.vue";
+import { logger } from "@/_utils";
 const props = defineProps({
   keyLabel: String,
   keyIcon: String,
@@ -81,7 +82,8 @@ const props = defineProps({
   width: { type: String, default: "210px" },
   title: String,
   logo: String,
-  linkType: { type: String, default: "router" },
+  linkType: { type: String, default: "paneAdd" },
+  formatTab: Function,
 });
 
 const emit = defineEmits(["menuClick", "update:collapse"]);
@@ -102,8 +104,9 @@ const fileNavMenu = (arr: any) => {
 
 const menuClick = (item: any) => {
   emit("menuClick", item);
-  if (props.linkType === "router") {
-    paneAdd(item);
+  logger("menuClick", props.linkType, item);
+  if (props.linkType === "paneAdd") {
+    paneAdd(props.formatTab ? props.formatTab(item) : item);
   }
 };
 const menuData = computed(() => {

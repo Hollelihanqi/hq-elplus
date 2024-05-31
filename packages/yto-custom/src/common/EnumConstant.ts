@@ -7,3 +7,7 @@ export enum EnumSessionKey {
   MenuKeyIcon = "menu-icon",
   MenuWidth = "menu-width",
 }
+export enum LAYOUT_MODE {
+  Router = "router",
+  Frame = "frame",
+}
