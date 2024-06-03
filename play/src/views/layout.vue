@@ -1,6 +1,13 @@
 <template>
   <div id="layout">
-    <yto-c-layout ref="routerRef" class="h-full" :cacheable="true" type="horizontal" @tab-change="handleTabChange">
+    <yto-c-layout
+      ref="routerRef"
+      class="h-full"
+      :cacheable="true"
+      :router-goback="true"
+      type="horizontal"
+      @tab-change="handleTabChange"
+    >
       <template #header>
         <yto-c-layout-header :collapse="collapse" :user-info="userInfo" @collapse="collapse = !collapse">
           <template #extend>123</template>
@@ -13,8 +20,8 @@
         :unique-opened="true"
         :menus="listNavigation"
         width="220px"
+        :format-tab="formatTab"
         @menu-click="handleMenuClick"
-        :formatTab="formatTab"
       ></yto-c-layout-menu>
     </yto-c-layout>
   </div>
@@ -50,14 +57,14 @@ const listNavigation: any[] = [
     children: [
       {
         label: "用户活跃度",
-        href: "http://192.168.201.37:8003/platform-overview?source=JSC&token=b3d8f88160204af4bbc656c444b16428",
+        href: "http://192.168.201.37:8003/platform-overview?source=JSC&token=275fcb9953d34053b015b712a68e8245",
         code: "/platform-overview",
         // closable: false,
         mode: "frame",
       },
       {
         label: "日志监控",
-        href: "http://192.168.201.37:8003/log-monitoring?source=JSC&token=b3d8f88160204af4bbc656c444b16428",
+        href: "http://192.168.201.37:8003/log-monitoring?source=JSC&token=275fcb9953d34053b015b712a68e8245",
         code: "/log-monitoring",
         // closable: false,
         mode: "frame",
@@ -107,14 +114,33 @@ const listNavigation: any[] = [
 //   mode: "router",
 //   closable: false,
 // });
+window.addEventListener("message", (e) => {
+  console.log("window.addEventListener-----123", e);
+  if (!e.data.url) return;
+  const urlPattern = new URLPattern(e.data.url);
+  let href = e.data.url as string;
+  if (e.data?.params && Object.keys(e.data?.params).length) {
+    Object.keys(e.data?.params).forEach((key) => {
+      const value = e.data.params[key];
+      href.includes("?") ? (href += `&${key}=${value}`) : (href += `?${key}=${value}`);
+    });
+  }
+  tabPaneAdd(e.data.url, {
+    label: e.data.title,
+    href,
+    code: urlPattern.pathname,
+    mode: "frame",
+    // closable: false,
+  });
+});
 const formatTab = (info: any) => {
-  if(info.mode == 'frame') {
-    const tmpArr = info.href.split('token=')
-    info.href = `${tmpArr[0]}token=56e322f92cf34c2f89969adf03979479`
+  if (info.mode == "frame") {
+    const tmpArr = info.href.split("token=");
+    info.href = `${tmpArr[0]}token=b11ba0e90cb94317a002e30e065d69b7`;
   }
   console.log("formatTab-----", info);
-  return info
-}
+  return info;
+};
 const handleMenuClick = (info: any) => {
   console.log("handleMenuClick-----", info);
 };

@@ -47,12 +47,14 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const tabsMenuValue: any = inject(EnumSessionKey.TabsActivate);
-const activeItem = computed(() => props.tabsMenuList.find((item) => item.code === unref(tabsMenuValue)) as IOptionTabPane);
+const activeItem = computed(
+  () => props.tabsMenuList.find((item) => item.code === unref(tabsMenuValue)) as IOptionTabPane
+);
 const router = useRouter();
 const route = useRoute();
 const handleTabRemove = (code: any) => {
   tabPaneClose(code);
-  if (props.routerGoback) {
+  if (props.routerGoback && code === unref(tabsMenuValue)) { //只有关闭当前激活的页签，才需要执行此逻辑
     logger("handleTabRemove", code, props.tabsMenuList);
     const backPath = history.state.back;
     props.tabsMenuList.find((item: IOptionTabPane) => item.code === backPath) && router.back();
@@ -68,12 +70,12 @@ watch(
   (value) => {
     if (!value) return;
     const { mode, href } = unref(props.tabsMenuList).find((tab: any) => tab.code === value) || {};
-    logger('watch--tabsMenuValue.value', href);
+    logger("watch--tabsMenuValue.value", href);
     if (mode === LAYOUT_MODE.Router) {
       const url = toURL(href as string);
       router.push(url.pathname + url.search);
-    }else{
-      router.push('/iframe');
+    } else {
+      router.push("/iframe");
     }
   },
   {
@@ -106,7 +108,7 @@ const getTabsItem = (path: string): any => {
 watch(
   () => route.fullPath,
   (newVal) => {
-    logger('watch--route.fullPath',newVal, unref(activeItem)?.mode)
+    logger("watch--route.fullPath", newVal, unref(activeItem)?.mode);
     if (!newVal || unref(activeItem)?.mode === LAYOUT_MODE.Frame) return;
     const path = route.path;
     const url = getUrl(path);
