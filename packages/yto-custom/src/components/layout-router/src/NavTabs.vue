@@ -47,7 +47,8 @@ const router = useRouter();
 const route = useRoute();
 const handleTabRemove = (code: any) => {
   tabPaneClose(code);
-  if (props.routerGoback) {
+  //只有关闭当前激活的页签，才需要执行此逻辑
+  if (props.routerGoback && code === unref(tabsMenuValue)) {
     logger("handleTabRemove", code, props.tabsMenuList);
     const backPath = history.state.back;
     props.tabsMenuList.find((item: IOptionTabPane) => item.code === backPath) && router.back();
