@@ -1,4 +1,4 @@
-import type { TableProps, ColumnsItemProps, setColumnsProps } from "./interface";
+import type { TableProps, ColumnsItemProps } from "./interface";
 
 const useController = (props: TableProps) => {
   const ElTableInstance = ref();
@@ -110,6 +110,7 @@ const useController = (props: TableProps) => {
     }
   });
 
+  provide("ElTableInstance", ElTableInstance);
   return {
     ElTableInstance,
     _columns,
