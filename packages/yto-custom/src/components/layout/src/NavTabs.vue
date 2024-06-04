@@ -54,10 +54,11 @@ const router = useRouter();
 const route = useRoute();
 const handleTabRemove = (code: any) => {
   tabPaneClose(code);
-  if (props.routerGoback && code === unref(tabsMenuValue)) { //只有关闭当前激活的页签，才需要执行此逻辑
-    logger("handleTabRemove", code, props.tabsMenuList);
-    const backPath = history.state.back;
-    props.tabsMenuList.find((item: IOptionTabPane) => item.code === backPath) && router.back();
+  //只有关闭当前激活的页签，才需要执行此逻辑
+  logger("handleTabRemove-1", code, unref(tabsMenuValue), props.routerGoback, history.state.back);
+  if (props.routerGoback && code === unref(tabsMenuValue)) {
+    logger("handleTabRemove", code, history.state.back, props.tabsMenuList);
+    findActiveTabItem(history.state.back) && router.back();
   }
 };
 
@@ -65,17 +66,22 @@ const activePreidx = computed(() => {
   const idx = props.tabsMenuList.findIndex((e: IOptionTabPane) => e.code === tabsMenuValue.value);
   return idx > 0 ? idx - 1 : -1;
 });
+const buildCodePath = (code?: string) => (code?.startsWith("/") ? code : `/${code}`);
+const findActiveTabItem = (path: string) => {
+  return props.tabsMenuList.find((item: IOptionTabPane) => buildCodePath(item.code) === path) as IOptionTabPane;
+};
 watch(
   () => tabsMenuValue.value,
   (value) => {
     if (!value) return;
-    const { mode, href } = unref(props.tabsMenuList).find((tab: any) => tab.code === value) || {};
+    const { mode, href, code } = unref(props.tabsMenuList).find((tab: any) => tab.code === value) || {};
     logger("watch--tabsMenuValue.value", href);
+    const url = toURL(href as string);
     if (mode === LAYOUT_MODE.Router) {
-      const url = toURL(href as string);
       router.push(url.pathname + url.search);
     } else {
-      router.push("/iframe");
+      // router.push("/iframe");
+      router.push(buildCodePath(code));
     }
   },
   {
@@ -93,7 +99,7 @@ const getUrl = (path: string) => {
 };
 const getTabsItem = (path: string): any => {
   const routers = router.getRoutes();
-  const curRoute: any = routers.find((item) => item.path === path);
+  const curRoute = routers.find((item) => item.path === path);
   if (!curRoute) return;
   const href = getUrl(path);
   const tabItem = {
@@ -105,25 +111,33 @@ const getTabsItem = (path: string): any => {
   };
   return props.formatTab ? props.formatTab(tabItem) : tabItem;
 };
+const routerPathChange = () => {
+  const path = route.path;
+  const url = getUrl(path);
+  const tabItem = unref(props.tabsMenuList).find((tab: any) => {
+    const urlObj = toURL(tab.href as string);
+    return urlObj.pathname + urlObj.search === url;
+  }) as IOptionTabPane;
+  const { href } = tabItem || {};
+  if (tabItem && href) {
+    tabPaneAdd(href as string, { ...tabItem });
+    return;
+  }
+  const tmpItem = getTabsItem(path);
+  tmpItem && tabPaneAdd(tmpItem.href as string, { ...tmpItem });
+};
+const framePathChange = (activeItem: IOptionTabPane) => {
+  logger("framePathChange", activeItem);
+  activeItem.href && tabPaneAdd(activeItem.href, { ...activeItem });
+};
+
 watch(
   () => route.fullPath,
   (newVal) => {
-    logger("watch--route.fullPath", newVal, unref(activeItem)?.mode);
-    if (!newVal || unref(activeItem)?.mode === LAYOUT_MODE.Frame) return;
-    const path = route.path;
-    const url = getUrl(path);
-    const tabItem: any =
-      unref(props.tabsMenuList).find((tab: any) => {
-        const urlObj = toURL(tab.href as string);
-        return urlObj.pathname + urlObj.search === url;
-      }) || {};
-    const { href } = tabItem;
-    if (tabItem && href) {
-      tabPaneAdd(href as string, { ...tabItem });
-      return;
-    }
-    const tmpItem = getTabsItem(path);
-    tmpItem && tabPaneAdd(tmpItem.href as string, { ...tmpItem });
+    if (!newVal) return;
+    const activeItem = findActiveTabItem(route.path);
+    logger("watch--route.fullPath", newVal, activeItem?.mode);
+    activeItem?.mode === LAYOUT_MODE.Frame ? framePathChange(activeItem) : routerPathChange();
   },
   {
     immediate: true,
@@ -136,7 +150,7 @@ provide(EnumSessionKey.TabsActivate, tabsMenuValue);
 .nav-tabs-router {
   @apply h-[40px];
   :deep(.el-tabs__content) {
-    display: none;
+    @apply hidden;
   }
 }
 .nav-tabs-frame {

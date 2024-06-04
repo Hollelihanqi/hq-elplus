@@ -1,11 +1,12 @@
 import { EnumSessionKey } from "@/common/EnumConstant";
 import { inject, provide, reactive, ref } from "vue";
 import { tabPaneAdd, isBlank, session } from "gold-core";
+import { logger } from "../_utils";
 
 export function useMenu(props: any): any {
   function paneAdd(item: any) {
     const href: string = getHref(item);
-    console.log("useMenu--paneAdd", href, { ...item, href });
+    logger("useMenu--paneAdd", href, { ...item, href });
     tabPaneAdd(href, { ...item, href });
   }
 
