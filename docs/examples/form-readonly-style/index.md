@@ -2,7 +2,7 @@
  * @Author: DESKTOP-7338OS6\LHQ LHQ
  * @Date: 2024-06-05 09:56:39
  * @LastEditors: DESKTOP-7338OS6\LHQ LHQ
- * @LastEditTime: 2024-06-05 14:09:23
+ * @LastEditTime: 2024-06-05 14:22:20
  * @FilePath: \yto-engine\docs\examples\form-readonly-style\index.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -70,6 +70,7 @@
   .el-input__prefix {
     display: none;
   }
+  .el-select__selected-item.el-select__placeholder.is-transparent,
   .el-form-item__error,
   textarea::placeholder,
   input::placeholder {
