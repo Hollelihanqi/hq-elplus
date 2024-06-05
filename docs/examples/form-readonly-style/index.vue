@@ -27,6 +27,17 @@
           :disabled="isReadonly"
         ></el-input>
       </el-form-item>
+      <el-form-item label="对接数据内容" prop="data_info" :disabled="isReadonly" class="w-[100%]">
+        <el-input
+          v-model="formModel.data_info"
+          type="textarea"
+          maxlength="5000"
+          :rows="3"
+          placeholder="请输入对接数据内容"
+          clearable
+          :disabled="isReadonly"
+        ></el-input>
+      </el-form-item>
       <el-form-item label="对接方式" prop="method" class="w-[100%]">
         <el-select v-model="formModel.method" clearable placeholder="请选择" :disabled="isReadonly" class="w-[100%]">
           <el-option
@@ -142,12 +153,19 @@ const rules = {
     color: #606266;
     -webkit-text-fill-color: #606266;
   }
+
+  .el-select__selected-item span {
+    color: rgb(96, 98, 102);
+  }
+
+  textarea {
+    resize: none;
+  }
   .el-select__suffix,
   .el-input__prefix {
     display: none;
   }
   .el-form-item__error,
-  .el-select__placeholder,
   textarea::placeholder,
   input::placeholder {
     opacity: 0;

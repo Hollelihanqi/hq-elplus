@@ -2,7 +2,7 @@
  * @Author: DESKTOP-7338OS6\LHQ LHQ
  * @Date: 2024-06-05 09:56:39
  * @LastEditors: DESKTOP-7338OS6\LHQ LHQ
- * @LastEditTime: 2024-06-05 13:09:14
+ * @LastEditTime: 2024-06-05 14:09:23
  * @FilePath: \yto-engine\docs\examples\form-readonly-style\index.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -58,12 +58,19 @@
     color: #606266;
     -webkit-text-fill-color: #606266;
   }
+
+  .el-select__selected-item span {
+    color: rgb(96, 98, 102);
+  }
+
+  textarea {
+    resize: none;
+  }
   .el-select__suffix,
   .el-input__prefix {
     display: none;
   }
   .el-form-item__error,
-  .el-select__placeholder,
   textarea::placeholder,
   input::placeholder {
     opacity: 0;
