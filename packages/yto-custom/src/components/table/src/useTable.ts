@@ -1,9 +1,9 @@
 import type { TableProps, ColumnsItemProps } from "./interface";
-import { ref, onMounted, defineEmits } from "vue";
+import { ref, onMounted } from "vue";
 import { error } from "@/_utils";
-const useTable = (props: TableProps) => {
-  const emits = defineEmits(["on-table"]);
-  const ElTableInstance: any = inject("ElTableInstance");
+const useTable = (props: TableProps, _ElTableInstance: any, emits: any) => {
+  // const emits = defineEmits(["on-table"]);
+  const ElTableInstance: any = _ElTableInstance;
   const _loading = ref(false);
   const _tableData = ref<any>([]);
   const _tableDataTotal = ref(0);

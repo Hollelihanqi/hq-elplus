@@ -1,7 +1,7 @@
 import type { TableProps, ColumnsItemProps } from "./interface";
 
-const useController = (props: TableProps) => {
-  const ElTableInstance = ref();
+const useController = (props: TableProps, _ElTableInstance: any) => {
+  const ElTableInstance: any = _ElTableInstance;
   const _columns = ref<any>([]);
   let _cacheSaveColumns: any = null;
   _columns.value = _ideepClone(props?.columns);
@@ -109,10 +109,7 @@ const useController = (props: TableProps) => {
       HandleSetSave();
     }
   });
-
-  provide("ElTableInstance", ElTableInstance);
   return {
-    ElTableInstance,
     _columns,
     _showColumn,
     setColumns,

@@ -24,6 +24,7 @@ const alias: Alias[] = [
     replacement: `${path.resolve(__dirname, "./.vitepress/vitepress")}/`,
   },
 ];
+
 // if (process.env.DOC_ENV !== 'production') {
 //   alias.push(
 //     {
@@ -60,7 +61,7 @@ export default defineConfig(async ({ mode }) => {
     server: {
       host: true,
       fs: {
-        allow: [projRoot],
+        // allow: [projRoot],
       },
     },
     resolve: {

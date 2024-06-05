@@ -77,8 +77,7 @@ const renderColumn = (column: any) => {
                   <div class="flex items-center gap-2">
                     <span>{renderCellData(column, scope)}</span>
                     <el-icon
-                      color="#3c74e1"
-                      class="cursor-pointer"
+                      class="cursor-pointer copy-icon-color"
                       onClick={() => {
                         handleCopyClick(renderCellData(column, scope));
                       }}

@@ -92,8 +92,12 @@ export interface ColumnsItemProps {
 }
 
 const props = defineProps(Props);
-const { ElTableInstance, _columns, _showColumn, setColumns, SettingInstance, handleSetting, HandleSetSave } =
-  useController(props);
+const emits = defineEmits(["on-table"]);
+const ElTableInstance = ref();
+const { _columns, _showColumn, setColumns, SettingInstance, handleSetting, HandleSetSave } = useController(
+  props,
+  ElTableInstance
+);
 
 const {
   _loading,
@@ -112,7 +116,7 @@ const {
   resetPage,
   updatePage,
   getData,
-} = useTable(props);
+} = useTable(props, ElTableInstance, emits);
 
 // const emits = defineEmits(["on-table"]);
 // const _loading = ref(false);
