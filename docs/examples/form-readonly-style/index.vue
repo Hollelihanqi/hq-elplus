@@ -165,6 +165,7 @@ const rules = {
   .el-input__prefix {
     display: none;
   }
+  .el-select__selected-item.el-select__placeholder.is-transparent,
   .el-form-item__error,
   textarea::placeholder,
   input::placeholder {
