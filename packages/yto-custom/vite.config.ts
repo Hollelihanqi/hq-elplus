@@ -5,7 +5,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
-import ElementPlus from "unplugin-element-plus/vite";
+// import ElementPlus from "unplugin-element-plus/vite";
 import vueSetupExtend from "vite-plugin-vue-setup-extend";
 import WindiCSS from "vite-plugin-windicss";
 import fs, { copyFileSync } from "fs";
@@ -76,10 +76,10 @@ export default defineConfig({
     vueSetupExtend(),
 
     dts({
-      tsconfigPath: './tsconfig.json',
-      outDir: ['./dist/es'], // 可以指定一个数组来输出到多个目录中
+      tsconfigPath: "./tsconfig.json",
+      outDir: ["./dist/es"], // 可以指定一个数组来输出到多个目录中
       cleanVueFileName: true,
-      exclude: ['./src/components/**/src/components/*.vue', './src/_utils/*', './src/icon-font/*']
+      exclude: ["./src/components/**/src/components/*.vue", "./src/_utils/*", "./src/icon-font/*"],
     }),
     MoveFile(() => {
       move();

@@ -14,10 +14,10 @@ export default defineComponent({
     const valueFormat = (node: any) => {
       if (node.value === null) {
         return <span class="jv-n">null</span>;
-      } else if (node.type === "string") {
+      } else if (node.nodeType === "string") {
         return <span class="jv-greed">{JSON.stringify(node.value)}</span>;
-      } else if (node.type === "number" || node.type === "boolean") {
-        return <span class="jv-red">{node.type === "boolean" ? String(node.value) : node.value}</span>;
+      } else if (node.nodeType === "number" || node.nodeType === "boolean") {
+        return <span class="jv-red">{node.nodeType === "boolean" ? String(node.value) : node.value}</span>;
       }
     };
 
@@ -44,7 +44,7 @@ export default defineComponent({
               <CollapseArrow toggleClick={() => toggleExpand(_node)} isCollapsed={_node.collapse} />
               <div style="display:inline-block;word-break: break-all;">
                 <span>{paseKey(key)}</span>
-                <span> : </span>
+                <span> :{_node.nodeType} </span>
                 <strong style={{ color: _colors[index] }}>{type === "object" ? "{" : "["}</strong>
               </div>
               {_node.collapse ? "..." : ""}
@@ -53,7 +53,7 @@ export default defineComponent({
                   {children.map((child: any, index2) => {
                     return (
                       <div key={index2}>
-                        {renderNode(child.key, child.value, child._children, child.type, index2, child)}
+                        {renderNode(child.key, child.value, child._children, child.nodeType, index2, child)}
                       </div>
                     );
                   })}
@@ -67,17 +67,21 @@ export default defineComponent({
         } else {
           return (
             <div style="display:inline-block;word-break: break-all;">
-              <span class="json-key-span" style="display:inline-block">
-                {paseKey(key)}
-              </span>
-              <span> : </span>
+              {type !== "array" && (
+                <>
+                  <span class="json-key-span" style="display:inline-block">
+                    {paseKey(key)}
+                  </span>
+                  <span> : {_node.nodeType}</span>
+                </>
+              )}
               {valueFormat(_node)}
             </div>
           );
         }
       };
 
-      return <div>{renderNode(node.key, node.value, node._children, node.type, 0, node)}</div>;
+      return <div>{renderNode(node.key, node.value, node._children, node.nodeType, 0, node)}</div>;
     };
     // 根组件，渲染整个JSON树
     const JsonTree = (data = []) => {

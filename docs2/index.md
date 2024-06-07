@@ -1,6 +1,5 @@
 ---
-title: "A Vue 3 UI Framework"
-lang: en-US
+title: "西安技术平台部"
 page: true
 ---
 
