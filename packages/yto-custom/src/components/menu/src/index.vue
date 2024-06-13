@@ -2,7 +2,7 @@
  * @Description: 模块名称
  * @Author: ym
  * @Date: 2023-04-22 14:08:34
- * @LastEditTime: 2023-12-11 15:09:54
+ * @LastEditTime: 2024-06-13 10:46:52
 -->
 <script lang="ts">
 import { defineComponent, PropType, h } from "vue";
@@ -51,7 +51,7 @@ export default defineComponent({
   //   select(index: string, indexPath: string, item: IMenuData, routeResult: boolean) {},
   //   itemClick(item: IMenuData) {},
   // },
-  emits: ["open", "close", "select", "itemClick"],
+  emits: ["itemClick"],
   setup(props, context) {
     const renderTitle = (e: IMenuData) => {
       const title = [h("span", e.name)];
@@ -104,15 +104,6 @@ export default defineComponent({
         ElMenu,
         {
           ...context.attrs,
-          "on-open": (index: string, indexPath: string) => {
-            context.emit("open", index, indexPath);
-          },
-          "on-Close": (index: string, indexPath: string) => {
-            context.emit("close", index, indexPath);
-          },
-          "on-Select": (index: string, indexPath: string, item: IMenuData, routeResult: boolean) => {
-            context.emit("select", index, indexPath);
-          },
         },
         () => renderChildren(props.menuData)
       );
