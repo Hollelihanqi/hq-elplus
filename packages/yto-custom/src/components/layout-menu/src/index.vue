@@ -83,7 +83,7 @@ const props = defineProps({
   title: String,
   logo: String,
   linkType: { type: String, default: "paneAdd" },
-  formatTab: Function,
+  formatMenu: Function,
 });
 
 const emit = defineEmits(["menuClick", "update:collapse"]);
@@ -102,11 +102,11 @@ const fileNavMenu = (arr: any) => {
   });
 };
 
-const menuClick = (item: any) => {
+const menuClick = async (item: any) => {
   emit("menuClick", item);
   logger("menuClick", props.linkType, item);
   if (props.linkType === "paneAdd") {
-    paneAdd(props.formatTab ? props.formatTab(item) : item);
+    paneAdd(props.formatMenu ? await props.formatMenu(item) : item);
   }
 };
 const menuData = computed(() => {

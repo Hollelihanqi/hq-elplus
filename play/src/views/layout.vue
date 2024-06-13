@@ -20,7 +20,7 @@
         :unique-opened="true"
         :menus="listNavigation"
         width="220px"
-        :format-tab="formatTab"
+        :format-menu="formatMenu"
         @menu-click="handleMenuClick"
       ></yto-c-layout-menu>
     </yto-c-layout>
@@ -57,14 +57,14 @@ const listNavigation: any[] = [
     children: [
       {
         label: "用户活跃度",
-        href: "http://192.168.201.37:8003/platform-overview?source=JSC&token=0aadf5bcab3447d4bcf191d645481303",
+        href: "http://192.168.201.37:8003/platform-overview?source=JSC&token=314b4c6ff535406ebc46b15ddaf617b4",
         code: "/platform-overview",
         // closable: false,
         mode: "frame",
       },
       {
         label: "激励记录",
-        href: "http://192.168.201.37:8003/assessment-stimulate-list?primaryColor=%2356297e&source=JSC&token=0aadf5bcab3447d4bcf191d645481303",
+        href: "http://192.168.201.37:8003/assessment-stimulate-list?primaryColor=%2356297e&source=JSC&token=314b4c6ff535406ebc46b15ddaf617b4",
         code: "/log-monitoring",
         // closable: false,
         mode: "frame",
@@ -133,10 +133,10 @@ window.addEventListener("message", (e) => {
     // closable: false,
   });
 });
-const formatTab = (info: any) => {
+const formatMenu = (info: any) => {
   if (info.mode == "frame") {
     const tmpArr = info.href.split("token=");
-    info.href = `${tmpArr[0]}token=54cdebc602284d518c4e5dc5c7edce19`;
+    info.href = `${tmpArr[0]}token=2c3085642b584ac8a9e156d633474e12`;
   }
   console.log("formatTab-----", info);
   return info;

@@ -17,7 +17,7 @@
           >
             <template #default="{ info }">
               <iframe
-                v-if="info.mode == LAYOUT_MODE.Frame"
+                v-if="info.mode == LAYOUT_MODE.Frame && !isInIframe()"
                 :id="info.code"
                 scrolling="auto"
                 allowfullscreen="true"
@@ -30,7 +30,7 @@
           </NavTabs>
         </slot>
         <div
-          v-show="activeItem?.mode === LAYOUT_MODE.Router"
+          v-show="activeItem?.mode === LAYOUT_MODE.Router && !isInIframe()"
           class="router-view-container flex-1 px-[10px] pb-[10px] overflow-auto w-full"
         >
           <router-view v-slot="{ Component, route }">
@@ -82,6 +82,8 @@ const { listRoute, activate } = useFrame({
   sso: props.sso as boolean,
   max: props.max as number,
 });
+const isInIframe = (): boolean => window.self !== window.top;
+
 const activeItem = computed(() => listRoute.value.find((item) => item.code === unref(activate)));
 // 是否为垂直布局
 const isVertical = computed(() => props.type === "vertical");
