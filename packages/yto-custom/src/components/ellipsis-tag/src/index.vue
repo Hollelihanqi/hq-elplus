@@ -1,5 +1,5 @@
 <template>
-  <div ref="ellipsisTagRef" v-resize-element="handleResize" class="ellipsis-tag flex w-full">
+  <div :id="containerId" ref="ellipsisTagRef" v-resize-element="handleResize" class="ellipsis-tag flex w-full">
     <div class="flex-1 overflow-hidden">
       <div class="tag-box">
         <template v-for="(tag, index) in tags" :key="tag[valueKey] || index">
@@ -39,6 +39,8 @@
 <script lang="ts" setup name="EllipsisTag">
 import { MoreFilled } from "@element-plus/icons-vue";
 import { resizeElement as vResizeElement } from "@/directives";
+import { guid } from "@yto/utils";
+import { logger } from "@/_utils";
 
 interface Props {
   tags?: Array<any>;
@@ -52,10 +54,14 @@ const props = withDefaults(defineProps<Props>(), {
     return [];
   },
 });
+const containerId = computed(() => {
+  return `ellipsis-tag_${guid()}`;
+});
 const ellipsisTagRef = ref();
 const shoEllipsis = ref(false);
 const handleResize = (info: any) => {
-  const boxEl = unref(ellipsisTagRef).querySelector(".ellipsis-tag .tag-box");
+  const boxEl = unref(ellipsisTagRef).querySelector(`#${unref(containerId)} .tag-box`);
+  logger("ellipsis-tag-handleResize", boxEl, unref(containerId));
   if (!boxEl) return;
   const boxWidth = boxEl.getBoundingClientRect().width;
   shoEllipsis.value = info.width < boxWidth;
