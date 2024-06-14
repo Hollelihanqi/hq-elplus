@@ -1,5 +1,5 @@
 <template>
-  <div :id="containerId" ref="ellipsisTagRef" v-resize-element="handleResize" class="ellipsis-tag flex w-full">
+  <div :id="containerId" ref="ellipsisTagRef" v-resize-element="resizeHandle" class="ellipsis-tag flex w-full">
     <div class="flex-1 overflow-hidden">
       <div class="tag-box">
         <template v-for="(tag, index) in tags" :key="tag[valueKey] || index">
@@ -39,7 +39,7 @@
 <script lang="ts" setup name="EllipsisTag">
 import { MoreFilled } from "@element-plus/icons-vue";
 import { resizeElement as vResizeElement } from "@/directives";
-import { guid } from "@yto/utils";
+import { guid, debounceFun } from "@yto/utils";
 import { logger } from "@/_utils";
 
 interface Props {
@@ -59,6 +59,9 @@ const containerId = computed(() => {
 });
 const ellipsisTagRef = ref();
 const shoEllipsis = ref(false);
+const resizeHandle = debounceFun((info: any) => {
+  handleResize(info);
+}, 300);
 const handleResize = (info: any) => {
   const boxEl = unref(ellipsisTagRef).querySelector(`#${unref(containerId)} .tag-box`);
   logger("ellipsis-tag-handleResize", boxEl, unref(containerId));
@@ -66,6 +69,22 @@ const handleResize = (info: any) => {
   const boxWidth = boxEl.getBoundingClientRect().width;
   shoEllipsis.value = info.width < boxWidth;
 };
+watch(
+  () => props.tags,
+  () => {
+    const tmpEl: any = document.querySelector(`#${unref(containerId)} .tag-box`);
+    if (!tmpEl) return;
+    resizeHandle({ width: tmpEl.offsetWidth });
+  },
+  {
+    deep: true,
+  }
+);
+onMounted(() => {
+  const tmpEl: any = document.querySelector(`#${unref(containerId)} .tag-box`);
+  if (!tmpEl) return;
+  resizeHandle({ width: tmpEl.offsetWidth });
+});
 </script>
 <style lang="scss" scoped>
 .ellipsis-tag {
