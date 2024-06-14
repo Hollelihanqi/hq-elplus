@@ -58,9 +58,9 @@ const tags = ref([
     label: "木马病毒",
   },
 ]);
-setTimeout(() => {
-  tags.value.splice(1, 3);
-}, 3000);
+// setTimeout(() => {
+//   tags.value.splice(1, 3);
+// }, 3000);
 </script>
 <style lang="scss" scoped>
 .wrapper {

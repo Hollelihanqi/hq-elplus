@@ -94,7 +94,7 @@ onMounted(() => {
   }
 
   .ellipsis {
-    @apply rounded-[2px] px-[4px] py-[4px] bg-white;
+    @apply rounded-[2px] px-[8px] bg-white flex items-center;
     border: 1px solid rgba(0, 0, 0, 0.06);
   }
 }
