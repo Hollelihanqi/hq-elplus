@@ -46,7 +46,7 @@ for (let index = 0; index < 10; index++) {
     itemType: "input",
     value: "",
     label: "测试数据" + (index + 1),
-    contentClass: "w-full",
+    contentClass: index%2==1 ? 'w-full h-[60px]': "w-full",
     cols: !index ? 2 : 1,
   });
 }

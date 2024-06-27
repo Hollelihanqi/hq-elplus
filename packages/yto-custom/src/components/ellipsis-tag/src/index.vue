@@ -24,13 +24,13 @@
         </ul>
       </template>
       <template #reference>
-        <div v-show="shoEllipsis" class="ellipsis">
-          <slot name="ellipsis">
-            <el-icon color="#7f7f7f">
-              <MoreFilled />
-            </el-icon>
-          </slot>
-        </div>
+        <slot name="ellipsis">
+          <div v-show="shoEllipsis" class="ellipsis">
+              <el-icon color="#7f7f7f">
+                <MoreFilled />
+              </el-icon>
+          </div>
+        </slot>
       </template>
     </el-popover>
   </div>

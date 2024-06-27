@@ -4,6 +4,9 @@
       <!-- <template #default="scope">
         <div class="h-[22px] bg-red-300">{{ scope.info }}</div>
       </template> -->
+      <template #ellipsis>
+        <span class="bg-red">123</span>
+      </template>
     </yto-c-ellipsis-tag>
     <yto-c-ellipsis-tag :tags="tags">
       <!-- <template #default="scope">
