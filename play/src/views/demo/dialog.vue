@@ -2,7 +2,13 @@
   <div>
     <button class="a" @click="dialogVisible = true">基础弹框</button>
 
-    <yto-c-dialog v-model="dialogVisible" width="1000px" @confirm="handleConfirm" @cancel="handleCancel">
+    <yto-c-dialog
+      v-model="dialogVisible"
+      width="1000px"
+      @confirm="handleConfirm"
+      @cancel="handleCancel"
+      :hiddenFooter="true"
+    >
       <template #header> title </template>
       <yto-c-form
         id="123"
@@ -14,6 +20,8 @@
         :span="12"
       >
       </yto-c-form>
+
+      <template #footer> title </template>
     </yto-c-dialog>
   </div>
 </template>
