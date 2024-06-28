@@ -1,8 +1,13 @@
 <script lang="tsx">
 import { Props } from "./props";
 import { useController } from "./useControl";
+import MyTransition from "./MyTransition.vue";
 export default defineComponent({
   name: "JsonViewer",
+  components: {
+    // 使用不同的名称
+    MyTransition,
+  },
   props: Props,
   setup(props) {
     const { _nodes, isCollapsed, toggleRoot, handleCopyClick } = useController(props);
@@ -29,7 +34,7 @@ export default defineComponent({
     const CollapseArrow = ({ toggleClick, isCollapsed }: any) => (
       <div
         style={{ cursor: "pointer", display: "inline-block" }}
-        class={`color-f ${isCollapsed ? "triangle-right" : "triangle-down"}`}
+        class={`color-f triangle-arrow ${isCollapsed ? "triangle-right" : "triangle-down"}`}
         onClick={toggleClick}
       ></div>
     );
@@ -43,25 +48,41 @@ export default defineComponent({
             <div>
               <CollapseArrow toggleClick={() => toggleExpand(_node)} isCollapsed={_node.collapse} />
               <div style="display:inline-block;word-break: break-all;">
-                <span>{paseKey(key)}</span>
-                <span> :{_node.nodeType} </span>
+                {!_node.isArrayChild && (
+                  <>
+                    <span>{paseKey(key)}</span>
+                    <span style="fontWeight:bold">：</span>
+                  </>
+                )}
                 <strong style={{ color: _colors[index] }}>{type === "object" ? "{" : "["}</strong>
               </div>
               {_node.collapse ? "..." : ""}
-              {!_node.collapse && (
-                <div style={{ marginLeft: "20px" }}>
-                  {children.map((child: any, index2) => {
+              <MyTransition>
+                {/* {!_node.collapse && (
+                  <div style={{ marginLeft: "20px" }}>
+                    {children.map((child: any, index2) => {
+                      return (
+                        <div key={index2}>
+                          {renderNode(child.key, child.value, child._children, child.nodeType, index2, child)}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )} */}
+                <div v-show={!_node.collapse} style={{ marginLeft: "20px" }}>
+                  {children.map((child: any) => {
                     return (
-                      <div key={index2}>
-                        {renderNode(child.key, child.value, child._children, child.nodeType, index2, child)}
+                      <div key={child.level}>
+                        {renderNode(child.key, child.value, child._children, child.nodeType, child.level, child)}
                       </div>
                     );
                   })}
                 </div>
-              )}
+              </MyTransition>
               <span style={{ color: _colors[index] }}>
                 <strong style={{ color: _colors[index] }}>{type === "object" ? "}" : "]"}</strong>
               </span>
+              {_node.isArrayChild && <span>，</span>}
             </div>
           );
         } else {
@@ -69,13 +90,18 @@ export default defineComponent({
             <div style="display:inline-block;word-break: break-all;">
               {type !== "array" && (
                 <>
-                  <span class="json-key-span" style="display:inline-block">
-                    {paseKey(key)}
-                  </span>
-                  <span> : {_node.nodeType}</span>
+                  {!_node.isArrayChild && (
+                    <>
+                      <span class="json-key-span" style="display:inline-block">
+                        {paseKey(key)}
+                      </span>
+                      <span style="fontWeight:bold">：</span>
+                    </>
+                  )}
                 </>
               )}
               {valueFormat(_node)}
+              {_node.isArrayChild && <span>，</span>}
             </div>
           );
         }
@@ -97,16 +123,24 @@ export default defineComponent({
               </>
             )}
           </div>
-          {!isCollapsed.value && (
-            <>
-              <div style={{ marginLeft: "20px" }}>
-                {data.map((node, index) => (
-                  <JsonNode node={node} />
-                ))}
-              </div>
-              <span class="json-key-span">{props.rootTagEnd}</span>
-            </>
-          )}
+          <MyTransition>
+            {/* {!isCollapsed.value && (
+              <>
+                <div style={{ marginLeft: "20px" }}>
+                  {data.map((node, index) => (
+                    <JsonNode node={node} />
+                  ))}
+                </div>
+                <span class="json-key-span">{props.rootTagEnd}</span>
+              </>
+            )} */}
+            {/* 使用 v-show 控制子节点的显示和隐藏 */}
+            <div v-show={!isCollapsed.value} style={{ marginLeft: "20px" }}>
+              {data.map((node, index) => (
+                <JsonNode node={node} />
+              ))}
+            </div>
+          </MyTransition>
         </div>
       );
     };

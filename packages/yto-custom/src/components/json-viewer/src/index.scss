@@ -3,6 +3,7 @@
   width: 100%;
   min-height: 100%;
   padding: 8px;
+  font-weight: bold;
   .node-box {
     display: flex;
     align-items: center;
@@ -28,8 +29,37 @@
       padding: 8px 16px;
     }
   }
-  /* 向下的正三角形 */
-  .triangle-down {
+  // /* 向下的正三角形 */
+  // .triangle-down {
+  //   display: inline-block;
+  //   width: 0;
+  //   height: 0;
+  //   border-top: 8px solid var(--el-color-primary);
+  //   border-left: 6px solid transparent;
+  //   border-right: 6px solid transparent;
+  //   margin-right: 6px;
+  //   border-radius: 2px;
+  //   transform-origin: 50% 60%; /* 设置旋转中心点 */
+  //   transition: transform 0.3s ease-in-out; /* 调整动画函数 */
+  // }
+
+  // /* 向右的正三角形 */
+  // .triangle-right {
+  //   display: inline-block;
+  //   width: 0;
+  //   height: 0;
+  //   border-left: 8px solid var(--el-color-primary);
+  //   border-top: 6px solid transparent;
+  //   border-bottom: 6px solid transparent;
+  //   transform: translateY(1px);
+  //   margin-right: 6px;
+  //   border-radius: 3px;
+  //   transform-origin: 50% 60%; /* 设置旋转中心点 */
+  //   // transform: rotate(90deg);
+  //   transition: transform 0.3s ease-in-out; /* 调整动画函数 */
+  // }
+  /* 箭头基础样式 */
+  .triangle-arrow {
     display: inline-block;
     width: 0;
     height: 0;
@@ -38,20 +68,12 @@
     border-right: 6px solid transparent;
     margin-right: 6px;
     border-radius: 2px;
-    // transform: translateY(1px);
+    transition: transform 0.3s ease-in-out; /* 添加过渡效果 */
   }
 
-  /* 向右的正三角形 */
+  /* 向右箭头 (旋转 90 度) */
   .triangle-right {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border-left: 8px solid var(--el-color-primary);
-    border-top: 6px solid transparent;
-    border-bottom: 6px solid transparent;
-    transform: translateY(1px);
-    margin-right: 6px;
-    border-radius: 3px;
+    transform: rotate(-90deg);
   }
 
   .json-copy {
