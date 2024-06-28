@@ -11,8 +11,8 @@
 
     <slot />
 
-    <template #footer>
-      <slot v-if="!_hiddenFooter" name="footer">
+    <template #footer v-if="!_hiddenFooter">
+      <slot name="footer">
         <el-button v-if="_showCancel" v-bind="_cancelOption" @click="handleClose">{{
           _cancelOption.txt ? _cancelOption.txt : "取消"
         }}</el-button>
