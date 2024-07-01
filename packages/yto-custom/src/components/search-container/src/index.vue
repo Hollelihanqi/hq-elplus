@@ -3,7 +3,7 @@
     :id="containerId"
     class="search-container overflow-hidden relative w-full"
     :class="customClass"
-    :style="handleContainerHeightChange()"
+    :style="handleContainerStyle()"
     @keyup.enter="handleEnterKeyup"
   >
     <el-form
@@ -76,26 +76,28 @@ const handleResize = (info: any) => {
   if (!props.itemMinWidth || !info.width || prevWidth == info.width) return;
   logger("search-container-handleResize", info);
   prevWidth = info.width;
-  let num = Math.floor(info.width / props.itemMinWidth);
+  let num = Math.floor(info.width / props.itemMinWidth); // 每行显示数量
   const tmpItemWidth = info.width / num;
   if (tmpItemWidth < props.itemMinWidth) {
     num -= 1;
   }
-  let itemWidth = Math.floor(info.width / num);
+  let itemWidth = Math.floor(info.width / num); // 每个元素宽度
   // 超过最大值则按照最大值展示
   if (props.itemMaxWidth && itemWidth > props.itemMaxWidth) {
     itemWidth = props.itemMaxWidth;
   }
   emit("resize", itemWidth);
-  props.autoLayout && setChildWidth(itemWidth); // 设置子元素宽度
+  const tmpChildren: HTMLCollection | undefined = document.querySelector(
+    `#${containerId.value} .container-content`
+  )?.children;
+  props.autoLayout && setChildWidth(itemWidth, tmpChildren); // 设置子元素宽度
   nextTick(() => {
-    props.isCollapse && dealCollapse(num, itemWidth);
+    props.isCollapse && dealCollapse(num, tmpChildren); // 如果开启了折叠，则处理折叠
   });
 };
-const setChildWidth = (itemWidth: number) => {
-  const tmpChildren = document.querySelector(`#${containerId.value} .container-content`)?.children;
-  if (!tmpChildren || !tmpChildren.length) return;
-  const children = Array.from(tmpChildren).filter((item: any) => {
+const setChildWidth = (itemWidth: number, childrenNodes?: HTMLCollection) => {
+  if (!childrenNodes || !childrenNodes.length) return;
+  const children = Array.from(childrenNodes).filter((item: any) => {
     return !item.className.includes("container-operation");
   });
   children.forEach((item: any) => {
@@ -133,33 +135,41 @@ const getElExtraHeight = (elStyle: IAnyObject) => {
     parseInt(elStyle.borderBottomWidth)
   );
 };
-const dealCollapse = (lineNum: number, itemWidth: number) => {
+const dealCollapse = (lineNum: number, childrenNodes?: HTMLCollection) => {
   setContainerMaxMinHeight();
-  const tmpChildren = document.querySelector(`#${containerId.value} .container-content`)?.children;
-  if (!tmpChildren || !tmpChildren.length) return;
+  if (!childrenNodes || !childrenNodes.length) return;
   let row = 1,
     rowHeightObj: IAnyObject = {}; //用于保存每一行的最大高度
   let currentTotalLineCols = 0;
-  Array.from(tmpChildren).forEach((child: any, idx: number) => {
+  Array.from(childrenNodes).forEach((child: any, idx: number) => {
     const cols = Number(child.getAttribute("data-cols")) || 1;
     currentTotalLineCols += cols;
     child.setAttribute("data-line-count", row);
-
+    // 为了计算高度需要让每一个元素都显示出来
+    showEl(child);
     //计算每一行最大高度
-    const tmpRowHeight = child.offsetHeight + getElExtraHeight(getComputedStyle(child));
     !rowHeightObj[row] && (rowHeightObj[row] = 0);
+    const tmpRowHeight = child.offsetHeight + getElExtraHeight(getComputedStyle(child));
     rowHeightObj[row] = tmpRowHeight > rowHeightObj[row] ? tmpRowHeight : rowHeightObj[row];
 
     // 如果是折叠状态，resize过程中,动态改变元素的display属性,避免元素被隐藏
     if (unref(collapse) && !isOperateEl(child)) {
-      row <= props.collapseLine ? showEl(child) : hideEl(child);
+      if (row < props.collapseLine) {
+        showEl(child);
+      } else if (row === props.collapseLine) {
+        // 折叠行数所在行的最后一个元素需要隐藏
+        currentTotalLineCols >= lineNum ? hideEl(child) : showEl(child);
+      } else {
+        hideEl(child);
+      }
     }
-    if (currentTotalLineCols >= lineNum && Array.from(tmpChildren)[idx + 1]) {
+    //换行
+    if (currentTotalLineCols >= lineNum && Array.from(childrenNodes)[idx + 1]) {
       currentTotalLineCols = 0;
       row++;
     }
   });
-  // 计算容器的最大、最小高度
+  // 遍历完所有子元素侯计算容器的最大、最小高度
   let tmpMaxHeight = 0,
     tmpMinHeight = 0;
   Object.keys(rowHeightObj).forEach((key: string) => {
@@ -170,19 +180,21 @@ const dealCollapse = (lineNum: number, itemWidth: number) => {
   });
   setContainerMaxMinHeight(tmpMaxHeight, tmpMinHeight);
   logger("containerRowMaxHeight", rowHeightObj, containerMinHeight, containerMaxHeight);
+
   setTimeout(() => {
     //判断是否显示折叠按钮
     showCollapse.value = row > props.collapseLine;
 
-    unref(showCollapse) && unref(collapse) && hiddenLastEl(tmpChildren);
+    unref(showCollapse) && unref(collapse) && hiddenLastEl(childrenNodes);
     logger("内部元素共显示了大致", row, "行（不包含最后一行可能未满的情况）", showCollapse.value);
     //如果开启了默认折叠 超过最大行数则自动折叠
     if (props.isCollapse && props.defaultCollapse && unref(showCollapse)) {
-      doCollapse(tmpChildren);
+      doCollapse(childrenNodes);
       collapse.value = true;
     }
   }, 10);
 };
+
 //处理展开
 const doExpand = (elements: any) => Array.from(elements).forEach(showEl);
 //处理折叠
@@ -202,7 +214,10 @@ const handleCollapse = () => {
   unref(collapse) ? doExpand(tmpChildren) : doCollapse(tmpChildren);
   collapse.value = !unref(collapse);
 };
-const handleContainerHeightChange = () => {
+/**
+ * 为容器增加动画
+ */
+const handleContainerStyle = () => {
   if (!props.isCollapse) return;
   const containerEl: any = document.querySelector(`#${containerId.value}`);
   if (!containerEl) return { height: 0 };
