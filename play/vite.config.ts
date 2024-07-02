@@ -37,7 +37,8 @@ export default defineConfig({
     },
   },
   server: {
-    port: 1206,
+    host: true,
+    port: 8989,
     proxy: {
       "/api/v2": {
         target: "http://10.130.137.53:8000", // sit

@@ -41,12 +41,12 @@ const form = {};
 const formItemWidth = ref(350);
 const formConfig: Array<any> = reactive([]);
 const searchContainerRef = ref();
-for (let index = 0; index < 10; index++) {
+for (let index = 0; index < 20; index++) {
   formConfig.push({
     itemType: "input",
     value: "",
     label: "测试数据" + (index + 1),
-    contentClass: index%2==1 ? 'w-full h-[60px]': "w-full",
+    contentClass: index % 2 == 1 ? "w-full h-[60px]" : "w-full",
     cols: !index ? 2 : 1,
   });
 }
