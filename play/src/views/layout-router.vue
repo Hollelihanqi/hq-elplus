@@ -229,6 +229,12 @@ const listNavigation: any[] = [
         mode: "router",
       },
       {
+        label: "stickyContainer",
+        href: "/stickyContainer",
+        code: "/stickyContainer",
+        mode: "router",
+      },
+      {
         label: "waterMarker",
         href: "/waterMarker",
         code: "/waterMarker",

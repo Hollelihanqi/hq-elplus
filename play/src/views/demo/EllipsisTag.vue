@@ -4,13 +4,36 @@
       <!-- <template #default="scope">
         <div class="h-[22px] bg-red-300">{{ scope.info }}</div>
       </template> -->
+      <template #ellipsis>
+        <span class="bg-red-300">123</span>
+      </template>
+    </yto-c-ellipsis-tag>
+    <yto-c-ellipsis-tag :tags="tags">
+      <!-- <template #default="scope">
+        <div class="h-[22px] bg-red-300">{{ scope.info }}</div>
+      </template> -->
+    </yto-c-ellipsis-tag>
+    <yto-c-ellipsis-tag :tags="tags">
+      <!-- <template #default="scope">
+        <div class="h-[22px] bg-red-300">{{ scope.info }}</div>
+      </template> -->
+    </yto-c-ellipsis-tag>
+    <yto-c-ellipsis-tag :tags="tags">
+      <!-- <template #default="scope">
+        <div class="h-[22px] bg-red-300">{{ scope.info }}</div>
+      </template> -->
+    </yto-c-ellipsis-tag>
+    <yto-c-ellipsis-tag :tags="tags">
+      <!-- <template #default="scope">
+        <div class="h-[22px] bg-red-300">{{ scope.info }}</div>
+      </template> -->
     </yto-c-ellipsis-tag>
   </div>
 </template>
 
 <script lang="ts" setup>
 const list = ["sdfwe", "fwewegwgw", "rtyrtyrtyrt", "h4h4h4h"];
-const tags = [
+const tags = ref([
   {
     value: 1,
     label: "高风险",
@@ -37,7 +60,10 @@ const tags = [
     value: 5,
     label: "木马病毒",
   },
-];
+]);
+// setTimeout(() => {
+//   tags.value.splice(1, 3);
+// }, 3000);
 </script>
 <style lang="scss" scoped>
 .wrapper {

@@ -1,5 +1,5 @@
 <template>
-  <div ref="ellipsisTagRef" v-resize-element="handleResize" class="ellipsis-tag flex w-full">
+  <div :id="containerId" ref="ellipsisTagRef" v-resize-element="resizeHandle" class="ellipsis-tag flex w-full">
     <div class="flex-1 overflow-hidden">
       <div class="tag-box">
         <template v-for="(tag, index) in tags" :key="tag[valueKey] || index">
@@ -24,13 +24,13 @@
         </ul>
       </template>
       <template #reference>
-        <div v-show="shoEllipsis" class="ellipsis">
-          <slot name="ellipsis">
-            <el-icon color="#7f7f7f">
-              <MoreFilled />
-            </el-icon>
-          </slot>
-        </div>
+        <slot name="ellipsis">
+          <div v-show="shoEllipsis" class="ellipsis">
+              <el-icon color="#7f7f7f">
+                <MoreFilled />
+              </el-icon>
+          </div>
+        </slot>
       </template>
     </el-popover>
   </div>
@@ -39,6 +39,8 @@
 <script lang="ts" setup name="EllipsisTag">
 import { MoreFilled } from "@element-plus/icons-vue";
 import { resizeElement as vResizeElement } from "@/directives";
+import { guid, debounceFun } from "@yto/utils";
+import { logger } from "@/_utils";
 
 interface Props {
   tags?: Array<any>;
@@ -52,14 +54,37 @@ const props = withDefaults(defineProps<Props>(), {
     return [];
   },
 });
+const containerId = computed(() => {
+  return `ellipsis-tag_${guid()}`;
+});
 const ellipsisTagRef = ref();
 const shoEllipsis = ref(false);
+const resizeHandle = debounceFun((info: any) => {
+  handleResize(info);
+}, 300);
 const handleResize = (info: any) => {
-  const boxEl = unref(ellipsisTagRef).querySelector(".ellipsis-tag .tag-box");
+  const boxEl = unref(ellipsisTagRef).querySelector(`#${unref(containerId)} .tag-box`);
+  logger("ellipsis-tag-handleResize", boxEl, unref(containerId));
   if (!boxEl) return;
   const boxWidth = boxEl.getBoundingClientRect().width;
   shoEllipsis.value = info.width < boxWidth;
 };
+watch(
+  () => props.tags,
+  () => {
+    const tmpEl: any = document.querySelector(`#${unref(containerId)} .tag-box`);
+    if (!tmpEl) return;
+    resizeHandle({ width: tmpEl.offsetWidth });
+  },
+  {
+    deep: true,
+  }
+);
+onMounted(() => {
+  const tmpEl: any = document.querySelector(`#${unref(containerId)} .tag-box`);
+  if (!tmpEl) return;
+  resizeHandle({ width: tmpEl.offsetWidth });
+});
 </script>
 <style lang="scss" scoped>
 .ellipsis-tag {
@@ -69,7 +94,7 @@ const handleResize = (info: any) => {
   }
 
   .ellipsis {
-    @apply rounded-[2px] px-[4px] py-[4px] bg-white;
+    @apply rounded-[2px] px-[8px] bg-white flex items-center;
     border: 1px solid rgba(0, 0, 0, 0.06);
   }
 }
