@@ -29,8 +29,11 @@
             </template>
           </NavTabs>
         </slot>
+        <!-- {{
+          `activeItem===${activeItem ? JSON.stringify(activeItem) : activeItem}---------isInIframe===${isInIframe()}`
+        }} -->
         <div
-          v-show="activeItem?.mode === LAYOUT_MODE.Router && !isInIframe()"
+          v-show="isInIframe() || activeItem?.mode === LAYOUT_MODE.Router"
           class="router-view-container flex-1 px-[10px] pb-[10px] overflow-auto w-full"
         >
           <router-view v-slot="{ Component, route }">
@@ -76,7 +79,7 @@ const props = defineProps({
     default: true,
   },
 });
-
+const route = useRoute();
 const { listRoute, activate } = useFrame({
   cacheable: props.cacheable as boolean,
   sso: props.sso as boolean,
@@ -84,7 +87,9 @@ const { listRoute, activate } = useFrame({
 });
 const isInIframe = (): boolean => window.self !== window.top;
 
-const activeItem = computed(() => listRoute.value.find((item) => item.code === unref(activate)));
+const activeItem = computed(() =>
+  listRoute.value.find((item) => item.code === unref(activate) || item.code === route.path)
+);
 // 是否为垂直布局
 const isVertical = computed(() => props.type === "vertical");
 const emit = defineEmits(["tab-change"]);
