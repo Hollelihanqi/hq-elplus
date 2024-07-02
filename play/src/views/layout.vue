@@ -57,14 +57,14 @@ const listNavigation: any[] = [
     children: [
       {
         label: "用户活跃度",
-        href: "http://192.168.201.37:8003/platform-overview?source=JSC&token=314b4c6ff535406ebc46b15ddaf617b4",
+        href: "http://192.168.201.37:8003/platform-overview?source=JSC&token=a07bb7ef30da46ed9dc8cf41cf3890ec",
         code: "/platform-overview",
         // closable: false,
         mode: "frame",
       },
       {
         label: "激励记录",
-        href: "http://192.168.201.37:8003/assessment-stimulate-list?primaryColor=%2356297e&source=JSC&token=314b4c6ff535406ebc46b15ddaf617b4",
+        href: "http://192.168.201.37:8003/assessment-stimulate-list?primaryColor=%2356297e&source=JSC&token=a07bb7ef30da46ed9dc8cf41cf3890ec",
         code: "/log-monitoring",
         // closable: false,
         mode: "frame",
@@ -136,7 +136,7 @@ window.addEventListener("message", (e) => {
 const formatMenu = (info: any) => {
   if (info.mode == "frame") {
     const tmpArr = info.href.split("token=");
-    info.href = `${tmpArr[0]}token=2c3085642b584ac8a9e156d633474e12`;
+    info.href = `${tmpArr[0]}token=afe97c47d0b446d4858cd88ca7e98cf1`;
   }
   console.log("formatTab-----", info);
   return info;
