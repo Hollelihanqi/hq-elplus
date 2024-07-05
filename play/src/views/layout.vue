@@ -56,16 +56,23 @@ const listNavigation: any[] = [
     icon: "icon iconfont party-web-icon-caidan3",
     children: [
       {
+        label: "windicss",
+        href: "https://windicss.org/",
+        code: "/windicss",
+        // closable: false,
+        mode: "frame",
+      },
+      {
         label: "用户活跃度",
-        href: "http://192.168.201.37:8003/platform-overview?source=JSC&token=a07bb7ef30da46ed9dc8cf41cf3890ec",
+        href: "http://192.168.201.37:8003/platform-overview?theme=light&source=WDGJ&token=1234567890",
         code: "/platform-overview",
         // closable: false,
         mode: "frame",
       },
       {
         label: "激励记录",
-        href: "http://192.168.201.37:8003/assessment-stimulate-list?primaryColor=%2356297e&source=JSC&token=a07bb7ef30da46ed9dc8cf41cf3890ec",
-        code: "/log-monitoring",
+        href: "http://192.168.201.37:8003/assessment-stimulate-detail?primaryColor=%23ed731a&source=WDGJ&token=1234567890&csp-channel=riskControlWeb-manager&appealEnable=true&itemCode=cb1873f49f5a42bf9fc8fd4b1d13977b&itemIndicatorCode342104e941c14bbfafcb31f7f5886fcf",
+        code: "/assessment-stimulate-detail",
         // closable: false,
         mode: "frame",
       },
@@ -106,7 +113,6 @@ const listNavigation: any[] = [
 // if (route.path === "/") {
 //   tabPaneAdd(frist?.href as string, frist as IOptionTabPane);
 // }
-
 // tabPaneAdd(`/layout-child-3?iFrameUrl=http://action-analysis-tst.ytokj.com/user-access-records` as string, {
 //   label: "测试列表3",
 //   href: "/layout-child-3",
@@ -114,6 +120,7 @@ const listNavigation: any[] = [
 //   mode: "router",
 //   closable: false,
 // });
+
 window.addEventListener("message", (e) => {
   console.log("window.addEventListener-----123", e);
   if (!e.data.url) return;
@@ -134,11 +141,11 @@ window.addEventListener("message", (e) => {
   });
 });
 const formatMenu = (info: any) => {
-  if (info.mode == "frame") {
-    const tmpArr = info.href.split("token=");
-    info.href = `${tmpArr[0]}token=afe97c47d0b446d4858cd88ca7e98cf1`;
-  }
-  console.log("formatTab-----", info);
+  // if (info.mode == "frame") {
+  //   const tmpArr = info.href.split("token=");
+  //   info.href.includes("token=") && (info.href = `${tmpArr[0]}token=e49de2c2ff1c49c8886dcfa30aa15c71`);
+  // }
+  // console.log("formatTab-----", info);
   return info;
 };
 const handleMenuClick = (info: any) => {

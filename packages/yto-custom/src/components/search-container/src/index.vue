@@ -179,7 +179,7 @@ const dealCollapse = (lineNum: number, childrenNodes?: HTMLCollection) => {
     }
   });
   setContainerMaxMinHeight(tmpMaxHeight, tmpMinHeight);
-  logger("containerRowMaxHeight", rowHeightObj, containerMinHeight, containerMaxHeight);
+  logger("containerRowMaxHeight", rowHeightObj, tmpMaxHeight, tmpMinHeight);
 
   setTimeout(() => {
     //判断是否显示折叠按钮
@@ -220,6 +220,13 @@ const handleCollapse = () => {
 const handleContainerStyle = () => {
   if (!props.isCollapse) return;
   const containerEl: any = document.querySelector(`#${containerId.value}`);
+  if (containerMinHeight === containerMaxHeight) {
+    if (containerMinHeight == 0) {
+      return;
+    } else {
+      return { height: `${containerMinHeight + getElExtraHeight(getComputedStyle(containerEl))}px` };
+    }
+  }
   if (!containerEl) return { height: 0 };
   const height = unref(collapse)
     ? `${containerMinHeight + getElExtraHeight(getComputedStyle(containerEl))}px`

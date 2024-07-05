@@ -41,7 +41,7 @@ const form = {};
 const formItemWidth = ref(350);
 const formConfig: Array<any> = reactive([]);
 const searchContainerRef = ref();
-for (let index = 0; index < 20; index++) {
+for (let index = 0; index < 10; index++) {
   formConfig.push({
     itemType: "input",
     value: "",
