@@ -22,14 +22,15 @@
 
 ### LayoutMenu 属性
 
-| 属性名       | 说明       | 类型             | 可选值 | 默认值  | 备注 |
-| ------------ | ---------- | ---------------- | ------ | ------- | ---- |
-| `collapse`   | 系统名称   | boolean          | -      | ""      |      |
-| `menus`      | 菜单数据   | IOptionTabPane[] | -      | []      |      |
-| `width`      | 菜单宽度   | string           | —      | "210px" |      |
-| `searchable` | 是否可搜索 | boolean          | —      | true    |      |
-| `title`      | 系统名称   | string           | -      | ""      |      |
-| `logo`       | 系统 logo  | Img              | —      | -       |      |
+| 属性名       | 说明                | 类型             | 可选值 | 默认值  | 备注 |
+| ------------ | ------------------- | ---------------- | ------ | ------- | ---- |
+| `collapse`   | 系统名称            | boolean          | -      | ""      |      |
+| `menus`      | 菜单数据            | IOptionTabPane[] | -      | []      |      |
+| `width`      | 菜单宽度            | string           | —      | "210px" |      |
+| `searchable` | 是否可搜索          | boolean          | —      | true    |      |
+| `title`      | 系统名称            | string           | -      | ""      |      |
+| `logo`       | 系统 logo           | Img              | —      | -       |      |
+| `formatMenu` | tabsItem 格式化方法 | function         | —      | -       |      |
 
 ### LayoutMenu 样式变量
 
