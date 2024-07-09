@@ -9,14 +9,14 @@
       <slot name="tip"></slot>
     </div>
 
-    <!-- <UploadList v-if="!listHide" :cmd5="cmd5">
+    <!-- <UploadList v-if="!listHide">
       <template #fileListItem>
         <slot name="fileListItem"></slot>
       </template>
     </UploadList> -->
     <div v-show="UPLOADER?.fileList?.length && !listHide" class="uploader-list">
       <div v-for="file in UPLOADER.fileList" :key="file.id" class="file-item">
-        <UploadInfo :file="file" :list="true" :cmd5="cmd5">
+        <UploadInfo :file="file" :list="true">
           <template #default="{ progress, status }">
             <slot name="fileListItem" :file="file" :progress="progress" :status="status" />
           </template>
@@ -234,6 +234,7 @@ const uploadStart = () => {
 //开始上传
 const startUpload = (file: any) => {
   cmd5.value = true;
+  file.cmd5 = true;
   const fileReader = new FileReader();
   const time = new Date().getTime();
   const blobSlice = File.prototype.slice;
@@ -262,6 +263,7 @@ const startUpload = (file: any) => {
       file.uniqueIdentifier = HASH2; // 增加文件唯一标识
       file.resume(); // 恢复文件开始上传
       cmd5.value = false;
+      file.cmd5 = false;
       logger(
         `MD5计算完毕：${file.name} \nMD5：${HASH} \n分片：${chunks} 大小:${file.size} 用时：${
           new Date().getTime() - time
