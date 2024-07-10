@@ -135,7 +135,7 @@ const testData2 = {
   userName: "李涵祺",
   stationName: "总公司",
   stationCode: "999999",
-  tags: [28, 89, 65, { name: "lihanqi", age: 28 }],
+  tags: [28, 89, 65, { name: "lihanqi", age: 28 },"train",false],
   block: false,
   role: "用户体验设计前端开发工程师",
   show: true,

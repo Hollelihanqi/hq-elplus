@@ -2,7 +2,7 @@
  * @Author: DESKTOP-7338OS6\LHQ LHQ
  * @Date: 2024-04-07 16:11:35
  * @LastEditors: DESKTOP-7338OS6\LHQ LHQ
- * @LastEditTime: 2024-05-30 19:22:00
+ * @LastEditTime: 2024-06-28 15:02:37
  * @FilePath: \yto-engine\packages\yto-custom\src\components\json-viewer\src\useControl.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -42,7 +42,7 @@ export const useController = (props: JsonViewerProps) => {
 
 function jsonToNestedArray(obj: any) {
   // 定义一个帮助函数递归地处理对象和数组，新增一个level参数来表示当前层级
-  function processNode(key: any, value: any, path: any, level: any) {
+  function processNode(key: any, value: any, path: any, level: any, isArrayChild = false) {
     // 获取完整的路径
     const fullPath = path ? `${path}.${key}` : key;
     // 初始化节点，增加level属性
@@ -60,15 +60,19 @@ function jsonToNestedArray(obj: any) {
       if (Array.isArray(value)) {
         // 处理数组类型
         node.nodeType = "array";
-        node.value = value.toString();
+        // node.value = value.toString();
+        node.value = JSON.stringify(value);
+        node.isArrayChild = isArrayChild;
         // node.type = "array";
         value.forEach((item, index) => {
-          node._children.push(processNode(`${index}`, item, "", level + 1));
+          node._children.push(processNode(`${index}`, item, "", level + 1, true));
         });
       } else {
         // 处理对象类型
         node.nodeType = "object";
-        node.value = value?.toString();
+        // node.value = value?.toString();
+        node.value = JSON.stringify(value);
+        node.isArrayChild = isArrayChild;
         // node.type = "object";
         Object.entries(value).forEach(([childKey, childValue]) => {
           node._children.push(processNode(childKey, childValue, fullPath, level + 1));
@@ -78,9 +82,11 @@ function jsonToNestedArray(obj: any) {
       // 如果值不是对象或数组，直接设置值和类型
       node.nodeType = "function";
       node.value = value?.toString();
+      node.isArrayChild = isArrayChild;
     } else {
       node.nodeType = typeof value;
       node.value = value;
+      node.isArrayChild = isArrayChild;
     }
     return node;
   }

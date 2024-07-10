@@ -1,5 +1,5 @@
 <template>
-  <div class="upload-info" :status="status2">
+  <div class="upload-info">
     <slot :progress="progress" :status="status2">
       <div
         class="uploader-file-progress"
@@ -38,10 +38,6 @@ const props = defineProps({
   file: {
     type: Object,
     default: () => ({}),
-  },
-  cmd5: {
-    type: Boolean,
-    default: false,
   },
 });
 
@@ -155,12 +151,16 @@ watch(
 );
 
 watch(
-  () => props.cmd5,
+  () => props.file.cmd5,
   (newValue) => {
-    logger("cmd5");
     if (newValue) {
+      logger("已经开始计算 MD5");
       setStatus("cmd5");
     }
+  },
+  {
+    deep: true,
+    immediate: true,
   }
 );
 
