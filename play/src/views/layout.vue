@@ -71,8 +71,15 @@ const listNavigation: any[] = [
       },
       {
         label: "激励记录",
-        href: "http://192.168.201.37:8003/assessment-stimulate-detail?primaryColor=%23ed731a&source=WDGJ&token=1234567890&csp-channel=riskControlWeb-manager&appealEnable=true&itemCode=cb1873f49f5a42bf9fc8fd4b1d13977b&itemIndicatorCode342104e941c14bbfafcb31f7f5886fcf",
+        href: "http://192.168.201.37:8003/assessment-stimulate-detail?primaryColor=%23ed731a&source=WDGJ&token=1234567890&csp-channel=riskControlWeb-manager&appealEnable=false&itemCode=cb1873f49f5a42bf9fc8fd4b1d13977b&itemIndicatorCode=342104e941c14bbfafcb31f7f5886fcf",
         code: "/assessment-stimulate-detail",
+        // closable: false,
+        mode: "frame",
+      },
+      {
+        label: "日志监控",
+        href: "http://192.168.201.37:8003/log-monitoring?primaryColor=%2356297e&source=WDGJ&token=1234567890&csp-channel=riskControlWeb-manager",
+        code: "/log-monitoring",
         // closable: false,
         mode: "frame",
       },
