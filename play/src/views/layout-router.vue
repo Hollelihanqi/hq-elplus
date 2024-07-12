@@ -91,6 +91,12 @@ const listNavigation: any[] = [
         mode: "router",
       },
       {
+        label: "FormItems",
+        href: "/formItems",
+        code: "/formItems",
+        mode: "router",
+      },
+      {
         label: "Chart",
         href: "/chart",
         code: "/chart",

@@ -14,6 +14,7 @@ import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   { path: "/chart", component: () => import("@/views/demo/chart.vue") },
   { path: "/form", component: () => import("@/views/form/index.vue") },
+  { path: "/formItems", component: () => import("@/views/formItems/index.vue") },
   { path: "/table", component: () => import("@/views/demo/table.vue") },
   { path: "/staffSearch", component: () => import("@/views/demo/staffSearch.vue") },
   { path: "/userSearch", component: () => import("@/views/demo/TestSearch.vue") },

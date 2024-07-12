@@ -330,7 +330,7 @@ const formConfig = [
     label: "选择框",
     options: options,
   },
-  { itemType: "switch", prop: "switch", label: "单选" },
+  { itemType: "switch", prop: "switch", label: "switch" },
   {
     itemType: "timePicker",
     prop: "timePicker",
@@ -340,6 +340,15 @@ const formConfig = [
     itemType: "timeSelect",
     prop: "timeSelect",
     label: "时间区间",
+  },
+  {
+    itemType: "radio",
+    prop: "sssssss",
+    label: "时间区间",
+    options: [
+      { label: "选项1", value: "1" },
+      { label: "选项2", value: "3" },
+    ],
   },
 ];
 

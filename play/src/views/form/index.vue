@@ -333,6 +333,15 @@ const formConfig = [
     prop: "timeSelect",
     label: "时间区间",
   },
+  {
+    itemType: "radio",
+    prop: "sssssss",
+    label: "时间区间",
+    options: [
+      { label: "选项1", value: "1" },
+      { label: "选项2", value: "3" },
+    ],
+  },
 ];
 
 const test = ref();
