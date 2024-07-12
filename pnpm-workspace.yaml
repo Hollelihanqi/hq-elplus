@@ -4,3 +4,5 @@ packages:
   - "play"
   - "docs"
   - "docs2"
+  - "docs3"
+  - internal/*
