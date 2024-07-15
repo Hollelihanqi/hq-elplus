@@ -52,13 +52,23 @@ const activeItem = computed(
 );
 const router = useRouter();
 const route = useRoute();
-const handleTabRemove = (code: any) => {
-  tabPaneClose(code);
+const handleTabRemove = (closeCode: any) => {
+  tabPaneClose(closeCode);
   //只有关闭当前激活的页签，才需要执行此逻辑
-  logger("handleTabRemove-1", code, unref(tabsMenuValue), props.routerGoback, history.state.back);
-  if (props.routerGoback && code === unref(tabsMenuValue)) {
-    logger("handleTabRemove", code, history.state.back, props.tabsMenuList);
-    findActiveTabItem(history.state.back) && router.back();
+  logger("handleTabRemove-1", closeCode, unref(tabsMenuValue), props.routerGoback);
+  if (props.routerGoback && closeCode === unref(tabsMenuValue)) {
+    const backItem = props.tabsMenuList.find((item: any) => item.back) as IOptionTabPane;
+    logger("handleTabRemove", closeCode, props.tabsMenuList, backItem);
+    if (!backItem) return;
+    setTimeout(() => {
+      const { href, mode, code } = backItem;
+      const url = toURL(href as string);
+      if (mode === LAYOUT_MODE.Router) {
+        router.push(url.pathname + url.search);
+      } else {
+        router.push(buildCodePath(code));
+      }
+    }, 0);
   }
 };
 
@@ -133,11 +143,17 @@ const framePathChange = (activeItem: IOptionTabPane) => {
 
 watch(
   () => route.fullPath,
-  (newVal) => {
+  (newVal, oldVal) => {
     if (!newVal) return;
     const activeItem = findActiveTabItem(route.path);
-    logger("watch--route.fullPath", newVal, activeItem?.mode);
+    logger("watch--route.fullPath", newVal, oldVal, activeItem?.mode);
     activeItem?.mode === LAYOUT_MODE.Frame ? framePathChange(activeItem) : routerPathChange();
+    //记录path切换时的current/back标记
+    props.routerGoback &&
+      props.tabsMenuList.forEach((item: any) => {
+        item.current = newVal && item.href && toURL(item.href).pathname === newVal.split("?")[0];
+        item.back = oldVal && item.href && toURL(item.href).pathname === oldVal.split("?")[0];
+      });
   },
   {
     immediate: true,

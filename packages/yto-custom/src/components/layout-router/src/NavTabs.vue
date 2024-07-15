@@ -45,13 +45,19 @@ const props = withDefaults(defineProps<Props>(), {
 const tabsMenuValue: any = inject(EnumSessionKey.TabsActivate);
 const router = useRouter();
 const route = useRoute();
-const handleTabRemove = (code: any) => {
-  tabPaneClose(code);
+const handleTabRemove = (closeCode: any) => {
+  tabPaneClose(closeCode);
   //只有关闭当前激活的页签，才需要执行此逻辑
-  if (props.routerGoback && code === unref(tabsMenuValue)) {
-    logger("handleTabRemove", code, props.tabsMenuList);
-    const backPath = history.state.back;
-    props.tabsMenuList.find((item: IOptionTabPane) => item.code === backPath) && router.back();
+  logger("handleTabRemove-1", closeCode, unref(tabsMenuValue), props.routerGoback);
+  if (props.routerGoback && closeCode === unref(tabsMenuValue)) {
+    const backItem = props.tabsMenuList.find((item: any) => item.back) as IOptionTabPane;
+    logger("handleTabRemove", closeCode, props.tabsMenuList, backItem);
+    if (!backItem) return;
+    setTimeout(() => {
+      const { href } = backItem;
+      const url = toURL(href as string);
+      router.push(url.pathname + url.search);
+    }, 0);
   }
 };
 
@@ -119,7 +125,7 @@ const getTabsItem = (path: string): any => {
 // });
 watch(
   () => route.fullPath,
-  (newVal) => {
+  (newVal, oldVal) => {
     if (!newVal) return;
     const path = route.path;
     const url = getUrl(path);
@@ -134,7 +140,14 @@ watch(
       return;
     }
     const tmpItem = getTabsItem(path);
+    logger("watch--route.fullPath", newVal, oldVal, tmpItem);
     tmpItem && tabPaneAdd(tmpItem.href as string, { ...tmpItem });
+    //记录path切换时的current/back标记
+    props.routerGoback &&
+      props.tabsMenuList.forEach((item: any) => {
+        item.current = newVal && item.href && toURL(item.href).pathname === newVal.split("?")[0];
+        item.back = oldVal && item.href && toURL(item.href).pathname === oldVal.split("?")[0];
+      });
   },
   {
     immediate: true,

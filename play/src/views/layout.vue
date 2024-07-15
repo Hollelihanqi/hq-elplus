@@ -83,6 +83,13 @@ const listNavigation: any[] = [
         // closable: false,
         mode: "frame",
       },
+      {
+        label: "目标管理",
+        href: "http://192.168.201.37:8003/menu-management?primaryColor=%2356297e&source=WDGJ&token=1234567890&",
+        code: "/menu-management",
+        // closable: false,
+        mode: "frame",
+      },
     ],
   },
   {
