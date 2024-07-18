@@ -129,14 +129,14 @@ watch(
     if (!newVal) return;
     const path = route.path;
     const url = getUrl(path);
-    const tabItem: any =
-      unref(props.tabsMenuList).find((tab: any) => {
-        const urlObj = toURL(tab.href as string);
-        return urlObj.pathname + urlObj.search === url;
-      }) || {};
-    const { href } = tabItem;
-    if (tabItem && href) {
-      tabPaneAdd(href as string, { ...tabItem });
+    const tabItem: any = unref(props.tabsMenuList).find((tab: any) => {
+      const urlObj = toURL(tab.href as string);
+      return urlObj.pathname + urlObj.search === url;
+    });
+    logger("watch--route.fullPath-tabItem", tabItem);
+    if (tabItem && tabItem.href) {
+      const tmpItem = props.formatTab ? props.formatTab(tabItem) : tabItem;
+      tabPaneAdd(tmpItem.href as string, { ...tmpItem });
       return;
     }
     const tmpItem = getTabsItem(path);
