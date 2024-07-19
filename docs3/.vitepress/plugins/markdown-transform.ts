@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import glob from "fast-glob";
-// import { docRoot, docsDirName, projRoot } from "@yto-custom/build-utils";
+import { docRoot, docsDirName, projRoot } from "@yto-custom/build-utils";
 // import { REPO_BRANCH, REPO_PATH } from "@yto-custom/build-constants";
 // import { getLang, languages } from "../utils/lang";
 // import footerLocale from "../i18n/component/footer.json";
@@ -20,28 +20,43 @@ export function MarkdownTransform(): Plugin {
     enforce: "pre",
 
     async buildStart() {
-      // const pattern = `{${[...languages, languages[0]].join(",")}}/component`;
-      // compPaths = await glob(pattern, {
-      //   cwd: docRoot,
-      //   absolute: true,
-      //   onlyDirectories: true,
-      // });
+      const pattern = `mds/components`;
+      compPaths = await glob(pattern, {
+        cwd: docRoot,
+        absolute: true,
+        onlyDirectories: true,
+      });
+      console.log("compPaths", compPaths);
     },
 
     async transform(code, id) {
       if (!id.endsWith(".md")) return;
-
+      // if (id.includes("docs3/index.md") || id.includes("docs3/home/index.md")) {
+      //   return code
+      // }
+      console.log("id", id);
+      //E:/yto-engine/docs3/index.md
       const componentId = path.basename(id, ".md");
-      const append: Append = {
+      console.log("componentId", componentId);
+      let append: any = {
         headers: [],
         footers: [],
-        scriptSetups: [`const demos = import.meta.globEager('../../examples/${componentId}/*.vue')`],
+        scriptSetups: [],
       };
-      code = transformVpScriptSetup(code, append);
-      console.log("compPaths", id);
-      // if (compPaths.some((compPath) => id.startsWith(compPath))) {
-      //   code = transformComponentMarkdown(id, componentId, code, append);
-      // }
+      if (!id.includes("docs3/index.md") && !id.includes("docs3/home/index.md")) {
+        console.log("append", componentId);
+        append = {
+          headers: [],
+          footers: [],
+          scriptSetups: [`const demos = import.meta.globEager('../../examples/${componentId}/*.vue')`],
+        };
+        code = transformVpScriptSetup(code, append);
+      }
+
+      if (compPaths.some((compPath) => id.startsWith(compPath))) {
+        code = transformComponentMarkdown(id, componentId, code, append);
+      }
+
       code = transformComponentMarkdown(id, componentId, code, append);
       return combineMarkdown(code, [combineScriptSetup(append.scriptSetups), ...append.headers], append.footers);
     },
@@ -75,12 +90,12 @@ const transformVpScriptSetup = (code: string, append: Append) => {
   return code;
 };
 
-const GITHUB_BLOB_URL = `https://github.com/${REPO_PATH}/blob/${REPO_BRANCH}`;
-const GITHUB_TREE_URL = `https://github.com/${REPO_PATH}/tree/${REPO_BRANCH}`;
+// const GITHUB_BLOB_URL = `https://github.com/${REPO_PATH}/blob/${REPO_BRANCH}`;
+// const GITHUB_TREE_URL = `https://github.com/${REPO_PATH}/tree/${REPO_BRANCH}`;
 const transformComponentMarkdown = (id: string, componentId: string, code: string, append: Append) => {
   // const lang = getLang(id);
-  const docUrl = `${GITHUB_BLOB_URL}/${docsDirName}/en-US/component/${componentId}.md`;
-  const componentUrl = `${GITHUB_TREE_URL}/packages/components/${componentId}`;
+  // const docUrl = `${GITHUB_BLOB_URL}/${docsDirName}/en-US/component/${componentId}.md`;
+  // const componentUrl = `${GITHUB_TREE_URL}/packages/components/${componentId}`;
   const componentPath = path.resolve(projRoot, `packages/components/${componentId}`);
   const isComponent = fs.existsSync(componentPath);
 

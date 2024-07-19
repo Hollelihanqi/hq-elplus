@@ -16,7 +16,7 @@ import tableWrapper from "../plugins/table-wrapper";
 import tooltip from "../plugins/tooltip";
 import tag from "../plugins/tag";
 import { ApiTableContainer } from "../plugins/api-table";
-import { highlight } from "../utils/highlight";
+import { highlight } from "../utils/highlight2";
 import type Token from "markdown-it/lib/token";
 import type Renderer from "markdown-it/lib/renderer";
 
