@@ -66,6 +66,8 @@ export default defineComponent({
       if (slotsFun) {
         return slotsFun();
       } else if (_itemConfig.elType) {
+        const tmpProps = { ..._itemConfig };
+        delete tmpProps.props; //props字段与selectV2冲突
         return h(resolveComponent("el-" + _itemConfig.elType), {
           modelValue: props.modelValue[_itemConfig.props],
           "onUpdate:modelValue": (val: any) => {
@@ -76,7 +78,7 @@ export default defineComponent({
           // style: `width:${key === 'operatorConfig' ? props.optionWidth || '100px' : 'auto'}`,
           style: "width:" + (key === "operatorConfig" ? props.optionWidth || "100px" : "auto"),
           disabled: props.disabled || _itemConfig.disabled || false,
-          ..._itemConfig,
+          ...tmpProps,
         });
       }
     };

@@ -72,8 +72,8 @@ const setContainerMaxMinHeight = (maxHeight = 0, minHeight = 0) => {
   containerMaxHeight = maxHeight || 0;
   containerMinHeight = minHeight || 0;
 };
-const handleResize = (info: any) => {
-  if (!props.itemMinWidth || !info.width || prevWidth == info.width) return;
+const handleResize = (info: any, forceUpdate = false) => {
+  if ((!props.itemMinWidth || !info.width || prevWidth == info.width) && !forceUpdate) return;
   logger("search-container-handleResize", info);
   prevWidth = info.width;
   let num = Math.floor(info.width / props.itemMinWidth); // 每行显示数量
@@ -241,11 +241,28 @@ const handleEnterKeyup = () => {
   logger("search-container inner enter keyup");
   emit("enterKeyup");
 };
+const observeChildList = (el: HTMLElement) => {
+  // 当观察到变动时执行的回调函数
+  const callback = async function (mutationsList: any, observer: any) {
+    for (let mutation of mutationsList) {
+      if (mutation.type === "childList") {
+        // 在这里可以访问到变化后的子元素
+        logger("新增子元素", mutation.addedNodes); // 新增的节点
+        logger("删除子元素", mutation.removedNodes); // 删除的节点
+        setOrgElDisplay(el.children);
+        handleResize({ width: el.offsetWidth }, true);
+      }
+    }
+  };
+  const observer = new MutationObserver(callback);
+  observer.observe(el, { childList: true, subtree: false });
+};
 onMounted(() => {
-  const tmpEl: any = document.querySelector(`#${containerId.value} .container-content`);
+  const tmpEl = document.querySelector(`#${containerId.value} .container-content`) as HTMLElement;
   if (!tmpEl) return;
   setOrgElDisplay(tmpEl.children);
   handleResize({ width: tmpEl.offsetWidth });
+  observeChildList(tmpEl);
 });
 defineExpose({
   formInstance,

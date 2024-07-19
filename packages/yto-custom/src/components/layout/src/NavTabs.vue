@@ -128,12 +128,14 @@ const routerPathChange = () => {
     const urlObj = toURL(tab.href as string);
     return urlObj.pathname + urlObj.search === url;
   }) as IOptionTabPane;
-  const { href } = tabItem || {};
-  if (tabItem && href) {
-    tabPaneAdd(href as string, { ...tabItem });
+  logger("watch--route.fullPath-tabItem", tabItem);
+  if (tabItem && tabItem.href) {
+    const tmpItem = props.formatTab ? props.formatTab(tabItem) : tabItem;
+    tabPaneAdd(tmpItem.href as string, { ...tmpItem });
     return;
   }
   const tmpItem = getTabsItem(path);
+  logger("watch--route.fullPath", tmpItem);
   tmpItem && tabPaneAdd(tmpItem.href as string, { ...tmpItem });
 };
 const framePathChange = (activeItem: IOptionTabPane) => {
