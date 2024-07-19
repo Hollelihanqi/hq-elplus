@@ -8,8 +8,8 @@
 
 <template>
   <div class="app flex flex-col">
-    <!-- <LayoutRouter class="h-full"></LayoutRouter> -->
-    <Layout class="h-full"></Layout>
+    <LayoutRouter class="h-full"></LayoutRouter>
+    <!-- <Layout class="h-full"></Layout> -->
   </div>
 </template>
 <script lang="ts" setup>
