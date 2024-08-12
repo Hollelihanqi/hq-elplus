@@ -1,8 +1,4 @@
 packages:
   # all packages in direct subdirs of packages/
   - "packages/**"
-  - "play"
-  - "docs"
-  - "docs2"
-  - "docs3"
   - internal/*

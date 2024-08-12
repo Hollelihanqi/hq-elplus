@@ -1,24 +1,24 @@
 import path from "path";
-import { PKG_NAME } from "@yto-custom/build-constants";
-import { epOutput } from "@yto-custom/build-utils";
+import { PKG_NAME } from "@yto-uplus/build-constants";
+import { epOutput } from "@yto-uplus/build-utils";
 
 import type { ModuleFormat } from "rollup";
 
-export const modules = ["esm", "cjs"] as const;
+export const modules = ["esm"] as const;
 export type Module = (typeof modules)[number];
 export interface BuildInfo {
-  module: "ESNext" | "CommonJS";
+  module: "ESNext";
   format: ModuleFormat;
-  ext: "mjs" | "cjs" | "js";
+  ext: "mjs";
   output: {
     /** e.g: `es` */
     name: string;
-    /** e.g: `dist/element-plus/es` */
+    /** e.g: `dist/yto-uplus/es` */
     path: string;
   };
 
   bundle: {
-    /** e.g: `element-plus/es` */
+    /** e.g: `yto-uplus/es` */
     path: string;
   };
 }
@@ -36,18 +36,18 @@ export const buildConfig: Record<Module, BuildInfo> = {
       path: `${PKG_NAME}/es`,
     },
   },
-  cjs: {
-    module: "CommonJS",
-    format: "cjs",
-    ext: "js",
-    output: {
-      name: "lib",
-      path: path.resolve(epOutput, "lib"),
-    },
-    bundle: {
-      path: `${PKG_NAME}/lib`,
-    },
-  },
+  // cjs: {
+  //   module: "CommonJS",
+  //   format: "cjs",
+  //   ext: "js",
+  //   output: {
+  //     name: "lib",
+  //     path: path.resolve(epOutput, "lib"),
+  //   },
+  //   bundle: {
+  //     path: `${PKG_NAME}/lib`,
+  //   },
+  // },
 };
 export const buildConfigEntries = Object.entries(buildConfig) as BuildConfigEntries;
 

@@ -9,10 +9,10 @@ import esbuild, { minify as minifyPlugin } from "rollup-plugin-esbuild";
 import { parallel } from "gulp";
 import glob from "fast-glob";
 import { camelCase, upperFirst } from "lodash-unified";
-import { PKG_BRAND_NAME, PKG_CAMELCASE_LOCAL_NAME, PKG_CAMELCASE_NAME } from "@yto-custom/build-constants";
-import { epOutput, epRoot, localeRoot } from "@yto-custom/build-utils";
-import { version } from "../../../../packages/element-plus/version";
-import { ElementPlusAlias } from "../plugins/element-plus-alias";
+import { PKG_BRAND_NAME, PKG_CAMELCASE_LOCAL_NAME, PKG_CAMELCASE_NAME } from "@yto-uplus/build-constants";
+import { epOutput, epRoot, localeRoot } from "@yto-uplus/build-utils";
+import { version } from "../../../../packages/yto-uplus/version";
+import { YtoUPlusAlias } from "../plugins/yto-uplus-alias";
 import { formatBundleFilename, generateExternal, withTaskName, writeBundles } from "../utils";
 import { target } from "../build-info";
 import type { TaskFunction } from "gulp";
@@ -22,7 +22,7 @@ const banner = `/*! ${PKG_BRAND_NAME} v${version} */\n`;
 
 async function buildFullEntry(minify: boolean) {
   const plugins: Plugin[] = [
-    ElementPlusAlias(),
+    YtoUPlusAlias(),
     VueMacros({
       setupComponent: false,
       setupSFC: false,

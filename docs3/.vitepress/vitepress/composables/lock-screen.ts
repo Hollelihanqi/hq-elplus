@@ -1,6 +1,6 @@
 import { onUnmounted } from "vue";
 import { isClient } from "@vueuse/core";
-import { addClass, getScrollBarWidth, getStyle, hasClass, removeClass } from "@yto-custom/utils";
+import { addClass, getScrollBarWidth, getStyle, hasClass, removeClass } from "@yto-uplus/utils";
 
 export const useLockScreen = () => {
   let scrollBarWidth = 0;

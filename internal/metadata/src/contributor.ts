@@ -5,8 +5,8 @@ import { Octokit } from "octokit";
 import { consola } from "consola";
 import chalk from "chalk";
 import { chunk, mapValues, uniqBy } from "lodash-unified";
-import { ensureDir, errorAndExit, projRoot, writeJson } from "@yto-custom/build-utils";
-import { REPO_BRANCH, REPO_NAME, REPO_OWNER } from "@yto-custom/build-constants";
+import { ensureDir, errorAndExit, projRoot, writeJson } from "@yto-uplus/build-utils";
+import { REPO_BRANCH, REPO_NAME, REPO_OWNER } from "@yto-uplus/build-constants";
 
 interface FetchOption {
   key: string;
@@ -53,8 +53,8 @@ const fetchCommits = async (options: FetchOption[]): Promise<Record<string, ApiR
       object(expression: "${REPO_BRANCH}") {
         ... on Commit {
           ${options
-            .map(({ path, after }, index) => {
-              return `
+      .map(({ path, after }, index) => {
+        return `
               path${index}: history(path: "${path}"${after ? `, after: "${after}"` : ""}) {
                 nodes {
                   oid
@@ -73,8 +73,8 @@ const fetchCommits = async (options: FetchOption[]): Promise<Record<string, ApiR
                   endCursor
                 }
               }`;
-            })
-            .join("\n")}
+      })
+      .join("\n")}
         }
       }
     }
@@ -110,10 +110,10 @@ const calcContributors = (commits: ApiResult["nodes"]) => {
 
 const getContributorsByComponents = async (components: string[]) => {
   let options: FetchOption[] = components.flatMap((component) => [
-    { key: component, path: `packages/components/${component}` },
-    { key: component, path: `packages/theme-chalk/src/${component}.scss` },
-    { key: component, path: `docs/examples/${component}` },
-    { key: component, path: `docs/en-US/component/${component}.md` },
+    { key: component, path: `packages/yto-custom/src/components/${component}` },
+    // { key: component, path: `packages/theme-chalk/src/${component}.scss` },
+    // { key: component, path: `docs/examples/${component}` },
+    // { key: component, path: `docs/en-US/component/${component}.md` },
   ]);
   const commits: Record<string /* component name */, ApiResult["nodes"]> = {};
   do {

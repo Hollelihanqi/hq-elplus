@@ -1,73 +1,75 @@
 <script setup lang="ts">
-import { computed, getCurrentInstance, ref, toRef } from 'vue'
-import { isClient, useClipboard, useToggle } from '@vueuse/core'
-import { CaretTop } from '@element-plus/icons-vue'
-import { useSourceCode } from '../composables/source-code'
-import { usePlayground } from '../composables/use-playground'
+import { computed, getCurrentInstance, ref, toRef } from "vue";
+import { isClient, useClipboard, useToggle } from "@vueuse/core";
+import { CaretTop, CopyDocument, Edit, View } from "@element-plus/icons-vue";
+import { useSourceCode } from "../composables/source-code";
+import { usePlayground } from "../composables/use-playground";
 
-import Example from './demo/vp-example.vue'
-import SourceCode from './demo/vp-source-code.vue'
+import Example from "./demo/vp-example.vue";
+import SourceCode from "./demo/vp-source-code.vue";
 
 const props = defineProps<{
-  demos: object
-  source: string
-  path: string
-  rawSource: string
-  description?: string
-}>()
+  demos: object;
+  source: string;
+  path: string;
+  rawSource: string;
+  description?: string;
+}>();
 
-const vm = getCurrentInstance()!
+const vm = getCurrentInstance()!;
 
 const { copy, isSupported } = useClipboard({
   source: decodeURIComponent(props.rawSource),
   read: false,
-})
+});
 
-const [sourceVisible, toggleSourceVisible] = useToggle()
-const demoSourceUrl = useSourceCode(toRef(props, 'path'))
+const [sourceVisible, toggleSourceVisible] = useToggle();
+const demoSourceUrl = useSourceCode(toRef(props, "path"));
 
-const sourceCodeRef = ref<HTMLButtonElement>()
+const sourceCodeRef = ref<HTMLButtonElement>();
 const formatPathDemos = computed(() => {
-  const demos = {}
-
+  const demos = {};
+  console.log("propsdemos", props.demos);
+  console.log("source",props.source)
   Object.keys(props.demos).forEach((key) => {
-    demos[key.replace('../../examples/', '').replace('.vue', '')] =
-      props.demos[key].default
-  })
+    demos[key.replace("../examples/", "").replace(".vue", "")] = props.demos[key].default;
+  });
+  console.log("demos456", demos);
+  return demos;
+});
 
-  return demos
-})
-
-const decodedDescription = computed(() =>
-  decodeURIComponent(props.description!)
-)
+const decodedDescription = computed(() => decodeURIComponent(props.description!));
 
 const onPlaygroundClick = () => {
-  const { link } = usePlayground(props.rawSource)
-  if (!isClient) return
-  window.open(link)
-}
+  const { link } = usePlayground(props.rawSource);
+  if (!isClient) return;
+  window.open(link);
+};
 
 const onSourceVisibleKeydown = (e: KeyboardEvent) => {
-  if (['Enter', 'Space'].includes(e.code)) {
-    e.preventDefault()
-    toggleSourceVisible(false)
-    sourceCodeRef.value?.focus()
+  if (["Enter", "Space"].includes(e.code)) {
+    e.preventDefault();
+    toggleSourceVisible(false);
+    sourceCodeRef.value?.focus();
   }
-}
+};
 
 const copyCode = async () => {
-  const { $message } = vm.appContext.config.globalProperties
+  const { $message } = vm.appContext.config.globalProperties;
   if (!isSupported) {
-    $message.error('copy-error')
+    $message.error("copy-error");
   }
   try {
-    await copy()
-    $message.success('copy-success')
+    await copy();
+    $message.success("copy-success");
   } catch (e: any) {
-    $message.error(e.message)
+    $message.error(e.message);
   }
-}
+};
+
+const testData = {
+  "text-ellipsis/basic": "",
+};
 </script>
 
 <template>
@@ -81,12 +83,7 @@ const copyCode = async () => {
       <ElDivider class="m-0" />
 
       <div class="op-btns">
-        <ElTooltip
-          content="edit-in-editor"
-          :show-arrow="false"
-          :trigger="['hover', 'focus']"
-          :trigger-keys="[]"
-        >
+        <ElTooltip content="edit-in-editor" :show-arrow="false" :trigger="['hover', 'focus']" :trigger-keys="[]">
           <ElIcon
             :size="16"
             aria-label="edit-in-editor"
@@ -97,10 +94,11 @@ const copyCode = async () => {
             @keydown.prevent.enter="onPlaygroundClick"
             @keydown.prevent.space="onPlaygroundClick"
           >
-            <i-ri-flask-line />
+            <!-- <i-ri-flask-line /> -->
+            <Edit />
           </ElIcon>
         </ElTooltip>
-        <ElTooltip
+        <!-- <ElTooltip
           content="edit-on-github"
           :show-arrow="false"
           :trigger="['hover', 'focus']"
@@ -118,15 +116,11 @@ const copyCode = async () => {
               target="_blank"
             >
               <i-ri-github-line />
+              
             </a>
           </ElIcon>
-        </ElTooltip>
-        <ElTooltip
-          content="copy-code"
-          :show-arrow="false"
-          :trigger="['hover', 'focus']"
-          :trigger-keys="[]"
-        >
+        </ElTooltip> -->
+        <ElTooltip content="copy-code" :show-arrow="false" :trigger="['hover', 'focus']" :trigger-keys="[]">
           <ElIcon
             :size="16"
             aria-label="copy-code"
@@ -137,15 +131,11 @@ const copyCode = async () => {
             @keydown.prevent.enter="copyCode"
             @keydown.prevent.space="copyCode"
           >
-            <i-ri-file-copy-line />
+            <!-- <i-ri-file-copy-line /> -->
+            <CopyDocument />
           </ElIcon>
         </ElTooltip>
-        <ElTooltip
-          content="view-source"
-          :show-arrow="false"
-          :trigger="['hover', 'focus']"
-          :trigger-keys="[]"
-        >
+        <ElTooltip content="view-source" :show-arrow="false" :trigger="['hover', 'focus']" :trigger-keys="[]">
           <button
             ref="sourceCodeRef"
             :aria-label="sourceVisible ? 'hide-source' : 'view-source'"
@@ -153,7 +143,7 @@ const copyCode = async () => {
             @click="toggleSourceVisible()"
           >
             <ElIcon :size="16">
-              <i-ri-code-line />
+              <View />
             </ElIcon>
           </button>
         </ElTooltip>
@@ -175,7 +165,7 @@ const copyCode = async () => {
           <ElIcon :size="16">
             <CaretTop />
           </ElIcon>
-          <span>hide-source</span>
+          <span>隐藏源码</span>
         </div>
       </Transition>
     </div>

@@ -2,7 +2,7 @@ import path from "path";
 import glob from "fast-glob";
 import chalk from "chalk";
 import { consola } from "consola";
-import { ensureDir, projRoot, writeJson } from "@yto-custom/build-utils";
+import { ensureDir, projRoot, writeJson } from "@yto-uplus/build-utils";
 
 const pathOutput = path.resolve(__dirname, "..", "dist");
 
@@ -10,7 +10,7 @@ async function main() {
   await ensureDir(pathOutput);
 
   const components = await glob("*", {
-    cwd: path.resolve(projRoot, "packages/components"),
+    cwd: path.resolve(projRoot, "packages/yto-custom/src/components"),
     onlyDirectories: true,
   });
 

@@ -150,7 +150,7 @@ import {
   withKeys,
   withMemo,
   withModifiers,
-  withScopeId,
+  withScopeId
 } from "./chunk-7GDRTMHZ.js";
 import {
   camelize,
@@ -159,9 +159,9 @@ import {
   normalizeProps,
   normalizeStyle,
   toDisplayString,
-  toHandlerKey,
+  toHandlerKey
 } from "./chunk-WUGQLSLX.js";
-import "./chunk-PR4QN5HX.js";
+import "./chunk-G3PMV62Z.js";
 export {
   BaseTransition,
   BaseTransitionPropsValidators,
@@ -321,6 +321,6 @@ export {
   withKeys,
   withMemo,
   withModifiers,
-  withScopeId,
+  withScopeId
 };
 //# sourceMappingURL=vue.js.map

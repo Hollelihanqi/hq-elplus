@@ -1,5 +1,5 @@
 {
-  "name": "@yto-custom/utils",
+  "name": "@yto-uplus/utils",
   "private": true,
   "license": "MIT",
   "main": "index.ts",

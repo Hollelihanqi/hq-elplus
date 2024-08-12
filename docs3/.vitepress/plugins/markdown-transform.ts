@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
 import glob from "fast-glob";
-import { docRoot, docsDirName, projRoot } from "@yto-custom/build-utils";
-// import { REPO_BRANCH, REPO_PATH } from "@yto-custom/build-constants";
+import { docRoot, docsDirName, projRoot } from "@yto-uplus/build-utils";
+// import { REPO_BRANCH, REPO_PATH } from "@yto-uplus/build-constants";
 // import { getLang, languages } from "../utils/lang";
 // import footerLocale from "../i18n/component/footer.json";
 
@@ -20,7 +20,7 @@ export function MarkdownTransform(): Plugin {
     enforce: "pre",
 
     async buildStart() {
-      const pattern = `mds/components`;
+      const pattern = `components`;
       compPaths = await glob(pattern, {
         cwd: docRoot,
         absolute: true,
@@ -31,9 +31,9 @@ export function MarkdownTransform(): Plugin {
 
     async transform(code, id) {
       if (!id.endsWith(".md")) return;
-      // if (id.includes("docs3/index.md") || id.includes("docs3/home/index.md")) {
-      //   return code
-      // }
+      if (id.includes("docs3/index.md") || id.includes("docs3/home/index.md")) {
+        return code
+      }
       console.log("id", id);
       //E:/yto-engine/docs3/index.md
       const componentId = path.basename(id, ".md");
@@ -48,16 +48,21 @@ export function MarkdownTransform(): Plugin {
         append = {
           headers: [],
           footers: [],
-          scriptSetups: [`const demos = import.meta.globEager('../../examples/${componentId}/*.vue')`],
+          // scriptSetups: [`const demos = import.meta.globEager('../../examples/${componentId}/*.vue')`],
+          scriptSetups: [`const demos = import.meta.glob('../examples/${componentId}/*.vue',{ eager: true })`],
         };
         code = transformVpScriptSetup(code, append);
       }
+      // const modules = import.meta.glob('../../examples/text-ellipsis/*.vue')
+      // console.log("modules", modules)
+      console.log("compPathshas", id.startsWith(compPaths[0]));
 
       if (compPaths.some((compPath) => id.startsWith(compPath))) {
+        console.log("compPathshas", 'train');
+
         code = transformComponentMarkdown(id, componentId, code, append);
       }
 
-      code = transformComponentMarkdown(id, componentId, code, append);
       return combineMarkdown(code, [combineScriptSetup(append.scriptSetups), ...append.headers], append.footers);
     },
   };
@@ -83,6 +88,7 @@ const combineMarkdown = (code: string, headers: string[], footers: string[]) => 
 const vpScriptSetupRE = /<vp-script\s(.*\s)?setup(\s.*)?>([\s\S]*)<\/vp-script>/;
 
 const transformVpScriptSetup = (code: string, append: Append) => {
+  console.log('codeAppend', append)
   const matches = code.match(vpScriptSetupRE);
   if (matches) code = code.replace(matches[0], "");
   const scriptSetup = matches?.[3] ?? "";
@@ -96,8 +102,12 @@ const transformComponentMarkdown = (id: string, componentId: string, code: strin
   // const lang = getLang(id);
   // const docUrl = `${GITHUB_BLOB_URL}/${docsDirName}/en-US/component/${componentId}.md`;
   // const componentUrl = `${GITHUB_TREE_URL}/packages/components/${componentId}`;
-  const componentPath = path.resolve(projRoot, `packages/components/${componentId}`);
+  console.log("projRoot", projRoot)
+  const componentPath = path.resolve(projRoot, `packages/yto-custom/src/components/${componentId}`);
+  console.log("componentPath", componentPath)
+
   const isComponent = fs.existsSync(componentPath);
+  console.log("isComponent", isComponent)
 
   // const links = [[footerLocale[lang].docs, docUrl]];
   // if (isComponent) links.unshift([footerLocale[lang].component, componentUrl]);
@@ -111,12 +121,13 @@ const transformComponentMarkdown = (id: string, componentId: string, code: strin
 
 linksText`;
 
-  const contributorsSection = `
-## contributors
+  //   const contributorsSection = `
+  // ## contributors
 
-<Contributors id="${componentId}" />`;
+  // <Contributors id="${componentId}" />`;
 
-  append.footers.push(sourceSection, isComponent ? contributorsSection : "");
+  // append.footers.push(sourceSection, isComponent ? contributorsSection : "");
+  console.log("code-train", code)
 
   return code;
 };

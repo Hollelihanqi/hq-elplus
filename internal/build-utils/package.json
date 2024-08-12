@@ -1,5 +1,5 @@
 {
-  "name": "@yto-custom/build-utils",
+  "name": "@yto-uplus/build-utils",
   "version": "0.0.1",
   "private": true,
   "description": "Build utils for @Yto/custom",
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@pnpm/find-workspace-packages": "^6.0.9",
-    "@pnpm/logger": "^4.0.0",
+    "@pnpm/logger": "^5.0.0",
     "@pnpm/types": "^11.0.0",
     "consola": "^3.2.3"
   },

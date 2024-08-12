@@ -22,12 +22,12 @@ const { theme, page } = useData();
   <div class="navbar-wrapper">
     <div class="header-container">
       <div class="logo-container">
-        <a href="">
+        <a href="/home/">
           <img class="logo" src="/images/element-plus-logo.svg" alt="Element Plus Logo" />
         </a>
       </div>
       <div class="content">
-        <VPNavbarSearch class="search" :options="theme.agolia" multilang />
+        <!-- <VPNavbarSearch class="search" :options="theme.agolia" multilang /> -->
         <VPNavbarMenu class="menu" />
         <VPNavbarThemeToggler class="theme-toggler" />
         <!-- <VPNavbarTranslation class="translation" /> -->

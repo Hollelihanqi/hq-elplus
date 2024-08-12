@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-
+import { computed } from "vue";
+import { Link } from "@element-plus/icons-vue";
 const props = defineProps<{
-  href?: string
-  noIcon?: boolean
-}>()
+  href?: string;
+  noIcon?: boolean;
+}>();
 
-const isExternal = computed(() => props.href && /^[a-z]+:/i.test(props.href))
+const isExternal = computed(() => props.href && /^[a-z]+:/i.test(props.href));
 </script>
 
 <template>
@@ -20,7 +20,8 @@ const isExternal = computed(() => props.href && /^[a-z]+:/i.test(props.href))
   >
     <slot />
     <ElIcon v-if="isExternal && !noIcon">
-      <i-ri-external-link-line class="link-icon" />
+      <!-- <i-ri-external-link-line class="link-icon" /> -->
+      <Link />
     </ElIcon>
   </component>
 </template>

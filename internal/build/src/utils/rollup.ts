@@ -1,4 +1,4 @@
-import { epPackage, getPackageDependencies } from "@yto-custom/build-utils";
+import { epPackage, getPackageDependencies } from "@yto-uplus/build-utils";
 
 import type { OutputOptions, RollupBuild } from "rollup";
 

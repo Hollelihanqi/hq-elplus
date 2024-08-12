@@ -6,7 +6,7 @@ import * as vueCompiler from "vue/compiler-sfc";
 import glob from "fast-glob";
 import chalk from "chalk";
 import { Project } from "ts-morph";
-import { buildOutput, epRoot, excludeFiles, pkgRoot, projRoot } from "@yto-custom/build-utils";
+import { buildOutput, epRoot, excludeFiles, pkgRoot, projRoot } from "@yto-uplus/build-utils";
 import { pathRewriter } from "../utils";
 import type { CompilerOptions, SourceFile } from "ts-morph";
 
@@ -25,6 +25,7 @@ export const generateTypesDefinitions = async () => {
     skipLibCheck: true,
     noImplicitAny: false,
   };
+  console.log("compilerOptions______________", compilerOptions);
   const project = new Project({
     compilerOptions,
     tsConfigFilePath: TSCONFIG_PATH,
@@ -73,7 +74,7 @@ async function addSourceFiles(project: Project) {
 
   const globSourceFile = "**/*.{js?(x),ts?(x),vue}";
   const filePaths = excludeFiles(
-    await glob([globSourceFile, "!element-plus/**/*"], {
+    await glob([globSourceFile, "!yto-uplus/**/*"], {
       cwd: pkgRoot,
       absolute: true,
       onlyFiles: true,

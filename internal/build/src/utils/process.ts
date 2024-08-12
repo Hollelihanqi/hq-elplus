@@ -1,10 +1,12 @@
 import { spawn } from "child_process";
 import chalk from "chalk";
 import { consola } from "consola";
-import { projRoot } from "@yto-custom/build-utils";
+import { projRoot } from "@yto-uplus/build-utils";
 
 export const run = async (command: string, cwd: string = projRoot) =>
   new Promise<void>((resolve, reject) => {
+    console.log("run______________", command, cwd);
+
     const [cmd, ...args] = command.split(" ");
     consola.info(`run: ${chalk.green(`${cmd} ${args.join(" ")}`)}`);
     const app = spawn(cmd, args, {

@@ -1,7 +1,7 @@
 import path from "path";
 import os from "os";
 import { arrayToRegExp, getTypeSymbol, hyphenate, isCommonType, isUnionType, main } from "components-helper";
-import { epOutput, epPackage, getPackageManifest, projRoot } from "@yto-custom/build-utils";
+import { epOutput, epPackage, getPackageManifest, projRoot } from "@yto-uplus/build-utils";
 
 import type { TaskFunction } from "gulp";
 import type { ReAttribute, ReComponentName, ReDocUrl, ReWebTypesSource, ReWebTypesType } from "components-helper";
@@ -75,10 +75,10 @@ const reAttribute: ReAttribute = (value, key) => {
   } else if (key === "Subtags") {
     return str
       ? `el-${str
-          .replaceAll(/\s*\/\s*/g, "/el-")
-          .replaceAll(/\B([A-Z])/g, "-$1")
-          .replaceAll(/\s+/g, "-")
-          .toLowerCase()}`
+        .replaceAll(/\s*\/\s*/g, "/el-")
+        .replaceAll(/\B([A-Z])/g, "-$1")
+        .replaceAll(/\s+/g, "-")
+        .toLowerCase()}`
       : undefined;
   } else {
     return str;
@@ -144,7 +144,7 @@ const rewriteType = (str: string): string => {
 };
 
 const transformEnum = (str: string) => {
-  const result = str.match(/:values="\[([^\]]*)\]/);
+  const result: any = str.match(/:values="\[([^\]]*)\]/);
   return result ? result[1].replaceAll(/,\s*/g, " | ") : "string";
 };
 
@@ -157,7 +157,7 @@ const transformFunction = (str: string) => {
   if (paramsStr) {
     const list = paramsStr[0].matchAll(/\['([^\]]*)'\]/g);
 
-    params = Array.from(list, (item) => {
+    params = Array.from(list, (item: any) => {
       return item[1].replaceAll(/',\s*'/g, ": ");
     }).join(", ");
   }

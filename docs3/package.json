@@ -19,7 +19,7 @@
     "chalk": "^4.1.2",
     "escape-html": "^1.0.3",
     "prismjs": "^1.28.0",
-    "unocss": "0.33.5",
+    "unocss": "0.61.5",
     "unplugin-auto-import": "^0.16.6",
     "unplugin-vue-macros": "^0.11.2",
     "vite": "^5.3.3",
@@ -30,7 +30,9 @@
   },
   "dependencies": {
     "@docsearch/js": "^3.6.0",
+    "@highlightjs/vue-plugin": "^2.1.0",
     "@vue/shared": "^3.2.37",
+    "consola": "^3.2.3",
     "fast-glob": "^3.2.11",
     "fs": "0.0.1-security",
     "highlight.js": "^11.10.0",
